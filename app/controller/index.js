@@ -5,13 +5,15 @@ var Control = require('./control.js');
 var control = new Control;
 var IndexModel = require('../model/indexModel.js');
 var model = new IndexModel;
-var data = '';
+var data = {};
 var app = express();
 app.use(require('express-is-ajax-request'));
 
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data});
+	model.SelectUsuarios().then(data=> {
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data});
+	});
 });
 
 

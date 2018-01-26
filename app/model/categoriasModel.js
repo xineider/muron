@@ -4,7 +4,7 @@ var app = express();
 var Helper = require('./model.js');
 var helper = new Helper;
 
-class IndexModel {
+class CategoriasModel {
 	Login(POST) {
 		// Tratar as variaveis e criar a query, caso não precise dela, deixe-a vazia
 		query = 'SELECT id FROM usuarios WHERE login = ? AND senha = ?';
@@ -24,4 +24,4 @@ class IndexModel {
 		});
 	}
 }
-module.exports = IndexModel;
+module.exports = CategoriasModel;

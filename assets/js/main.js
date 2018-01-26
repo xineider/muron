@@ -7,7 +7,7 @@ $(document).on('ready', function () {
   GoTo(location.pathname, false);
 
 	$(document).ajaxComplete(function () {
-		// FormatInputs();
+		FormatInputs();
 		Materialize.updateTextFields();
 	});
 
@@ -79,15 +79,13 @@ $(document).on('ready', function () {
 		GetEndereco($(this).val(), $(this).closest('.row'));
 	});
 
-	$(".button-collapse").sideNav();
-
-	$('.change-bar').on('click', function () {
-		if ($(this).data('ativo') == 'true') {
-			changeBar(1);
-		} else {
-			changeBar(2);
-		}
-	});
+	$(".button-collapse").sideNav({
+    menuWidth: 300, // Default is 300
+    edge: 'right', // Choose the horizontal origin
+    closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+    draggable: true // Choose whether you can drag to open on touch screens,
+  });
+	
 	window.onpopstate = function() {
 	  GoTo(location.pathname, false);
 	};
@@ -122,10 +120,11 @@ $(document).on('ready', function () {
 			$(this).removeClass('observe-post');
 		}
 	});
-	// Eventos Após DOM
-	$(window).on('load', function (e) {
-		removerLoader();
-	});
+});
+// Eventos Após DOM
+$(window).on('load', function (e) {
+	removerLoader();
+	FormatInputs();
 });
 
 
@@ -139,30 +138,10 @@ function removerLoader() {
 	$('body').css('overflow', 'auto');
 	$('.loader').fadeOut('fast');
 }
-function changeBar(tipo) {
-	if (tipo == 1) {
-		$('.change-bar').data('ativo', 'false').removeClass('ativo');
-		$('.nav-wrapper').removeClass('mini-nav');
-		$('header').removeClass('l1').addClass('l2');
-		$('main').removeClass('l11').addClass('l10').removeClass('offset-l1').addClass('offset-l2');
-		$('#big-nav').css('display', 'block');
-		$('#small-nav').css('display', 'none');
-		localStorage.bar = 1;
-	} else if (tipo == 2) {
-		$('.change-bar').data('ativo', 'true').addClass('ativo');
-		$('.nav-wrapper').addClass('mini-nav');
-		$('header').removeClass('l2').addClass('l1');
-		$('main').removeClass('l10').addClass('l11').removeClass('offset-l2').addClass('offset-l1');
-		$('#big-nav').css('display', 'none');
-		$('#small-nav').css('display', 'block');
-		localStorage.bar = 2;
-	}
-}
 function InitBar() {
 	if (localStorage.bar != 2 && localStorage.bar != 1) {
 		localStorage.setItem("bar", 1);
 	}
-	changeBar(localStorage.bar);
 }
 function GoTo(link, state) {
 	$.ajax({
@@ -190,6 +169,26 @@ function GoTo(link, state) {
 	}
 }
 function FormatInputs(focus) {
+  $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year,
+		monthsFull: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+    monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+    weekdaysFull: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabádo'],
+    weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+    today: 'Hoje',
+    clear: 'Limpar',
+    close: 'Pronto',
+    labelMonthNext: 'Próximo mês',
+    labelMonthPrev: 'Mês anterior',
+    labelMonthSelect: 'Selecione um mês',
+    labelYearSelect: 'Selecione um ano',
+    format: 'dd/mm/yyyy',
+    closeOnSelect: false // Close upon selecting a date,
+  });
+   $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
 	$('.cnpj').mask('00.000.000/0000-00', {reverse: true});
 	$('.cpf').mask('000.000.000-00', {reverse: true});
 	$('.rg').mask('AAAAAAAAAAAAA', {reverse: true});
@@ -201,9 +200,23 @@ function FormatInputs(focus) {
       }
     }
   });
+  $('ul.tabs').tabs({
+    responsiveThreshold : 'auto'
+  });
+  //usar pra esconder barra de baixo
   $('.money').mask('000000000000000,00', {reverse: true});
   $('.dropdown-button').dropdown();
+  setTimeout(function(){ $('.carousel').carousel({dist: 0,padding: 15}); }, 500);
   ActiveMaterializeInput(focus);
+	// $('#'+'header_2').fadeOut('changeH2');
+	// $('#'+'header_1').fadeIn('changeH2');
+	// $('#'+'header_1').fadeOut('changeH1');
+	// $('#'+'header_2').fadeIn('changeH1');
+	// $('#'+'footer').fadeOut('hideFooter');
+	// $('#'+'footer').fadeOut('showFooter');
+	$('#'+'sobre-facul').click(function(){
+		$('.facul-screen').toggle();
+	})
 }
 function GetEndereco(cep, pai) {
 	var link = 'https://viacep.com.br/ws/'+cep+'/json/ ';
@@ -311,19 +324,19 @@ function MountModal(modal, link) {
 function VerificarForm() {
 	var error = false;
 	$('.error').remove();
-	$('input:enabled:not([type="hidden"])').each(function(){
+	$('input:enabled:not([type="hidden"])[required="true"]').each(function(){
 		if(VerificaItem($(this)) == true) {
 			error = true;
 			return false;
 		};
 	});
-	$('textarea:enabled').each(function(){
+	$('textarea:enabled[required="true"]').each(function(){
 		if(VerificaItem($(this)) == true) {
 			error = true;
 			return false;
 		};
 	});
-	$('select:enabled').each(function(){
+	$('select:enabled[required="true"]').each(function(){
 		if(VerificaItem($(this)) == true) {
 			error = true;
 			return false;

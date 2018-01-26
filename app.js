@@ -10,6 +10,12 @@ var Control = require('./app/controller/control.js');
 
 var login = require('./app/controller/login');
 var index = require('./app/controller/index');
+var usuarios = require('./app/controller/usuarios');
+var grupos = require('./app/controller/grupos');
+var chats = require('./app/controller/chats');
+var faculdades = require('./app/controller/faculdades');
+var categorias = require('./app/controller/categorias');
+var sobre = require('./app/controller/sobre');
 var api = require('./app/controller/api');
 var configuracoes = require('./app/controller/configuracoes');
 
@@ -20,7 +26,7 @@ app.use(require('express-is-ajax-request'));
 // INICIANDO SESSION
 app.set('trust proxy', 1); // trust first proxy
 app.use(session({
-  secret: 'sistemapazze',
+  secret: 'muronapp',
   resave: true,
   saveUninitialized: true
 }));
@@ -55,6 +61,12 @@ app.use("/assets", express.static(__dirname + '/assets'));
 
 app.use('/', login);
 app.use('/sistema', index);
+app.use('/sistema/usuarios', usuarios);
+app.use('/sistema/grupos', grupos);
+app.use('/sistema/chats', chats);
+app.use('/sistema/faculdades', faculdades);
+app.use('/sistema/categorias', categorias);
+app.use('/sistema/sobre', sobre);
 app.use('/sistema/api', api);
 app.use('/sistema/configuracoes', configuracoes);
 

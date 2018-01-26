@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Sistema Quorp</title>
+    <title>MurOn</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <link rel='stylesheet' href='/assets/css/font-awesome.min.css' />
     <link rel='stylesheet' href='/assets/css/materialize.min.css' />
     <link rel='stylesheet' href='/assets/css/style.css' />
@@ -10,46 +11,138 @@
 		<script src="/assets/js/materialize.min.js"></script>
 		<script src="/assets/js/main.js"></script>
   </head>
-  <body class="row">
+  <body class="row g-white">
   	<div class="loader none">
 	  	<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-			<!-- <span class="sr-only">Loading...</span> -->
+			 <!-- <span class="sr-only">Loading...</span> --> 
   	</div>
-  	<header class="col m2 indigo darken-1">
-			<nav>
-				<div class="nav-wrapper">
-			  	<div class="change-bar">
-			  		<button class="btn white grey-text text-darken-4"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-			  		<button class="btn white grey-text text-darken-4 none"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-			  	</div>
-			  	<div id="big-nav">
-						<a href="#!" class="brand-logo center-align"><img style="max-width: 100%;" src="/assets/imgs/mini-logo.png"></a>
-						<ul class="hide-on-med-and-down">
-						  <li>
-						  	<a class="ajax-load" href="/sistema/"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a>
-						  </li>
-						  <li>
-						  	<a class="ajax-load" href="/sistema/configuracoes"><i class="fa fa-cogs" aria-hidden="true"></i> Configurações</a>
-						  </li>
-						  <li>
-						  	<a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Sair</a>
-						  </li>
-						</ul>
-			  	</div>
-			  	<div id="small-nav" class="none">
-						<a href="#!" class="brand-logo center-align"><img style="max-width: 100%;" src="/assets/imgs/mini-mini-logo.png"></a>
-						<ul class="hide-on-med-and-down">
-						  <li>
-						  	<a class="ajax-load" href="/sistema/"><i class="fa fa-home" aria-hidden="true"></i></a>
-						  </li>		  
-						  <li>
-						  	<a class="ajax-load" href="/sistema/configuracoes"><i class="fa fa-cogs" aria-hidden="true"></i></a>
-						  </li>
-						  <li>
-						  	<a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
-						  </li>
-						</ul>
-			  	</div>
-				</div>
-			</nav>
+  	<header class="col s12 g-blue" id="header_1">
+		  <nav>
+		    <div class="nav-wrapper"> 
+		    	<div class="row">
+		    		<div class="col s4">
+<!-- 		    			<a href="/" class="left"><i class="fa fa-home"></i></a> -->
+		    			<a href="/" class="left"><i class="fa fa-chevron-left"></i></a>
+		    		</div>
+		    		<div class="col s4 center">
+		      		<a class="logo-container" href="/sistema"><img src="/assets/imgs/mini-logo.png"></a>
+		    		</div>
+		    		<div class="row">
+							<ul id="slide-out" class="side-nav white-text">
+						    <li>
+					    		<div class="user-view g-blue">
+							      <div class="background">
+							        <img src="/assets/imgs/side_background.jpg">
+							      </div>
+							      <a href="#!user"><img class="circle" src="/assets/imgs/banner-1.jpeg"></a>
+							      <a href="#!name"><span class="name">
+							      	Teste
+							      </span></a>
+							      <a href="#!email"><span class="email">
+							      	teste@teste.tes
+							      </span></a>
+							    </div>
+						  	</li>
+						    <li><a class="waves-effect ajax-load" href="/sistema">Início</a></li>
+						    <li><div class="small-line"></div></li>
+						    <li><a class="waves-effect ajax-load" href="/sistema/usuarios/ver/1">Perfil</a></li>
+						    <li><div class="small-line"></div></li>
+						    <li><a class="waves-effect ajax-load" href="/sistema/chats">Chat</a></li>
+						    <li><div class="small-line"></div></li>
+						    <li><a class="waves-effect ajax-load" href="/sistema/grupos">Grupos</a></li>
+						    <li><div class="small-line"></div></li>
+						    <li><a class="waves-effect ajax-load" href="/sistema/faculdades">Faculdades</a></li>
+						    <li><div class="small-line"></div></li>
+						    <li><a class="waves-effect ajax-load" href="/sistema/usuarios">Contatos</a></li>
+						    <li><div class="small-line"></div></li>
+						    <li><a class="waves-effect" href="/sistema/sobre">Sobre o App</a></li>
+						    <li><div class="small-line"></div></li>
+						    <li><a class="waves-effect ajax-load" href="/login">Sair</a></li>
+						  </ul>
+						  <a href="#" data-activates="slide-out" class="right button-collapse"><i class="fa fa-bars"></i></a>
+		    		</div>
+		    	</div>
+		    </div>
+		  </nav>
   	</header>
+		<div id="modaldeletar" class="modal" style="overflow: hidden;">
+			<div class="modal-content">
+				<b><p style="text-align: center;" id="texto">Remover</p></b>
+			</div>
+			<div class="modal-footer">
+				<div class="row">
+					<div class="col s12 m6">
+						<a style="width: 100%; text-align: center;" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat grey lighten-2">Cancelar</a>
+					</div>
+					<div class="col s12 m6">
+						<form method="POST" action="">
+							<input id="id" type="hidden" name="id">
+							<input type="hidden" name="deletado" value="1">
+							<button style="width: 100%; text-align: center;" class="modal-action modal-close waves-effect waves-green btn-flat red lighten-2 white-text ajax-submit"
+											data-href=""
+												data-action=""
+													>Excluir</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal Structure -->
+		<div id="modalinfo" class="modal">
+			<div class="modal-content">
+			</div>
+		</div>
+		<style type="text/css">
+			.modal {
+				border-radius: 7px !important;
+			}
+		</style>
+<!--   	<header class="col s12 red" id="header_2">
+		  <nav>
+		    <div class="nav-wrapper"> 
+		    	<div class="row">
+		    		<div class="col s4">
+		      		<a class="logo-container" href="/sistema"><img src="/assets/imgs/mini-logo.png"></a>
+		    		</div>
+		    		<div class="row">
+						<%
+						if (typeof data != 'undefined' && data.length > 0) {
+							for (var i = data.length - 1; i >= 0; i--) {
+						%>
+							<ul id="slide-out_2" class="side-nav white-text">
+						    <li><div class="user-view">
+						      <div class="background">
+						        <img src="/assets/imgs/side_background.jpg">
+						      </div>
+						      <a href="#!user"><img class="circle" src="/assets/imgs/banner-1.jpeg"></a>
+						      <a href="#!name"><span class="name">
+						      	<%= data[i].nome %>
+						      </span></a>
+						      <a href="#!email"><span class="email">
+						      	<%= data[i].login %>
+						      </span></a>
+						    </div></li>
+						    <li><a class="waves-effect ajax-load" href="/sistema">Início</a></li>
+						    <li><div class="small-line"></div></li>
+						    <li><a class="waves-effect ajax-load" href="/sistema/perfil">Perfil</a></li>
+						    <li><div class="small-line"></div></li>
+						    <li><a class="waves-effect ajax-load" href="/sistema/chat">Chat</a></li>
+						    <li><div class="small-line"></div></li>
+						    <li><a class="waves-effect ajax-load" href="/sistema/faculdades">Faculdades</a></li>
+						    <li><div class="small-line"></div></li>
+						    <li><a class="waves-effect ajax-load" href="/sistema/usuarios">Contatos</a></li>
+						    <li><div class="small-line"></div></li>
+						    <li><a class="waves-effect ajax-load" href="/sistema/sobre">Sobre o App</a></li>
+						    <li><div class="small-line"></div></li>
+						    <li><a class="waves-effect" href="/logout"><i class="fa fa-times red-text"></i> Sair</a></li>
+						  </ul>
+						  <a href="#" data-activates="slide-out_2" class="right button-collapse"><i class="fa fa-bars"></i></a>
+		    		<%
+							}
+						}
+						%>
+		    		</div>
+		    	</div>
+		    </div>
+		  </nav>
+  	</header> -->
