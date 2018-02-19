@@ -12,6 +12,9 @@ app.use(require('express-is-ajax-request'));
 router.get('/', function(req, res, next) {
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'categorias/categorias', data: data});
 });
+router.get('/estagios', function(req, res, next) {
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'categorias/estagios', data: data});
+});
 router.get('/postagens/criar', function(req, res, next) {
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'categorias/postagens_criar', data: data});
 });

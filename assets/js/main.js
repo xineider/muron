@@ -37,10 +37,20 @@ $(document).on('ready', function () {
 		console.log(link);
 		GoTo(link, true);
 	});
-
+	$(document).on('click', '.ajax-load-to', function(e) {
+    e.preventDefault();
+    var link = $(this).attr('href');
+    var to = $(this).data('to');
+    LoadTo(link, to);
+	});
+	$(document).on('click', '.remove', function (e) {
+   	e.preventDefault();
+   	$(this).closest('.pai').remove();
+  });
 	$(document).on('click', '.ajax-submit', function(e) {
 		e.preventDefault();
-		var form = $(this).parents('form');
+		var form = $(this).closest('form');
+		console.log(form);
 		var post = form.serializeArray();
 		var link = $(this).data('href');
 		var back = $(this).data('action');
@@ -309,6 +319,7 @@ function MountModal(modal, link) {
     success: function(data) {
 			$(modal).find('.modal-content').html(data);
 			$(modal).modal('open');
+			$(modal).modal('draggable');
     },
     error: function(xhr) { // if error occured
       alert("Error, contate o administrador ou reinicie a pagina.");

@@ -35,6 +35,22 @@ router.get('/', function(req, res, next) {
 	});
 
 	// Metodos POST
+	router.post('/cadastro', function(req, res, next) {
+// Recebendo o valor do post
+		POST = req.body;
+		POST.senha = control.Encrypt(POST.senha);
+		model.CadastrarUsuario(POST).then(data => {
+			var to = 'clebercavalheiro.000@gmail.com';
+			var subject = 'Bem Vindo ao MurOn';
+			var html = 'Bem vindo ao aplicativo preferido das faculdades e alunos. Segue abaixo as informações sobre sua conta. \
+									<br> <b>Login: leopeixe42</b> <br> \
+						 			<br> <b>Senha: rr43233</b> <br>Acesse via o link "bla"';
+			var text = 'Bem vindo ao sistema de tarefas Optima. Seu login é: leopeixe42 e sua senha é rr43233. Acesse via o link "bla"';
+			control.SendMail(to, subject, html, text);
+			console.log(subject);
+			res.json(data);
+		});
+	});
 	router.post('/desativar', function(req, res, next) {
 		// Recebendo o valor do post
 		POST = req.body;

@@ -110,6 +110,9 @@ ul > li > ul.sub-menu:before {
 #modaldeletar {
   z-index: 1007 !important;
 }
+.modal {
+  max-height: 80% !important;
+}
 .error {
   position: absolute;
   bottom: -20px;
@@ -199,7 +202,7 @@ table td {
 {
   header {    
     width: 100%;
-    max-height: 80px;
+    max-height: 70px;
   }
   header #big-nav {
     display: block;
@@ -215,6 +218,10 @@ table td {
 }
 .small-line {
   border-bottom: 1px solid rgba(196, 196, 196, 0.6);
+}
+.small-line.post-line {
+  width: 96%;
+  margin: 0 auto;
 }
 .side-nav li>a>i {
   width: auto !important;
@@ -237,7 +244,7 @@ table td {
   max-height: 11em;
 }
 .g-blue {
-  background: linear-gradient(to right top, rgb(5, 117, 230), rgb(2, 27, 121));
+  background: linear-gradient(to right top, rgb(66, 165, 246), rgb(2, 95, 171));
 }
 .g-blue-light {
   background: linear-gradient(to right top, rgb(124, 186, 247), rgb(99, 130, 247));
@@ -250,18 +257,18 @@ table td {
   background-position: 
 }
 .logo-container img {
-  max-height: 70px;
-  padding-top: 10px;
+  max-width: 65%;
+  padding-top: 17px;
 }
 .nav-wrapper > div {
   margin: 0;
 }
 body {
-  margin-top: 80px;
+  margin-top: 70px;
   top: 0;
 }
 header .fa {
-  padding-top: 10px;
+  padding-top: 7px;
   font-size: 2.5em;
 }
 header .side-nav .fa {
@@ -395,6 +402,15 @@ td.contato-img {
     font-size: 40px;
     color: black;
 }
+/* label focus color */
+.input-field input:focus + label {
+ color: black !important;
+}
+/* label underline focus color */
+.row .input-field input:focus {
+ border-bottom: 1px solid black !important;
+ box-shadow: 0 1px 0 0 black !important;
+}
 header .fa.fa-chevron-left {
   font-size: 2em;
 }
@@ -438,3 +454,6 @@ table.striped>tbody>tr>td {
 /*@media (max-width: 992px) {
   .post-center
 }*/
+.blue-mur {
+  background-color: #42a5f6 !important;
+} 

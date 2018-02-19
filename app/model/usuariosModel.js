@@ -33,12 +33,19 @@ class UsuariosModel {
 	GetUsuario(id) {
 		// Para retornar quando chamar a função
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT *, (SELECT b.nome FROM usuarios as b WHERE b.id = a.id_usuario LIMIT 1) as nome_usuario FROM obras as a WHERE a.deletado = ? AND a.id = ?', [0, id]).then(data => {
+			helper.Query('SELECT * FROM usuarios WHERE deletado = ? AND id = ?', [0, id]).then(data => {
 				resolve(data);
 			});
 		});
 	}
 	InsertUsuario(post) {
+		return new Promise(function(resolve, reject) {
+			helper.Insert('usuarios', post).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	CadastrarUsuario(post) {
 		return new Promise(function(resolve, reject) {
 			helper.Insert('usuarios', post).then(data => {
 				resolve(data);

@@ -12,41 +12,58 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-      <div class="input-field col s12">
-        <input id="password" type="password" class="validate">
-        <label for="password">Nome</label>
-      </div>
-      <div class="input-field col s12">
-        <input id="email" type="email" class="validate">
-        <label for="email">Email</label>
-      </div>
-      <div class="input-field col s12">
-        <input id="password" type="password" class="validate">
-        <label for="password">Senha</label>
-      </div>
-      <div class="input-field col s12">
-        <input id="email" type="email" class="validate">
-        <label for="email">Confirmar Senha</label>
-      </div>
-      <div class="input-field col s12">
-        <input id="password" type="password" class="validate">
-        <label for="password">Password</label>
-      </div>
-			<div class="col s12 center">
-				<p>
-		      <input type="checkbox" id="test5" />
-		      <label for="test5">Li e concordo com os <a href="">Termos de Serviço</a>.</label>
-		    </p>
+		<form method="POST" action="" enctype="multipart/form-data">
+			<div class="row">
+				<div class="col s12 m6">
+					<label>Tipo de Usuário</label>
+			    <select required="true" id="select-cadastro" class="browser-default" name="tipo">
+			      <option value="1" selected>MurEr</option>
+			      <option value="2">Faculdade</option>
+			      <option value="3">Divulgador</option>
+			    </select>
+				</div>
+	      <div class="input-field col s12">
+	        <input id="nome" name="nome" type="text" class="">
+	        <label for="nome">Nome Completo</label>
+	      </div>
+	      <div class="input-field col s12">
+	        <input id="nome_murer" name="nome_murer" type="text" class="">
+	        <label for="nome_murer">Nome MurEr</label>
+	      </div>
+	      <div class="input-field col s12">
+	        <input id="email" name="email" type="text" class="">
+	        <label for="email">Email</label>
+	      </div>
+	      <div class="input-field col s12">
+	        <input id="faculdade" type="text" class="">
+	        <label for="faculdade">Faculdade</label>
+	      </div>
+	      <div class="input-field col s12">
+	        <input class="datepicker" type="text" name="nascimento">
+	        <label>Data de Nascimento</label>
+	      </div>
+				<div class="col s12 center">
+					<p>
+			      <input type="checkbox" id="termos_servico" />
+			      <label for="termos_servico">Li e concordo com os <a href="#!">Termos de Serviço</a>.</label>
+			    </p>
+				</div>
+				<div class="col s12 center">
+					<!-- adicionar modal de "parabens pelo cadastro" quando der certo-->
+					<button data-href="cadastro" data-action="sistema/" id="button-cadastro" class="g-blue white-text btn-large waves-effect waves-light ajax-submit">Confirmar Cadastro</button>
+				</div>
 			</div>
-			<div class="col s12 center">
-				<button class="g-blue white-text btn-large" style="border-radius: 10px; font-size: 1.2em; font-weight: bold; width: 80%;">Confirmar Cadastro</button>
-			</div>
-		</div>
+		</form>
 	</div>
 </section>
 
 <style type="text/css">
+	#select-cadastro, #select-cadastro > option {
+		background-color: rgba(255, 255, 255, 0);
+	}
+	#select-cadastro {
+		border: 1px solid #e6e6e6;
+	}
 	#edit-cadastro {
 		position: absolute;
 		bottom: 1px;
@@ -73,7 +90,27 @@
 		margin-left: 0 !important;
 		margin-right: 0 !important;
 	}
+	#button-cadastro {
+		border-radius: 10px;
+		font-size: 1.2em;
+		font-weight: bold;
+		width: 80%;
+	}
+	.picker__date-display {
+		background-color: #3196ff !important;
+	}
+	.picker__close, .picker__today {
+		color: #3196ff !important;
+	}
+	.picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
+		background-color: #3196ff !important;
+	}
+	.picker__day.picker__day--today {
+		color: #3196ff !important;
+	}
+
 </style>
+
 <script type="text/javascript">
   $('#footer').fadeOut('slow');
 </script>
