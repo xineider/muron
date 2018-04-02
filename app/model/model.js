@@ -2,11 +2,13 @@
 var crypto = require('crypto');
 
 var config = {
-							    "host"     : "tyduzbv3ggpf15sx.cbetxkdyhwsb.us-east-1.rds.amazonaws.com	",
-							    "user"     : "f1g48qsphymfjk99",
-							    "password" : "ebndzz273sqpvr4m",
-							    "database" : "iokb5znwkva64bqf"
+				"host"     : "tyduzbv3ggpf15sx.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+				"user"     : "f1g48qsphymfjk99",
+				"password" : "ebndzz273sqpvr4m",
+				"database" : "iokb5znwkva64bqf"
 			};
+
+
 
 // // CONEXÃO MYSQL
 var mysql      = require('mysql');
