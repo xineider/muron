@@ -12,22 +12,22 @@ app.use(require('express-is-ajax-request'));
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {
 	model.SelectFaculdade().then(data=> {
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'faculdades/faculdades', data: data});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'faculdades/faculdades', data: data, usuario: req.session.usuario});
 	});
 });
 	router.get('/criar', function(req, res, next) {
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'faculdades/faculdades_criar', data: data});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'faculdades/faculdades_criar', data: data, usuario: req.session.usuario});
 	});
 	router.get('/editar/:id', function(req, res, next) {
 		id = req.params.id;
 		model.GetFaculdade(id).then(data => {
-			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'faculdades/faculdades_editar', data: data});
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'faculdades/faculdades_editar', data: data, usuario: req.session.usuario});
 		});
 	});
 	router.get('/ver/:id', function(req, res, next) {
 		id = req.params.id;
 		model.GetFaculdade(id).then(data => {
-			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'faculdades/faculdades_ver', data: data});
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'faculdades/faculdades_ver', data: data, usuario: req.session.usuario});
 		});
 	});
 

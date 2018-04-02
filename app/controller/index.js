@@ -11,11 +11,10 @@ app.use(require('express-is-ajax-request'));
 
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {
-	model.SelectUsuarios().then(data=> {
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data});
+	model.GetCategorias().then(data=> {
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
 	});
 });
-
 
 /* POST enviando o login para verificação. */
 router.post('/', function(req, res, next) {

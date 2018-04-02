@@ -11,8 +11,16 @@ app.use(require('express-is-ajax-request'));
 
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {
-	model.SelecioneChats().then(data => {
+	model.GetContatos(req.session.usuario.id).then(data => {
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'chats/chats', data: data, usuario: req.session.usuario});
+	});
+});
+
+router.get('/ver/:id', function(req, res, next) {
+	id = req.params.id;
+	model.GetMensagens(id, req.session.usuario.id).then(data => {
+		console.log(id);
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'chats/chats_interno', data: data, usuario: req.session.usuario, usuario_chat: id});
 	});
 });
 
@@ -21,13 +29,10 @@ router.get('/novidades/', function(req, res, next) {
 });
 
 // POSTS
-	router.post('/mensagens/', function(req, res, next) {
+	router.post('/enviar/mensagem/', function(req, res, next) {
 		POST = req.body;
-		console.log('<=======================================>');
-		console.log(POST);
-		console.log('<=======================================>');
-		model.SelecioneMensagens(POST.id, POST.id_usuario).then(data => {
-			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'chats/chats_conteudo', data: data});
+		model.InsertMensagem(POST).then(data => {
+			res.json(data);
 		});
 	});
 

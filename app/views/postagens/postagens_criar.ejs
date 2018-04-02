@@ -1,0 +1,52 @@
+<form method="post" action="">
+	<div class="container">
+		<div class="row">
+			<div class="col s12 m6">
+			  <select required="true" class="browser-default" name="id_categoria">
+			    <option value="" disabled selected>Categoria*</option>
+				<%
+				if (typeof data != 'undefined' && data.length > 0) {
+					for (var i = data.length - 1; i >= 0; i--) {
+						%>
+			    		<option value="<%= data[i].id %>"><%= data[i].nome %></option>
+						<%
+					}
+				}
+				%>
+			  </select>
+			  <br>
+			</div>
+			<div class="col s12 m6">
+			  <select required="true" class="browser-default" name="id_grupo">
+			    <option value="" disabled selected>Para*</option>
+			    <option value="0">Geral</option>
+			    <option value="1">Grupo</option>
+			  </select>
+			</div>
+		    <div class="input-field col s12">
+		      <input id="contato" type="text" class="validate" required="true" name="contato">
+		      <label for="contato">Contato*</label>
+		    </div>
+	        <div class="row uploads word-wrap">
+	        	<label>Imagem *</label>
+			    <div class="file-field input-field col s12 m7" style="height: 64px;">
+			      <div class="btn white col s12">
+			        <span class="black-text">Procurar <i class="fa fa-search" aria-hidden="true"></i></span>
+			        <input type="file" data-href="/sistema/postagens/uploadarquivo" id="arquivo">
+			      </div>
+			      <div class="file-path-wrapper col 12" style="width: 100%;">
+			        <input class="file-path validate" type="text" placeholder="Ou arraste seu arquivo aqui">
+			      </div>
+			    </div>
+			    <input type="hidden" name="imagem">
+	        </div>
+		    <div class="input-field col s12">
+		      <input id="descricao" type="text" class="validate" name="descricao">
+		      <label for="descricao">Descrição</label>
+		    </div>
+		</div>
+		<div class="col s12 center">
+			<button class="g-blue white-text btn-large ajax-submit"  data-href="/sistema/postagens/cadastrar/" data-link="/sistema/" style="border-radius: 10px; font-size: 1.2em; font-weight: bold; width: 80%;">Publicar</button>
+		</div>
+	</div>
+</form>

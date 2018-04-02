@@ -1,199 +1,40 @@
-<section>
-	<div class="line"></div>
-	<div class="carousel">
-	  <a class="carousel-item ajax-load" href="/sistema/categoria/eventos"><img src="/assets/imgs/banner-1.jpeg"><h5 class="center-align black-text">Eventos</h5></a>
-	  <a class="carousel-item ajax-load" href="/sistema/categoria/estários"><img src="/assets/imgs/banner-2.jpeg"><h5 class="center-align black-text">Estágios</h5></a>
-	  <a class="carousel-item ajax-load" href="/sistema/categoria/projetos"><img src="/assets/imgs/banner-3.jpeg"><h5 class="center-align black-text">Projetos</h5></a>
-	  <a class="carousel-item ajax-load" href="/sistema/categoria/tutoriais"><img src="/assets/imgs/banner-4.jpeg"><h5 class="center-align black-text">Tutorias</h5></a>
-	  <a class="carousel-item ajax-load" href="/sistema/categoria/servicos"><img src="/assets/imgs/banner-5.jpeg"><h5 class="center-align black-text">Serviços</h5></a>
-	  <a class="carousel-item ajax-load" href="/sistema/categoria/grupos"><img src="/assets/imgs/banner-7.png"><h5 class="center-align black-text">Grupos</h5></a>
+<section class="types">
+	<div class="row">
+		<%
+		if (typeof data != 'undefined' && data.length > 0) {
+			for (var i = data.length - 1; i >= 0; i--) {
+		%>
+			<div class="col s3">
+				<a href="/sistema/postagens/ver/<%= data[i].id %>" class="ajax-load">
+					<img class="circle" style="max-width: 100%;" src="/assets/imgs/banner-1.jpeg">
+					<p class="center-align black-text">
+						<%= data[i].nome %>
+					</p>
+				</a>
+			</div>
+		<%
+			}
+		}
+		%>
 	</div>
-	<div class="line"></div>
 </section>
 <section class="main-margin">
-	<div class="card row">
-		<span class="card-title">Eventos</span>
-		<div class="line"></div>
-		<div class="col s12 m6 l4 center">
-			<div class="card medium"> <!-- style="position: relative;" -->
-				<div class="card-image mur-card-img">
-					<img src="http://pngimg.com/uploads/student/student_PNG136.png">
-				</div>
-				<div class="card-content">
-					<p>Lorem ipsum himenaeos rhoncus ultricies cras dictum pulvinar, ut suscipit imperdiet pulvinar nullam vestibulum, eleifend habitant mi commodo aenean vitae. pharetra purus hendrerit sapien leo et fusce non fusce mollis magna, proin commodo sociosqu blandit himenaeos nec ac feugiat vel aptent aenean, tempus ante facilisis quisque curabitur dolor per sit fusce. arcu ipsum ultricies inceptos tempus ligula nulla mattis leo id curabitur c</p>
-				</div>
-				<div class="post-bottom">
-					<div class="small-line"></div>
-					<div class="card-content white">
-						<div class="col s6 left-align">
-							<p>Publicado por: Meu ovo cozido</p>
-							<p>Publicado por: Rã frita</p>
-						</div>
-						<div class="col s6 right-align">
-							<p><br></p>
-							<p>Data: 01/01/2001</p>
-						</div>
-					</div>
+	<%
+	if (typeof data != 'undefined' && data.length > 0) {
+		for (var i = data.length - 1; i >= 0; i--) {
+			%>
+			<div class="card row categorias" data-id="<%= data[i].id %>">
+				<span class="card-title"><%= data[i].nome %></span>
+				<div class="line"></div>
+				<div class="post-<%= data[i].id %>">
+					
 				</div>
 			</div>
-			<div class="card comments">
-				<ul class="collection">
-					<!--for começa aqui-->
-			    <li class="collection-item avatar left-align">
-			      <img src="/assets/imgs/banner-1.jpeg" alt="" class="circle">
-			      <span class="title">Title</span>
-			      <p>First Line</p>
-			      <a href="#!" class="secondary-content"><i class="fa fa-pencil-square-o blue-text"></i></a>
-			    </li>
-			    <!--for termina aqui-->
-			  </ul>
-			</div>
-		</div>
-		<div class="col s12 m6 l4 center">
-			<div class="card medium"> <!-- style="position: relative;" -->
-				<div class="card-image mur-card-img">
-					<img src="http://pngimg.com/uploads/student/student_PNG136.png">
-				</div>
-				<div class="card-content">
-					<p>Lorem ipsum himenaeos rhoncus ultricies cras dictum pulvinar, ut suscipit imperdiet pulvinar nullam vestibulum, eleifend habitant mi commodo aenean vitae. pharetra purus hendrerit sapien leo et fusce non fusce mollis magna, proin commodo sociosqu blandit himenaeos nec ac feugiat vel aptent aenean, tempus ante facilisis quisque curabitur dolor per sit fusce. arcu ipsum ultricies inceptos tempus ligula nulla mattis leo id curabitur c</p>
-				</div>
-				<div class="post-bottom">
-					<div class="small-line"></div>
-					<div class="card-content white">
-						<div class="col s6 left-align">
-							<p>Publicado por: Meu ovo cozido</p>
-							<p>Publicado por: Rã frita</p>
-						</div>
-						<div class="col s6 right-align">
-							<p><br></p>
-							<p>Data: 01/01/2001</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="card comments">
-				<ul class="collection">
-					<!--for começa aqui-->
-			    <li class="collection-item avatar left-align">
-			      <img src="/assets/imgs/banner-1.jpeg" alt="" class="circle">
-			      <span class="title">Title</span>
-			      <p>First Line</p>
-			      <a href="#!" class="secondary-content"><i class="fa fa-pencil-square-o blue-text"></i></a>
-			    </li>
-			    <!--for termina aqui-->
-			  </ul>
-			</div>
-		</div>
-		<div class="col s12 m6 l4 center">
-			<div class="card medium"> <!-- style="position: relative;" -->
-				<div class="card-image mur-card-img">
-					<img src="http://pngimg.com/uploads/student/student_PNG136.png">
-				</div>
-				<div class="card-content">
-					<p>Lorem ipsum himenaeos rhoncus ultricies cras dictum pulvinar, ut suscipit imperdiet pulvinar nullam vestibulum, eleifend habitant mi commodo aenean vitae. pharetra purus hendrerit sapien leo et fusce non fusce mollis magna, proin commodo sociosqu blandit himenaeos nec ac feugiat vel aptent aenean, tempus ante facilisis quisque curabitur dolor per sit fusce. arcu ipsum ultricies inceptos tempus ligula nulla mattis leo id curabitur c</p>
-				</div>
-				<div class="post-bottom">
-					<div class="small-line"></div>
-					<div class="card-content white">
-						<div class="col s6 left-align">
-							<p>Publicado por: Meu ovo cozido</p>
-							<p>Publicado por: Rã frita</p>
-						</div>
-						<div class="col s6 right-align">
-							<p><br></p>
-							<p>Data: 01/01/2001</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="card comments">
-				<ul class="collection">
-					<!--for começa aqui-->
-			    <li class="collection-item avatar left-align">
-			      <img src="/assets/imgs/banner-1.jpeg" alt="" class="circle">
-			      <span class="title">Title</span>
-			      <p>First Line</p>
-			      <a href="#!" class="secondary-content"><i class="fa fa-pencil-square-o blue-text"></i></a>
-			    </li>
-			    <!--for termina aqui-->
-			  </ul>
-			</div>
-		</div>
-	</div>
-	<div class="card row">
-		<span class="card-title">Estágios</span>
-		<div class="line"></div>
-		<div class="col s12 m6 l4 center">
-			<div class="card medium"> <!-- style="position: relative;" -->
-				<div class="card-image mur-card-img">
-					<img src="http://pngimg.com/uploads/student/student_PNG136.png">
-				</div>
-				<div class="card-content">
-					<p>Lorem ipsum himenaeos rhoncus ultricies cras dictum pulvinar, ut suscipit imperdiet pulvinar nullam vestibulum, eleifend habitant mi commodo aenean vitae. pharetra purus hendrerit sapien leo et fusce non fusce mollis magna, proin commodo sociosqu blandit himenaeos nec ac feugiat vel aptent aenean, tempus ante facilisis quisque curabitur dolor per sit fusce. arcu ipsum ultricies inceptos tempus ligula nulla mattis leo id curabitur c</p>
-				</div>
-				<div class="post-bottom">
-					<div class="small-line"></div>
-					<div class="card-content white">
-						<div class="col s6 left-align">
-							<p>Publicado por: Meu ovo cozido</p>
-							<p>Publicado por: Rã frita</p>
-						</div>
-						<div class="col s6 right-align">
-							<p><br></p>
-							<p>Data: 01/01/2001</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="card comments">
-				<ul class="collection">
-					<!--for começa aqui-->
-			    <li class="collection-item avatar left-align">
-			      <img src="/assets/imgs/banner-1.jpeg" alt="" class="circle">
-			      <span class="title">Title</span>
-			      <p>First Line</p>
-			      <a href="#!" class="secondary-content"><i class="fa fa-pencil-square-o blue-text"></i></a>
-			    </li>
-			    <!--for termina aqui-->
-			  </ul>
-			</div>
-		</div>
-		<div class="col s12 m6 l4 center">
-			<div class="card medium"> <!-- style="position: relative;" -->
-				<div class="card-image mur-card-img">
-					<img src="http://pngimg.com/uploads/student/student_PNG136.png">
-				</div>
-				<div class="card-content">
-					<p>Lorem ipsum himenaeos rhoncus ultricies cras dictum pulvinar, ut suscipit imperdiet pulvinar nullam vestibulum, eleifend habitant mi commodo aenean vitae. pharetra purus hendrerit sapien leo et fusce non fusce mollis magna, proin commodo sociosqu blandit himenaeos nec ac feugiat vel aptent aenean, tempus ante facilisis quisque curabitur dolor per sit fusce. arcu ipsum ultricies inceptos tempus ligula nulla mattis leo id curabitur c</p>
-				</div>
-				<div class="post-bottom">
-					<div class="small-line"></div>
-					<div class="card-content white">
-						<div class="col s6 left-align">
-							<p>Publicado por: Meu ovo cozido</p>
-							<p>Publicado por: Rã frita</p>
-						</div>
-						<div class="col s6 right-align">
-							<p><br></p>
-							<p>Data: 01/01/2001</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="card comments">
-				<ul class="collection">
-					<!--for começa aqui-->
-			    <li class="collection-item avatar left-align">
-			      <img src="/assets/imgs/banner-1.jpeg" alt="" class="circle">
-			      <span class="title">Title</span>
-			      <p>First Line</p>
-			      <a href="#!" class="secondary-content"><i class="fa fa-pencil-square-o blue-text"></i></a>
-			    </li>
-			    <!--for termina aqui-->
-			  </ul>
-			</div>
-		</div>
-	</div>
+			<%
+		}
+	}
+	%>
+	
 </section>
 
 
@@ -205,5 +46,28 @@
 </style>
 
 <script type="text/javascript">
-  $('#footer').fadeIn('slow');
+	$('#footer').fadeIn('slow');
+	$('.categorias').each(function() {
+		var id = $(this).data('id');
+		$.ajax({
+			method: "GET",
+			async: true,
+			url: '/sistema/postagens/ver/'+id,
+		    beforeSend: function(request) {
+		    	request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
+				request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
+		    	request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+				adicionarLoader();
+		    },
+		    success: function(data) {
+		    	$('.post-'+id).html(data);
+		    },
+		    error: function(xhr) { // if error occured
+		      alert("Error, contate o administrador ou reinicie a pagina.");
+		    },
+		    complete: function() {
+				removerLoader();
+		    }
+		});
+	});
 </script>

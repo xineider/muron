@@ -1,180 +1,28 @@
-<section id="chat" class="hide-footer">
-  <div class="black" style="position: fixed;z-index: -1;height:  100%;width:  100%;left:  0;top: 0;"></div>
-  <div class="container">
-    <div class="message-wrapper them">
-      <div class="text-wrapper animated fadeIn">Hey Yo! o/</div>
-    </div>
-    <div class="message-wrapper me">
-      <div class="text-wrapper animated fadeIn">Hey Yo! o/</div>
-    </div>
-    <div class="message-wrapper me">
-      <div class="text-wrapper animated fadeIn">Tudo bem</div>
-    </div>
-  </div>
-<!--   <div id="message-area" class="row">
-    <div class="input-field">
-      <input id="mensagem_enviar" type="text" class="validate">
-      <label for="mensagem_enviar">Escreva aqui</label>
-    </div>
-    <div class="col s2">
-      <a href="">
-        <div class="send-button center valign-wrapper">
-          <i class="fa fa-paper-plane"></i>
-        </div>
-      </a>
-    </div>
-  </div> -->
-  <div class="row" style="background-color: #fff; position: fixed; right: 0; bottom: 0; border: 1px 2px 1px 2px; margin-bottom: 0; width: 100%; border-radius: 40px; padding: 0 20px;">
-    <div class="col s12" style="position: relative;">
-      <div style="width: 65%; margin: auto;">
-      <input type="text" name="" placeholder="Digite sua mensagem aqui">
-      </div>
-      <div style="position: absolute; left: 0; bottom: 0; font-size: 3.4em;">
-        <i class="fa fa-smile-o" aria-hidden="true"></i>
-      </div>
-      <div style="position: absolute; right: 0; bottom: 0; font-size: 3em;">
-        <i class="fa fa-paperclip" aria-hidden="true"></i>
-        <i class="fa fa-camera" aria-hidden="true"></i>
-      </div>
-    </div>
-  </div>
+<section id="chats">
+  <ul class="collection">
+    <%
+    if (typeof data != 'undefined' && data.length > 0) {
+      for (var i = data.length - 1; i >= 0; i--) {
+    %>
+    <a href="/sistema/chats/ver/<%= data[i].id_usuario2 %>" class="black-text ajax-load" data-top="1">
+      <li class="collection-item avatar">
+        <img src="https://imgflip.com/s/meme/WTF.jpg" alt="" class="circle">
+        <span class="title"><%= data[i].nome_murer %></span>
+        <p><small><%= data[i].nome %><br>
+          <%= data[i].email %></small>
+        </p>
+        <a class="secondary-content"><i class="fa fa-comments blue-text"></i></a>
+      </li>
+    </a>
+  <%
+    }
+  } else {
+  %>
+    <li class="center-align">
+      Nenhum contato foi adicionado, <a href="/sistema/contatos">clique aqui para adicionar contatos</a>
+    </li>
+  <%
+  }
+  %>
+  </ul>
 </section>
-
-<style type="text/css">
-  #chat {
-    padding: 0.5em 0.1em 0em 0.2em;
-    padding-bottom: 50px;
-  }
-  input#mensagem_enviar {
-    border-bottom: none;
-/*    bottom: 10px;
-    left: 10px;*/
-  }
-  #message-area.row {
-    margin-bottom: 0;
-  }
-/*  #message-area .input-field {
-    top: 0.2em;
-    left: 0.9em;
-  }*/
-  #message-area > .input-field {
-    margin-bottom: 0;
-    padding: 10px;
-  }
-  input[type=text]:not(.browser-default):focus:not([readonly])+label {
-    color: #000;
-  }
-  .input-field label:not(.label-icon).active {
-    transform: translateY(-10px) scale(0.9);
-    -webkit-transform: translateY(-10px) scale(0.9);
-    transform-origin: 0 0;
-    -webkit-transform-origin: 0 0;
-  }
-  .send-button {
-    position: fixed;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    border: 0;
-    background: #ddeafd;
-    color: #ffffff;
-    bottom: 10px;
-    right: 10px;
-  }
-  .message-wrapper {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    margin: 10.6666666667px 0;
-    padding: 10.6666666667px 0;
-  }
-  .message-wrapper.them .circle-wrapper, .message-wrapper.them .text-wrapper {
-    background: #fff;
-    float: left;
-    color: #000;
-  }
-  .message-wrapper.me .text-wrapper {
-    background: #3588cb;
-    float: right;
-    color: #ffffff;
-  }
-  .message-wrapper.me .text-wrapper {
-    background: #3588cb;
-  }
-  .message-wrapper .circle-wrapper {
-    height: 42.6666666667px;
-    width: 42.6666666667px;
-    border-radius: 50%;
-  }
-  .message-wrapper .text-wrapper {
-    padding: 10.6666666667px;
-    min-height: 42.6666666667px;
-    width: 60%;
-    margin:0 10.6666666667px;
-    webkit-box-shadow: 0px 1px 0px 0px rgba(50, 50, 50, 0.3); /*riscado*/
-    box-shadow: 0px 1px 0px 0px rgba(50, 50, 50, 0.3);
-    border-radius: 10px;
-    font-weight: 300;
-    position: relative;
-    word-break: break-all; /*riscado*/
-    opacity: 0;
-  }
-  .fadeIn {
-    webkit-animation-name: fadeIn;
-    animation-name: fadeIn;
-  }
-  .bounceIn {
-    webkit-animation-name: bounceIn; /*riscado*/
-    animation-name: bounceIn;
-    webkit-animation-duration: .75s; /*riscado*/
-    animation-duration: .75%;
-  }
-  .animated {
-    webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-  }
-  .message-wrapper.me .text-wrapper:before {
-    border-width: 10px 0 10px 10px;
-    border-color: transparent transparent transparent #3588cb;
-    position: absolute;
-    bottom: 0.3em;
-    right: -8px;
-  }
-  .message-wrapper.them .text-wrapper:before {
-    border-width: 10px 10px 10px 0px;
-    border-color: transparent #fff transparent transparent;
-    position: absolute;
-    bottom: 0.3em;
-    left: -8px;
-  }
-  .message-wrapper .text-wrapper:before {
-    content: '';
-    width: 0;
-    height: 0;
-    border-style: solid;
-  }
-  @keyframes fadeIn{
-    0%{opacity:0}
-    100%{opacity:1}
-  }
-  .fadeIn{
-    -webkit-animation-name:fadeIn;
-    animation-name:fadeIn
-  }
-  #message-area {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    height: 50px;
-    border-top: 1px;
-    border-top-color: #000000;
-    background-color: #f1f1f1;
-  }
-</style>
-
-<script type="text/javascript">
-  $('#footer').fadeOut('slow');
-</script>

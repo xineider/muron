@@ -5,7 +5,7 @@ var crypto = require('crypto');
 var config = {"mysql": {
 								    "host"     : "localhost",
 								    "user"     : "root",
-								    "password" : "root",
+								    "password" : "",
 								    "database" : "muron"
 							  	}};
 
@@ -200,13 +200,13 @@ class Helper {
 	Update(table, data) {
 		var values = '';
 		var array = [];
-  	for (var key in data) {
-  		if (key == 'id') {
-	    	var where = ' WHERE id = ' + data[key] + ' AND deletado = 0';
-  		} else {
-  			values += ','+key + '= ?';
-  			array.push(data[key]);
-  		}
+	  	for (var key in data) {
+	  		if (key == 'id') {
+		    	var where = ' WHERE id = ' + data[key] + ' AND deletado = 0';
+	  		} else {
+	  			values += ','+key + '= ?';
+	  			array.push(data[key]);
+	  		}
 		}
 		if (data['id'] != undefined && data['id'] != null && data['id'] != '') {
 		  values = values.slice(1);
@@ -218,6 +218,16 @@ class Helper {
 				});
 			});
 		}
+	}
+	Ativar(table, data) {
+		return new Promise(function(resolve, reject) {
+			// Adicione a query com scape(?) e os respectivos valores em um array simples
+			connection.query('UPDATE '+ table + ' SET deletado = ? WHERE id = ?', [0, data.id], function (error, results, fields) {
+			  if (error && query != '') console.log('ERROR SQL ------------- '+error+' ------------- SQL ERROR');
+			  resolve(results);
+
+			});
+		});
 	}
 	Desativar(table, data) {
 		return new Promise(function(resolve, reject) {

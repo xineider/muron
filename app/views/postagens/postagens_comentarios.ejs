@@ -1,0 +1,51 @@
+<div class="comments">
+<%
+if (typeof data.comentarios != 'undefined' && data.comentarios.length > 0) {
+	for (var i = data.comentarios.length - 1; i >= 0; i--) {
+%>
+	<div class="row comentario parent">
+		<div class="col s3 m4 center-align" style="padding: 5px;">
+			<div class="image" style="background-image: url('/assets/imgs/banner-1.jpeg')"></div>
+		</div>
+		<div class="col s9 m8 text">
+			<%
+			if (data.comentarios[i].id_usuario == usuario.id) {
+			%>
+			<div class="right-align col s6 horizontal fixed-action-btn">
+				<a class="">
+					<i class="fa fa-ellipsis-h"></i>
+				</a>
+			    <ul>
+			      <li><a class="btn-floating red white-text remove" data-link="/sistema/postagens/desativar/comentario/" data-id="<%= data.comentarios[i].id %>"><i class="fa fa-times"></i></a></li>
+			    </ul>
+			</div>
+			<%
+			}
+			%>
+			<p>
+				<a href="">
+					<%= data.comentarios[i].nome %>:
+				</a>
+				<%= data.comentarios[i].texto %>
+			</p>
+		</div>
+	</div>
+<%
+	}
+} else {
+%>
+	<p class="center-align">
+		Nenhuma comentário foi publicado.
+	</p>
+<%
+}
+%>
+<form method="POST" action="" id="comentario-form">
+	<div class="col s12 input-field valign-wrapper m0">
+		<input type="hidden" name="id_postagem" value="<%= data.postagem %>">
+		<input type="hidden" name="id_usuario" value="<%= usuario.id %>">
+		<input type="text" name="texto" placeholder="Deixe seu comentário">
+		<button class="sufix ajax-submit"  data-href="/sistema/postagens/cadastrar/comentario/"><i class="fa fa-chevron-circle-right blue-text"></i></button>
+	</div>
+</form>
+</div>

@@ -1,33 +1,32 @@
-<section class="hideFooter">
-  <table class="striped">
-      <tbody>
-      <tr>
-      	<td class="contato-img"><a href="/sistema/usuarios/ver/1"><img src="/assets/imgs/banner-1.jpeg" alt="" class="circle responsive-img"></a></td>
-        <td>Gabriel</td>
-      </tr>
-      <tr>
-      	<td class="contato-img"><a href="/sistema/usuarios/ver/1"><img src="/assets/imgs/banner-1.jpeg" alt="" class="circle responsive-img"></a></td>
-        <td>Uriel</td>
-      </tr>
-      <tr>
-      	<td class="contato-img"><a href="/sistema/usuarios/ver/1"><img src="/assets/imgs/banner-1.jpeg" alt="" class="circle responsive-img"></a></td>
-        <td>Galadriel</td>
-      </tr>
-      <tr>
-      	<td class="contato-img"><a href="/sistema/usuarios/ver/1"><img src="/assets/imgs/banner-1.jpeg" alt="" class="circle responsive-img"></a></td>
-        <td>Andariel</td>
-      </tr>
-      <tr>
-      	<td class="contato-img"><a href="/sistema/usuarios/ver/1"><img src="/assets/imgs/banner-1.jpeg" alt="" class="circle responsive-img"></a></td>
-        <td>Miguel</td>
-      </tr>
-      <tr>
-      	<td class="contato-img"><a href="/sistema/usuarios/ver/1"><img src="/assets/imgs/banner-1.jpeg" alt="" class="circle responsive-img"></a></td>
-        <td>Kafziel</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-<script type="text/javascript">
-  $('#footer').fadeOut('slow');
-</script>
+<%
+if (typeof data != 'undefined' && data.length > 0) {
+  for (var i = data.length - 1; i >= 0; i--) {
+    %>
+    <tr>
+      <td class="center-align">
+        <a href="/sistema/usuarios/ver/<%= data[i].id_usuario2 %>">
+        <%= data[i].nome_murer %> | <small><%= data[i].email %></small>
+        </a>
+      </td>
+      <%
+      if (typeof data.amigos != 'undefined' && data.amigos == 1) {
+      %>
+      <td>
+        <a data-id_usuario2="<%= data[i].id_usuario2 %>" data-id_usuario="<%= usuario.id %>" class="add_contato btn-floating btn waves-effect waves-light blue darken-2 white-text">
+          <i class="fa fa-plus"></i>
+        </a>
+      </td>
+      <%
+      }
+      %>
+    </tr>
+    <%
+  }
+} else {
+  %>
+  <tr>
+    <td class="center-align">Nenhuma resultado foi encontrado.</td>
+  </tr>
+  <%
+}
+%>

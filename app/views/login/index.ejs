@@ -1,122 +1,237 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Sistema Quorp</title>
-    <link rel='stylesheet' href='/stylesheets/font-awesome.min.css' />
-    <link rel='stylesheet' href='/stylesheets/materialize.min.css' />
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-		<script src="/javascripts/jquery.min.js"></script>
-		<script src="/javascripts/materialize.min.js"></script>
-		<script src="/javascripts/main.js"></script>
-  </head>
-  <body class="row">
-  <main>
+<head>
+	<title>Sistema Quorp</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<link rel='stylesheet' href='/assets/css/font-awesome.min.css' />
+	<link rel='stylesheet' href='/assets/css/materialize.min.css' />
+	<link rel='stylesheet' href='/assets/css/style.css' />
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/materialize.min.js"></script>
+	<meta name="google-signin-scope" content="profile email">
+	<meta name="google-signin-client_id" content="341951899153-ruhib3nf027df8qbauo9is0ocvgi4snb.apps.googleusercontent.com">
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+<body class="row login">
+	<!-- Esqueceu Senha -->
+	<div id="modalforgot" class="modal">
+		<div class="modal-content">
+			<p><b>Recuperação de Senha</b></p>
+			<div class="input-field">
+				<label>Digite seu email</label>
+				<input type="email" name="email">
+			</div>
+			<button class="btn blue white-text">
+				Confirmar
+			</button>
+		</div>
+	</div>
+	<!-- Cadastre-se -->
+	<div id="modalnew" class="modal">
+		<div class="modal-content">
+			<p><b>Cadastro de Usuário</b></p>
+			<form id="cadastra-usuario" method="POST" action="" onsubmit="">
+				<div class="row">
+					<div class="col s12 input-field">
+						<label>Nome</label>
+						<input required="true" type="text" name="nome">
+					</div>
+					<div class="col s12 input-field">
+						<label>Nome Murer</label>
+						<input required="true" type="text" name="nome_murer">
+					</div>
+					<div class="col s12 input-field">
+						<label>E-mail</label>
+						<input required="true" type="email" name="email">
+					</div>
+					<div class="col s12 input-field">
+						<label>Login</label>
+						<input required="true" type="text" name="login">
+					</div>
+					<div class="col s12 input-field">
+						<label>Senha</label>
+						<input required="true" type="password" name="senha">
+					</div>
+					<div class="col s12 input-field">
+						<label>Senha Confirmar</label>
+						<input required="true" type="password" name="senha_confirmar">
+					</div>
+					<div class="col s12">
+						<button class="btn blue white-text" style="width: 100%;">Finalizar Cadastro</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- Cadastre-se Parceiro -->
+	<div id="modalparceiro" class="modal">
+		<div class="modal-content">
+			<p><b>Cadastro de Parceiro</b></p>
+			<div class="row">
+				<div class="col s12 input-field">
+					<label>E-mail</label>
+					<input type="text" name="email">
+				</div>
+				<div class="col s12 input-field">
+					<label>Telefone</label>
+					<input type="text" name="celular">
+				</div>
+				<div class="col s12 input-field">
+					<label>Nome</label>
+					<input type="text" name="nome">
+				</div>
+				<div class="col s12 input-field">
+					<label>Sigla/MurEr</label>
+					<input type="text" name="nome_murer">
+				</div>
+				<div class="col s12 input-field">
+					<label>Descrição</label>
+					<input type="text" name="descricao">
+				</div>
+				<div class="col s12 input-field">
+					<label>Login</label>
+					<input type="text" name="login">
+				</div>
+				<div class="col s12 input-field">
+					<label>Senha</label>
+					<input type="text" name="senha">
+				</div>
+				<div class="col s12 input-field">
+					<label>Confirmar Senha</label>
+					<input type="text" name="senha_confirmar">
+				</div>
+				<div class="col s12">
+					<button class="btn blue white-text" style="width: 100%;">Finalizar Cadastro</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<main>
 		<section>
-			<div class="login">
+			<div>
 				<form method="POST" action="/">
 					<div class="icon center-align">
-						<img style="max-height: 320px;" src="/images/logo.png">
+						<img style="max-height: 320px;" src="/assets/imgs/logo.png">
 					</div>
-					<div class="box white arrow_box">
+					<div class="box arrow_box">
 						<%
 						if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == '404') {
-						%>
-		        		<div class="card-panel red darken-1 center-align">
-		        			<span class="white-text"><%= erro %></span>
-		        		</div>
-						<%
+							%>
+							<div class="card-panel red darken-1 center-align">
+								<span class="white-text"><%= erro %></span>
+							</div>
+							<%
 						} else if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == 'login') {
-						%>
-		        		<div class="card-panel red darken-1 center-align">
-		        			<span class="white-text"><%= erro %></span>
-		        		</div>
-						<%
+							%>
+							<div class="card-panel red darken-1 center-align">
+								<span class="white-text"><%= erro %></span>
+							</div>
+							<%
 						}
 						%>
-						<div class="input-field">
-							<i class="fa fa-user prefix" aria-hidden="true"></i>
-							<input type="text" name="login" id="login" class="validate">
-							<label for="login">Usuário</label>
+						<div class="container-small">
+							<div class="inputs">
+								<div class="input-field valign-wrapper">
+									<i class="fa fa-user-o prefix grey-text center-align" aria-hidden="true"></i>
+									<input type="text" name="login" id="login" class="validate" placeholder="Login">
+								</div>
+								<div class="input-field">
+									<i class="fa fa-key prefix grey-text center-align" aria-hidden="true"></i>
+									<input type="password" name="senha" id="senha" class="validate" placeholder="Senha">
+								</div>
+							</div>
+							<div class="center-align">
+								<button class="btn-large waves-effect waves-teal waves-light">
+									Entrar
+								</button>
+							</div>
+							<p class="acc">
+								<a class="white-text" href="#modalforgot">Esqueceu sua senha?</a><br>
+								<a class="white-text" href="#modalnew">Ainda não tem conta? <span class="blue-text text-darken-2">Cadastre-se</span></a>
+							</p>
+							<div class="row acc-midias">
+								<div class="col s12 google">
+									<a class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true" data-lang="pt-BR">
+										<!-- <i class="fa fa-google"></i> Entrar com Google+ -->
+									</a>
+								</div>
+								<div class="col s12 center-align">
+									<a href="" class="">
+										<div id="fb-root"></div>
+										<div class="fb-login-button" data-width="100%" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+									</a>
+								</div>
+							</div>
+							<div class="or"><span>OU</span></div>
 						</div>
-						<div class="input-field">
-							<i class="fa fa-key prefix" aria-hidden="true"></i>
-							<input type="password" name="senha" id="senha" class="validate">
-							<label for="senha">Senha</label>
-						</div>
-						<small><a href="#">Esqueceu sua senha?</a></small>
-						<div class="center-align">
-							<button class="btn-large blue darken-2 waves-effect waves-teal waves-light">
-								Acessar
-							</button>
-						</div>
+					</div>
+					<div class="row">
+						<br>
+						<a style="width: 100%;" href="#modalparceiro" class="btn grey lighten-4 black-text">Quer ser um parceiro?</a>
 					</div>
 				</form>
 			</div>
 		</section>
-		<style type="text/css">
-			html {
-				height: 100%;
-		    	min-height: 100%;
-			    background-color: #f5f5f5;
-			}
-			.login .icon {
-				font-size: 6em;
-			}
-			.login .box {
-			    width: 50%;
-		    	margin: auto;
-		    	padding: 20px;
-		    	box-sizing: content-box;
-			}
-		    footer {
-		        position: absolute;
-		        bottom: 0;
-		        min-width: 100%;
-		        background-color: rgba(178, 34, 34, 0.9);
-		    }
-		    .arrow_box {
-				position: relative;
-				background: #ffffff;
-				border: 4px solid #d6d6d6;
-			}
-			.arrow_box:after, .arrow_box:before {
-				bottom: 100%;
-				left: 50%;
-				border: solid transparent;
-				content: " ";
-				height: 0;
-				width: 0;
-				position: absolute;
-				pointer-events: none;
-			}
+	</main>
+</body>
+<script type="text/javascript">
+	$(document).on('ready', function () {
+		$('.modal').modal();
+		$('#cadastra-usuario').on('submit', function(e) {
+			e.preventDefault();
+			var form = $(this);
+			var post = form.serializeArray();
+			if($('.modal input[name="senha"]').val() != $('.modal input[name="senha_confirmar"]').val()){alert('Confirmação de Senha incorreta')}
+			$.ajax({
+				method: 'POST',
+				async: true,
+				data: post,
+				url: '/sistema/api/cadastrar/usuario',
+				beforeSend: function(request) {
+				},
+				success: function(data) {
+					if(data.length == 0) {
+						alert('Erro, tente novamente ou entre contato com o administrador');
+					} else {
+						var login = form.find('input[name="login"]').val();
+						var senha = form.find('input[name="senha"]').val();
+						$('.inputs').find('input[name="login"]').val(login);
+						$('.inputs').find('input[name="senha"]').val(senha);
+    					$('.modal').modal('close');
+					}
+				},
+			    error: function(xhr) { // if error occured
+			    	alert("Error, contate o administrador ou reinicie a pagina.");
+			    },
+			    complete: function() {
+			    }
+			});
+		});
+	});
+</script>
+<script>
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = 'https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.12&appId=180728395898475&autoLogAppEvents=1';
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
 
-			.arrow_box:after {
-				border-color: rgba(136, 183, 213, 0);
-				border-bottom-color: #ffffff;
-				border-width: 10px;
-				margin-left: -10px;
-			}
-			.arrow_box:before {
-				border-color: rgba(194, 225, 245, 0);
-				border-bottom-color: #d6d6d6;
-				border-width: 16px;
-				margin-left: -16px;
-			}
-			.input-field .prefix.active {
-			    color: #1976D2 ;
-			}
-			img {
-				width: 100%;
-				max-width: 450px;
-			}
-			input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
-			    border-bottom: 1px solid #1976D2 ;
-		   		box-shadow: 0 1px 0 0 #1976D2 ;
-			}
-			input:not([type]):focus:not([readonly])+label, input[type=text]:focus:not([readonly])+label, input[type=password]:focus:not([readonly])+label, input[type=email]:focus:not([readonly])+label, input[type=url]:focus:not([readonly])+label, input[type=time]:focus:not([readonly])+label, input[type=date]:focus:not([readonly])+label, input[type=datetime]:focus:not([readonly])+label, input[type=datetime-local]:focus:not([readonly])+label, input[type=tel]:focus:not([readonly])+label, input[type=number]:focus:not([readonly])+label, input[type=search]:focus:not([readonly])+label, textarea.materialize-textarea:focus:not([readonly])+label {
-			    color: #1976D2 ;
-			}
-		</style>
-  </main>
-  </body>
+
+	function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+        var profile = googleUser.getBasicProfile();
+        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail());
+
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token: " + id_token);
+    };
+</script>
 </html>

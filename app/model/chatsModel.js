@@ -5,15 +5,23 @@ var Helper = require('./model.js');
 var helper = new Helper;
 
 class ChatsModel {
-	SelecioneChats(id_usuario) {
-		var data = {};
+	GetContatos(id) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT b.* FROM chats_participantes as a INNER JOIN chats as b ON a.id_chat = b.id WHERE deletado = ? AND id_usuario = ?', [0, id_usuario]).then(data_participantes => {
-				data['grupos'] = data_participantes;
-				helper.Query('SELECT * FROM usuarios WHERE deletado = ?', [0]).then(data_usuarios => {
-					data['usuarios'] = data_usuarios;
-					resolve(data);
-				});
+			helper.Query('SELECT (SELECT b.nome_murer FROM usuarios as b WHERE b.id = a.id_usuario2) as nome_murer,\
+						(SELECT c.email FROM usuarios as c WHERE c.id = a.id_usuario2) as email,\
+						(SELECT d.nome FROM usuarios as d WHERE d.id = a.id_usuario2) as nome,\
+						a.id_usuario2, a.id\
+						FROM usuarios_contatos as a WHERE a.deletado = ? AND a.id_usuario = ?', [0, id]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	GetMensagens(id, id_usuario) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT * FROM chats_mensagens WHERE\
+						(id_usuario = ? AND id_usuario_para = ?)\
+						OR (id_usuario = ? AND id_usuario_para = ?) ORDER BY id DESC', [id, id_usuario, id_usuario, id]).then(data => {
+				resolve(data);
 			});
 		});
 	}
@@ -24,9 +32,9 @@ class ChatsModel {
 			});
 		});
 	}
-	EnviarMensagen(id, id_usuario) {
+	InsertMensagem(post) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT * FROM chats_mensagens WHERE id_chat = ?', [id]).then(data => {
+			helper.Insert('chats_mensagens', post).then(data => {
 				resolve(data);
 			});
 		});

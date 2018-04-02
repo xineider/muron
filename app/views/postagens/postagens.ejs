@@ -1,0 +1,64 @@
+<div class="row">
+<%
+if (typeof data.postagens != 'undefined' && data.postagens.length > 0) {
+	for (var i = data.postagens.length - 1; i >= 0; i--) {
+%>
+	<div class="col s12 m6 l4 center post parent">
+		<div class="card medium"> <!-- style="position: relative;" -->
+			<div class="card-image mur-card-img">
+				<img src="/assets/uploads/<%= data.postagens[i].imagem %>">
+			</div>
+			<div class="row grey lighten-3 blue-text actions row relative">
+				<div class="left-align col s6">
+					<a class="GiveLike <%= data.postagens[i].gostei >= 1 ? 'active' : '' %>" data-id="<%= data.postagens[i].id %>" data-id_usuario="<%= usuario.id %>" data-gostei="<%= data.postagens[i].gostei %>">
+						<i class="fa fa-thumbs-up"></i>
+					</a>
+					<a href="" class="modal-mount" data-href="#modalinfo" data-link="/postagens/comentarios/<%= data.postagens[i].id %>">
+						<i class="fa fa-comment"></i>
+					</a>
+					<a href="">
+						<i class="fa fa-share-alt"></i>
+					</a>
+				</div>
+				<%
+				if (data.postagens[i].id_usuario == usuario.id) {
+				%>
+				<div class="right-align col s6 horizontal fixed-action-btn">
+					<a class="">
+						<i class="fa fa-ellipsis-h"></i>
+					</a>
+				    <ul>
+				      <li><a class="btn-floating red white-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.postagens[i].id %>" data-to="/sistema/postagens/desativar/" data-back="/sistema" data-texto="Você tem deseja remover esta publicação? Esta ação não poderá ser desfeita."><i class="fa fa-times"></i></a></li>
+				    </ul>
+				</div>
+				<%
+				}
+				%>
+			</div>
+			<div class="card-content <%= data.postagens[i].descricao != '' && data.postagens[i].descricao != null ? 'text-content' : '' %> left-align">
+				<p><%= data.postagens[i].descricao %></p>
+			</div>
+			<div class="post-bottom">
+				<div class="small-line"></div>
+				<div class="card-content white">
+					<div class="col s6 left-align">
+						<p>Publicado por: <%= data.postagens[i].usuario %></p>
+					</div>
+					<div class="col s6 right-align">
+						<p>Data: <%= data.postagens[i].data_atualizado %></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<%
+	}
+} else {
+%>
+	<p class="center-align">
+		Nenhuma resultado foi encontrado.
+	</p>
+<%
+}
+%>
+</div>

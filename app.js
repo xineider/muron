@@ -7,6 +7,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var Control = require('./app/controller/control.js');
+const fileUpload = require('express-fileupload');
+
+var VerificacaoModel = require('./app/model/verificacaoModel');
+var verificacao = new VerificacaoModel;
 
 var login = require('./app/controller/login');
 var index = require('./app/controller/index');
@@ -14,7 +18,7 @@ var usuarios = require('./app/controller/usuarios');
 var grupos = require('./app/controller/grupos');
 var chats = require('./app/controller/chats');
 var faculdades = require('./app/controller/faculdades');
-var categorias = require('./app/controller/categorias');
+var postagens = require('./app/controller/postagens');
 var sobre = require('./app/controller/sobre');
 var api = require('./app/controller/api');
 var configuracoes = require('./app/controller/configuracoes');
@@ -33,16 +37,35 @@ app.use(session({
 
 // Verifica usuario se esta logado ou não
 app.use(function (req, res, next) {
-  req.session.id_usuario = 1;
   var pathname = parseurl(req).pathname;
-  if (control.Isset(req.session.id_usuario, false) 
-  	&& (pathname != '/' && pathname != '')
-  		&& (pathname.indexOf("css") == -1 && pathname.indexOf("js") == -1 && pathname.indexOf("imgs") == -1 && pathname.indexOf("fonts") == -1)) {
-		res.redirect('/');
+  if ((pathname != '/' && pathname != '') && pathname.indexOf("api") == -1 &&
+      (pathname.indexOf("css") == -1 && pathname.indexOf("js") == -1 && pathname.indexOf("imgs") == -1 && pathname.indexOf("fonts") == -1) && 
+        req.isAjaxRequest() == true){
+    var id = req.headers['authority-optima-id'];
+    var hash = req.headers['authority-optima-hash'];
+    var tipo = req.headers['authority-optima-tipo'];
+    verificacao.VerificarUsuario(id, hash, tipo).then(data => {
+      if (data.length > 0) {
+        req.session.usuario = {};
+        req.session.usuario.id = id;
+        req.session.usuario.hash_login = hash;
+        req.session.usuario.tipo = tipo;
+        req.session.usuario.nome_murer = data[0].nome_murer;
+        req.session.usuario.email = data[0].email;
+        next();
+      } else {
+        req.session.destroy(function(err) {
+          res.json('<script>window.location.replace("/");</script>');
+        });
+      }
+    });
+  } else if (control.Isset(req.session.usuario, false)
+    && (pathname != '/' && pathname != '') && pathname.indexOf("api") == -1
+      && (pathname.indexOf("css") == -1 && pathname.indexOf("js") == -1 && pathname.indexOf("imgs") == -1 && pathname.indexOf("fonts") == -1)) {
+    res.redirect('/');
   } else {
-		next();
+    next();
   }
-
 });
 
 // view engine setup
@@ -58,6 +81,7 @@ app.use(cookieParser());
 app.use("/assets", express.static(__dirname + '/assets'));
 // app.use(express.static(path.join(__dirname, '/assets')));
 // console.log(path.join(__dirname, 'assets'));
+app.use(fileUpload());
 
 app.use('/', login);
 app.use('/sistema', index);
@@ -65,7 +89,7 @@ app.use('/sistema/usuarios', usuarios);
 app.use('/sistema/grupos', grupos);
 app.use('/sistema/chats', chats);
 app.use('/sistema/faculdades', faculdades);
-app.use('/sistema/categorias', categorias);
+app.use('/sistema/postagens', postagens);
 app.use('/sistema/sobre', sobre);
 app.use('/sistema/api', api);
 app.use('/sistema/configuracoes', configuracoes);
