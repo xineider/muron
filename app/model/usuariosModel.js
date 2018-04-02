@@ -4,16 +4,6 @@ var app = express();
 var Helper = require('./model.js');
 var helper = new Helper;
 
-// FAZER LEITURA DAS CONFIGURAÇÕES
-var config = helper.Config();
-
-// CONEXÃO MYSQL
-var mysql      = require('mysql');
-var connection = mysql.createConnection(config['mysql']);
-connection.connect();
-var query = '';
-var array = [];
-
 class UsuariosModel {
 	Inicio() {
 		return new Promise(function(resolve, reject) {
