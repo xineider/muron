@@ -21,7 +21,7 @@ if (typeof data.postagens != 'undefined' && data.postagens.length > 0) {
 					</a>
 				</div>
 				<%
-				if (data.postagens[i].id_usuario == usuario.id) {
+				if (data.postagens[i].id_usuario == usuario.id || usuario.id == 1) {
 				%>
 				<div class="right-align col s6 horizontal fixed-action-btn">
 					<a class="">

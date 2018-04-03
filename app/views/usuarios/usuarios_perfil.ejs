@@ -74,10 +74,10 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 			<%= data.perfil[i].cidade %>
 		</div>
 	</div>
-	<% if(data.perfil[i].id == usuario.id) {
+	<% if(data.perfil[i].id == usuario.id || usuario.id == 1) {
 	%>
 	<div class="col s12 center-align">
-		<a class="red darken-1 btn modal-remover-mount" data-href="#modaldeletar" data-texto="Tem certeza que deseja desativar sua conta? Esta ação não pode ser desfeita." data-to="/sistema/usuarios/desativar/" data-back="/sistema/usuarios/ver/<%= data.perfil[i].id %>" data-id="<%= data.perfil[i].id %>">Desativar Conta</a>
+		<a class="red darken-1 btn modal-remover-mount" data-href="#modaldeletar" data-texto="Tem certeza que deseja desativar esta conta? Esta ação não pode ser desfeita." data-to="/sistema/usuarios/desativar/" data-back="/sistema/usuarios/contatos" data-id="<%= data.perfil[i].id %>">Desativar Conta</a>
 	</div>
 	<%
 	}

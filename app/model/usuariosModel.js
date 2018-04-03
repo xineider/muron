@@ -35,10 +35,12 @@ class UsuariosModel {
 	}
 	GetUsuarioContatos(id) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT (SELECT b.nome_murer FROM usuarios as b WHERE b.id = a.id_usuario2) as nome_murer,\
-						(SELECT c.email FROM usuarios as c WHERE c.id = a.id_usuario2) as email,\
+			helper.Query('SELECT b.nome_murer,\
+						b.email,\
 						a.id_usuario2, a.id\
-						FROM usuarios_contatos as a WHERE a.deletado = ? AND a.id_usuario = ?', [0, id]).then(data => {
+						FROM usuarios_contatos as a\
+						LEFT JOIN usuarios as b ON b.id = a.id_usuario2\
+						WHERE a.deletado = ? AND b.deletado = ? AND a.id_usuario = ?', [0, 0, id]).then(data => {
 				resolve(data);
 			});
 		});
