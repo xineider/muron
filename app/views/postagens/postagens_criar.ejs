@@ -1,6 +1,14 @@
 <form method="post" action="">
 	<div class="container">
 		<div class="row">
+			<%
+				if (usuario.tipo == 2) {
+			%>
+				<input type="hidden" name="id_categoria" value="3">
+				<input type="hidden" name="id_grupo" value="0">
+			<%
+				} else {
+			%>
 			<div class="col s12 m6">
 			  <select required="true" class="browser-default" name="id_categoria">
 			    <option value="" disabled selected>Categoria*</option>
@@ -23,6 +31,9 @@
 			    <option value="1">Grupo</option>
 			  </select>
 			</div>
+			<%
+				}
+			%>
 		    <div class="input-field col s12">
 		      <input id="contato" type="text" class="validate" required="true" name="contato">
 		      <label for="contato">Contato*</label>
@@ -46,7 +57,7 @@
 		    </div>
 		</div>
 		<div class="col s12 center">
-			<button class="g-blue white-text btn-large ajax-submit"  data-href="/sistema/postagens/cadastrar/" data-link="/sistema/" style="border-radius: 10px; font-size: 1.2em; font-weight: bold; width: 80%;">Publicar</button>
+			<button class="g-blue white-text btn-large ajax-submit" data-href="/sistema/postagens/cadastrar/" data-action="/sistema/" style="border-radius: 10px; font-size: 1.2em; font-weight: bold; width: 80%;">Publicar</button>
 		</div>
 	</div>
 </form>

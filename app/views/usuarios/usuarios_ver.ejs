@@ -3,21 +3,27 @@
 		<img class="mur-img" src="/assets/imgs/perfil-1.jpg">
 	</div>
 	<ul class="row center tabs tabs-fixed-width">
-		<li class="tab col s4 blue-mur">
+		<li class="tab col <%= usuario.tipo == 1 ? 's4' : 's6' %> blue-mur">
 			<a href="#test-swipe-1">
 				<i class="fa fa-list-alt" aria-hiden="true"></i>
 			</a>
 		</li>
-		<li class="tab col s4 blue-mur">
+		<li class="tab col <%= usuario.tipo == 1 ? 's4' : 's6' %> blue-mur">
 			<a href="#test-swipe-2">
 				<i class="fa fa-info-circle" aria-hiden="true"></i>
 			</a>
 		</li>
+		<%
+			if (usuario.tipo == 1) {
+		%>
 		<li class="tab col s4 blue-mur">
 			<a class="swipe-margin ajax-load" href="/sistema/chats">
 				<i class="fa fa-comments" aria-hiden="true"></i>
 			</a>
 		</li>
+		<%
+			}
+		%>
 	</ul>
 	<div id="test-swipe-1" class="swipe-margin">
 		<div class="row">
@@ -31,8 +37,14 @@
 			</div>
 		</div>
 	</div>
-	<div id="test-swipe-3" class="swipe-margin">
-	</div>
+	<%
+		if (usuario.tipo == 1) {
+	%>
+		<div id="test-swipe-3" class="swipe-margin">
+		</div>
+	<%
+		}
+	%>
 </section>
 <script type="text/javascript">
 	$('#footer').fadeOut('slow');

@@ -4,15 +4,12 @@ if (typeof data.comentarios != 'undefined' && data.comentarios.length > 0) {
 	for (var i = data.comentarios.length - 1; i >= 0; i--) {
 %>
 	<div class="row comentario parent">
-		<div class="col s3 m4 center-align" style="padding: 5px;">
-			<div class="image" style="background-image: url('/assets/imgs/banner-1.jpeg')"></div>
-		</div>
-		<div class="col s9 m8 text">
+		<div class="col s12 text">
 			<%
 			if (data.comentarios[i].id_usuario == usuario.id) {
 			%>
 			<div class="right-align col s6 horizontal fixed-action-btn">
-				<a class="">
+				<a>
 					<i class="fa fa-ellipsis-h"></i>
 				</a>
 			    <ul>
@@ -23,7 +20,7 @@ if (typeof data.comentarios != 'undefined' && data.comentarios.length > 0) {
 			}
 			%>
 			<p>
-				<a href="">
+				<a class="ajax-load" href="/sistema/usuarios/ver/<%= data.comentarios[i].id_usuario %>">
 					<%= data.comentarios[i].nome %>:
 				</a>
 				<%= data.comentarios[i].texto %>

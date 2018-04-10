@@ -30,8 +30,7 @@ router.post('/cadastrar/usuario', function(req, res, next) {
 router.post('/cadastrar/parceiro', function(req, res, next) {
 	var post = req.body;
 	var post_limpo = model.VerificarSenha(post);
-	console.log(post_limpo);
-	if (post_limpo.length > 0) {
+	if (Object.keys(post_limpo).length > 0) {
 		model.CadastrarParceiro(post_limpo).then(data => {
 			res.json(data);
 		});

@@ -12,10 +12,9 @@ class FaculdadesModel {
 			});
 		});
 	}
-	SelectFaculdade() {
+	GetRelacao(id) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT * FROM faculdades', []).then(data => {
-				console.log(data);
+			helper.Query('SELECT id, nome FROM faculdades_relacoes WHERE id_faculdade = ? AND deletado = ?', [id, 0]).then(data => {
 				resolve(data);
 			});
 		});
@@ -24,6 +23,20 @@ class FaculdadesModel {
 		// Para retornar quando chamar a função
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT *, (SELECT b.nome FROM faculdades as b WHERE b.id = a.id_usuario LIMIT 1) as nome_usuario FROM obras as a WHERE a.deletado = ? AND a.id = ?', [0, id]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	InsertRelacao(post) {
+		return new Promise(function(resolve, reject) {
+			helper.Insert('faculdades_relacoes', post).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	DesativarRelacao(post) {
+		return new Promise(function(resolve, reject) {
+			helper.Desativar('faculdades_relacoes', post).then(data => {
 				resolve(data);
 			});
 		});

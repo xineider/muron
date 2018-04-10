@@ -1,0 +1,34 @@
+<div class="row">
+	<form>
+		<input type="hidden" name="id_faculdade" value="<%= usuario.id %>">
+		<div class="col s12 input-field">
+			<label>Adicionar nome de relação</label>
+			<input type="text" name="nome">
+		</div>
+		<div class="col s12">
+			<button style="width: 100%;" class="btn white-text blue ajax-submit" data-href="/sistema/faculdades/alunos/relacao/cadastrar/" data-action="/sistema/faculdades/alunos/relacao">
+				Adicionar
+			</button>
+		</div>
+	</form>
+	<%
+	if (typeof data != 'undefined' && data.length > 0) {
+		for (var i = data.length - 1; i >= 0; i--) {
+	%>
+		<div class="col s12 card-panel">
+			<p class="center-align black-text">
+				<%= data[i].nome %>
+				<i class="fa fa-times-circle red-text modal-remover-mount right" style="margin: 0; font-size: 1.8em;" data-href="#modaldeletar" data-texto="Tem certeza que deseja desativar esta relação? Esta ação não pode ser desfeita." data-to="/sistema/faculdades/alunos/relacao/desativar/" data-back="/sistema/faculdades/alunos/relacao" data-id="<%= data[i].id %>"></i>
+			</p>
+		</div>
+	<%
+		}
+	} else {
+	%>
+		<p class="center-align col s12">
+			Nenhuma resultado foi encontrado.
+		</p>
+	<%
+	}
+	%>
+</div>

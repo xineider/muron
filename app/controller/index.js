@@ -11,9 +11,18 @@ app.use(require('express-is-ajax-request'));
 
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {
-	model.GetCategorias().then(data=> {
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
-	});
+  	if (req.session.usuario.tipo == 1) {	
+		model.GetCategorias().then(data=> {
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+		});
+  	} else {
+		model.GetCategorias().then(data=> {
+			model.GetPostagens(req.session.usuario.id).then(data_postagens => {
+				data.postagens = data_postagens;
+				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/parceiro', data: data, usuario: req.session.usuario});
+			});
+		});
+  	}
 });
 
 /* POST enviando o login para verificação. */

@@ -25,7 +25,7 @@
 				<div class="row valign-wrapper">
 					<div class="col s3">
 						<!-- 		    			<a href="/" class="left"><i class="fa fa-home"></i></a> -->
-						<a href="/sistema/" class="left ajax-load" onclick="window.history.go(-1); return false;"><i class="fa fa-chevron-left"></i></a>
+						<a href="/sistema/" id="sair" class="left ajax-load" onclick="window.history.go(-1); return false;"><i class="fa fa-chevron-left"></i></a>
 					</div>
 					<div class="col s6 center">
 						<a class="logo-container ajax-load" href="/sistema"><img src="/assets/imgs/mini-logo.png"></a>
@@ -49,16 +49,21 @@
 								</div>
 							</li>
 							<li><a class="waves-effect ajax-load" href="/sistema">Início</a></li>
-							<li><div class="small-line"></div></li>
-							<li><a class="waves-effect ajax-load" href="/sistema/usuarios/ver/<%= usuario.id %>">Perfil</a></li>
+							<% if(usuario.tipo == 1) {
+							%>
 							<li><div class="small-line"></div></li>
 							<li><a class="waves-effect ajax-load" href="/sistema/chats">Chat</a></li>
 							<li><div class="small-line"></div></li>
 							<!-- <li><a class="waves-effect ajax-load" href="/sistema/grupos">Grupos</a></li> -->
 							<li><div class="small-line"></div></li>
-							<li><a class="waves-effect ajax-load" href="/sistema/faculdades">Faculdades</a></li>
-							<li><div class="small-line"></div></li>
 							<li><a class="waves-effect ajax-load" href="/sistema/usuarios/contatos">Contatos</a></li>
+							<%
+							} else if (usuario.tipo == 2) {
+							%>
+							<li><div class="small-line"></div></li>
+							<li><a class="waves-effect ajax-load" href="/sistema/faculdades/alunos/relacao">Relação dos Alunos</a></li>
+							<%
+							}%>
 							<li><div class="small-line"></div></li>
 							<li><a class="waves-effect ajax-load" href="/sistema/sobre">Sobre o App</a></li>
 							<li><div class="small-line"></div></li>

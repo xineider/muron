@@ -17,7 +17,7 @@ class PostagensModel {
 	}
 	GetCategorias() {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT id, nome FROM postagens_categorias WHERE deletado = ?', [0]).then(data => {
+			helper.Query('SELECT id, nome FROM postagens_categorias WHERE deletado = ? AND id != ? ORDER BY nome DESC', [0, 3]).then(data => {
 				resolve(data);
 			});
 		});	

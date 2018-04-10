@@ -10,6 +10,8 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 			<%= data.perfil[i].nome_murer %>
 		</div>
 	</div>
+	<% if(usuario.tipo == 1) {
+	%>
 	<div class="card-panel panel-full">
 		<div class="card-content">
 			Universidade <%- data.perfil[i].id == usuario.id ? '<span class="blue-text right modal-input" data-nome="Universidade" data-id="'+data.perfil[i].id+'" data-collum="id_faculdade"><i class="fa fa-edit"></i></span>' : '' %>
@@ -26,6 +28,8 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 			<%= typeof data.perfil[i].curso != 'undefined' && data.perfil[i].curso != '' ? data.perfil[i].curso : 'Não Informado' %>
 		</div>
 	</div>
+	<%
+	} %>
 	<div class="card-panel panel-full">
 		<div class="card-content">
 			E-Mail <%- data.perfil[i].id == usuario.id ? '<span class="blue-text right modal-input" data-nome="E-mail" data-id="'+data.perfil[i].id+'" data-collum="email"><i class="fa fa-edit"></i></span>' : '' %>
@@ -34,6 +38,8 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 			<%= data.perfil[i].email %>
 		</div>
 	</div>
+	<% if(usuario.tipo == 1) {
+	%>
 	<div class="card-panel panel-full">
 		<div class="card-content">
 			Gênero <%- data.perfil[i].id == usuario.id ? '<span class="blue-text right modal-input" data-nome="Gênero" data-id="'+data.perfil[i].id+'" data-collum="genero"><i class="fa fa-edit"></i></span>' : '' %>
@@ -50,6 +56,8 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 			<%= data.perfil[i].nascimento %>
 		</div>
 	</div>
+	<%
+	} %>
 	<div class="col s7 card-panel">
 		<div class="card-content">
 			País <%- data.perfil[i].id == usuario.id ? '<span class="blue-text right modal-input" data-nome="País" data-id="'+data.perfil[i].id+'" data-collum="pais"><i class="fa fa-edit"></i></span>' : '' %>

@@ -1,4 +1,6 @@
 		<footer class="blue lighten-1 fixed-bar" id="footer">
+			<% if(usuario.tipo == 1) {
+			%>
 			<div class="row center">
 				<div class="col s3">
 					<a style="padding-top: 10px;" href="#!" class="white-text modal-mount" data-href="#modalinfo" data-link="/postagens/pesquisar"><i class="fa fa-search"></i></a>
@@ -13,6 +15,9 @@
 					<a style="padding-top: 10px;" href="/sistema/usuarios/ver/1" class="white-text ajax-load"><i class="fa fa-user"></i></a>
 				</div>
 			</div>
+			<%
+			}
+			%>
     </footer>
   </body>
 </html>

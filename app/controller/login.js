@@ -34,7 +34,7 @@ router.post('/', function(req, res, next) {
 	        req.session.usuario.email = data[0].email;
 			res.redirect('/sistema');
 	  } else {
-  		res.render('login/index', { erro: 'Login ou senha incorreto(s).', tipo_erro: 'login', usuario: req.session.usuario });
+		res.render('login/index', { erro: 'Login ou senha incorreto(s).', tipo_erro: 'login', usuario: req.session.usuario });
 	  }
 	});
 });

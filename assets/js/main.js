@@ -257,6 +257,7 @@ function GoTo(link, state, top) {
 			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
 			adicionarLoader();
+			$('#sair').fadeIn('slow');
 		},
 		success: function(data) {
 			$('main').html(data);
@@ -376,7 +377,6 @@ function SubmitAjax(post, link, back, method) {
 			adicionarLoader();
 		},
 		success: function(data) {
-			
 			if (typeof data != undefined && data > 0) {
 				Materialize.toast('<div class="center-align" style="width:100%;">Cadastrado com sucesso</div>', 5000, 'rounded');
 			}

@@ -7,20 +7,31 @@ var helper = new Helper;
 class ApiModel {
 	CadastrarUsuario(data) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT id FROM usuarios WHERE login = ?', [data.login]).then(result => {
+			helper.Query('SELECT id FROM usuarios WHERE nome_murer = ?', [data.nome_murer]).then(result => {
+				console.log(result);
 				if (result.length <= 0) {
 					helper.Insert('usuarios', data).then(data => {
 						resolve(data);
 					});
 				} else {
-					console.log('entrei');
 					resolve([]);
 				}
 			});
 		});
 	}
 	CadastrarParceiro(data) {
-
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT id FROM usuarios WHERE nome_murer = ?', [data.nome_murer]).then(result => {
+				console.log(result);
+				if (result.length <= 0) {
+					helper.Insert('usuarios', data).then(data => {
+						resolve(data);
+					});
+				} else {
+					resolve([]);
+				}
+			});
+		});
 	}
 	VerificarSenha(data) {
 		if (typeof data.senha != 'undefined') {

@@ -15,27 +15,21 @@ router.get('/', function(req, res, next) {
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'faculdades/faculdades', data: data, usuario: req.session.usuario});
 	});
 });
-	router.get('/criar', function(req, res, next) {
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'faculdades/faculdades_criar', data: data, usuario: req.session.usuario});
-	});
-	router.get('/editar/:id', function(req, res, next) {
-		id = req.params.id;
-		model.GetFaculdade(id).then(data => {
-			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'faculdades/faculdades_editar', data: data, usuario: req.session.usuario});
+	router.get('/alunos/relacao', function(req, res, next) {
+		model.GetRelacao(req.session.usuario.id).then(data => {
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'faculdades/faculdades_relacao', data: data, usuario: req.session.usuario});
 		});
 	});
-	router.get('/ver/:id', function(req, res, next) {
-		id = req.params.id;
-		model.GetFaculdade(id).then(data => {
-			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'faculdades/faculdades_ver', data: data, usuario: req.session.usuario});
-		});
-	});
-
 	// Metodos POST
-	router.post('/desativar', function(req, res, next) {
-		// Recebendo o valor do post
+	router.post('/alunos/relacao/cadastrar', function(req, res, next) {
 		POST = req.body;
-  		model.DesativarFaculdade('faculdades', POST).then(data=> {
+  		model.InsertRelacao(POST).then(data=> {
+  			res.json(data);
+  		});
+	});
+	router.post('/alunos/relacao/desativar', function(req, res, next) {
+		POST = req.body;
+  		model.DesativarRelacao(POST).then(data=> {
   			res.json(data);
   		});
 	});

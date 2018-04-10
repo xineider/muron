@@ -63,39 +63,49 @@
 	<div id="modalparceiro" class="modal">
 		<div class="modal-content">
 			<p><b>Cadastro de Parceiro</b></p>
-			<div class="row">
-				<div class="col s12 input-field">
-					<label>E-mail</label>
-					<input type="text" name="email">
+			<form id="cadastra-parceiro" method="POST" action="" onsubmit="">
+				<div class="row">
+					<div class="col s12">
+						<label>Tipo de Parceiro</label>
+						<select class="browser-default" name="tipo">
+							<option value="" disabled selected>Selecione</option>
+							<option value="2">Faculdade</option>
+							<option value="3">Divulgador</option>
+						</select>
+					</div>
+					<div class="col s12 input-field">
+						<label>E-mail</label>
+						<input type="text" name="email">
+					</div>
+					<div class="col s12 input-field">
+						<label>Telefone</label>
+						<input type="text" name="celular">
+					</div>
+					<div class="col s12 input-field">
+						<label>Nome</label>
+						<input type="text" name="nome">
+					</div>
+					<div class="col s12 input-field">
+						<label>Descrição</label>
+						<textarea name="descricao" class="materialize-textarea" placeholder="Tipo do parceiro, oque você faz, entre outros"></textarea>
+					</div>
+					<div class="col s12 input-field">
+						<label>Login (Sigla/MurEr)</label>
+						<input type="text" name="nome_murer">
+					</div>
+					<div class="col s12 input-field">
+						<label>Senha</label>
+						<input type="password" name="senha">
+					</div>
+					<div class="col s12 input-field">
+						<label>Confirmar Senha</label>
+						<input type="password" name="senha_confirmar">
+					</div>
+					<div class="col s12">
+						<button class="btn blue white-text" style="width: 100%;">Finalizar Cadastro</button>
+					</div>
 				</div>
-				<div class="col s12 input-field">
-					<label>Telefone</label>
-					<input type="text" name="celular">
-				</div>
-				<div class="col s12 input-field">
-					<label>Nome</label>
-					<input type="text" name="nome">
-				</div>
-				<div class="col s12 input-field">
-					<label>Descrição</label>
-					<input type="text" name="descricao">
-				</div>
-				<div class="col s12 input-field">
-					<label>Login (Sigla/MurEr)</label>
-					<input type="text" name="nome_murer">
-				</div>
-				<div class="col s12 input-field">
-					<label>Senha</label>
-					<input type="text" name="senha">
-				</div>
-				<div class="col s12 input-field">
-					<label>Confirmar Senha</label>
-					<input type="text" name="senha_confirmar">
-				</div>
-				<div class="col s12">
-					<button class="btn blue white-text" style="width: 100%;">Finalizar Cadastro</button>
-				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 	<main>
@@ -125,7 +135,7 @@
 							<div class="inputs">
 								<div class="input-field valign-wrapper">
 									<i class="fa fa-user-o prefix grey-text center-align" aria-hidden="true"></i>
-									<input type="text" name="murer" id="murer" class="validate" placeholder="Login (Nome MurEr)">
+									<input type="text" name="nome_murer" id="nome_murer" class="validate" placeholder="Login (Nome MurEr)">
 								</div>
 								<div class="input-field">
 									<i class="fa fa-key prefix grey-text center-align" aria-hidden="true"></i>
@@ -141,25 +151,12 @@
 								<a class="white-text" href="#modalforgot">Esqueceu sua senha?</a><br>
 								<a class="white-text" href="#modalnew">Ainda não tem conta? <span class="blue-text text-darken-2">Cadastre-se</span></a>
 							</p>
-							<div class="row acc-midias">
-								<div class="col s12 google">
-									<a class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true" data-lang="pt-BR">
-										<!-- <i class="fa fa-google"></i> Entrar com Google+ -->
-									</a>
-								</div>
-								<div class="col s12 center-align">
-									<a href="" class="">
-										<div id="fb-root"></div>
-										<div class="fb-login-button" data-width="100%" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-									</a>
-								</div>
-							</div>
 							<div class="or"><span>OU</span></div>
+							<div class="row">
+								<br>
+								<a class="white-text" href="#modalparceiro">Quer ser um parceiro? <span class="blue-text text-darken-2">Cadastre-se</span></a><br>
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<br>
-						<a style="width: 100%;" href="#modalparceiro" class="btn grey lighten-4 black-text">Quer ser um parceiro?</a>
 					</div>
 				</form>
 			</div>
@@ -185,9 +182,39 @@
 					if(data.length == 0) {
 						alert('Erro, tente novamente ou entre contato com o administrador');
 					} else {
-						var login = form.find('input[name="login"]').val();
+						var nome_murer = form.find('input[name="nome_murer"]').val();
 						var senha = form.find('input[name="senha"]').val();
-						$('.inputs').find('input[name="login"]').val(login);
+						$('.inputs').find('input[name="nome_murer"]').val(nome_murer);
+						$('.inputs').find('input[name="senha"]').val(senha);
+    					$('.modal').modal('close');
+					}
+				},
+			    error: function(xhr) { // if error occured
+			    	alert("Error, contate o administrador ou reinicie a pagina.");
+			    },
+			    complete: function() {
+			    }
+			});
+		});
+		$('#cadastra-parceiro').on('submit', function(e) {
+			e.preventDefault();
+			var form = $(this);
+			var post = form.serializeArray();
+			if($('.modal input[name="senha"]').val() != $('.modal input[name="senha_confirmar"]').val()){alert('Confirmação de Senha incorreta')}
+			$.ajax({
+				method: 'POST',
+				async: true,
+				data: post,
+				url: '/sistema/api/cadastrar/parceiro',
+				beforeSend: function(request) {
+				},
+				success: function(data) {
+					if(data.length == 0) {
+						alert('Erro, tente novamente ou entre contato com o administrador');
+					} else {
+						var nome_murer = form.find('input[name="nome_murer"]').val();
+						var senha = form.find('input[name="senha"]').val();
+						$('.inputs').find('input[name="nome_murer"]').val(nome_murer);
 						$('.inputs').find('input[name="senha"]').val(senha);
     					$('.modal').modal('close');
 					}
