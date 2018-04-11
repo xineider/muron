@@ -12,9 +12,11 @@ if (typeof data.postagens != 'undefined' && data.postagens.length > 0) {
 				<div class="left-align col s6">
 					<a class="GiveLike <%= data.postagens[i].gostei >= 1 ? 'active' : '' %>" data-id="<%= data.postagens[i].id %>" data-id_usuario="<%= usuario.id %>" data-gostei="<%= data.postagens[i].gostei %>">
 						<i class="fa fa-thumbs-up"></i>
+						<%- data.postagens[i].qtd_gostei >= 1 ? '<span class="qtd_likes">'+data.postagens[i].qtd_gostei+'</span>' : '' %>
 					</a>
 					<a href="" class="modal-mount" data-href="#modalinfo" data-link="/postagens/comentarios/<%= data.postagens[i].id %>">
 						<i class="fa fa-comment"></i>
+						<%- data.postagens[i].qtd_comentario >= 1 ? '<span class="qtd_likes">'+data.postagens[i].qtd_comentario+'</span>' : '' %>
 					</a>
 					<a href="">
 						<i class="fa fa-share-alt"></i>
@@ -40,14 +42,16 @@ if (typeof data.postagens != 'undefined' && data.postagens.length > 0) {
 			</div>
 			<div class="post-bottom">
 				<div class="small-line"></div>
-				<div class="card-content white">
-					<div class="col s6 left-align">
-						<p>Publicado por: <%= data.postagens[i].usuario %></p>
+				<small>
+					<div class="card-content white">
+						<div class="col s8 left-align">
+							<p>Publicado por: <a href="/sistema/usuarios/ver/<%= data.postagens[i].id_usuario %>" class="ajax-load"><%= data.postagens[i].usuario %></p></a>
+						</div>
+						<div class="col s4 right-align">
+							<p>Em: <%= data.postagens[i].data_atualizado %></p>
+						</div>
 					</div>
-					<div class="col s6 right-align">
-						<p>Data: <%= data.postagens[i].data_atualizado %></p>
-					</div>
-				</div>
+				</small>
 			</div>
 		</div>
 	</div>

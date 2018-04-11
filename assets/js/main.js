@@ -240,7 +240,7 @@ function adicionarLoader() {
 }
 function removerLoader() {
 	$('body').css('overflow', 'auto');
-	$('.loader').fadeOut('fast');
+	setTimeout(function(){ $('.loader').fadeOut('fast'); }, 1000);
 }
 function InitBar() {
 	if (localStorage.bar != 2 && localStorage.bar != 1) {

@@ -8,9 +8,6 @@
 	<link rel='stylesheet' href='/assets/css/style.css' />
 	<script src="/assets/js/jquery.min.js"></script>
 	<script src="/assets/js/materialize.min.js"></script>
-	<meta name="google-signin-scope" content="profile email">
-	<meta name="google-signin-client_id" content="341951899153-ruhib3nf027df8qbauo9is0ocvgi4snb.apps.googleusercontent.com">
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body class="row login">
 	<!-- Esqueceu Senha -->
@@ -39,6 +36,24 @@
 					<div class="col s12 input-field">
 						<label>E-mail</label>
 						<input required="true" type="email" name="email">
+					</div>
+					<div class="col s12 input-field">
+						<label>Faculdade</label>
+						<input required="true" type="text" name="faculdade">
+					</div>
+					<div class="col s12 input-field">
+						<label>Curso</label>
+						<input required="true" type="text" name="curso">
+					</div>
+					<div class="col s12">
+						<label>Situação</label>
+						<select class="browser-default" name="status">
+							<option value="" disabled selected>Selecione</option>
+							<option value="1">Aluno</option>
+							<option value="2">Ex-Aluno</option>
+							<option value="3">Professor</option>
+							<option value="4">Divulgador</option>
+						</select>
 					</div>
 					<div class="col s12 input-field">
 						<label>Login (Nome MurEr)</label>
@@ -74,6 +89,14 @@
 						</select>
 					</div>
 					<div class="col s12 input-field">
+						<label>Nome</label>
+						<input type="text" name="nome">
+					</div>
+					<div class="col s12 input-field">
+						<label>Login (Nome MurEr)</label>
+						<input type="text" name="nome_murer">
+					</div>
+					<div class="col s12 input-field">
 						<label>E-mail</label>
 						<input type="text" name="email">
 					</div>
@@ -82,16 +105,12 @@
 						<input type="text" name="celular">
 					</div>
 					<div class="col s12 input-field">
-						<label>Nome</label>
-						<input type="text" name="nome">
+						<label>Nome de Contato</label>
+						<input type="text" name="nome_contato">
 					</div>
 					<div class="col s12 input-field">
 						<label>Descrição</label>
-						<textarea name="descricao" class="materialize-textarea" placeholder="Tipo do parceiro, oque você faz, entre outros"></textarea>
-					</div>
-					<div class="col s12 input-field">
-						<label>Login (Sigla/MurEr)</label>
-						<input type="text" name="nome_murer">
+						<textarea name="descricao" class="materialize-textarea" placeholder="Detalhes da sua atividade..."></textarea>
 					</div>
 					<div class="col s12 input-field">
 						<label>Senha</label>
@@ -148,7 +167,7 @@
 								</button>
 							</div>
 							<p class="acc">
-								<a class="white-text" href="#modalforgot">Esqueceu sua senha?</a><br>
+								<a class="white-text" href="#modalforgot">Esqueceu sua senha? <span class="blue-text text-darken-2">Clique aqui</span></a><br>
 								<a class="white-text" href="#modalnew">Ainda não tem conta? <span class="blue-text text-darken-2">Cadastre-se</span></a>
 							</p>
 							<div class="or"><span>OU</span></div>
@@ -180,7 +199,7 @@
 				},
 				success: function(data) {
 					if(data.length == 0) {
-						alert('Erro, tente novamente ou entre contato com o administrador');
+						alert('Usuário já cadastrado, tente novamente com outro Login');
 					} else {
 						var nome_murer = form.find('input[name="nome_murer"]').val();
 						var senha = form.find('input[name="senha"]').val();
@@ -210,7 +229,7 @@
 				},
 				success: function(data) {
 					if(data.length == 0) {
-						alert('Erro, tente novamente ou entre contato com o administrador');
+						alert('Usuário já cadastrado, tente novamente com outro Login');
 					} else {
 						var nome_murer = form.find('input[name="nome_murer"]').val();
 						var senha = form.find('input[name="senha"]').val();
@@ -227,30 +246,5 @@
 			});
 		});
 	});
-</script>
-<script>
-	(function(d, s, id) {
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) return;
-		js = d.createElement(s); js.id = id;
-		js.src = 'https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.12&appId=180728395898475&autoLogAppEvents=1';
-		fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));
-
-
-	function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        console.log('Full Name: ' + profile.getName());
-        console.log('Given Name: ' + profile.getGivenName());
-        console.log('Family Name: ' + profile.getFamilyName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());
-
-        // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-    };
 </script>
 </html>

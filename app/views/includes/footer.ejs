@@ -1,18 +1,21 @@
 		<footer class="blue lighten-1 fixed-bar" id="footer">
-			<% if(usuario.tipo == 1) {
+			<% if(usuario.tipo == 1 || usuario.tipo == 2) {
 			%>
 			<div class="row center">
-				<div class="col s3">
+				<div class="col pra5">
 					<a style="padding-top: 10px;" href="#!" class="white-text modal-mount" data-href="#modalinfo" data-link="/postagens/pesquisar"><i class="fa fa-search"></i></a>
 				</div>
-				<div class="col s3">
+				<div class="col pra5">
 					<a style="padding-top: 10px;" data-href="#modalinfo" data-link="/postagens/criar" class="white-text modal-mount"><i class="fa fa-plus"></i></a>
 				</div>
-				<div class="col s3">
+				<div class="col pra5">
 					<a style="padding-top: 10px;" href="/sistema/chats" class="white-text ajax-load"><i class="fa fa-comment"></i></a>
 				</div>
-				<div class="col s3">
-					<a style="padding-top: 10px;" href="/sistema/usuarios/ver/1" class="white-text ajax-load"><i class="fa fa-user"></i></a>
+				<div class="col pra5">
+					<a style="padding-top: 10px;" href="/sistema/usuarios/ver/<%= usuario.id %>" class="white-text ajax-load"><i class="fa fa-user"></i></a>
+				</div>
+				<div class="col pra5">
+					<a style="padding-top: 10px;" href="/sistema/usuarios/contatos" class="white-text ajax-load"><i class="fa fa-group"></i></a>
 				</div>
 			</div>
 			<%

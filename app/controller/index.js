@@ -11,7 +11,7 @@ app.use(require('express-is-ajax-request'));
 
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {
-  	if (req.session.usuario.tipo == 1) {	
+  	if (req.session.usuario.tipo == 1 || req.session.usuario.tipo == 2) {	
 		model.GetCategorias().then(data=> {
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
 		});
