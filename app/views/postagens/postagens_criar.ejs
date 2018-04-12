@@ -6,12 +6,26 @@
 			%>
 				<input type="hidden" name="id_categoria" value="3">
 				<input type="hidden" name="id_grupo" value="0">
+				<input type="hidden" name="id_contato" value="0">
 			<%
 				} else {
 			%>
+			<input type="hidden" name="id_grupo" value="0">
+			<input type="hidden" name="id_contato" value="0">
+			<div class="col s12 m6">
+			  <select required="true" class="browser-default" name="tipo">
+			    <option value="" disabled selected>Para*</option>
+			    <option value="0">Geral</option>
+			    <option value="1">Grupo</option>
+			    <option value="2">Contato</option>
+			  </select>
+			</div>
+			<div class="col s12 m6" id="add-tipo">
+				
+			</div>
 			<div class="col s12 m6">
 			  <select required="true" class="browser-default" name="id_categoria">
-			    <option value="" disabled selected>Categoria*</option>
+			    <option value="1" selected>Categoria*</option>
 				<%
 				if (typeof data != 'undefined' && data.length > 0) {
 					for (var i = data.length - 1; i >= 0; i--) {
@@ -24,20 +38,9 @@
 			  </select>
 			  <br>
 			</div>
-			<div class="col s12 m6">
-			  <select required="true" class="browser-default" name="id_grupo">
-			    <option value="" disabled selected>Para*</option>
-			    <option value="0">Geral</option>
-			    <option value="1">Grupo</option>
-			  </select>
-			</div>
 			<%
 				}
 			%>
-		    <div class="input-field col s12">
-		      <input id="contato" type="text" class="validate" required="true" name="contato">
-		      <label for="contato">Contato*</label>
-		    </div>
 	        <div class="row uploads word-wrap">
 	        	<label>Imagem *</label>
 			    <div class="file-field input-field col s12 m7" style="height: 64px;">

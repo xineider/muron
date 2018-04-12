@@ -29,7 +29,7 @@ router.get('/', function(req, res, next) {
 	});
 	router.get('/ver/:id', function(req, res, next) {
 		id = req.params.id;
-		model.GetUsuario(id).then(data_usuario => {
+		model.GetUsuario(id, req.session.usuario.id).then(data_usuario => {
 			data.perfil = data_usuario;
 			model.GetPostagemByUser(id, req.session.usuario.id).then(data_postagens => {
 				data.postagens = data_postagens;
@@ -42,6 +42,24 @@ router.get('/', function(req, res, next) {
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_contatos', data: data, usuario: req.session.usuario});
 		});
 	});
+	router.get('/grupos/', function(req, res, next) {
+		model.GetUsuarioGrupos(req.session.usuario.id).then(data => {
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_grupos', data: data, usuario: req.session.usuario});
+		});
+	});
+	router.get('/grupos/ver/:id', function(req, res, next) {
+		id = req.params.id;
+		model.GetGrupo(id, req.session.usuario.id).then(data_grupo => {
+			data.grupo = data_grupo;
+			model.GetUsuariosGrupo(id).then(data_usuarios => {
+				data.usuarios = data_usuarios;
+				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_grupos_ver', data: data, usuario: req.session.usuario});
+			});
+		});
+	});
+	router.get('/grupos/criar', function(req, res, next) {
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_grupos_criar', data: data, usuario: req.session.usuario});
+	});
 
 	// Metodos POST
 	router.post('/contatos/', function(req, res, next) {
@@ -50,9 +68,45 @@ router.get('/', function(req, res, next) {
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
 		});
 	});
+	router.post('/grupos/pesquisar', function(req, res, next) {
+		POST = req.body;
+		model.GetGrupos(POST).then(data => {
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_grupos_lista', data: data, usuario: req.session.usuario});
+		});
+	});
+	router.post('/grupos/sair', function(req, res, next) {
+		POST = req.body;
+		model.SairGrupo(POST).then(data => {
+			res.json(data);
+		});
+	});
+	router.post('/grupos/entrar', function(req, res, next) {
+		POST = req.body;
+		model.EntrarGrupo(POST).then(data => {
+			res.json(data);
+		});
+	});
 	router.post('/contatos/adicionar', function(req, res, next) {
 		POST = req.body;
 		model.InsertContato(POST).then(data => {
+			res.json(data);
+		});
+	});
+	router.post('/contatos/remover', function(req, res, next) {
+		POST = req.body;
+		model.DesativarContato(POST).then(data => {
+			res.json(data);
+		});
+	});
+	router.post('/grupos/adicionar', function(req, res, next) {
+		POST = req.body;
+		model.InsertGrupo(POST, {id_usuario: req.session.usuario.id}).then(data => {
+			res.json(data);
+		});
+	});
+	router.post('/grupos/usuario/desativar', function(req, res, next) {
+		POST = req.body;
+		model.DesativarUsuarioGrupo(POST).then(data => {
 			res.json(data);
 		});
 	});

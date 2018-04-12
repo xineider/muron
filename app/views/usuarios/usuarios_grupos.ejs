@@ -1,0 +1,17 @@
+<form method="POST" action="">
+  <div class="row">
+    <div class="input-field col s12">
+      <label>Nome do Grupo</label>
+      <input type="text" name="pesquisar" placeholder="Exemplo: Empregos São Paulo">
+    </div>
+    <div class="center-align col s12">
+      <a id="pesquisar_grupo" class="btn blue darken-1 white-text" data-href="/sistema/usuarios/grupos/pesquisar">Pesquisar</a>
+    </div>
+  </div>
+</form>
+<table class="striped">
+  <tbody id="grupos">
+    <%- include('usuarios_grupos_lista') %>
+  </tbody>
+</table>
+<button class="btn-floating btn btn-add blue modal-mount" data-href="#modalinfo" data-link="/usuarios/grupos/criar"><i class="fa fa-plus" aria-hidden="true"></i></button>

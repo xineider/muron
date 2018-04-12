@@ -146,7 +146,7 @@ ul > li > ul.sub-menu:before {
 }
 .loader {
   position: fixed;
-  background-color: rgb(90, 179, 253);
+  background-color: rgba(232, 232, 232, 0.59);
   top: 0;
   width: 100%;
   height: 100%;
@@ -727,3 +727,20 @@ header {
     right: 5%;
     font-size: 2em;
   }
+.define-tipo.active {
+  background-color: #0e4470 !important;
+}
+.btn-add {
+  position: fixed;
+  right: 5%;
+  bottom: 10%;
+}
+.usuarios-grupo p {
+  position: relative;
+}
+.usuarios-grupo a {
+  font-size: 1.7em;
+  position: absolute;
+  right: 5%;
+  top: -7px;
+}

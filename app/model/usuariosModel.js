@@ -19,9 +19,11 @@ class UsuariosModel {
 			});
 		});
 	}
-	GetUsuario(id) {
+	GetUsuario(id, id_usuario) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT *, DATE_FORMAT(nascimento, "%d/%m/%Y") as nascimento FROM usuarios WHERE deletado = ? AND id = ?', [0, id]).then(data => {
+			helper.Query('SELECT a.*, (SELECT COUNT(b.id) FROM usuarios_contatos as b WHERE b.id_usuario2 = a.id AND b.id_usuario = ? AND b.deletado = ? LIMIT 1) as amigos,\
+						DATE_FORMAT(a.nascimento, "%d/%m/%Y") as nascimento\
+						FROM usuarios as a WHERE a.deletado = ? AND a.id = ?', [id_usuario, 0, 0, id]).then(data => {
 				resolve(data);
 			});
 		});
@@ -29,6 +31,15 @@ class UsuariosModel {
 	GetUsuarios(data) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT id as id_usuario2, nome_murer, email FROM usuarios WHERE deletado = ? AND (nome_murer like CONCAT("%", ?, "%") OR nome like CONCAT("%", ?, "%") OR email like CONCAT("%", ?, "%"))', [0, data.pesquisar, data.pesquisar, data.pesquisar]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	GetUsuarioGrupos(id_usuario) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT b.id, b.nome, b.id_lider FROM grupos_usuarios as a\
+						INNER JOIN grupos as b ON a.id_grupo = b.id\
+						WHERE a.deletado = ? AND b.deletado = ? AND a.id_usuario = ?', [0, 0, id_usuario]).then(data => {
 				resolve(data);
 			});
 		});
@@ -45,11 +56,39 @@ class UsuariosModel {
 			});
 		});
 	}
+	GetGrupo(id, id_usuario) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.*, (SELECT COUNT(b.id) FROM grupos_usuarios as b WHERE b.id_usuario = ? AND b.id_grupo = a.id AND b.deletado = ? LIMIT 1) as pertence\
+						FROM grupos as a WHERE a.deletado = ? AND a.id = ?', [id_usuario, 0, 0, id]).then(data => {
+							console.log(data);
+				resolve(data);
+			});
+		});
+	}
+	GetGrupos(data) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.id, a.nome, a.id_lider FROM grupos as a\
+						WHERE a.deletado = ? AND\
+						(a.nome like CONCAT("%", ?, "%") OR a.descricao like CONCAT("%", ?, "%"))', [0, data.pesquisar, data.pesquisar]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	GetUsuariosGrupo(id) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.id as id_grupo_usuario, a.id_grupo, b.id, b.nome_murer,\
+						(SELECT c.id_lider FROM grupos as c WHERE c.id = a.id_grupo) as id_lider\
+						FROM grupos_usuarios as a INNER JOIN usuarios as b ON a.id_usuario = b.id\
+						WHERE a.deletado = ? AND a.id_grupo = ?', [0, id]).then(data => {
+				resolve(data);
+			});
+		});
+	}
 	GetPostagemByUser(id) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT id, id_usuario,\
 						(SELECT b.nome_murer FROM usuarios as b WHERE b.deletado = ? AND b.id = postagens.id_usuario) as usuario,\
-						imagem, descricao, contato, DATE_FORMAT(data_atualizado, "%d/%m/%Y") as data_atualizado\
+						imagem, descricao, DATE_FORMAT(data_atualizado, "%d/%m/%Y") as data_atualizado\
 						FROM postagens WHERE deletado = ? AND id_usuario = ?', [0, 0, id]).then(data => {
 				resolve(data);
 			});
@@ -60,10 +99,8 @@ class UsuariosModel {
 		post2.id_usuario = post.id_usuario2;
 		post2.id_usuario2 = post.id_usuario;
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT id FROM usuarios_contatos WHERE id_usuario = ? AND id_usuario2 = ?', [post.id_usuario, post.id_usuario2]).then(result => {
+			helper.Query('SELECT id FROM usuarios_contatos WHERE id_usuario = ? AND id_usuario2 = ? AND deletado = ?', [post.id_usuario, post.id_usuario2, 0]).then(result => {
 				if (result.length <= 0) {
-					console.log(post);
-					console.log(post2);
 					helper.Insert('usuarios_contatos', post).then(data => {
 						helper.Insert('usuarios_contatos', post2).then(data => {
 							resolve(data);
@@ -75,10 +112,46 @@ class UsuariosModel {
 			});
 		});	
 	}
+	DesativarContato(post) {
+		var post2 = {};
+		post2.id_usuario = post.id_usuario2;
+		post2.id_usuario2 = post.id_usuario;
+		return new Promise(function(resolve, reject) {
+			helper.Query('UPDATE usuarios_contatos SET deletado = ? WHERE id_usuario = ? AND id_usuario2 = ?', [1, post.id_usuario, post.id_usuario2]).then(data => {
+				helper.Query('UPDATE usuarios_contatos SET deletado = ? WHERE id_usuario = ? AND id_usuario2 = ?', [1, post.id_usuario2, post.id_usuario]).then(data => {
+					resolve(data);
+				});
+			});
+		});	
+	}
+	SairGrupo(post) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('UPDATE grupos_usuarios SET deletado = ? WHERE id_grupo = ? AND id_usuario = ?', [1, post.id_grupo, post.id_usuario]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	EntrarGrupo(post) {
+		return new Promise(function(resolve, reject) {
+			helper.Insert('grupos_usuarios', post).then(data => {
+				resolve(data);
+			});
+		});
+	}
 	InsertUsuario(post) {
 		return new Promise(function(resolve, reject) {
 			helper.Insert('usuarios', post).then(data => {
 				resolve(data);
+			});
+		});
+	}
+	InsertGrupo(post,post2) {
+		return new Promise(function(resolve, reject) {
+			helper.Insert('grupos', post).then(data => {
+				post2.id_grupo = data;
+				helper.Insert('grupos_usuarios', post2).then(data => {
+					resolve(data);
+				});
 			});
 		});
 	}
@@ -99,6 +172,13 @@ class UsuariosModel {
 	DesativarUsuario(post) {
 		return new Promise(function(resolve, reject) {
 			helper.Desativar('usuarios', post).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	DesativarUsuarioGrupo(post) {
+		return new Promise(function(resolve, reject) {
+			helper.Desativar('grupos_usuarios', post).then(data => {
 				resolve(data);
 			});
 		});

@@ -29,22 +29,23 @@ class PostagensModel {
 						(SELECT c.id FROM postagens_gostei as c WHERE c.id_usuario = ? AND c.id_postagem = postagens.id AND c.deletado = ?) as gostei,\
 						(SELECT COUNT(d.id) FROM postagens_gostei as d WHERE d.id_postagem = postagens.id AND d.deletado = ? GROUP BY d.id_postagem) as qtd_gostei,\
 						(SELECT COUNT(e.id) FROM postagens_comentarios as e WHERE e.id_postagem = postagens.id AND e.deletado = ? GROUP BY e.id_postagem) as qtd_comentario,\
-						imagem, descricao, contato, DATE_FORMAT(data_atualizado, "%d/%m/%Y") as data_atualizado\
+						imagem, descricao, DATE_FORMAT(data_atualizado, "%d/%m/%Y") as data_atualizado\
 						FROM postagens WHERE deletado = ? AND id_categoria = ?', [0, id_usuario, 0, 0, 0, 0, id]).then(data => {
-							console.log(data);
 				resolve(data);
 			});
 		});	
 	}
 	SearchPostagem(post, id_usuario) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT id, id_usuario,\
-						(SELECT b.nome_murer FROM usuarios as b WHERE b.deletado = ? AND b.id = postagens.id_usuario) as usuario,\
-						(SELECT c.id FROM postagens_gostei as c WHERE c.id_usuario = ? AND c.id_postagem = postagens.id AND c.deletado = ?) as gostei,\
-						(SELECT COUNT(d.id) FROM postagens_gostei as d WHERE d.id_postagem = postagens.id AND d.deletado = ? GROUP BY d.id_postagem) as qtd_gostei,\
-						imagem, descricao, contato, DATE_FORMAT(data_atualizado, "%d/%m/%Y") as data_atualizado\
-						FROM postagens WHERE deletado = ? AND descricao like CONCAT("%", ?, "%")', [0, id_usuario, 0, 0, post.pesquisa]).then(data => {
-							console.log(data);
+			helper.Query('SELECT a.id, a.id_usuario,\
+						b.nome_murer as usuario,\
+						(SELECT c.id FROM postagens_gostei as c WHERE c.id_usuario = ? AND c.id_postagem = a.id AND c.deletado = ?) as gostei,\
+						(SELECT COUNT(d.id) FROM postagens_gostei as d WHERE d.id_postagem = a.id AND d.deletado = ? GROUP BY d.id_postagem) as qtd_gostei,\
+						(SELECT COUNT(e.id) FROM postagens_comentarios as e WHERE e.id_postagem = a.id AND e.deletado = ? GROUP BY e.id_postagem) as qtd_comentario,\
+						a.imagem, a.descricao, DATE_FORMAT(a.data_atualizado, "%d/%m/%Y") as data_atualizado\
+						FROM postagens as a INNER JOIN usuarios as b ON a.id_usuario = b.id WHERE a.deletado = ? AND\
+						(a.descricao like CONCAT("%", ?, "%") OR\
+						b.nome_murer like CONCAT("%", ?, "%") OR b.nome like CONCAT("%", ?, "%") OR b.email like CONCAT("%", ?, "%"))', [id_usuario, 0, 0, 0, 0, post.pesquisa, post.pesquisa, post.pesquisa, post.pesquisa]).then(data => {
 				resolve(data);
 			});
 		});
@@ -61,6 +62,24 @@ class PostagensModel {
 				resolve(data);
 			});
 		});
+	}
+	SearchTipo(tipo, id_usuario) {
+		if (tipo == 1) {
+			return new Promise(function(resolve, reject) {
+				helper.Query('SELECT a.id_grupo as tipo_val AND (SELECT b.nome FROM grupos as b WHERE a.id_grupo = a.id) as nome\
+							FROM grupos_usuarios as a WHERE id_usuario = ? AND deletado = ?', [id_usuario, 0]).then(data => {
+					resolve(data);
+				});
+			});
+		} else {
+			return new Promise(function(resolve, reject) {
+				helper.Query('SELECT id_usuario2 as tipo_val,\
+							(SELECT b.nome_murer FROM usuarios as b WHERE a.id_usuario2 = b.id) as nome\
+							FROM usuarios_contatos as a WHERE a.id_usuario = ? AND a.deletado = ?', [id_usuario, 0]).then(data => {
+					resolve(data);
+				});
+			});
+		}
 	}
 	SelectUsuarios() {
 		return new Promise(function(resolve, reject) {

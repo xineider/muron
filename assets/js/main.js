@@ -184,6 +184,18 @@ $(document).on('ready', function () {
 			SearchAjax(post, link, method, '#contatos');
 		}
 	});
+	$(document).on('click', '#pesquisar_grupo', function(e) {
+		e.preventDefault();
+		var form = $(this).closest('form');
+		
+		var post = form.serializeArray();
+		var link = $(this).data('href');
+		var metodo = $(this).data('method');
+		var method = (metodo != undefined && metodo != '') ? metodo : 'POST';
+		if (VerificarForm(form) == true) {
+			SearchAjax(post, link, method, '#grupos');
+		}
+	});
 	$(document).on('click', '.add_contato', function(e) {
 		e.preventDefault();
 
@@ -192,7 +204,24 @@ $(document).on('ready', function () {
 		var post = {id_usuario: id_usuario, id_usuario2: id_usuario2};
 		AdicionarContato(post);
 	});
-
+	$(document).on('change', 'select[name="tipo"]', function () {
+		if ($(this).val() > 0) {
+			MountToAdd($(this).val(), '#add-tipo');
+		} else {
+			$('#add-tipo').html('');
+		}
+	});
+	$(document).on('click', '.define-tipo', function () {
+		$('.define-tipo').removeClass('active');
+		$(this).addClass('active');
+		var tipo = $('select[name="tipo"]').val();
+		var valor = $(this).data('val');
+		if (tipo == 1) {
+			$('input[name="id_grupo"]').val(valor);
+		} else if (tipo == 2) {
+			$('input[name="id_contato"]').val(valor);
+		}
+	});
 
 });
 // Eventos Após DOM
@@ -240,7 +269,7 @@ function adicionarLoader() {
 }
 function removerLoader() {
 	$('body').css('overflow', 'auto');
-	setTimeout(function(){ $('.loader').fadeOut('fast'); }, 1000);
+	$('.loader').fadeOut('fast');
 }
 function InitBar() {
 	if (localStorage.bar != 2 && localStorage.bar != 1) {
@@ -629,6 +658,30 @@ function AdicionarContato(post) {
 			if(data.length != 0) {
 				GoTo(location.pathname, false);
 			}
+		},
+	    error: function(xhr) { // if error occured
+	    	removerLoader();
+	    	alert("Error, contate o administrador ou reinicie a pagina.");
+	    },
+	    complete: function() {
+	    	removerLoader();
+	    }
+	});
+}
+function MountToAdd(val, where) {
+	$.ajax({
+		method: 'POST',
+		async: true,
+		data: {tipo: val},
+		url: '/sistema/postagens/tipo/',
+		beforeSend: function(request) {
+			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			adicionarLoader();
+		},
+		success: function(data) {
+			$(where).html(data);
 		},
 	    error: function(xhr) { // if error occured
 	    	removerLoader();

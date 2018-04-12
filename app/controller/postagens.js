@@ -57,6 +57,12 @@ router.post('/pesquisar', function(req, res, next) {
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens', data: data, usuario: req.session.usuario});
 	});
 });
+router.post('/tipo', function(req, res, next) {
+	POST = req.body;
+	model.SearchTipo(POST, req.session.usuario.id).then(data => {
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_tipos', data: data, usuario: req.session.usuario});
+	});
+});
 router.post('/gostei', function(req, res, next) {
 	POST = req.body;
 	model.AddLike(POST).then(data=> {

@@ -1,0 +1,76 @@
+<div class="card-panel">
+  <div class="container">
+    <%
+    if (typeof data.grupo != 'undefined' && data.grupo.length > 0) {
+      for (var i = data.grupo.length - 1; i >= 0; i--) {
+        %>
+        <h4>
+          Grupo <%= data.grupo[i].nome %>
+        </h4>
+        <p>
+          <b>Descrição </b><%= data.grupo[i].descricao %>
+        </p>
+        <%
+          if (data.grupo[i].pertence > 0) {
+        %>
+        <form method="POST">
+          <input type="hidden" name="id_grupo" value="<%= data.grupo[i].id %>">
+          <input type="hidden" name="id_usuario" value="<%= usuario.id %>">
+          <button class="btn red white-text ajax-submit" data-href="/sistema/usuarios/grupos/sair/" data-action="/sistema/usuarios/grupos/ver/<%= data.grupo[i].id %>" style="width: 100%;">
+            Sair do Grupo
+          </button>
+        </form>
+        <%
+          } else {
+        %>
+        <form method="POST">
+          <input type="hidden" name="id_grupo" value="<%= data.grupo[i].id %>">
+          <input type="hidden" name="id_usuario" value="<%= usuario.id %>">
+          <button class="btn blue white-text ajax-submit" data-href="/sistema/usuarios/grupos/entrar/" data-action="/sistema/usuarios/grupos/ver/<%= data.grupo[i].id %>" style="width: 100%;">
+            Participar do Grupo
+          </button>
+        </form>
+        <%
+          }
+        %>
+        <%
+      }
+    } else {
+      %>
+      <p class="center-align">Nenhuma resultado foi encontrado.</p>
+      <%
+    }
+    %>
+  </div>
+</div>
+<div class="card-panel">
+  <div class="container">
+    <h5>
+      Usuários
+    </h5>
+    <div class="usuarios-grupo">
+      <%
+      if (typeof data.usuarios != 'undefined' && data.usuarios.length > 0) {
+        for (var i = data.usuarios.length - 1; i >= 0; i--) {
+          %>
+          <p>
+            <%= data.usuarios[i].nome_murer %>
+            <%
+            if(data.usuarios[i].id != usuario.id && data.usuarios[i].id_lider == usuario.id) {
+            %>
+            <a class="red-text modal-remover-mount" data-href="#modaldeletar" data-texto="Tem certeza que deseja excluir esse usuário do grupo? Esta ação não pode ser desfeita." data-to="/sistema/usuarios/grupos/usuario/desativar/" data-back="/sistema/usuarios/grupos/ver/<%= data.usuarios[i].id_grupo %>" data-id="<%= data.usuarios[i].id_grupo_usuario %>"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+            <%
+            }
+            %>
+          </p>
+          <%
+        }
+      } else {
+        %>
+        <p class="center-align">Nenhuma resultado foi encontrado.</p>
+        <%
+      }
+      %>
+    </div>
+  </div>
+</div>
