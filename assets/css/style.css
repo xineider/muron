@@ -688,10 +688,12 @@ header {
       }
 #comentario-form {
   position: fixed;
-  width: 90%;
   bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
 }
-.modal {
+.modal:not(.modal-fixed-footer) {
   height: auto !important;
 }
 .side-nav .user-view {

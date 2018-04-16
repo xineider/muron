@@ -25,7 +25,7 @@
 				<div class="row valign-wrapper">
 					<div class="col s3">
 						<!-- 		    			<a href="/" class="left"><i class="fa fa-home"></i></a> -->
-						<a href="/sistema/" id="sair" class="left ajax-load" onclick="window.history.go(-1); return false;"><i class="fa fa-chevron-left"></i></a>
+						<a id="sair" class="left" onclick="window.history.go(-1); return false;"><i class="fa fa-chevron-left"></i></a>
 					</div>
 					<div class="col s6 center">
 						<a class="logo-container ajax-load" href="/sistema"><img src="/assets/imgs/mini-logo.png"></a>
@@ -106,6 +106,20 @@
 		<div class="modal-content">
 		</div>
 	</div>
+	<div id="modalinfo-footer" class="modal modal-fixed-footer comments">
+		<div class="modal-content" style="overflow-x: hidden;">
+		</div>
+		<div class="modal-footer">
+			<form method="POST" action="" id="comentario-form">
+				<div class="col s12 input-field valign-wrapper m0">
+					<input type="hidden" name="id_postagem" value="<%= data.postagem %>">
+					<input type="hidden" name="id_usuario" value="<%= usuario.id %>">
+					<input type="text" name="texto" placeholder="Deixe seu comentário">
+					<button class="sufix ajax-submit"  data-href="/sistema/postagens/cadastrar/comentario/"><i class="fa fa-chevron-circle-right blue-text"></i></button>
+				</div>
+			</form>
+		</div>
+	</div>
 	<!-- Modal Structure -->
 	<div id="modalinput" class="modal">
 		<div class="modal-content">
@@ -114,7 +128,7 @@
 				<input type="hidden" name="id" id="id">
 				<label></label>
 				<input type="text" name="">
-				<a class="btn blue darken-1 ajax-submit" data-href="/sistema/usuarios/atualizar/" data-action="/sistema/usuarios/ver/<%= usuario.id %>" >Alterar</a>
+				<a class="btn blue darken-1 ajax-submit" data-href="/sistema/usuarios/atualizar/" data-action="/sistema/usuarios/ver/<%= usuario.id %>#info-user" >Alterar</a>
 			</form>
 		</div>
 	</div>

@@ -13,14 +13,16 @@
 	<!-- Esqueceu Senha -->
 	<div id="modalforgot" class="modal">
 		<div class="modal-content">
-			<p><b>Recuperação de Senha</b></p>
-			<div class="input-field">
-				<label>Digite seu email</label>
-				<input type="email" name="email">
-			</div>
-			<button class="btn blue white-text">
-				Confirmar
-			</button>
+			<form method="POST">
+				<p><b>Recuperação de Senha</b></p>
+				<div class="input-field">
+					<label>Digite seu email</label>
+					<input type="email" name="email">
+				</div>
+				<button class="btn blue white-text resend-pass">
+					Confirmar
+				</button>
+			</form>
 		</div>
 	</div>
 	<!-- Cadastre-se -->
@@ -242,6 +244,23 @@
 			    	alert("Error, contate o administrador ou reinicie a pagina.");
 			    },
 			    complete: function() {
+			    }
+			});
+		});
+		$(document).on('click', '.resend-pass', function(e) {
+			e.preventDefault();
+			var form = $(this).closest('form');
+			var post = form.serializeArray();
+			$.ajax({
+				method: 'POST',
+				async: true,
+				data: post,
+				url: '/sistema/api/recuperar/senha',
+				success: function(data) {
+					Materialize.toast('<div class="center-align" style="width:100%;">Mensagem enviada com sucesso.</div>', 5000, 'rounded');
+				},
+			    error: function(xhr) { // if error occured
+			    	alert("Error, contate o administrador ou reinicie a pagina.");
 			    }
 			});
 		});

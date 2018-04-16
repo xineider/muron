@@ -14,7 +14,11 @@ router.post('/', function(req, res, next) {
 	res.json(0);
 });
 router.post('/recuperar/senha', function(req, res, next) {
-	res.json(0);
+	var post = req.body;
+	var html = "<p>Sua nova senha é: <b>"+nova_senha+"</b>";
+	var text = "Sua nova senha é: "+nova_senha;
+	control.SendMail(post.email, 'Recuperação de Senha - MurOn', html, text);
+	res.json(10);
 });
 router.post('/cadastrar/usuario', function(req, res, next) {
 	var post = req.body;

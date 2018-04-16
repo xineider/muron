@@ -33,7 +33,7 @@ $(document).on('ready', function () {
 	$(document).on('click', '.modal-input', function (e) {
 		e.preventDefault();
 		$('#modalinput label').text($(this).data('nome'));
-		$('#modalinput input:not(#id)').prop('name', $(this).data('collum'));
+		$('#modalinput input:not(#id)').prop('name', $(this).data('collum')).val('');
 		$('#modalinput #id').val($(this).data('id'));
 		$('#modalinput').modal('open');
 	});
@@ -521,8 +521,6 @@ function MountModal(modal, link) {
 		success: function(data) {
 			$(modal).find('.modal-content').html(data);
 			$(modal).modal('open');
-
-			
 		},
 	    error: function(xhr) { // if error occured
 	    	removerLoader();

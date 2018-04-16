@@ -1,4 +1,4 @@
-<div class="comments">
+<div class="">
 <%
 if (typeof data.comentarios != 'undefined' && data.comentarios.length > 0) {
 	for (var i = data.comentarios.length - 1; i >= 0; i--) {
@@ -37,12 +37,4 @@ if (typeof data.comentarios != 'undefined' && data.comentarios.length > 0) {
 <%
 }
 %>
-<form method="POST" action="" id="comentario-form">
-	<div class="col s12 input-field valign-wrapper m0">
-		<input type="hidden" name="id_postagem" value="<%= data.postagem %>">
-		<input type="hidden" name="id_usuario" value="<%= usuario.id %>">
-		<input type="text" name="texto" placeholder="Deixe seu comentário">
-		<button class="sufix ajax-submit"  data-href="/sistema/postagens/cadastrar/comentario/"><i class="fa fa-chevron-circle-right blue-text"></i></button>
-	</div>
-</form>
 </div>
