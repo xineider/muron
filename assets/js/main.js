@@ -30,6 +30,12 @@ $(document).on('ready', function () {
 		var link = $(this).data('link');
 		MountModal(modal, link);
 	});
+	$(document).on('click', '.modal-mount-inteiro', function (e) {
+		e.preventDefault();
+		var modal = $(this).data('href');
+		var link = $(this).data('link');
+		MountModalInteiro(modal, link);
+	});
 	$(document).on('click', '.modal-input', function (e) {
 		e.preventDefault();
 		$('#modalinput label').text($(this).data('nome'));
@@ -507,6 +513,33 @@ function Reestruturar(str) {
 // 		}
 // 	});
 // }
+function MountModalInteiro(modal, link) {
+	$.ajax({
+		method: "GET",
+		async: true,
+		url: '/sistema'+link,
+		beforeSend: function(request) {
+			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			adicionarLoader();
+		},
+		success: function(data) {
+			$(modal).html(data);
+			$(modal).modal('open');
+		},
+	    error: function(xhr) { // if error occured
+	    	removerLoader();
+	    	alert("Error, contate o administrador ou reinicie a pagina.");
+	    },
+	    complete: function() {
+	    	removerLoader();
+	    	$('.material-tooltip').remove();
+	    	$('.tooltipped').tooltip({delay: 50});
+	    	FormatInputs();
+	    }
+	});
+}
 function MountModal(modal, link) {
 	$.ajax({
 		method: "GET",

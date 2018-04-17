@@ -85,6 +85,7 @@ router.post('/desativar/', function(req, res, next) {
 });
 router.post('/cadastrar/comentario', function(req, res, next) {
 	POST = req.body;
+	console.log(POST);
 	model.InsertComentario(POST).then(data => {
 		res.json(data);
 	});
