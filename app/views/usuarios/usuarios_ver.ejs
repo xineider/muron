@@ -110,7 +110,7 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 				} %>
 				<div class=" col s4 right card-panel">
 					<div class="card-content">
-						UF <%- data.perfil[i].id == usuario.id ? '<span class="blue-text right modal-input" data-nome="UF" data-id="'+data.perfil[i].id+'" data-collum="uf"><i class="fa fa-edit"></i></span>' : '' %>
+						UF(onde reside) <%- data.perfil[i].id == usuario.id ? '<span class="blue-text right modal-input" data-nome="UF" data-id="'+data.perfil[i].id+'" data-collum="uf"><i class="fa fa-edit"></i></span>' : '' %>
 					</div>
 					<div class="card-title">
 						<%= data.perfil[i].uf %>
@@ -118,7 +118,7 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 				</div>
 				<div class=" col s7 right card-panel">
 					<div class="card-content">
-						Cidade <%- data.perfil[i].id == usuario.id ? '<span class="blue-text right modal-input" data-nome="Cidade" data-id="'+data.perfil[i].id+'" data-collum="cidade"><i class="fa fa-edit"></i></span>' : '' %>
+						Cidade(onde reside) <%- data.perfil[i].id == usuario.id ? '<span class="blue-text right modal-input" data-nome="Cidade" data-id="'+data.perfil[i].id+'" data-collum="cidade"><i class="fa fa-edit"></i></span>' : '' %>
 					</div>
 					<div class="card-title">
 						<%= data.perfil[i].cidade %>
