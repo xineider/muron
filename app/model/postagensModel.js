@@ -49,7 +49,7 @@ class PostagensModel {
 		});	
 	}
 
-	SearchPostagem(post, id_usuario) {
+	SearchPostagem(pesquisa, id_usuario) {
 		return new Promise(function(resolve, reject) {
 			var where_add = '';
 			var values = [];
@@ -57,9 +57,9 @@ class PostagensModel {
 				where_add = "AND ((id_grupo = ? OR id_grupo IN ((SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?)))\
 							AND (id_contato = ? OR id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = postagens.id_usuario AND deletado = ?)))\
 							OR id_usuario = ?)";
-				values = [id_usuario, 0, 0, 0, 0, post.pesquisa, post.pesquisa, post.pesquisa, post.pesquisa, 0, id_usuario, 0, 0, 0, id_usuario];
+				values = [id_usuario, 0, 0, 0, 0, pesquisa, pesquisa, pesquisa, pesquisa, 0, id_usuario, 0, 0, 0, id_usuario];
 			} else {
-				values = [id_usuario, 0, 0, 0, 0, post.pesquisa, post.pesquisa, post.pesquisa, post.pesquisa];
+				values = [id_usuario, 0, 0, 0, 0, pesquisa, pesquisa, pesquisa, pesquisa];
 			}
 			helper.Query('SELECT a.id, a.id_usuario,\
 						b.nome_murer as usuario,\

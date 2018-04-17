@@ -35,6 +35,13 @@ router.get('/criar', function(req, res, next) {
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_criar', data: data, usuario: req.session.usuario});
 	});
 });
+router.get('/pesquisar/:pesquisa', function(req, res, next) {
+	pesquisa = req.params.pesquisa;
+	model.SearchPostagem(pesquisa, req.session.usuario.id).then(data_postagens => {
+		data.postagens = data_postagens;
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_ver', data: data, usuario: req.session.usuario});
+	});
+});
 
 // POST
 router.post('/uploadarquivo', function(req, res, next) {
@@ -49,14 +56,6 @@ router.post('/uploadarquivo', function(req, res, next) {
 
 		res.json(nome);
   });
-});
-router.post('/pesquisar', function(req, res, next) {
-	POST = req.body;
-	model.SearchPostagem(POST, req.session.usuario.id).then(data_postagens => {
-		data.postagens = data_postagens;
-		console.log(data);
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_ver', data: data, usuario: req.session.usuario});
-	});
 });
 router.post('/tipo', function(req, res, next) {
 	POST = req.body;

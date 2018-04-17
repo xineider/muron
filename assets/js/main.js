@@ -99,6 +99,10 @@ $(document).on('ready', function () {
 			SearchAjax(post, link, method, 'main');
 		}
 	});
+	$(document).on('click', '.ajax-search-post', function(e) {
+		e.preventDefault();
+		GoTo($(this).data('href')+$('input[name="pesquisa"]').val(), true);
+	});
 	$(document).on('submit', 'form', function(e) {
 		e.preventDefault();
 	});

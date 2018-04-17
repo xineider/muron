@@ -1,1 +1,10 @@
 <%- include('postagens'); %>
+<%
+	if (typeof pesquisa != 'undefined' && pesquisa == 1) {
+%>
+<script type="text/javascript">
+	$('#sair').fadeIn('fast');
+</script>
+<%
+	}
+%>
