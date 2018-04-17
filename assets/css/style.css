@@ -654,7 +654,7 @@ header {
 .actions .active {
   color: #0562af;
 }
-.categorias .card .card-content.text-content {
+.card .card-content.text-content {
   padding-bottom: 62px;
   margin-top: -20px;
 }

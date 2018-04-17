@@ -54,7 +54,8 @@ router.post('/pesquisar', function(req, res, next) {
 	POST = req.body;
 	model.SearchPostagem(POST, req.session.usuario.id).then(data_postagens => {
 		data.postagens = data_postagens;
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens', data: data, usuario: req.session.usuario});
+		console.log(data);
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_ver', data: data, usuario: req.session.usuario});
 	});
 });
 router.post('/tipo', function(req, res, next) {
