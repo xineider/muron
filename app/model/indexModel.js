@@ -52,10 +52,10 @@ class IndexModel {
 	GetCategorias() {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT a.id, a.nome,\
-						 (SELECT COUNT(c.id) FROM postagens as c WHERE c.data_cadastro > b.data_acesso AND c.id_categoria = a.id) as atualizacoes\
+						 (SELECT COUNT(c.id) FROM postagens as c WHERE c.data_cadastro > b.data_acesso AND c.id_categoria = a.id AND deletado = ?) as atualizacoes\
 						 FROM postagens_categorias as a\
 						 LEFT JOIN postagens_categorias_view as b ON a.id = b.id_categoria\
-						 WHERE a.deletado = ? AND a.id != ? ORDER BY a.nome DESC', [0, 3]).then(data => {
+						 WHERE a.deletado = ? AND a.id != ? ORDER BY a.nome DESC', [0, 0, 3]).then(data => {
 				resolve(data);
 			});
 		});	
