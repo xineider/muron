@@ -62,6 +62,13 @@ router.get('/', function(req, res, next) {
 	});
 
 	// Metodos POST
+	router.post('/uploadfoto/', function(req, res, next) {
+		POST = req.body;
+		POST.id = req.session.usuario.id;
+		model.UpdateFoto(POST).then(data => {
+			res.json(data);
+		});
+	});
 	router.post('/contatos/', function(req, res, next) {
 		POST = req.body;
 		model.GetUsuarios(POST).then(data => {

@@ -10,6 +10,7 @@ class ChatsModel {
 			helper.Query('SELECT (SELECT b.nome_murer FROM usuarios as b WHERE b.id = a.id_usuario2) as nome_murer,\
 						(SELECT c.email FROM usuarios as c WHERE c.id = a.id_usuario2) as email,\
 						(SELECT d.nome FROM usuarios as d WHERE d.id = a.id_usuario2) as nome,\
+						(SELECT e.imagem FROM usuarios as e WHERE e.id = a.id_usuario2) as imagem,\
 						a.id_usuario2, a.id\
 						FROM usuarios_contatos as a WHERE a.deletado = ? AND a.id_usuario = ?', [0, id]).then(data => {
 				resolve(data);

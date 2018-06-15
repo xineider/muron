@@ -14,9 +14,24 @@ router.get('/', function(req, res, next) {
 });
 router.get('/ver/:id', function(req, res, next) {
 	id = req.params.id;
-	model.GetPostagemByCat(id, req.session.usuario.id).then(data_postagens => {
-		data.postagens = data_postagens;
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_ver', data: data, usuario: req.session.usuario});
+	title = '';
+	if(id == 1) {
+		title = 'Estágios';
+	} else if(id == 2) {
+
+			title = 'Projetos';
+	} else if (id == 3) {
+			title = 'Faculdades';
+
+	} else {
+		
+			title = 'Divulgação';
+	}
+	model.AddViewCat(id, req.session.usuario.id).then(ret => {
+		model.GetPostagemByCat(id, req.session.usuario.id).then(data_postagens => {
+			data.postagens = data_postagens;
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_ver', data: data, usuario: req.session.usuario, title: title});
+		});
 	});
 });
 router.get('/pesquisar', function(req, res, next) {
@@ -37,9 +52,12 @@ router.get('/criar', function(req, res, next) {
 });
 router.get('/pesquisar/:pesquisa', function(req, res, next) {
 	pesquisa = req.params.pesquisa;
+	if (pesquisa.indexOf('_') !== -1) {
+		pesquisa = pesquisa.split('_').join('/');
+	}
 	model.SearchPostagem(pesquisa, req.session.usuario.id).then(data_postagens => {
 		data.postagens = data_postagens;
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_ver', data: data, usuario: req.session.usuario});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_ver', data: data, usuario: req.session.usuario, title: 'Pesquisa por: ' + pesquisa});
 	});
 });
 

@@ -22,15 +22,16 @@ class UsuariosModel {
 	GetUsuario(id, id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT a.*, (SELECT COUNT(b.id) FROM usuarios_contatos as b WHERE b.id_usuario2 = a.id AND b.id_usuario = ? AND b.deletado = ? LIMIT 1) as amigos,\
-						DATE_FORMAT(a.nascimento, "%d/%m/%Y") as nascimento\
-						FROM usuarios as a WHERE a.deletado = ? AND a.id = ?', [id_usuario, 0, 0, id]).then(data => {
-				resolve(data);
+				DATE_FORMAT(a.nascimento, "%d/%m/%Y") as nascimento\
+				FROM usuarios as a WHERE a.deletado = ? AND a.id = ?', [id_usuario, 0, 0, id]).then(data => {
+					console.log(data);
+					resolve(data);
+				});
 			});
-		});
 	}
 	GetUsuarios(data) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT id as id_usuario2, nome_murer, email FROM usuarios WHERE deletado = ? AND (nome_murer like CONCAT("%", ?, "%") OR nome like CONCAT("%", ?, "%") OR email like CONCAT("%", ?, "%"))', [0, data.pesquisar, data.pesquisar, data.pesquisar]).then(data => {
+			helper.Query('SELECT id as id_usuario2, nome_murer, imagem, email FROM usuarios WHERE deletado = ? AND (nome_murer like CONCAT("%", ?, "%") OR nome like CONCAT("%", ?, "%") OR email like CONCAT("%", ?, "%"))', [0, data.pesquisar, data.pesquisar, data.pesquisar]).then(data => {
 				resolve(data);
 			});
 		});
@@ -38,61 +39,62 @@ class UsuariosModel {
 	GetUsuarioGrupos(id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT b.id, b.nome, b.id_lider FROM grupos_usuarios as a\
-						INNER JOIN grupos as b ON a.id_grupo = b.id\
-						WHERE a.deletado = ? AND b.deletado = ? AND a.id_usuario = ?', [0, 0, id_usuario]).then(data => {
-				resolve(data);
+				INNER JOIN grupos as b ON a.id_grupo = b.id\
+				WHERE a.deletado = ? AND b.deletado = ? AND a.id_usuario = ?', [0, 0, id_usuario]).then(data => {
+					resolve(data);
+				});
 			});
-		});
 	}
 	GetUsuarioContatos(id) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT b.nome_murer,\
-						b.email,\
-						a.id_usuario2, a.id\
-						FROM usuarios_contatos as a\
-						LEFT JOIN usuarios as b ON b.id = a.id_usuario2\
-						WHERE a.deletado = ? AND b.deletado = ? AND a.id_usuario = ?', [0, 0, id]).then(data => {
-				resolve(data);
+				b.email,\
+				b.imagem,\
+				a.id_usuario2, a.id\
+				FROM usuarios_contatos as a\
+				LEFT JOIN usuarios as b ON b.id = a.id_usuario2\
+				WHERE a.deletado = ? AND b.deletado = ? AND a.id_usuario = ?', [0, 0, id]).then(data => {
+					resolve(data);
+				});
 			});
-		});
 	}
 	GetGrupo(id, id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT a.*, (SELECT COUNT(b.id) FROM grupos_usuarios as b WHERE b.id_usuario = ? AND b.id_grupo = a.id AND b.deletado = ? LIMIT 1) as pertence\
-						FROM grupos as a WHERE a.deletado = ? AND a.id = ?', [id_usuario, 0, 0, id]).then(data => {
-							console.log(data);
-				resolve(data);
+				FROM grupos as a WHERE a.deletado = ? AND a.id = ?', [id_usuario, 0, 0, id]).then(data => {
+					console.log(data);
+					resolve(data);
+				});
 			});
-		});
 	}
 	GetGrupos(data) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT a.id, a.nome, a.id_lider FROM grupos as a\
-						WHERE a.deletado = ? AND\
-						(a.nome like CONCAT("%", ?, "%") OR a.descricao like CONCAT("%", ?, "%"))', [0, data.pesquisar, data.pesquisar]).then(data => {
-				resolve(data);
+				WHERE a.deletado = ? AND\
+				(a.nome like CONCAT("%", ?, "%") OR a.descricao like CONCAT("%", ?, "%"))', [0, data.pesquisar, data.pesquisar]).then(data => {
+					resolve(data);
+				});
 			});
-		});
 	}
 	GetUsuariosGrupo(id) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT a.id as id_grupo_usuario, a.id_grupo, b.id, b.nome_murer,\
-						(SELECT c.id_lider FROM grupos as c WHERE c.id = a.id_grupo) as id_lider\
-						FROM grupos_usuarios as a INNER JOIN usuarios as b ON a.id_usuario = b.id\
-						WHERE a.deletado = ? AND a.id_grupo = ?', [0, id]).then(data => {
-				resolve(data);
+				(SELECT c.id_lider FROM grupos as c WHERE c.id = a.id_grupo) as id_lider\
+				FROM grupos_usuarios as a INNER JOIN usuarios as b ON a.id_usuario = b.id\
+				WHERE a.deletado = ? AND a.id_grupo = ?', [0, id]).then(data => {
+					resolve(data);
+				});
 			});
-		});
 	}
 	GetPostagemByUser(id) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT id, id_usuario,\
-						(SELECT b.nome_murer FROM usuarios as b WHERE b.deletado = ? AND b.id = postagens.id_usuario) as usuario,\
-						imagem, descricao, DATE_FORMAT(data_atualizado, "%d/%m/%Y") as data_atualizado\
-						FROM postagens WHERE deletado = ? AND id_usuario = ?', [0, 0, id]).then(data => {
-				resolve(data);
-			});
-		});	
+				(SELECT b.nome_murer FROM usuarios as b WHERE b.deletado = ? AND b.id = postagens.id_usuario) as usuario,\
+				imagem, descricao, DATE_FORMAT(data_atualizado, "%d/%m/%Y") as data_atualizado\
+				FROM postagens WHERE deletado = ? AND id_usuario = ?', [0, 0, id]).then(data => {
+					resolve(data);
+				});
+			});	
 	}
 	InsertContato(post) {
 		var post2 = {};
@@ -165,6 +167,15 @@ class UsuariosModel {
 	UpdateUsuario(post) {
 		return new Promise(function(resolve, reject) {
 			helper.Update('usuarios', post).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	UpdateFoto(post) {
+		console.log(post);
+		return new Promise(function(resolve, reject) {
+			helper.Update('usuarios', post).then(data => {
+				console.log(data);
 				resolve(data);
 			});
 		});

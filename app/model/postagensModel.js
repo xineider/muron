@@ -22,6 +22,13 @@ class PostagensModel {
 			});
 		});	
 	}
+	AddViewCat(id_categoria, id_usuario) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('UPDATE postagens_categorias_view SET qtd_acesso = (qtd_acesso + 1) WHERE id_usuario = ? AND id_categoria = ?', [id_usuario, id_categoria]).then(data => {
+				resolve(data);
+			});
+		});
+	}
 	GetPostagemByCat(id, id_usuario) {
 		return new Promise(function(resolve, reject) {
 			var where_add = '';
@@ -53,13 +60,25 @@ class PostagensModel {
 		return new Promise(function(resolve, reject) {
 			var where_add = '';
 			var values = [];
+			if (pesquisa.indexOf('/') !== -1) {
+				pesquisa = pesquisa.split("/").reverse().join("-");
+			}
+			if ((new Date(pesquisa) !== "Invalid Date") && !isNaN(new Date(pesquisa))) {
+				pesquisa = new Date(pesquisa);
+				console.log(pesquisa);
+				console.log(pesquisa);
+				console.log(pesquisa);
+				console.log(pesquisa);
+				console.log(pesquisa);
+			}
+			console.log(pesquisa);
 			if (id_usuario != 1) {
 				where_add = "AND ((id_grupo = ? OR id_grupo IN ((SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?)))\
 							AND (id_contato = ? OR id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = postagens.id_usuario AND deletado = ?)))\
 							OR id_usuario = ?)";
-				values = [id_usuario, 0, 0, 0, 0, pesquisa, pesquisa, pesquisa, pesquisa, 0, id_usuario, 0, 0, 0, id_usuario];
+				values = [id_usuario, 0, 0, 0, 0, pesquisa, pesquisa, pesquisa, pesquisa, pesquisa, 0, id_usuario, 0, 0, 0, id_usuario];
 			} else {
-				values = [id_usuario, 0, 0, 0, 0, pesquisa, pesquisa, pesquisa, pesquisa];
+				values = [id_usuario, 0, 0, 0, 0, pesquisa, pesquisa, pesquisa, pesquisa, pesquisa];
 			}
 			helper.Query('SELECT a.id, a.id_usuario,\
 						b.nome_murer as usuario,\
@@ -69,7 +88,7 @@ class PostagensModel {
 						a.imagem, a.descricao, DATE_FORMAT(a.data_atualizado, "%d/%m/%Y") as data_atualizado\
 						FROM postagens as a INNER JOIN usuarios as b ON a.id_usuario = b.id WHERE a.deletado = ? AND\
 						(a.descricao like CONCAT("%", ?, "%") OR\
-						b.nome_murer like CONCAT("%", ?, "%") OR b.nome like CONCAT("%", ?, "%") OR b.email like CONCAT("%", ?, "%"))' + where_add, 
+						b.nome_murer like CONCAT("%", ?, "%") OR b.nome like CONCAT("%", ?, "%") OR a.data_cadastro >= ? OR b.email like CONCAT("%", ?, "%"))' + where_add, 
 						values).then(data => {
 				resolve(data);
 			});

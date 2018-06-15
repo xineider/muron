@@ -101,7 +101,11 @@ $(document).on('ready', function () {
 	});
 	$(document).on('click', '.ajax-search-post', function(e) {
 		e.preventDefault();
-		GoTo($(this).data('href')+$('input[name="pesquisa"]').val(), true);
+		var pesquisa = $('input[name="pesquisa"]').val();
+		if (pesquisa.indexOf('/') !== -1) {
+			pesquisa = pesquisa.split('/').join('_');
+		}
+		GoTo($(this).data('href')+pesquisa, true);
 	});
 	$(document).on('submit', 'form', function(e) {
 		e.preventDefault();
@@ -153,7 +157,16 @@ $(document).on('ready', function () {
 		}
 	});
 
-	$(document).on('change', 'input[type="file"]', function () {
+	$(document).on('change', 'input[type="file"]:not(#imagem_perfil)', function () {
+		console.log('aaaaaaaaaaa');
+		console.log('aaaaaaaaaaa');
+		console.log('aaaaaaaaaaa');
+		console.log('aaaaaaaaaaa');
+		console.log('aaaaaaaaaaa');
+		console.log('aaaaaaaaaaa');
+		console.log('aaaaaaaaaaa');
+		console.log('aaaaaaaaaaa');
+		console.log('aaaaaaaaaaa');
 		if($(this).val() != '') {
 			UploadFile($(this));
 		}
@@ -232,6 +245,9 @@ $(document).on('ready', function () {
 			$('input[name="id_contato"]').val(valor);
 		}
 	});
+	$(document).on('change', '#imagem_perfil', function() {
+		UploadFilePerfil($(this));
+	});
 
 });
 // Eventos Após DOM
@@ -270,6 +286,46 @@ function UploadFile(isso) {
 	    },
 	    complete: function() {
 			removerLoader();
+	    }
+	});
+}
+function UploadFilePerfil(isso) {
+	var link = isso.data('href');
+	var formData = new FormData();
+	formData.append('arquivo', isso[0].files[0]);
+
+	$.ajax({
+	    url: link,
+	    type: 'POST',
+	    data: formData,
+	    dataType: 'json',
+	    processData: false,
+	    contentType: false,
+	    beforeSend: function(request) {
+			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			adicionarLoader();
+	    },
+	    success: function (data) {
+	    	$('input[name="imagem"]').val(data);
+	    },
+	    error: function (xhr, e, t) {
+	    	removerLoader();
+	        console.debug((xhr.responseText));
+	    },
+	    complete: function() {
+			removerLoader();
+			var form = isso.closest('form');
+			
+			var post = form.serializeArray();
+			var link = form.data('href');
+			var back = form.data('action');
+			var metodo = isso.data('method');
+			var method = (metodo != undefined && metodo != '') ? metodo : 'POST';
+			if (VerificarForm(form) == true) {
+				SubmitAjax(post, link, back, method);
+			}
 	    }
 	});
 }
@@ -476,6 +532,7 @@ function SearchAjax(post, link, method, to) {
 			adicionarLoader();
 		},
 		success: function(data) {
+			console.log(to);
 			$(to).html(data);
 		},
 	    error: function(xhr) { // if error occured

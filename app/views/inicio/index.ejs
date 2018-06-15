@@ -3,37 +3,41 @@
 		<%
 		if (typeof data != 'undefined' && data.length > 0) {
 			for (var i = data.length - 1; i >= 0; i--) {
-		%>
-			<div class="col s3">
-				<a href="/sistema/postagens/ver/<%= data[i].id %>" class="ajax-load">
-					<img class="circle" style="max-width: 100%;" src="/assets/imgs/banner-1.jpeg">
-					<p class="center-align black-text">
-						<%= data[i].nome %>
-					</p>
-				</a>
-			</div>
-		<%
+				%>
+				<div class="col s3">
+					<a href="/sistema/postagens/ver/<%= data[i].id %>" class="ajax-load">
+						<img class="circle" style="max-width: 100%;" src="/assets/imgs/banner-1.jpeg">
+						<p class="center-align black-text">
+							<%= data[i].nome %>
+						</p>
+					</a>
+					<%
+					if (data[i].atualizacoes > 0) {
+					%>
+					<div class="atualizacoes">
+						<%= data[i].atualizacoes %><i class="fa fa-plus" aria-hidden="true"></i>
+					</div>
+					<%
+					}
+					%>
+				</div>
+				<%
 			}
 		}
 		%>
+		<div class="col s3">
+			<a href="/sistema/faculdades/ver" class="ajax-load">
+				<img class="circle" style="max-width: 100%;" src="/assets/imgs/banner-1.jpeg">
+				<p class="center-align black-text">
+					Faculdade
+				</p>
+			</a>
+		</div>
 	</div>
 </section>
 <section class="main-margin">
-	<%
-	if (typeof data != 'undefined' && data.length > 0) {
-		for (var i = data.length - 1; i >= 0; i--) {
-			%>
-			<div class="card row categorias" data-id="<%= data[i].id %>">
-				<span class="card-title"><%= data[i].nome %></span>
-				<div class="line"></div>
-				<div class="post-<%= data[i].id %>">
-					
-				</div>
-			</div>
-			<%
-		}
-	}
-	%>
+
+	<%- include('../postagens/postagens'); %>
 	
 </section>
 
@@ -48,27 +52,4 @@
 <script type="text/javascript">
 	$('#footer').fadeIn('slow');
 	$('#sair').fadeOut('slow');
-	$('.categorias').each(function() {
-		var id = $(this).data('id');
-		$.ajax({
-			method: "GET",
-			async: true,
-			url: '/sistema/postagens/ver/'+id,
-		    beforeSend: function(request) {
-		    	request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
-				request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
-		    	request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
-				adicionarLoader();
-		    },
-		    success: function(data) {
-		    	$('.post-'+id).html(data);
-		    },
-		    error: function(xhr) { // if error occured
-		      alert("Error, contate o administrador ou reinicie a pagina.");
-		    },
-		    complete: function() {
-				removerLoader();
-		    }
-		});
-	});
 </script>

@@ -30,7 +30,7 @@
 					<div class="col s6 center">
 						<a class="logo-container ajax-load" href="/sistema"><img src="/assets/imgs/mini-logo.png"></a>
 					</div>
-					<div class="row">
+					<div class="row col s3">
 						<ul id="slide-out" class="side-nav white-text">
 							<li>
 								<div class="user-view g-blue">
@@ -52,26 +52,35 @@
 							<% if(usuario.tipo == 1) {
 							%>
 							<li><div class="small-line"></div></li>
-							<li><a class="waves-effect ajax-load" href="/sistema/usuarios/grupos">Grupos</a></li>
+							<li><a class="waves-effect ajax-load" href="/sistema/usuarios/grupos">Lista de Transmissão</a></li>
 							<li><div class="small-line"></div></li>
 							<li><a class="waves-effect ajax-load" href="/sistema/chats">Chat</a></li>
 							<li><div class="small-line"></div></li>
-							<!-- <li><a class="waves-effect ajax-load" href="/sistema/grupos">Grupos</a></li> -->
+							<!-- <li><a class="waves-effect ajax-load" href="/sistema/grupos">Lista de Transmissão</a></li> -->
 							<%
 							} else if (usuario.tipo == 2) {
 							%>
 							<li><div class="small-line"></div></li>
-							<li><a class="waves-effect ajax-load" href="/sistema/usuarios/grupos">Grupos</a></li>
+							<li><a class="waves-effect ajax-load" href="/sistema/usuarios/grupos">Lista de Transmissão</a></li>
 							<li><div class="small-line"></div></li>
 							<li><a class="waves-effect ajax-load" href="/sistema/chats">Chat</a></li>
 							<li><div class="small-line"></div></li>
 							<li><a class="waves-effect ajax-load" href="/sistema/faculdades/alunos/relacao">Relação dos Alunos</a></li>
 							<%
-							}%>
+							} else {
+							%>
+							<li><div class="small-line"></div></li>
+							<li><a class="waves-effect ajax-load" href="/sistema/usuarios/grupos">Lista de Transmissão</a></li>
+							<li><div class="small-line"></div></li>
+							<li><a class="waves-effect ajax-load" href="/sistema/chats">Chat</a></li>
+							<li><div class="small-line"></div></li>
+							<%
+							}
+							%>
 							<li><div class="small-line"></div></li>
 							<li><a class="waves-effect ajax-load" href="/sistema/sobre">Sobre o App</a></li>
 							<li><div class="small-line"></div></li>
-							<li><a class="waves-effect" href="/logout">Sair</a></li>
+							<li><a class="waves-effect" href="/logout" onclick="return confirm('Você deseja sair?');">Sair</a></li>
 						</ul>
 						<a href="#" data-activates="slide-out" class="right button-collapse"><i class="fa fa-bars"></i></a>
 					</div>

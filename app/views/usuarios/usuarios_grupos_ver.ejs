@@ -5,7 +5,7 @@
       for (var i = data.grupo.length - 1; i >= 0; i--) {
         %>
         <h4>
-          Grupo <%= data.grupo[i].nome %>
+          Lista <%= data.grupo[i].nome %>
         </h4>
         <p>
           <b>Descrição </b><%= data.grupo[i].descricao %>
@@ -17,7 +17,7 @@
           <input type="hidden" name="id_grupo" value="<%= data.grupo[i].id %>">
           <input type="hidden" name="id_usuario" value="<%= usuario.id %>">
           <button class="btn red white-text ajax-submit" data-href="/sistema/usuarios/grupos/sair/" data-action="/sistema/usuarios/grupos/ver/<%= data.grupo[i].id %>" style="width: 100%;">
-            Sair do Grupo
+            Sair do Lista
           </button>
         </form>
         <%
@@ -27,7 +27,7 @@
           <input type="hidden" name="id_grupo" value="<%= data.grupo[i].id %>">
           <input type="hidden" name="id_usuario" value="<%= usuario.id %>">
           <button class="btn blue white-text ajax-submit" data-href="/sistema/usuarios/grupos/entrar/" data-action="/sistema/usuarios/grupos/ver/<%= data.grupo[i].id %>" style="width: 100%;">
-            Participar do Grupo
+            Participar do Lista
           </button>
         </form>
         <%

@@ -54,7 +54,7 @@
 							<option value="1">Aluno</option>
 							<option value="2">Ex-Aluno</option>
 							<option value="3">Professor</option>
-							<option value="4">Divulgador</option>
+							<option value="4">Colaborador</option>
 						</select>
 					</div>
 					<div class="col s12 input-field">
@@ -87,7 +87,7 @@
 						<select class="browser-default" name="tipo">
 							<option value="" disabled selected>Selecione</option>
 							<option value="2">Faculdade</option>
-							<option value="3">Colaborador</option>
+							<option value="3">Divulgador</option>
 						</select>
 					</div>
 					<div class="col s12 input-field">
@@ -221,31 +221,34 @@
 			e.preventDefault();
 			var form = $(this);
 			var post = form.serializeArray();
-			if($('.modal input[name="senha"]').val() != $('.modal input[name="senha_confirmar"]').val()){alert('Confirmação de Senha incorreta')}
-			$.ajax({
-				method: 'POST',
-				async: true,
-				data: post,
-				url: '/sistema/api/cadastrar/parceiro',
-				beforeSend: function(request) {
-				},
-				success: function(data) {
-					if(data.length == 0) {
-						alert('Usuário já cadastrado, tente novamente com outro Login');
-					} else {
-						var nome_murer = form.find('input[name="nome_murer"]').val();
-						var senha = form.find('input[name="senha"]').val();
-						$('.inputs').find('input[name="nome_murer"]').val(nome_murer);
-						$('.inputs').find('input[name="senha"]').val(senha);
-    					$('.modal').modal('close');
-					}
-				},
-			    error: function(xhr) { // if error occured
-			    	alert("Error, contate o administrador ou reinicie a pagina.");
-			    },
-			    complete: function() {
-			    }
-			});
+			if($('#cadastra-parceiro input[name="senha"]').val() != $('#cadastra-parceiro input[name="senha_confirmar"]').val()){
+				alert('Confirmação de Senha incorreta')
+			} else {
+				$.ajax({
+					method: 'POST',
+					async: true,
+					data: post,
+					url: '/sistema/api/cadastrar/parceiro',
+					beforeSend: function(request) {
+					},
+					success: function(data) {
+						if(data.length == 0) {
+							alert('Usuário já cadastrado, tente novamente com outro Login');
+						} else {
+							var nome_murer = form.find('input[name="nome_murer"]').val();
+							var senha = form.find('input[name="senha"]').val();
+							$('.inputs').find('input[name="nome_murer"]').val(nome_murer);
+							$('.inputs').find('input[name="senha"]').val(senha);
+	    					$('.modal').modal('close');
+						}
+					},
+				    error: function(xhr) { // if error occured
+				    	alert("Error, contate o administrador ou reinicie a pagina.");
+				    },
+				    complete: function() {
+				    }
+				});
+			}
 		});
 		$(document).on('click', '.resend-pass', function(e) {
 			e.preventDefault();

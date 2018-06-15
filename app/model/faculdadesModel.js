@@ -19,6 +19,33 @@ class FaculdadesModel {
 			});
 		});
 	}
+	GetFaculdadeVer(id_usuario) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT faculdade FROM usuarios WHERE id = ? AND deletado = ?', [id_usuario, 0]).then(data_user => {
+				if (data_user.length > 0) {
+					helper.Query('SELECT id_faculdade FROM faculdades_relacoes WHERE nome = ? AND deletado = ?', [data_user[0].faculdade, 0]).then(data_faculdade => {
+						helper.Query('SELECT a.*, (SELECT COUNT(b.id) FROM usuarios_contatos as b WHERE b.id_usuario2 = a.id AND b.id_usuario = ? AND b.deletado = ? LIMIT 1) as amigos,\
+							DATE_FORMAT(a.nascimento, "%d/%m/%Y") as nascimento\
+							FROM usuarios as a WHERE a.deletado = ? AND a.id = ?', [id_usuario, 0, 0, data_faculdade[0].id_faculdade]).then(data => {
+							resolve(data);
+						});
+					});
+				} else {
+					resolve(false);
+				}
+			});
+		});
+	}
+	GetPostagemByFaculdade(id) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT id, id_usuario,\
+						(SELECT b.nome_murer FROM usuarios as b WHERE b.deletado = ? AND b.id = postagens.id_usuario) as usuario,\
+						imagem, descricao, DATE_FORMAT(data_atualizado, "%d/%m/%Y") as data_atualizado\
+						FROM postagens WHERE deletado = ? AND id_usuario = ?', [0, 0, id]).then(data => {
+				resolve(data);
+			});
+		});	
+	}
 	GetFaculdade(id) {
 		// Para retornar quando chamar a função
 		return new Promise(function(resolve, reject) {

@@ -365,8 +365,10 @@ nav i {
   width: 100%;
 }
 .mur-img {
-  max-width: 100%;
-  height: 20em;
+  width: 90%;
+  height: auto;
+  margin: 0 auto;
+  padding: 10px 0;
 }
 .card-image.mur-card-img {
   height: 240px;
@@ -465,7 +467,7 @@ table.striped>tbody>tr>td {
   margin-bottom: 45px;
 }
 .drag-target {
-  width: 34%;
+  width: 34% !important;
   left: -1000%;
 }
 #slide-out {
@@ -746,3 +748,23 @@ header {
   right: 5%;
   top: -7px;
 }
+
+
+
+.types .col {
+  position: relative;
+}
+  .types .col .atualizacoes {
+        position: absolute;
+    top: 0px;
+    right: -10px;
+    background-color: #0979d5;
+    color: #fff;
+    line-height: 34px;
+    min-width: 32px;
+    min-height: 32px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0 1px 4px -1px black;
+    text-shadow: 0 1px black;
+  } 

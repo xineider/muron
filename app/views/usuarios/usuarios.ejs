@@ -1,32 +1,26 @@
+
+<ul class="collection">
+  <%
+  if (typeof data != 'undefined' && data.length > 0) {
+    for (var i = data.length - 1; i >= 0; i--) {
+  %>
+  <a href="/sistema/usuarios/ver/<%= data[i].id_usuario2 %>" class="ajax-load">
+    <li class="collection-item avatar">
+      <img src="/assets/uploads/<%= data[i].imagem %>" alt="" class="circle">
+      <span class="title"><%= data[i].nome_murer %></span>
+      <p style="line-height: 9px;"><small><%= data[i].nome %><br>
+        <%= data[i].email %></small>
+      </p>
+    </li>
+  </a>
 <%
-if (typeof data != 'undefined' && data.length > 0) {
-  for (var i = data.length - 1; i >= 0; i--) {
-    %>
-    <tr>
-      <td class="center-align">
-        <a href="/sistema/usuarios/ver/<%= data[i].id_usuario2 %>" class="ajax-load">
-        <%= data[i].nome_murer %> | <small><%= data[i].email %></small>
-        </a>
-      </td>
-      <%
-      if (typeof data.amigos != 'undefined' && data.amigos == 1) {
-      %>
-      <td>
-        <a data-id_usuario2="<%= data[i].id_usuario2 %>" data-id_usuario="<%= usuario.id %>" class="add_contato btn-floating btn waves-effect waves-light blue darken-2 white-text">
-          <i class="fa fa-plus"></i>
-        </a>
-      </td>
-      <%
-      }
-      %>
-    </tr>
-    <%
   }
 } else {
-  %>
-  <tr>
-    <td class="center-align">Nenhuma resultado foi encontrado.</td>
-  </tr>
-  <%
+%>
+  <li class="center-align">
+    Nenhum contato foi encontrado com essa pesquisa
+  </li>
+<%
 }
 %>
+</ul>
