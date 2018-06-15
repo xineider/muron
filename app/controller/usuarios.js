@@ -75,12 +75,6 @@ router.get('/', function(req, res, next) {
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
 		});
 	});
-	router.post('/grupos/pesquisar', function(req, res, next) {
-		POST = req.body;
-		model.GetGrupos(POST).then(data => {
-			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_grupos_lista', data: data, usuario: req.session.usuario});
-		});
-	});
 	router.post('/grupos/sair', function(req, res, next) {
 		POST = req.body;
 		model.SairGrupo(POST).then(data => {
@@ -103,6 +97,24 @@ router.get('/', function(req, res, next) {
 		POST = req.body;
 		model.DesativarContato(POST).then(data => {
 			res.json(data);
+		});
+	});
+	router.post('/grupos/adicionar/usuario', function(req, res, next) {
+		POST = req.body;
+		console.log(POST);
+		console.log(POST);
+		console.log(POST);
+		console.log(POST);
+		console.log(POST);
+		model.GetUsuarioMurer(POST).then(usuario => {
+			if (usuario.length > 0) {
+				data_insert = {id_usuario: usuario[0].id, id_grupo: POST.id_grupo};
+				model.EntrarGrupo(data_insert).then(data => {
+					res.json(data);
+				});
+			} else {
+				res.json(data);
+			}
 		});
 	});
 	router.post('/grupos/adicionar', function(req, res, next) {

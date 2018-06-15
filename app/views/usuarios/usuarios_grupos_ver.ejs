@@ -16,8 +16,8 @@
         <form method="POST">
           <input type="hidden" name="id_grupo" value="<%= data.grupo[i].id %>">
           <input type="hidden" name="id_usuario" value="<%= usuario.id %>">
-          <button class="btn red white-text ajax-submit" data-href="/sistema/usuarios/grupos/sair/" data-action="/sistema/usuarios/grupos/ver/<%= data.grupo[i].id %>" style="width: 100%;">
-            Sair do Lista
+          <button class="btn red white-text ajax-submit" data-href="/sistema/usuarios/grupos/sair/" data-action="/sistema/usuarios/grupos/" style="width: 100%;">
+            Excluir Lista
           </button>
         </form>
         <%
@@ -33,6 +33,24 @@
         <%
           }
         %>
+    <hr>
+    <p>
+      Deseja adicionar um usuário na lista?
+    </p>
+    <form method="POST">
+      <div class="row">
+        <div class="input-field col s12">
+          <label>
+            Digite o MurEr
+          </label>
+          <input type="text" name="nome_murer">
+        </div>
+        <input type="hidden" name="id_grupo" value="<%= data.grupo[i].id %>">
+        <button class="btn blue white-text ajax-submit" data-href="/sistema/usuarios/grupos/adicionar/usuario" data-action="/sistema/usuarios/grupos/ver/<%= data.grupo[i].id %>" style="width: 100%;">
+          Adicionar Usuário
+        </button>
+      </div>
+    </form>
         <%
       }
     } else {

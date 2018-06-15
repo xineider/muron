@@ -19,6 +19,17 @@ class UsuariosModel {
 			});
 		});
 	}
+	GetUsuarioMurer(post) {
+				console.log(post);
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT id FROM usuarios WHERE nome_murer like CONCAT("%", ?, "%") AND deletado = ?', [post.nome_murer, 0]).then(data => {
+				console.log(data);
+				console.log(data);
+				console.log(data);
+				resolve(data);
+			});
+		});
+	}
 	GetUsuario(id, id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT a.*, (SELECT COUNT(b.id) FROM usuarios_contatos as b WHERE b.id_usuario2 = a.id AND b.id_usuario = ? AND b.deletado = ? LIMIT 1) as amigos,\
@@ -40,7 +51,7 @@ class UsuariosModel {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT b.id, b.nome, b.id_lider FROM grupos_usuarios as a\
 				INNER JOIN grupos as b ON a.id_grupo = b.id\
-				WHERE a.deletado = ? AND b.deletado = ? AND a.id_usuario = ?', [0, 0, id_usuario]).then(data => {
+				WHERE a.deletado = ? AND b.deletado = ? AND b.id_lider = ? GROUP BY b.nome', [0, 0, id_usuario]).then(data => {
 					resolve(data);
 				});
 			});
@@ -128,7 +139,7 @@ class UsuariosModel {
 	}
 	SairGrupo(post) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('UPDATE grupos_usuarios SET deletado = ? WHERE id_grupo = ? AND id_usuario = ?', [1, post.id_grupo, post.id_usuario]).then(data => {
+			helper.Query('UPDATE grupos SET deletado = ? WHERE id = ? AND id_lider = ?', [1, post.id_grupo, post.id_usuario]).then(data => {
 				resolve(data);
 			});
 		});

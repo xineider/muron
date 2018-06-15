@@ -11,7 +11,7 @@ app.use(require('express-is-ajax-request'));
 
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {
-	model.SelectGrupo().then(data=> {
+	model.SelectGrupo(req.session.usuario.id).then(data=> {
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'grupos/grupos', data: data});
 	});
 });

@@ -12,9 +12,9 @@ class GruposModel {
 			});
 		});
 	}
-	SelectGrupo() {
+	SelectGrupo(id_usuario) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT * FROM grupos', []).then(data => {
+			helper.Query('SELECT * FROM grupos WHERE id_lider = ?', [id_usuario]).then(data => {
 				console.log(data);
 				resolve(data);
 			});
