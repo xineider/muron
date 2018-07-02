@@ -15,16 +15,25 @@ router.get('/', function(req, res, next) {
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'faculdades/faculdades', data: data, usuario: req.session.usuario});
 	});
 });
-	router.get('/ver', function(req, res, next) {
-		model.GetFaculdadeVer(req.session.usuario.id).then(data_faculdade => {
-			if (data_faculdade != false) {
+
+router.get('/ver', function(req, res, next) {
+	model.GetFaculdadeVer(req.session.usuario.id).then(data_faculdade => {
+		console.log('!!!!!!!!!!! Dados da Faculdade !!!!!!!!!!!');
+		console.log(data_faculdade);
+		console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+
+		console.log(data_faculdade == 1);
+
+		// if(data_faculdade != false)
+			if (data_faculdade > 3) {
 				data.perfil = data_faculdade;
 				model.GetPostagemByFaculdade(data.perfil[0].id).then(data_postagens => {
 					data.postagens = data_postagens;
 					res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_ver', data: data, usuario: req.session.usuario});
 				});
-			} else {
-				res.redirect('/sistema/');
+			} else if(data_faculdade < 3){
+				// res.redirect('/sistema/');
+				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_ver', data: data, usuario: req.session.usuario,error:data_faculdade});
 			}
 		});
 	});

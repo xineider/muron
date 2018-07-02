@@ -22,7 +22,6 @@ class ApiModel {
 	CadastrarParceiro(data) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT id FROM usuarios WHERE nome_murer = ?', [data.nome_murer]).then(result => {
-				console.log(result);
 				if (result.length <= 0) {
 					helper.Insert('usuarios', data).then(data => {
 						resolve(data);
@@ -47,5 +46,25 @@ class ApiModel {
 			return [];
 		}
 	}
+
+	InsertFaculdadeRelacao(POST) {
+		delete POST.tipo;
+		delete POST.nome_murer;
+		delete POST.email;
+		delete POST.celular;
+		delete POST.nome_contato;
+		delete POST.descricao;
+		delete POST.senha;
+
+		return new Promise(function(resolve, reject) {
+			helper.Insert('faculdades_relacoes', POST).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+
+
+
 }
 module.exports = ApiModel;

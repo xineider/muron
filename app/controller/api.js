@@ -34,13 +34,23 @@ router.post('/cadastrar/usuario', function(req, res, next) {
 router.post('/cadastrar/parceiro', function(req, res, next) {
 	var post = req.body;
 	var post_limpo = model.VerificarSenha(post);
+
 	if (Object.keys(post_limpo).length > 0) {
-		model.CadastrarParceiro(post_limpo).then(data => {
-			res.json(data);
+		model.CadastrarParceiro(post_limpo).then(id_parceiro => {
+			console.log('00000000000000000 POST LIMPO 00000000000000000000000000000');
+			console.log(post_limpo);
+			console.log('0000000000000000000000000000000000000000000000000000000000');
+
+			if(post_limpo.tipo == 2){
+				post_limpo.id_faculdade = id_parceiro; 
+				model.InsertFaculdadeRelacao(post_limpo).then(id_faculdade =>{								
+				});
+			};
+
+			res.json(id_parceiro);	
 		});
 	} else {
 		res.json([]);
 	}
 });
-
 module.exports = router;

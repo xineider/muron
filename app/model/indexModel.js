@@ -45,17 +45,24 @@ class IndexModel {
 						(SELECT COUNT(e.id) FROM postagens_comentarios as e WHERE e.id_postagem = postagens.id AND e.deletado = ? GROUP BY e.id_postagem) as qtd_comentario,\
 						imagem, descricao, DATE_FORMAT(data_atualizado, "%d/%m/%Y") as data_atualizado\
 						FROM postagens WHERE deletado = ? ' + where_add, values).then(data => {
+				console.log('1111111111111111111111 GET POSTAGENS 1111111111111111111');
+				console.log(data);
+				console.log('11111111111111111111111111111111111111111111111111111111');
+
 				resolve(data);
 			});
 		});	
 	}
 	GetCategorias() {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.id, a.nome,\
+			helper.Query('SELECT DISTINCT a.id, a.nome,\
 						 (SELECT COUNT(c.id) FROM postagens as c WHERE c.data_cadastro > b.data_acesso AND c.id_categoria = a.id AND deletado = ?) as atualizacoes\
 						 FROM postagens_categorias as a\
 						 LEFT JOIN postagens_categorias_view as b ON a.id = b.id_categoria\
 						 WHERE a.deletado = ? AND a.id != ? ORDER BY a.nome DESC', [0, 0, 3]).then(data => {
+				console.log('2222222222222222222 GET CATEGORIAS 2222222222222222222222222');
+				console.log(data);
+				console.log('222222222222222222222222222222222222222222222222222222222222');
 				resolve(data);
 			});
 		});	

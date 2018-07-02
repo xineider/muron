@@ -22,16 +22,38 @@ class FaculdadesModel {
 	GetFaculdadeVer(id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT faculdade FROM usuarios WHERE id = ? AND deletado = ?', [id_usuario, 0]).then(data_user => {
-				if (data_user.length > 0) {
+				console.log('00000000 FACULDADE 0000000000000000');
+				console.log(data_user);
+				console.log('00000000000000000000000000000000000');
+
+				console.log(data_user.faculdade);
+				console.log(data_user.length);
+				console.log(typeof data_user.faculdade == 'undefined');
+				console.log(typeof data_user.faculdade != 'undefined');
+
+				 if (data_user.length > 0 && typeof data_user.faculdade != 'undefined') {
 					helper.Query('SELECT id_faculdade FROM faculdades_relacoes WHERE nome = ? AND deletado = ?', [data_user[0].faculdade, 0]).then(data_faculdade => {
-						helper.Query('SELECT a.*, (SELECT COUNT(b.id) FROM usuarios_contatos as b WHERE b.id_usuario2 = a.id AND b.id_usuario = ? AND b.deletado = ? LIMIT 1) as amigos,\
+						console.log('****************** DATA FACULDADE *********************************');
+						console.log(data_faculdade);
+						console.log('*******************************************************************');
+						if(data_faculdade.length >0 && typeof data_faculdade.id_faculdade !='undefined'){
+							helper.Query('SELECT a.*, (SELECT COUNT(b.id) FROM usuarios_contatos as b WHERE b.id_usuario2 = a.id AND b.id_usuario = ? AND b.deletado = ? LIMIT 1) as amigos,\
 							DATE_FORMAT(a.nascimento, "%d/%m/%Y") as nascimento\
 							FROM usuarios as a WHERE a.deletado = ? AND a.id = ?', [id_usuario, 0, 0, data_faculdade[0].id_faculdade]).then(data => {
-							resolve(data);
-						});
+								console.log('+++++++++++++++++ DADOS AMIGOS +++++++++++++++++++++++++++');
+								console.log(data);
+								console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+								resolve(data);
+							});
+						}else{
+							resolve(1);
+						}						
 					});
 				} else {
-					resolve(false);
+					console.log('---------------- Não existe a faculdade ------------------');
+					console.log(data_user.length);
+					console.log('----------------------------------------------------------');
+					resolve(2);
 				}
 			});
 		});
