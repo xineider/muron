@@ -2,12 +2,14 @@
 	<div class="row">
 		<%
 		if (typeof data != 'undefined' && data.length > 0) {
-			for (var i = data.length - 1; i >= 0; i--) {
-				%>
+
+				for (var i = data.length - 1; i >= 0; i--) {
+			%>
+
 				<div class="col s3">
 					<a href="/sistema/postagens/ver/<%= data[i].id %>" class="ajax-load">
 						<img class="circle" style="max-width: 100%;" src="/assets/imgs/banner-1.jpeg">
-						<p class="center-align black-text">
+						<p class="center-align black-text">	
 							<%= data[i].nome %>
 						</p>
 					</a>

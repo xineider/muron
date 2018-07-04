@@ -23,6 +23,9 @@ class ApiModel {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT id FROM usuarios WHERE nome_murer = ?', [data.nome_murer]).then(result => {
 				if (result.length <= 0) {
+					if(data.tipo ==2 ){
+						data.faculdade = data.nome;
+					}
 					helper.Insert('usuarios', data).then(data => {
 						resolve(data);
 					});
@@ -55,6 +58,7 @@ class ApiModel {
 		delete POST.nome_contato;
 		delete POST.descricao;
 		delete POST.senha;
+		delete POST.faculdade;
 
 		return new Promise(function(resolve, reject) {
 			helper.Insert('faculdades_relacoes', POST).then(data => {

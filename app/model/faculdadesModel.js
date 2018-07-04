@@ -21,22 +21,27 @@ class FaculdadesModel {
 	}
 	GetFaculdadeVer(id_usuario) {
 		return new Promise(function(resolve, reject) {
+			//Seleciona o nome da Faculdade do Usuario
 			helper.Query('SELECT faculdade FROM usuarios WHERE id = ? AND deletado = ?', [id_usuario, 0]).then(data_user => {
-				console.log('00000000 FACULDADE 0000000000000000');
+				console.log('00000000 Nome da Faculdade do Usuario 0000000000000000');
 				console.log(data_user);
 				console.log('00000000000000000000000000000000000');
 
-				console.log(data_user.faculdade);
-				console.log(data_user.length);
-				console.log(typeof data_user.faculdade == 'undefined');
-				console.log(typeof data_user.faculdade != 'undefined');
+				console.log('Faculdade:' + data_user.faculdade);
+				console.log('Lenght: ' + data_user.length);
+				console.log('Faculdade nulo?');
+				console.log(data_user.faculdade == null);
+				console.log('Faculdade não é nulo?');
+				console.log(data_user.faculdade != null);
 
-				 if (data_user.length > 0 && typeof data_user.faculdade != 'undefined') {
+				 if (data_user.length > 0 && typeof data_user.faculdade != null) {
+				 	//Se existe o nome da Faculdade selecionar o id da faculdade da tabela faculdade_relacoes de acordo com o nome da faculdade
 					helper.Query('SELECT id_faculdade FROM faculdades_relacoes WHERE nome = ? AND deletado = ?', [data_user[0].faculdade, 0]).then(data_faculdade => {
-						console.log('****************** DATA FACULDADE *********************************');
+						console.log('****************** ID FACULDADE *********************************');
 						console.log(data_faculdade);
 						console.log('*******************************************************************');
-						if(data_faculdade.length >0 && typeof data_faculdade.id_faculdade !='undefined'){
+						if(data_faculdade.length >0 && typeof data_faculdade.id_faculdade != null){
+							//Seleciona os dados dos usuarios e conta os amigos
 							helper.Query('SELECT a.*, (SELECT COUNT(b.id) FROM usuarios_contatos as b WHERE b.id_usuario2 = a.id AND b.id_usuario = ? AND b.deletado = ? LIMIT 1) as amigos,\
 							DATE_FORMAT(a.nascimento, "%d/%m/%Y") as nascimento\
 							FROM usuarios as a WHERE a.deletado = ? AND a.id = ?', [id_usuario, 0, 0, data_faculdade[0].id_faculdade]).then(data => {

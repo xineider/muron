@@ -14,6 +14,10 @@ router.get('/', function(req, res, next) {
 	model.VeifyViews(req.session.usuario.id).then(ret => {
 	  	if (req.session.usuario.tipo == 1 || req.session.usuario.tipo == 2) {
 			model.GetCategorias().then(data=> {
+				console.log(',,,,,,,,,,,, Dados das Categorias ,,,,,,,,,,,');
+				console.log(data);
+				console.log(',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,');
+
 				model.GetPostagensTodas(req.session.usuario.id).then(data_postagens=> {
 					data.postagens = data_postagens;
 					res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});

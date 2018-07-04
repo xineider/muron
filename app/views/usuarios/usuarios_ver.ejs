@@ -211,13 +211,18 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 		<%
 	}
 } else {
-	if(error == 2){%>
-	<p> Sinto Muito, sua Faculdade Não foi Cadastrada! </p>
-	<%}
+	if(error == 1){ %>
+
+	<p>Sentimos Muito, sua Faculdade não foi cadastrada!</p>
+
+	<% }else if(error == 2){%>
+	<p> Sentimos Muito, você não inseriu uma Faculdade no seu cadastro. </p>
+	<%}else{
 	%>
 	<p class="center-align">
-		Sinto Muito, sua Faculdade Não foi Cadastrada!
+		Sentimos Muito, não existem postagens!
 	</p>
 	<%
-}
-%>
+	}
+	}
+	%>

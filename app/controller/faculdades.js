@@ -18,14 +18,22 @@ router.get('/', function(req, res, next) {
 
 router.get('/ver', function(req, res, next) {
 	model.GetFaculdadeVer(req.session.usuario.id).then(data_faculdade => {
+		console.log('kkkkkkkkkkkk ID do Usuario kkkkkkkkkkkkk');
+		console.log(req.session.usuario.id);
+		console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+
+
 		console.log('!!!!!!!!!!! Dados da Faculdade !!!!!!!!!!!');
 		console.log(data_faculdade);
 		console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 
+		console.log('Não achou o nome da Faculdade na relação');
 		console.log(data_faculdade == 1);
+		console.log('Nome da Faculdade nulo na tabela usuarios');
+		console.log(data_faculdade == 2);
 
 		// if(data_faculdade != false)
-			if (data_faculdade > 3) {
+			if (data_faculdade != 1 && data_faculdade != 2) {
 				data.perfil = data_faculdade;
 				model.GetPostagemByFaculdade(data.perfil[0].id).then(data_postagens => {
 					data.postagens = data_postagens;
