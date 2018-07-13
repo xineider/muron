@@ -27,6 +27,12 @@ router.get('/ver/:id', function(req, res, next) {
 		
 			title = 'Divulgação';
 	}
+	console.log('^^^^^^^^^^^^^^^^^^^ ID DA CATEGORIA CLICADA ^^^^^^^^^^^^^^^^^^^^^^^^');
+	console.log(id);
+	console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+	console.log('~~~~~~~~~~~~~~~~ ID DO USUARIO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+	console.log(req.session.usuario.id);
+	console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
 	model.AddViewCat(id, req.session.usuario.id).then(ret => {
 		model.GetPostagemByCat(id, req.session.usuario.id).then(data_postagens => {
 			data.postagens = data_postagens;
@@ -52,6 +58,13 @@ router.get('/criar', function(req, res, next) {
 });
 router.get('/pesquisar/:pesquisa', function(req, res, next) {
 	pesquisa = req.params.pesquisa;
+	console.log('@@@@@@@@@ dentro da pesquisa @@@@@@@@@@@@@');
+	console.log(pesquisa);
+	console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+	console.log(pesquisa.indexOf('_'))
+
+
+
 	if (pesquisa.indexOf('_') !== -1) {
 		pesquisa = pesquisa.split('_').join('/');
 	}
@@ -77,6 +90,9 @@ router.post('/uploadarquivo', function(req, res, next) {
 });
 router.post('/tipo', function(req, res, next) {
 	POST = req.body;
+	console.log('ppppppppppppppppppp Selecionar Tipo ppppppppppppppppppp');
+	console.log(POST);
+	console.log('ppppppppppppppppppppppppppppppppppppppppppppppppppppppp');
 	model.SearchTipo(POST, req.session.usuario.id).then(data => {
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_tipos', data: data, usuario: req.session.usuario});
 	});

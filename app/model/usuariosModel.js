@@ -20,16 +20,33 @@ class UsuariosModel {
 		});
 	}
 	GetUsuarioMurer(post) {
-				console.log(post);
+
+		console.log(post.nome_murer);
+
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT id FROM usuarios WHERE nome_murer like CONCAT("%", ?, "%") AND deletado = ?', [post.nome_murer, 0]).then(data => {
+				
+				console.log('---------------- EXISTE MURER --------------');
 				console.log(data);
-				console.log(data);
-				console.log(data);
+				console.log('--------------------------------------------');
 				resolve(data);
 			});
 		});
 	}
+
+	GetUsuarioMurerGrupo(post){
+			return new Promise(function(resolve, reject) {
+			helper.Query('SELECT id FROM grupos_usuarios WHERE deletado = ? AND id_usuario = ? AND id_grupo = ?', [0,post.id_usuario,post.id_grupo]).then(data => {
+				console.log('............. EXISTE NO GRUPO JÁ ..............');
+				console.log(data);
+				console.log('...............................................');
+
+				resolve(data);
+			});
+		});
+	}
+
+
 	GetUsuario(id, id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT a.*, (SELECT COUNT(b.id) FROM usuarios_contatos as b WHERE b.id_usuario2 = a.id AND b.id_usuario = ? AND b.deletado = ? LIMIT 1) as amigos,\
@@ -52,6 +69,9 @@ class UsuariosModel {
 			helper.Query('SELECT b.id, b.nome, b.id_lider FROM grupos_usuarios as a\
 				INNER JOIN grupos as b ON a.id_grupo = b.id\
 				WHERE a.deletado = ? AND b.deletado = ? AND b.id_lider = ? GROUP BY b.nome', [0, 0, id_usuario]).then(data => {
+					console.log('....... DADOS DAS LISTAS DE TRANSMISSÃO AKA GRUPO .............. ');
+					console.log(data);
+					console.log('.................................................................');
 					resolve(data);
 				});
 			});

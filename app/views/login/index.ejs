@@ -39,13 +39,17 @@
 						<label>E-mail</label>
 						<input required="true" type="email" name="email">
 					</div>
-					<div class="col s12 input-field">
+					<div class="col s12">
 						<label>Faculdade</label>
-						<input required="true" type="text" name="faculdade">
+						<select class="browser-default faculdade-lista" name="faculdade">
+							<option value="" disabled selected>Selecione</option>
+						</select>
+
+						<!-- <input required="true" type="text" name="faculdade"> -->
 					</div>
 					<div class="col s12 input-field">
 						<label>Curso</label>
-						<input required="true" type="text" name="curso">
+						<input type="text" name="curso">
 					</div>
 					<div class="col s12">
 						<label>Situação</label>
@@ -84,7 +88,7 @@
 				<div class="row">
 					<div class="col s12">
 						<label>Tipo de Parceiro</label>
-						<select class="browser-default" name="tipo">
+						<select required="true" class="browser-default" name="tipo">
 							<option value="" disabled selected>Selecione</option>
 							<option value="2">Faculdade</option>
 							<option value="3">Divulgador</option>
@@ -92,15 +96,15 @@
 					</div>
 					<div class="col s12 input-field">
 						<label>Nome</label>
-						<input type="text" name="nome">
+						<input required="true" type="text" name="nome">
 					</div>
 					<div class="col s12 input-field">
 						<label>Login (Nome MurEr)</label>
-						<input type="text" name="nome_murer">
+						<input required="true" type="text" name="nome_murer">
 					</div>
 					<div class="col s12 input-field">
 						<label>E-mail</label>
-						<input type="text" name="email">
+						<input required="true" type="email" name="email">
 					</div>
 					<div class="col s12 input-field">
 						<label>Telefone</label>
@@ -108,7 +112,7 @@
 					</div>
 					<div class="col s12 input-field">
 						<label>Nome de Contato</label>
-						<input type="text" name="nome_contato">
+						<input required="true" type="text" name="nome_contato">
 					</div>
 					<div class="col s12 input-field">
 						<label>Descrição</label>
@@ -116,11 +120,11 @@
 					</div>
 					<div class="col s12 input-field">
 						<label>Senha</label>
-						<input type="password" name="senha">
+						<input required="true" type="password" name="senha">
 					</div>
 					<div class="col s12 input-field">
 						<label>Confirmar Senha</label>
-						<input type="password" name="senha_confirmar">
+						<input required="true" type="password" name="senha_confirmar">
 					</div>
 					<div class="col s12">
 						<button class="btn blue white-text" style="width: 100%;">Finalizar Cadastro</button>
@@ -187,42 +191,82 @@
 <script type="text/javascript">
 	$(document).on('ready', function () {
 		$('.modal').modal();
+		getFaculdades();
+
+		function getFaculdades(){
+			$.ajax({
+				method:'GET',
+				async:true,
+				url:'/sistema/api/get-faculdades',
+				beforeSend: function() {			
+				},
+				success: function(data) {		
+					var select = $('.faculdade-lista');
+					var listitems = '';
+					$.each(data,function(key,value){
+						listitems += '<option value="'+value.nome+'">'+ value.nome + '</option>';
+					});
+					listitems += "<option id='semfaculdade'>Minha Faculdade não está na lista</option>";
+					$('.faculdade-lista').append(listitems);
+
+				},
+				error: function(xhr) {
+					console.log(xhr);
+				},
+				complete: function() {
+				}
+			});
+		}
+
+		function showOptions(option){
+			console.log('estou sendo clicado no sem faculdade');
+			console.log(option);
+		}
+
+		$('#semfaculdade').on('click',function(e){
+			console.log('estou clicando no sem faculdade');
+		})
+
 		$('#cadastra-usuario').on('submit', function(e) {
 			e.preventDefault();
 			var form = $(this);
 			var post = form.serializeArray();
-			if($('.modal input[name="senha"]').val() != $('.modal input[name="senha_confirmar"]').val()){alert('Confirmação de Senha incorreta')}
-			$.ajax({
-				method: 'POST',
-				async: true,
-				data: post,
-				url: '/sistema/api/cadastrar/usuario',
-				beforeSend: function(request) {
-				},
-				success: function(data) {
-					if(data.length == 0) {
-						alert('Usuário já cadastrado, tente novamente com outro Login');
-					} else {
-						var nome_murer = form.find('input[name="nome_murer"]').val();
-						var senha = form.find('input[name="senha"]').val();
-						$('.inputs').find('input[name="nome_murer"]').val(nome_murer);
-						$('.inputs').find('input[name="senha"]').val(senha);
-    					$('.modal').modal('close');
-					}
-				},
+			if($('.modal input[name="senha"]').val() != $('.modal input[name="senha_confirmar"]').val())
+			{
+				alert('Confirmação de Senha incorreta')
+			}else{
+				$.ajax({
+					method: 'POST',
+					async: true,
+					data: post,
+					url: '/sistema/api/cadastrar/usuario',
+					beforeSend: function(request) {
+					},
+					success: function(data) {
+						if(data.length == 0) {
+							alert('Usuário já cadastrado, tente novamente com outro Login');
+						} else {
+							var nome_murer = form.find('input[name="nome_murer"]').val();
+							var senha = form.find('input[name="senha"]').val();
+							$('.inputs').find('input[name="nome_murer"]').val(nome_murer);
+							$('.inputs').find('input[name="senha"]').val(senha);
+							$('.modal').modal('close');
+						}
+					},
 			    error: function(xhr) { // if error occured
 			    	alert("Error, contate o administrador ou reinicie a pagina.");
 			    },
 			    complete: function() {
 			    }
-			});
+			  });
+			};
 		});
 		$('#cadastra-parceiro').on('submit', function(e) {
 			e.preventDefault();
 			var form = $(this);
 			var post = form.serializeArray();
 			if($('#cadastra-parceiro input[name="senha"]').val() != $('#cadastra-parceiro input[name="senha_confirmar"]').val()){
-				alert('Confirmação de Senha incorreta')
+				alert('Confirmação de Senha incorreta');
 			} else {
 				$.ajax({
 					method: 'POST',
@@ -239,7 +283,7 @@
 							var senha = form.find('input[name="senha"]').val();
 							$('.inputs').find('input[name="nome_murer"]').val(nome_murer);
 							$('.inputs').find('input[name="senha"]').val(senha);
-	    					$('.modal').modal('close');
+							$('.modal').modal('close');
 						}
 					},
 				    error: function(xhr) { // if error occured
@@ -247,7 +291,7 @@
 				    },
 				    complete: function() {
 				    }
-				});
+				  });
 			}
 		});
 		$(document).on('click', '.resend-pass', function(e) {
@@ -265,7 +309,7 @@
 			    error: function(xhr) { // if error occured
 			    	alert("Error, contate o administrador ou reinicie a pagina.");
 			    }
-			});
+			  });
 		});
 	});
 </script>

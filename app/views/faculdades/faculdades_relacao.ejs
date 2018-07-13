@@ -3,7 +3,7 @@
 		<input type="hidden" name="id_faculdade" value="<%= usuario.id %>">
 		<div class="col s12 input-field">
 			<label>Adicionar nome de relação</label>
-			<input type="text" name="nome">
+			<input type="text" name="nome" required="true">
 		</div>
 		<div class="col s12">
 			<button style="width: 100%;" class="btn white-text blue ajax-submit" data-href="/sistema/faculdades/alunos/relacao/cadastrar/" data-action="/sistema/faculdades/alunos/relacao">
@@ -26,7 +26,7 @@
 	} else {
 	%>
 		<p class="center-align col s12">
-			Nenhuma resultado foi encontrado.
+			Nenhum resultado foi encontrado.
 		</p>
 	<%
 	}

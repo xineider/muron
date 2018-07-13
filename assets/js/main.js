@@ -101,7 +101,8 @@ $(document).on('ready', function () {
 	});
 	$(document).on('click', '.ajax-search-post', function(e) {
 		e.preventDefault();
-		var pesquisa = $('input[name="pesquisa"]').val();
+		var pesquisa = $(this).parent().prev().find('input[name="pesquisa"]').val();
+		// var pesquisa = $('input[name="pesquisa"]').val();
 		if (pesquisa.indexOf('/') !== -1) {
 			pesquisa = pesquisa.split('/').join('_');
 		}
@@ -228,6 +229,8 @@ $(document).on('ready', function () {
 		AdicionarContato(post);
 	});
 	$(document).on('change', 'select[name="tipo"]', function () {
+		console.log('estou selecionando o tipo');
+		console.log($(this).val());
 		if ($(this).val() > 0) {
 			MountToAdd($(this).val(), '#add-tipo');
 		} else {

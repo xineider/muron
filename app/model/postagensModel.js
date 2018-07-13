@@ -25,6 +25,10 @@ class PostagensModel {
 	AddViewCat(id_categoria, id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('UPDATE postagens_categorias_view SET qtd_acesso = (qtd_acesso + 1) WHERE id_usuario = ? AND id_categoria = ?', [id_usuario, id_categoria]).then(data => {
+				console.log('°°°°°°°°°°°°°° Atualizando postagens_categorias_view °°°°°°°°°°°°°°°°°°°°°°°°');
+				console.log(data);
+				console.log('°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°');
+
 				resolve(data);
 			});
 		});
@@ -111,8 +115,14 @@ class PostagensModel {
 		console.log(tipo);
 		return new Promise(function(resolve, reject) {
 			if (tipo.tipo == 1) {
-					helper.Query('SELECT a.id_grupo as tipo_val, (SELECT b.nome FROM grupos as b WHERE a.id_grupo = b.id) as nome\
-								FROM grupos_usuarios as a WHERE id_usuario = ? AND deletado = ?', [id_usuario, 0]).then(data => {
+
+
+					// helper.Query('SELECT a.id_grupo as tipo_val, \
+					// 	(SELECT b.nome FROM grupos as b WHERE a.id_grupo = b.id) as nome\
+					// 	FROM grupos_usuarios as a WHERE id_usuario = ? AND deletado = ?', [id_usuario, 0]).then(data => {
+						helper.Query('SELECT a.id_grupo as tipo_val, b.nome \
+													FROM grupos_usuarios as a LEFT JOIN grupos as b ON a.id_grupo = b.id \
+													WHERE b.deletado = ? AND a.deletado = ? AND a.id_usuario = ? GROUP BY b.nome ORDER BY nome ASC',[0,0,id_usuario]).then(data=>{
 						resolve(data);
 					});
 			} else {

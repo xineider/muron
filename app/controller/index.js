@@ -13,7 +13,7 @@ app.use(require('express-is-ajax-request'));
 router.get('/', function(req, res, next) {
 	model.VeifyViews(req.session.usuario.id).then(ret => {
 	  	if (req.session.usuario.tipo == 1 || req.session.usuario.tipo == 2) {
-			model.GetCategorias().then(data=> {
+			model.GetCategoriasAtualizacoes().then(data=> {
 				console.log(',,,,,,,,,,,, Dados das Categorias ,,,,,,,,,,,');
 				console.log(data);
 				console.log(',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,');

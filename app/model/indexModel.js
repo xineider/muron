@@ -83,7 +83,17 @@ class IndexModel {
 // GROUP BY a.id, a.nome
 // ORDER BY a.nome DESC
 
+	
 	GetCategorias() {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT id, nome FROM postagens_categorias WHERE deletado = ? AND id != ? ORDER BY nome DESC', [0, 3]).then(data => {
+				resolve(data);
+			});
+		});	
+	}
+
+
+	GetCategoriasAtualizacoes() {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT DISTINCT a.id, a.nome,\
 						 (SELECT COUNT(c.id) FROM postagens as c WHERE c.data_cadastro > b.data_acesso AND c.id_categoria = a.id AND deletado = ?) as atualizacoes\
@@ -94,9 +104,18 @@ class IndexModel {
 			});
 		});	
 	}
+
+
+
+
+
 	VeifyViews(id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT COUNT(id) as qtd FROM postagens_categorias_view WHERE id_usuario = ?', [id_usuario]).then(data => {
+				console.log('((((((((((((((((( Veify Views ((((((((((((((((((((((((((((((((');
+				console.log(data);
+				console.log('((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((');
+
 				if (data[0].qtd > 0) {
 					resolve('');
 				} else {

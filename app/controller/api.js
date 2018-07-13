@@ -5,11 +5,23 @@ var Control = require('./control.js');
 var control = new Control;
 var apiModel = require('../model/apiModel.js');
 var model = new apiModel;
-var data = '';
+var data = {};
 var app = express();
 app.use(require('express-is-ajax-request'));
 
 /* GET pagina de login. */
+
+router.get('/get-faculdades',function(req,res,next){
+	console.log('cai aqui no get-faculdades');
+	model.SelecionarFaculdades().then(data=> {
+		console.log('============== FACULDADES DO CONTROLLER =================');
+		console.log(data);
+		console.log('=========================================================');
+		res.json(data);
+	});
+})
+
+
 router.post('/', function(req, res, next) {
 	res.json(0);
 });
@@ -35,17 +47,20 @@ router.post('/cadastrar/parceiro', function(req, res, next) {
 	var post = req.body;
 	var post_limpo = model.VerificarSenha(post);
 
-	if (Object.keys(post_limpo).length > 0) {
-		model.CadastrarParceiro(post_limpo).then(id_parceiro => {
-			console.log('00000000000000000 POST LIMPO 00000000000000000000000000000');
-			console.log(post_limpo);
-			console.log('0000000000000000000000000000000000000000000000000000000000');
+	console.log('00000000000000000 POST LIMPO 00000000000000000000000000000');
+	console.log(post_limpo);
+	console.log('0000000000000000000000000000000000000000000000000000000000');
 
-			if(post_limpo.tipo == 2){
-				post_limpo.id_faculdade = id_parceiro; 
-				model.InsertFaculdadeRelacao(post_limpo).then(id_faculdade =>{								
-				});
-			};
+	if (Object.keys(post_limpo).length > 0) {
+		console.log('§§§§§§§§§§§§§ post_limpo > 0 §§§§§§§§§§§§§§§§§§§§§§§§§');
+		model.CadastrarParceiro(post_limpo).then(id_parceiro => {
+	
+
+			// if(post_limpo.tipo == 2){
+			// 	post_limpo.id_faculdade = id_parceiro; 
+			// 	model.InsertFaculdadeRelacao(post_limpo).then(id_faculdade =>{								
+			// 	});
+			// };
 
 			res.json(id_parceiro);	
 		});

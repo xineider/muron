@@ -101,17 +101,19 @@ router.get('/', function(req, res, next) {
 	});
 	router.post('/grupos/adicionar/usuario', function(req, res, next) {
 		POST = req.body;
-		console.log(POST);
-		console.log(POST);
-		console.log(POST);
-		console.log(POST);
-		console.log(POST);
 		model.GetUsuarioMurer(POST).then(usuario => {
 			if (usuario.length > 0) {
-				data_insert = {id_usuario: usuario[0].id, id_grupo: POST.id_grupo};
-				model.EntrarGrupo(data_insert).then(data => {
-					res.json(data);
-				});
+				data_insert = {id_usuario: usuario[0].id, id_grupo: POST.id_grupo};			
+				model.GetUsuarioMurerGrupo(data_insert).then(usuarionogrupo =>{
+					//se retornar algum valor quer dizer que o usuario está no grupo então não precisa cadastrar denovo
+					if(usuarionogrupo == 0 || usuarionogrupo == ''){
+						model.EntrarGrupo(data_insert).then(data => {
+							res.json(data);
+						});
+					}else{
+						res.json(data);
+					}
+				});				
 			} else {
 				res.json(data);
 			}

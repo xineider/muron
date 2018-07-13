@@ -2,13 +2,10 @@
   <div class="row">
   	<input type="hidden" name="id_lider" value="<%= usuario.id %>">
     <div class="input-field col s12">
-      <label>Nome do Lista</label>
-      <input type="text" name="nome">
+      <label>Nome da Lista</label>
+      <input type="text" name="nome" required="true">
     </div>
-    <div class="input-field col s12">
-      <label>Descrição</label>
-      <textarea class="materialize-textarea" name="descricao" placeholder="Sobre oque o lista é"></textarea>
-    </div>
+
     <div class="center-align col s12">
       <a class="btn blue darken-1 white-text ajax-submit" data-href="/sistema/usuarios/grupos/adicionar/" data-action="/sistema/usuarios/grupos">Criar</a>
     </div>
