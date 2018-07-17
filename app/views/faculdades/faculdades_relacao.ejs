@@ -2,7 +2,7 @@
 	<form>
 		<input type="hidden" name="id_faculdade" value="<%= usuario.id %>">
 		<div class="col s12 input-field">
-			<label>Adicionar nome de relação</label>
+			<label>Adicionar nome do aluno</label>
 			<input type="text" name="nome" required="true">
 		</div>
 		<div class="col s12">
@@ -14,21 +14,23 @@
 	<%
 	if (typeof data != 'undefined' && data.length > 0) {
 		for (var i = data.length - 1; i >= 0; i--) {
-	%>
-		<div class="col s12 card-panel">
-			<p class="center-align black-text">
-				<%= data[i].nome %>
-				<i class="fa fa-times-circle red-text modal-remover-mount right" style="margin: 0; font-size: 1.8em;" data-href="#modaldeletar" data-texto="Tem certeza que deseja desativar esta relação? Esta ação não pode ser desfeita." data-to="/sistema/faculdades/alunos/relacao/desativar/" data-back="/sistema/faculdades/alunos/relacao" data-id="<%= data[i].id %>"></i>
-			</p>
-		</div>
-	<%
+			%>
+			<div class="col s12 card-panel">
+				<p class="center-align black-text">
+					<%= data[i].nome %>
+					<i class="fa fa-times-circle red-text modal-remover-mount right" style="margin: 0; font-size: 1.8em;" data-href="#modaldeletar" data-texto="Tem certeza que deseja desativar esta relação? Esta ação não pode ser desfeita." data-to="/sistema/faculdades/alunos/relacao/desativar/" data-back="/sistema/faculdades/alunos/relacao" data-id="<%= data[i].id %>"></i>
+				</p>
+			</div>
+			<%
 		}
 	} else {
-	%>
-		<p class="center-align col s12">
-			Nenhum resultado foi encontrado.
-		</p>
-	<%
+		%>
+		<div class="center-align col s12 card-panel">
+			<p class="center-align black-text ">
+				Nenhum Aluno foi encontrado!
+			</p>
+		</div>
+		<%
 	}
 	%>
 </div>

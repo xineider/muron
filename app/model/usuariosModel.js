@@ -35,12 +35,24 @@ class UsuariosModel {
 	}
 
 	GetUsuarioMurerGrupo(post){
-			return new Promise(function(resolve, reject) {
+		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT id FROM grupos_usuarios WHERE deletado = ? AND id_usuario = ? AND id_grupo = ?', [0,post.id_usuario,post.id_grupo]).then(data => {
 				console.log('............. EXISTE NO GRUPO JÁ ..............');
 				console.log(data);
 				console.log('...............................................');
 
+				resolve(data);
+			});
+		});
+	}
+
+	GetUsuarioFaculdade(post){
+		console.log(post);
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT id_aluno FROM faculdades_relacoes_aluno WHERE deletado = ? AND id_faculdade = ? AND id_aluno = ?', [0,post.id_faculdade,post.id_aluno]).then(data => {
+				console.log('............. EXISTE NA FACULDADE ..............');
+				console.log(data);
+				console.log('...............................................');
 				resolve(data);
 			});
 		});

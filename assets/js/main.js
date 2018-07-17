@@ -278,6 +278,7 @@ function UploadFile(isso) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-faculdade", $('input[name="id_faculdade_sessao"]').val());
 			adicionarLoader();
 	    },
 	    success: function (data) {
@@ -308,6 +309,7 @@ function UploadFilePerfil(isso) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-faculdade", $('input[name="id_faculdade_sessao"]').val());
 			adicionarLoader();
 	    },
 	    success: function (data) {
@@ -354,6 +356,7 @@ function GoTo(link, state, top) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-faculdade", $('input[name="id_faculdade_sessao"]').val());
 			adicionarLoader();
 			$('#sair').fadeIn('slow');
 		},
@@ -438,6 +441,7 @@ function GetEndereco(cep, pai) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-faculdade", $('input[name="id_faculdade_sessao"]').val());
 			adicionarLoader();
 		},
 		success: function(data) {
@@ -472,6 +476,7 @@ function SubmitAjax(post, link, back, method) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-faculdade", $('input[name="id_faculdade_sessao"]').val());
 			adicionarLoader();
 		},
 		success: function(data) {
@@ -502,6 +507,7 @@ function SendAjax(post, link, back, method) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-faculdade", $('input[name="id_faculdade_sessao"]').val());
 			adicionarLoader();
 		},
 		success: function(data) {
@@ -532,6 +538,7 @@ function SearchAjax(post, link, method, to) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-faculdade", $('input[name="id_faculdade_sessao"]').val());
 			adicionarLoader();
 		},
 		success: function(data) {
@@ -586,6 +593,7 @@ function MountModalInteiro(modal, link) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-faculdade", $('input[name="id_faculdade_sessao"]').val());
 			adicionarLoader();
 		},
 		success: function(data) {
@@ -613,6 +621,7 @@ function MountModal(modal, link) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima_faculdade", $('input[name="id_faculdade_sessao"]').val());
 			adicionarLoader();
 		},
 		success: function(data) {
@@ -694,6 +703,7 @@ function AddLike(id, id_usuario, gostei) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-faculdade", $('input[name="id_faculdade_sessao"]').val());
 			adicionarLoader();
 		},
 		success: function(data) {
@@ -723,6 +733,7 @@ function SubmitRemove(id, link, pai) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-faculdade", $('input[name="id_faculdade_sessao"]').val());
 			adicionarLoader();
 		},
 		success: function(data) {
@@ -747,6 +758,7 @@ function AdicionarContato(post) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-faculdade", $('input[name="id_faculdade_sessao"]').val());
 			adicionarLoader();
 		},
 		success: function(data) {
@@ -773,6 +785,7 @@ function MountToAdd(val, where) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-faculdade", $('input[name="id_faculdade_sessao"]').val());
 			adicionarLoader();
 		},
 		success: function(data) {

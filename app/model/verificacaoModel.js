@@ -8,7 +8,7 @@ class VerificacaoModel {
   VerificarUsuario(id, hash, tipo) {
     return new Promise(function(resolve, reject) {
       console.log([id, hash]);
-      helper.Query('SELECT id,nome_murer,email FROM usuarios WHERE id = ? AND hash_login = ? AND tipo = ? AND deletado = ?', [id, hash, tipo, 0]).then(data => {
+      helper.Query('SELECT id,nome_murer,email,id_faculdade FROM usuarios WHERE id = ? AND hash_login = ? AND tipo = ? AND deletado = ?', [id, hash, tipo, 0]).then(data => {
         resolve(data);
       });
     });

@@ -41,7 +41,7 @@
 					</div>
 					<div class="col s12">
 						<label>Faculdade</label>
-						<select class="browser-default faculdade-lista" name="faculdade">
+						<select class="browser-default faculdade-lista" name="id_faculdade">
 							<option value="" disabled selected>Selecione</option>
 						</select>
 
@@ -204,7 +204,7 @@
 					var select = $('.faculdade-lista');
 					var listitems = '';
 					$.each(data,function(key,value){
-						listitems += '<option value="'+value.nome+'">'+ value.nome + '</option>';
+						listitems += '<option value="'+value.id+'">'+ value.nome + '</option>';
 					});
 					listitems += "<option id='semfaculdade'>Minha Faculdade não está na lista</option>";
 					$('.faculdade-lista').append(listitems);

@@ -44,12 +44,14 @@ app.use(function (req, res, next) {
     var id = req.headers['authority-optima-id'];
     var hash = req.headers['authority-optima-hash'];
     var tipo = req.headers['authority-optima-tipo'];
+    var id_faculdade = req.headers['authority-optima-faculdade'];
     verificacao.VerificarUsuario(id, hash, tipo).then(data => {
       if (data.length > 0) {
         req.session.usuario = {};
         req.session.usuario.id = id;
         req.session.usuario.hash_login = hash;
         req.session.usuario.tipo = tipo;
+        req.session.usuario.id_faculdade = data[0].id_faculdade;
         req.session.usuario.nome_murer = data[0].nome_murer;
         req.session.usuario.email = data[0].email;
         next();

@@ -35,9 +35,34 @@ router.post('/recuperar/senha', function(req, res, next) {
 router.post('/cadastrar/usuario', function(req, res, next) {
 	var post = req.body;
 	var post_limpo = model.VerificarSenha(post);
+	console.log('88888888888888 POST LIMPO ALUNO 8888888888888888888888888888888');
+	console.log(post_limpo);
+	console.log('888888888888888888888888888888888888888888888888888888888888888');
+
 	if (Object.keys(post_limpo).length > 0) {
-		model.CadastrarUsuario(post_limpo).then(data => {
-			res.json(data);
+		model.CadastrarUsuario(post_limpo).then(id_usuario => {
+			console.log('ESTOU AQUI');
+			console.log(id_usuario);
+			console.log(id_usuario>0);
+			console.log(id_usuario[0]);
+			console.log(typeof id_usuario);
+			console.log('ola marilene');
+			console.log(id_usuario == '');
+
+			if(id_usuario != ''){
+				data_insert = {id_faculdade: post_limpo.id_faculdade, id_aluno: id_usuario};
+				console.log('7777777777777777777777777777 DATA INSERT 777777777777777777777777');
+				console.log(data_insert);
+				console.log('77777777777777777777777777777777777777777777777777777777777777777');
+				model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
+					res.json(data);
+				});
+			}else{
+				res.json([]);
+			}
+
+
+			
 		});
 	} else {
 		res.json([]);

@@ -59,9 +59,11 @@
  		});
  	}
 
+
+
  	SelecionarFaculdades(){
  		return new Promise(function(resolve, reject) {
- 			helper.Query('SELECT nome FROM faculdades WHERE deletado = ? ORDER BY nome ', [0]).then(data => {
+ 			helper.Query('SELECT nome,id FROM faculdades WHERE deletado = ? ORDER BY nome ', [0]).then(data => {
  				console.log('*********************** Faculdades do MODEL ***********************');
  				console.log(data);
  				console.log('*******************************************************************');
@@ -104,6 +106,16 @@
  		});
 
  	}
+
+ 	CadastrarRelacaoAlunoFaculdade(POST){
+ 		return new Promise(function(resolve, reject) {
+ 			helper.Insert('faculdades_relacoes_aluno', POST).then(data => {
+ 				resolve(data);
+ 			});
+ 		});
+ 	}
+
+
 
  	InsertFaculdadeRelacao(POST) {
  		delete POST.tipo;

@@ -39,25 +39,25 @@ class PostagensModel {
 			var values = [];
 			if (id_usuario != 1) {
 				where_add = "AND ((id_grupo = ? OR id_grupo IN ((SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?)))\
-							AND (id_contato = ? OR id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = postagens.id_usuario AND deletado = ?)))\
-							OR id_usuario = ?)";
+				AND (id_contato = ? OR id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = postagens.id_usuario AND deletado = ?)))\
+				OR id_usuario = ?)";
 				values = [0, id_usuario, 0, 0, 0, 0, id, 0, id_usuario, 0, 0, 0, id_usuario];
 			} else {
 				values = [0, id_usuario, 0, 0, 0, 0, id];
 			}
 			helper.Query('SELECT id, id_usuario, id_contato,\
-						(SELECT b.nome_murer FROM usuarios as b WHERE b.deletado = ? AND b.id = postagens.id_usuario) as usuario,\
-						(SELECT c.id FROM postagens_gostei as c WHERE c.id_usuario = ? AND c.id_postagem = postagens.id AND c.deletado = ?) as gostei,\
-						(SELECT COUNT(d.id) FROM postagens_gostei as d WHERE d.id_postagem = postagens.id AND d.deletado = ? GROUP BY d.id_postagem) as qtd_gostei,\
-						(SELECT COUNT(e.id) FROM postagens_comentarios as e WHERE e.id_postagem = postagens.id AND e.deletado = ? GROUP BY e.id_postagem) as qtd_comentario,\
-						imagem, descricao, DATE_FORMAT(data_atualizado, "%d/%m/%Y") as data_atualizado\
-						FROM postagens WHERE deletado = ? AND id_categoria = ? ' + where_add, values).then(data => {
-							if (id == 4) {
-								console.log(id_usuario);
-							}
-				resolve(data);
-			});
-		});	
+				(SELECT b.nome_murer FROM usuarios as b WHERE b.deletado = ? AND b.id = postagens.id_usuario) as usuario,\
+				(SELECT c.id FROM postagens_gostei as c WHERE c.id_usuario = ? AND c.id_postagem = postagens.id AND c.deletado = ?) as gostei,\
+				(SELECT COUNT(d.id) FROM postagens_gostei as d WHERE d.id_postagem = postagens.id AND d.deletado = ? GROUP BY d.id_postagem) as qtd_gostei,\
+				(SELECT COUNT(e.id) FROM postagens_comentarios as e WHERE e.id_postagem = postagens.id AND e.deletado = ? GROUP BY e.id_postagem) as qtd_comentario,\
+				imagem, descricao, DATE_FORMAT(data_atualizado, "%d/%m/%Y") as data_atualizado\
+				FROM postagens WHERE deletado = ? AND id_categoria = ? ' + where_add, values).then(data => {
+					if (id == 4) {
+						console.log(id_usuario);
+					}
+					resolve(data);
+				});
+			});	
 	}
 
 	SearchPostagem(pesquisa, id_usuario) {
@@ -78,38 +78,38 @@ class PostagensModel {
 			console.log(pesquisa);
 			if (id_usuario != 1) {
 				where_add = "AND ((id_grupo = ? OR id_grupo IN ((SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?)))\
-							AND (id_contato = ? OR id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = postagens.id_usuario AND deletado = ?)))\
-							OR id_usuario = ?)";
+				AND (id_contato = ? OR id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = postagens.id_usuario AND deletado = ?)))\
+				OR id_usuario = ?)";
 				values = [id_usuario, 0, 0, 0, 0, pesquisa, pesquisa, pesquisa, pesquisa, pesquisa, 0, id_usuario, 0, 0, 0, id_usuario];
 			} else {
 				values = [id_usuario, 0, 0, 0, 0, pesquisa, pesquisa, pesquisa, pesquisa, pesquisa];
 			}
 			helper.Query('SELECT a.id, a.id_usuario,\
-						b.nome_murer as usuario,\
-						(SELECT c.id FROM postagens_gostei as c WHERE c.id_usuario = ? AND c.id_postagem = a.id AND c.deletado = ?) as gostei,\
-						(SELECT COUNT(d.id) FROM postagens_gostei as d WHERE d.id_postagem = a.id AND d.deletado = ? GROUP BY d.id_postagem) as qtd_gostei,\
-						(SELECT COUNT(e.id) FROM postagens_comentarios as e WHERE e.id_postagem = a.id AND e.deletado = ? GROUP BY e.id_postagem) as qtd_comentario,\
-						a.imagem, a.descricao, DATE_FORMAT(a.data_atualizado, "%d/%m/%Y") as data_atualizado\
-						FROM postagens as a INNER JOIN usuarios as b ON a.id_usuario = b.id WHERE a.deletado = ? AND\
-						(a.descricao like CONCAT("%", ?, "%") OR\
-						b.nome_murer like CONCAT("%", ?, "%") OR b.nome like CONCAT("%", ?, "%") OR a.data_cadastro >= ? OR b.email like CONCAT("%", ?, "%"))' + where_add, 
-						values).then(data => {
-				resolve(data);
+				b.nome_murer as usuario,\
+				(SELECT c.id FROM postagens_gostei as c WHERE c.id_usuario = ? AND c.id_postagem = a.id AND c.deletado = ?) as gostei,\
+				(SELECT COUNT(d.id) FROM postagens_gostei as d WHERE d.id_postagem = a.id AND d.deletado = ? GROUP BY d.id_postagem) as qtd_gostei,\
+				(SELECT COUNT(e.id) FROM postagens_comentarios as e WHERE e.id_postagem = a.id AND e.deletado = ? GROUP BY e.id_postagem) as qtd_comentario,\
+				a.imagem, a.descricao, DATE_FORMAT(a.data_atualizado, "%d/%m/%Y") as data_atualizado\
+				FROM postagens as a INNER JOIN usuarios as b ON a.id_usuario = b.id WHERE a.deletado = ? AND\
+				(a.descricao like CONCAT("%", ?, "%") OR\
+				b.nome_murer like CONCAT("%", ?, "%") OR b.nome like CONCAT("%", ?, "%") OR a.data_cadastro >= ? OR b.email like CONCAT("%", ?, "%"))' + where_add, 
+				values).then(data => {
+					resolve(data);
+				});
 			});
-		});
 	}
 	GetComentarios(id) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT a.id,\
-						a.texto,\
-						a.id_usuario,\
-						b.nome_murer as nome\
-						FROM postagens_comentarios as a\
-						INNER JOIN usuarios as b ON b.id = a.id_usuario\
-						WHERE a.id_postagem = ? AND a.deletado = ?', [id, 0]).then(data => {
-				resolve(data);
+				a.texto,\
+				a.id_usuario,\
+				b.nome_murer as nome\
+				FROM postagens_comentarios as a\
+				INNER JOIN usuarios as b ON b.id = a.id_usuario\
+				WHERE a.id_postagem = ? AND a.deletado = ?', [id, 0]).then(data => {
+					resolve(data);
+				});
 			});
-		});
 	}
 	SearchTipo(tipo, id_usuario) {
 		console.log(tipo);
@@ -120,21 +120,26 @@ class PostagensModel {
 					// helper.Query('SELECT a.id_grupo as tipo_val, \
 					// 	(SELECT b.nome FROM grupos as b WHERE a.id_grupo = b.id) as nome\
 					// 	FROM grupos_usuarios as a WHERE id_usuario = ? AND deletado = ?', [id_usuario, 0]).then(data => {
-						helper.Query('SELECT a.id_grupo as tipo_val, b.nome \
-													FROM grupos_usuarios as a LEFT JOIN grupos as b ON a.id_grupo = b.id \
-													WHERE b.deletado = ? AND a.deletado = ? AND a.id_usuario = ? GROUP BY b.nome ORDER BY nome ASC',[0,0,id_usuario]).then(data=>{
-						resolve(data);
-					});
-			} else {
-					helper.Query('SELECT id_usuario2 as tipo_val,\
-								b.nome_murer as nome\
-								FROM usuarios_contatos as a\
-								LEFT JOIN usuarios as b ON b.id = a.id_usuario2\
-								WHERE a.deletado = ? AND b.deletado = ? AND a.id_usuario = ?', [0, 0, id_usuario]).then(data => {
-						resolve(data);
-					});
-			}
-		});
+						// helper.Query('SELECT a.id_grupo as tipo_val, b.nome \
+						// 							FROM grupos_usuarios as a LEFT JOIN grupos as b ON a.id_grupo = b.id \
+						// 							WHERE b.deletado = ? AND a.deletado = ? AND a.id_usuario = ? GROUP BY b.nome ORDER BY nome ASC',[0,0,id_usuario]).then(data=>{
+							helper.Query('SELECT b.id as tipo_val, b.nome \
+								FROM grupos_usuarios as a\
+								INNER JOIN grupos as b ON a.id_grupo = b.id\
+								WHERE a.deletado = ? AND b.deletado = ? AND b.id_lider = ? \
+								GROUP BY b.nome', [0, 0, id_usuario]).then(data => {
+									resolve(data);
+								});
+							} else {
+								helper.Query('SELECT id_usuario2 as tipo_val,\
+									b.nome_murer as nome\
+									FROM usuarios_contatos as a\
+									LEFT JOIN usuarios as b ON b.id = a.id_usuario2\
+									WHERE a.deletado = ? AND b.deletado = ? AND a.id_usuario = ?', [0, 0, id_usuario]).then(data => {
+										resolve(data);
+									});
+								}
+							});
 	}
 	SelectUsuarios() {
 		return new Promise(function(resolve, reject) {
