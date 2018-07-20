@@ -12,25 +12,37 @@ app.use(require('express-is-ajax-request'));
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {
 	model.VeifyViews(req.session.usuario.id).then(ret => {
+		data_insert = {id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id};
+		data_projeto = {id_categoria:2, id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id };
+		data_estagio = {id_categoria:1, id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id};
+		data_divulgacao = {id_categoria:4, id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id};
+		
 		if (req.session.usuario.tipo == 1) {
-			data_projeto = {id_categoria:2, id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id };
 			model.GetCategoriasAtualizacoes(data_projeto).then(cat_proj=> {
-				data.categorias = cat_proj;
-				console.log(',,,,,,,,,,,, Dados das Categorias ,,,,,,,,,,,');
-				console.log(data);
-				console.log(',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,');
 
-				model.GetPostagensTodas(req.session.usuario.id).then(data_postagens=> {
-					data.postagens = data_postagens;
-					res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+				console.log('***************** CAT_EST ********************');
+				console.log(cat_proj);
+				console.log('***********************************************');
+				data.categorias = {atualizacoes:cat_proj};
+				console.log('&&&&&&&&&&&&&&&&&&&&& data &&&&&&&&&&&&&&&&');
+				console.log(data);
+				console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&');
+
+				model.GetCategoriasAtualizacoes(data_estagio).then(cat_est=> {
+
+					data.categorias[3] = cat_est[0];
+					console.log(data);
+					// console.log(',,,,,,,,,,,, Dados das Categorias ,,,,,,,,,,,');
+					// console.log(data);
+					// console.log(',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,');
+
+					model.GetPostagensTodas(req.session.usuario.id).then(data_postagens=> {
+						data.postagens = data_postagens;
+						res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+					});
 				});
 			});
 		} else if(req.session.usuario.tipo == 2){
-			data_insert = {id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id};
-			data_projeto = {id_categoria:2, id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id };
-			data_estagio = {id_categoria:1, id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id};
-			data_divulgacao = {id_categoria:4, id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id}
-
 			model.GetCategoriasAtualizacoesFaculdade(data_projeto).then(cat_proj=> {
 				data.categorias = cat_proj;
 				model.GetCategoriasAtualizacoesFaculdade(data_estagio).then(cat_est=> {

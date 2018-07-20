@@ -126,33 +126,34 @@ GetCategorias() {
 
 GetCategoriasAtualizacoes(POST) {
 	return new Promise(function(resolve, reject) {
-		var where_add = 'AND (a.data_cadastro > b.data_acesso AND b.id_usuario = 40 and b.id_categoria = 2) \
-		OR (a.id_tipo = 2 AND a.id_faculdade = 6 AND a.id_categoria = 2) AND\
-		((a.id_grupo = 0 OR a.id_grupo IN ((SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = 40 AND deletado = 0)))\
-		AND (a.id_contato = 0 OR a.id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = a.id_usuario AND deletado = 0))))\
+		var where_add = 'AND (a.data_cadastro > b.data_acesso AND b.id_usuario = ? and b.id_categoria = ?) \
+		OR (a.id_tipo = ? AND a.id_faculdade = ? AND a.id_categoria = ?) AND\
+		((a.id_grupo = ? OR a.id_grupo IN ((SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?)))\
+		AND (a.id_contato = ? OR a.id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = a.id_usuario AND deletado = ?))))\
 		GROUP BY a.id';
 		var values;
 		var retorno = {};
-		// var values = [POST.id_categoria,POST.id_categoria,0,POST.id_faculdade,POST.id_categoria,0,POST.id_usuario,0,0,0,POST.id_usuario,POST.id_categoria,POST.id_usuario,2,2,POST.id_faculdade];
+		var values = [0, 2,POST.id_categoria,POST.id_usuario,POST.id_categoria,2,POST.id_faculdade,POST.id_categoria,0,POST.id_usuario,0,0,0];
 
 		helper.Query('SELECT a.id FROM postagens as a \
 			LEFT JOIN postagens_categorias_view as b ON a.id_categoria = b.id_categoria\
-			WHERE a.deletado = 0 AND a.id_tipo !=2 AND a.id_categoria = 2  \
-						 ' + where_add, values).then(data => {
+			WHERE a.deletado = ? AND a.id_tipo != ? AND a.id_categoria = ?  \
+			' + where_add, values).then(data => {
+
+				helper.Query('SELECT COUNT(?) as atualizacoes FROM postagens',data).then(teste =>{
+					console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+					console.log(teste);
+					console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+				})
+
+
 				console.log('---------------- Atualizacoes DOS ALUNOS ---------------------');
-				console.log(data);
-				console.log(data.length);
-				retorno = data;
-				console.log('()()()() RETORNO  ()()()()');
-				console.log(retorno);
-				console.log('()()()()()()()()()()()()()');
-				console.log(retorno.length);
 				var abc = {atualizacoes:data.length,id:POST.id_categoria};
 				console.log(abc);
-				// retorno.push('atualizacoes':retorno.length);
+				var tamanho = data.length
+
 				console.log('---------------------------------------------------');
-			helper.Query('')
-				resolve(abc);
+				resolve(tamanho);
 			});			
 		});	
 }
