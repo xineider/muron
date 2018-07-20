@@ -38,6 +38,8 @@ class PostagensModel {
 			var where_add = '';
 			var values = [];
 			if (id_usuario != 1) {
+				console.log('&&&&&&&&&&&&&&& Não sou administrador &&&&&&&&&&&&&&&&&&');
+
 				where_add = "AND ((id_grupo = ? OR id_grupo IN ((SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?)))\
 				AND (id_contato = ? OR id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = postagens.id_usuario AND deletado = ?)))\
 				OR id_usuario = ?)";
@@ -55,6 +57,9 @@ class PostagensModel {
 					if (id == 4) {
 						console.log(id_usuario);
 					}
+					console.log('!!!!!!!!!!! POSTAGENS DA CATEGORIA !!!!!!!!!!!!!!!!!!!!!!!!!!');
+					console.log(data);
+					console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 					resolve(data);
 				});
 			});	

@@ -17,7 +17,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/ver', function(req, res, next) {
-	model.GetFaculdadeVer(req.session.usuario.id).then(data_faculdade => {
+	console.log('aqui');
+	model.GetFaculdadeVer(req.session.usuario.id,req.session.usuario.id_faculdade).then(data_faculdade => {
 		console.log('kkkkkkkkkkkk ID do Usuario kkkkkkkkkkkkk');
 		console.log(req.session.usuario.id);
 		console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');

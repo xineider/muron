@@ -1,23 +1,23 @@
 <section class="types">
 	<div class="row">
 		<%
-		if (typeof data != 'undefined' && data.length > 0) {
+		if (typeof data.categorias != 'undefined' && data.categorias.length > 0) {
 
-				for (var i = data.length - 1; i >= 0; i--) {
+				for (var i = data.categorias.length - 1; i >= 0; i--) {
 			%>
 
 				<div class="col s3">
-					<a href="/sistema/postagens/ver/<%= data[i].id %>" class="ajax-load">
+					<a href="/sistema/postagens/ver/<%= data.categorias[i].id %>" class="ajax-load">
 						<img class="circle" style="max-width: 100%;" src="/assets/imgs/banner-1.jpeg">
 						<p class="center-align black-text">	
-							<%= data[i].nome %>
+							<%= data.categorias[i].nome %>
 						</p>
 					</a>
 					<%
-					if (data[i].atualizacoes > 0) {
+					if (data.categorias[i].atualizacoes > 0) {
 					%>
 					<div class="atualizacoes">
-						<%= data[i].atualizacoes %><i class="fa fa-plus" aria-hidden="true"></i>
+						<%= data.categorias[i].atualizacoes %><i class="fa fa-plus" aria-hidden="true"></i>
 					</div>
 					<%
 					}
