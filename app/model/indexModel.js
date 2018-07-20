@@ -45,9 +45,7 @@ class IndexModel {
 				(SELECT COUNT(e.id) FROM postagens_comentarios as e WHERE e.id_postagem = postagens.id AND e.deletado = ? GROUP BY e.id_postagem) as qtd_comentario,\
 				imagem, descricao, DATE_FORMAT(data_atualizado, "%d/%m/%Y") as data_atualizado\
 				FROM postagens WHERE deletado = ? ' + where_add, values).then(data => {
-					console.log('1111111111111111111111 GET POSTAGENS 1111111111111111111');
-					console.log(data);
-					console.log('11111111111111111111111111111111111111111111111111111111');
+
 
 					resolve(data);
 				});
@@ -128,21 +126,33 @@ GetCategorias() {
 
 GetCategoriasAtualizacoes(POST) {
 	return new Promise(function(resolve, reject) {
-		var where_add = ' AND ((id_grupo = ? OR id_grupo IN ((SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?))) \
-		AND (id_contato = ? OR id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = postagens.id_usuario AND deletado = ?))) \
-		AND (SELECT data_acesso FROM postagens_categorias_view WHERE id_usuario = ? AND postagens.data_cadastro > data_acesso AND id_categoria = ?) \
-		OR id_usuario = ? OR id_tipo != ? OR (id_tipo = ? AND id_faculdade = ?)';
+		var where_add = 'AND (a.data_cadastro > b.data_acesso AND b.id_usuario = 40 and b.id_categoria = 2) \
+		OR (a.id_tipo = 2 AND a.id_faculdade = 6 AND a.id_categoria = 2) AND\
+		((a.id_grupo = 0 OR a.id_grupo IN ((SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = 40 AND deletado = 0)))\
+		AND (a.id_contato = 0 OR a.id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = a.id_usuario AND deletado = 0))))\
+		GROUP BY a.id';
+		var values;
+		var retorno = {};
+		// var values = [POST.id_categoria,POST.id_categoria,0,POST.id_faculdade,POST.id_categoria,0,POST.id_usuario,0,0,0,POST.id_usuario,POST.id_categoria,POST.id_usuario,2,2,POST.id_faculdade];
 
-		var values = [POST.id_categoria,POST.id_categoria,0,POST.id_faculdade,POST.id_categoria,0,POST.id_usuario,0,0,0,POST.id_usuario,POST.id_categoria,POST.id_usuario,2,2,POST.id_faculdade];
-
-		helper.Query('SELECT COUNT(id) as atualizacoes,\
-			(SELECT id FROM postagens_categorias WHERE id = ? ) as id,\
-			(SELECT nome FROM postagens_categorias WHERE id = ? ) as nome\
-			FROM postagens WHERE deletado = ? AND id_categoria = ?' + where_add, values).then(data => {
-				console.log('---------------- Atualizacoes ---------------------');
+		helper.Query('SELECT a.id FROM postagens as a \
+			LEFT JOIN postagens_categorias_view as b ON a.id_categoria = b.id_categoria\
+			WHERE a.deletado = 0 AND a.id_tipo !=2 AND a.id_categoria = 2  \
+						 ' + where_add, values).then(data => {
+				console.log('---------------- Atualizacoes DOS ALUNOS ---------------------');
 				console.log(data);
+				console.log(data.length);
+				retorno = data;
+				console.log('()()()() RETORNO  ()()()()');
+				console.log(retorno);
+				console.log('()()()()()()()()()()()()()');
+				console.log(retorno.length);
+				var abc = {atualizacoes:data.length,id:POST.id_categoria};
+				console.log(abc);
+				// retorno.push('atualizacoes':retorno.length);
 				console.log('---------------------------------------------------');
-				resolve(data);
+			helper.Query('')
+				resolve(abc);
 			});			
 		});	
 }

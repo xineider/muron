@@ -1,6 +1,10 @@
 <section class="types">
 	<div class="row">
 		<%
+		console.log('------------- DADOS NA VIEW ------------');
+		console.log(data.categorias);
+		console.log(data.categorias.length);
+		console.log('----------------------------------------');
 		if (typeof data.categorias != 'undefined' && data.categorias.length > 0) {
 
 				for (var i = data.categorias.length - 1; i >= 0; i--) {
