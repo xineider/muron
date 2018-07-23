@@ -19,26 +19,16 @@ router.get('/', function(req, res, next) {
 		
 		if (req.session.usuario.tipo == 1) {
 			model.GetCategoriasAtualizacoes(data_projeto).then(cat_proj=> {
-
-				console.log('***************** CAT_EST ********************');
-				console.log(cat_proj);
-				console.log('***********************************************');
-				data.categorias = {atualizacoes:cat_proj};
-				console.log('&&&&&&&&&&&&&&&&&&&&& data &&&&&&&&&&&&&&&&');
-				console.log(data);
-				console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&');
-
+				data.categorias = cat_proj;
 				model.GetCategoriasAtualizacoes(data_estagio).then(cat_est=> {
-
-					data.categorias[3] = cat_est[0];
-					console.log(data);
-					// console.log(',,,,,,,,,,,, Dados das Categorias ,,,,,,,,,,,');
-					// console.log(data);
-					// console.log(',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,');
-
-					model.GetPostagensTodas(req.session.usuario.id).then(data_postagens=> {
-						data.postagens = data_postagens;
-						res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+					data.categorias.push(cat_est[0]);
+					model.GetCategoriasAtualizacoesFaculdade(data_divulgacao).then(cat_div=> {
+						data.categorias.push(cat_div[0]);
+						model.GetPostagensTodas(req.session.usuario.id).then(data_postagens=> {
+							data.postagens = data_postagens;
+							console.log(data);
+							res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+						});
 					});
 				});
 			});

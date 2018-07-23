@@ -1,88 +1,58 @@
 <section class="types">
-	<div class="row">
-		<%
-		console.log('------------- DADOS NA VIEW ------------');
-		console.log(data);
-		console.log(data.categorias);
-		console.log('----------------------------------------');
+<div class="row">
+<%
+if (typeof data.categorias != 'undefined' && data.categorias.length > 0) {
 
+for (var i = data.categorias.length - 1; i >= 0; i--) {
+%>
 
-		if(usuario.tipo == 1){
-			console.log('lllllllllllllllllllllll usuario tipo 1 lllllllllllllllllllllllll');
-			console.log(Object.keys(data.categorias).length);
-			if(typeof data.categorias != 'undefined' && Object.keys(data.categorias).length > 0){
+<div class="col s3">
+<a href="/sistema/postagens/ver/<%= data.categorias[i].id %>" class="ajax-load">
+<img class="circle" style="max-width: 100%;" src="/assets/imgs/banner-1.jpeg">
+<p class="center-align black-text">	
+<%= data.categorias[i].nome %>
+</p>
+</a>
+<%
+if (data.categorias[i].atualizacoes > 0) {
+%>
+<div class="atualizacoes">
+<%= data.categorias[i].atualizacoes %><i class="fa fa-plus" aria-hidden="true"></i>
+</div>
+<%
+}
+%>
+</div>
+<%
+}
+}
 
-				for(key in data.categorias){
-					console.log('para cada key');
-					console.log(data.categorias.id);
-				}
-				for(var i = Object.keys(data.categorias).length - 1; i>=0; i--){
-					console.log('no for');
-					console.log(data.categorias.id);
-
-
-				}
-			}
-		} %>
-
-
-
-		<% if(usuario.tipo == 2){
-			console.log('USUARIO.TIPO');
-			console.log(usuario.tipo);
-
-			if (typeof data.categorias != 'undefined' && data.categorias.length > 0) {
-
-				for (var i = data.categorias.length - 1; i >= 0; i--) {
-					%>
-
-					<div class="col s3">
-						<a href="/sistema/postagens/ver/<%= data.categorias[i].id %>" class="ajax-load">
-							<img class="circle" style="max-width: 100%;" src="/assets/imgs/banner-1.jpeg">
-							<p class="center-align black-text">	
-								<%= data.categorias[i].nome %>
-							</p>
-						</a>
-						<%
-						if (data.categorias[i].atualizacoes > 0) {
-							%>
-							<div class="atualizacoes">
-								<%= data.categorias[i].atualizacoes %><i class="fa fa-plus" aria-hidden="true"></i>
-							</div>
-							<%
-						}
-						%>
-					</div>
-					<%
-				}
-			}
-		}
-		%>
-		<div class="col s3">
-			<a href="/sistema/faculdades/ver" class="ajax-load">
-				<img class="circle" style="max-width: 100%;" src="/assets/imgs/banner-1.jpeg">
-				<p class="center-align black-text">
-					Faculdade
-				</p>
-			</a>
-		</div>
-	</div>
+%>
+<div class="col s3">
+<a href="/sistema/faculdades/ver" class="ajax-load">
+<img class="circle" style="max-width: 100%;" src="/assets/imgs/banner-1.jpeg">
+<p class="center-align black-text">
+Faculdade
+</p>
+</a>
+</div>
+</div>
 </section>
 <section class="main-margin">
 
-	<%- include('../postagens/postagens'); %>
-	
+<%- include('../postagens/postagens'); %>
+
 </section>
 
 
 <!-- <script type="text/javascript">
-	changeHeader('par1');
+changeHeader('par1');
 </script> -->
 
 <style type="text/css">
 </style>
 
 <script type="text/javascript">
-	$('#footer').fadeIn('slow');
-	$('#sair').fadeOut('slow');
+$('#footer').fadeIn('slow');
+$('#sair').fadeOut('slow');
 </script>
