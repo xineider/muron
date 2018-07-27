@@ -290,6 +290,30 @@ body > div.row .col {
   header .side-nav .fa {
     padding: 0;
   }
+
+  .circulo-header{
+    border-radius: 50%;
+    height: 72px;
+    width: 72px;
+    border:5px solid #1b1b1b;
+    position:relative;
+  }
+
+  .icone-categoria-header{
+    color:#1b1b1b;
+    font-size:40px;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform:translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+  }
+
+  .no-categoria-faculdade > .col:first-child{
+    margin-left:12.5%;
+  }
+
   .post-bottom {
     position: absolute;
     bottom: 0;

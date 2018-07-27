@@ -14,7 +14,7 @@ class FaculdadesModel {
 	}
 	GetRelacao(id_faculdade,tipo) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT b.id, b.nome \
+			helper.Query('SELECT a.id, b.nome \
 				FROM faculdades_relacoes_aluno as a \
 				LEFT JOIN usuarios as b ON a.id_aluno = b.id\
 				WHERE a.deletado = ? AND b.id_faculdade = ? AND b.tipo != ? \
@@ -26,28 +26,23 @@ class FaculdadesModel {
 	GetFaculdadeVer(id_usuario,id_faculdade) {
 		return new Promise(function(resolve, reject) {
 			//Seleciona o nome da Faculdade do Usuario
+			if(id_usuario != 1){
+				
+			}
+
+
 			helper.Query('SELECT nome FROM faculdades WHERE id = ? AND deletado = ?', [id_faculdade, 0]).then(data_user => {
-				console.log('00000000 Nome da Faculdade do Usuario 0000000000000000');
+				console.log('************* Existe Faculdade ********************');
 				console.log(data_user);
-				console.log('00000000000000000000000000000000000');
-
-				console.log('Faculdade:' + data_user.nome);
-				console.log('Lenght: ' + data_user.length);
-				console.log('Faculdade nulo?');
-				console.log(data_user.nome == null);
-				console.log('Faculdade não é nulo?');
-				console.log(data_user.nome != null);
-
+				console.log('***************************************************');
 				if (data_user.length > 0 && typeof data_user.nome != null) {
 				 	//Se existe o nome da Faculdade selecionar o id da faculdade da tabela faculdade_relacoes de acordo com o nome da faculdade
 
 					//Seleciona os dados dos usuarios e conta os amigos
-					helper.Query('SELECT a.*, (SELECT COUNT(b.id) FROM usuarios_contatos as b WHERE b.id_usuario2 = a.id AND b.id_usuario = ? AND b.deletado = ? LIMIT 1) as amigos,\
+					helper.Query('SELECT a.*,\
+					 (SELECT COUNT(b.id) FROM usuarios_contatos as b WHERE b.id_usuario2 = a.id AND b.id_usuario = ? AND b.deletado = ? LIMIT 1) as amigos,\
 						DATE_FORMAT(a.nascimento, "%d/%m/%Y") as nascimento\
 						FROM usuarios as a WHERE a.deletado = ? AND a.id = ?', [id_usuario, 0, 0, id_faculdade]).then(data => {
-							console.log('+++++++++++++++++ DADOS AMIGOS +++++++++++++++++++++++++++');
-							console.log(data);
-							console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
 
 							if(data.length > 0){
 								resolve(data);
@@ -102,14 +97,14 @@ class FaculdadesModel {
 
 	InsertRelacao(post) {
 		return new Promise(function(resolve, reject) {
-			helper.Insert('faculdades_relacoes', post).then(data => {
+			helper.Insert('faculdades_relacoes_aluno', post).then(data => {
 				resolve(data);
 			});
 		});
 	}
 	DesativarRelacao(post) {
 		return new Promise(function(resolve, reject) {
-			helper.Desativar('faculdades_relacoes', post).then(data => {
+			helper.Desativar('faculdades_relacoes_aluno', post).then(data => {
 				resolve(data);
 			});
 		});

@@ -16,7 +16,9 @@ router.get('/', function(req, res, next) {
 	});
 });
 
-router.get('/ver', function(req, res, next) {
+router.get('/ver/:id', function(req, res, next) {
+	id = req.params.id;
+	/*id da categoria que sempre é 3*/
 	console.log('aqui');
 	model.GetFaculdadeVer(req.session.usuario.id,req.session.usuario.id_faculdade).then(data_faculdade => {
 		console.log('kkkkkkkkkkkk ID do Usuario kkkkkkkkkkkkk');
