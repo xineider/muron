@@ -33,20 +33,29 @@ class PostagensModel {
 			});
 		});
 	}
-	GetPostagemByCat(id, id_usuario) {
+	GetPostagemByCat(POST) {
 		return new Promise(function(resolve, reject) {
 			var where_add = '';
 			var values = [];
-			if (id_usuario != 1) {
+			if (POST.id_usuario != 1) {
 				console.log('&&&&&&&&&&&&&&& Não sou administrador &&&&&&&&&&&&&&&&&&');
 
-				where_add = "AND ((id_grupo = ? OR id_grupo IN ((SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?)))\
-				AND (id_contato = ? OR id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = postagens.id_usuario AND deletado = ?)))\
-				OR id_usuario = ?)";
-				values = [0, id_usuario, 0, 0, 0, 0, id, 0, id_usuario, 0, 0, 0, id_usuario];
+				if(POST.id_categoria == 3){
+					//quer dizer que é uma faculdade
+					where_add = "AND id_faculdade = ?"
+					values = [0, POST.id_usuario, 0, 0, 0, 0, POST.id_categoria,POST.id_faculdade];
+					console.log('((((((((( É FACULDADE ((((((((((((((((((((((((((((')
+
+				}else{
+					where_add = "AND ((id_grupo = ? OR id_grupo IN ((SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?)))\
+					AND (id_contato = ? OR id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = postagens.id_usuario AND deletado = ?)))\
+					OR id_usuario = ?)";
+					values = [0, POST.id_usuario, 0, 0, 0, 0, POST.id_categoria, 0, POST.id_usuario, 0, 0, 0, POST.id_usuario];
+				}
 			} else {
-				values = [0, id_usuario, 0, 0, 0, 0, id];
+				values = [0, POST.id_usuario, 0, 0, 0, 0, POST.id_categoria];
 			}
+
 			helper.Query('SELECT id, id_usuario, id_contato,\
 				(SELECT b.nome_murer FROM usuarios as b WHERE b.deletado = ? AND b.id = postagens.id_usuario) as usuario,\
 				(SELECT c.id FROM postagens_gostei as c WHERE c.id_usuario = ? AND c.id_postagem = postagens.id AND c.deletado = ?) as gostei,\
@@ -54,9 +63,6 @@ class PostagensModel {
 				(SELECT COUNT(e.id) FROM postagens_comentarios as e WHERE e.id_postagem = postagens.id AND e.deletado = ? GROUP BY e.id_postagem) as qtd_comentario,\
 				imagem, descricao, DATE_FORMAT(data_atualizado, "%d/%m/%Y") as data_atualizado\
 				FROM postagens WHERE deletado = ? AND id_categoria = ? ' + where_add, values).then(data => {
-					if (id == 4) {
-						console.log(id_usuario);
-					}
 					console.log('!!!!!!!!!!! POSTAGENS DA CATEGORIA !!!!!!!!!!!!!!!!!!!!!!!!!!');
 					console.log(data);
 					console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');

@@ -20,6 +20,8 @@ router.get('/ver/:id', function(req, res, next) {
 	id = req.params.id;
 	/*id da categoria que sempre é 3*/
 	console.log('aqui');
+	if(req.session.usuario.id != 1){}
+
 	model.GetFaculdadeVer(req.session.usuario.id,req.session.usuario.id_faculdade).then(data_faculdade => {
 		console.log('kkkkkkkkkkkk ID do Usuario kkkkkkkkkkkkk');
 		console.log(req.session.usuario.id);
@@ -36,13 +38,13 @@ router.get('/ver/:id', function(req, res, next) {
 		console.log(data_faculdade == 2);
 
 		// if(data_faculdade != false)
-		if (data_faculdade != 1 && data_faculdade != 2) {
-			data.perfil = data_faculdade;
+		if (data_faculdade != 2) {
+			// data.perfil = data_faculdade;
 			model.GetPostagemByFaculdade(data.perfil[0].id).then(data_postagens => {
 				data.postagens = data_postagens;
 				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_ver', data: data, usuario: req.session.usuario});
 			});
-		} else if(data_faculdade < 3){
+		} else if(data_faculdade == 2){
 				// res.redirect('/sistema/');
 				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_ver', data: data, usuario: req.session.usuario,error:data_faculdade});
 			}

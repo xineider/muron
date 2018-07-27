@@ -21,10 +21,9 @@ router.get('/ver/:id', function(req, res, next) {
 
 			title = 'Projetos';
 	} else if (id == 3) {
-			title = 'Faculdades';
+			title = 'Faculdade';
 
-	} else {
-		
+	} else {		
 			title = 'Divulgação';
 	}
 	console.log('^^^^^^^^^^^^^^^^^^^ ID DA CATEGORIA CLICADA ^^^^^^^^^^^^^^^^^^^^^^^^');
@@ -34,7 +33,9 @@ router.get('/ver/:id', function(req, res, next) {
 	console.log(req.session.usuario.id);
 	console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
 	model.AddViewCat(id, req.session.usuario.id).then(ret => {
-		model.GetPostagemByCat(id, req.session.usuario.id).then(data_postagens => {
+		data_insert = {id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id,id_categoria:id};
+
+		model.GetPostagemByCat(data_insert).then(data_postagens => {
 			data.postagens = data_postagens;
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_ver', data: data, usuario: req.session.usuario, title: title});
 		});
