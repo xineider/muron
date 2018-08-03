@@ -10,7 +10,7 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 					<form method="POST" action="#" style="position: absolute;right: 5%;" data-href="/sistema/usuarios/uploadfoto" data-action="/sistema/usuarios/ver/<%= usuario.id %>">
 						<div class="file-field input-field">
 							<div class="btn-floating btn-large waves-effect waves-light blue darken-3" style="width: 44px;height: 41px;">
-								<i class="fa fa-pencil-square-o" aria-hidden="true" style="line-height: 44px; margin-right: -5px;"></i>
+								<i class="fas fa-edit" aria-hidden="true" style="line-height: 44px; margin-right: -5px;"></i>
 								<input type="file" accept="image/*" id="imagem_perfil" name="imagem_perfil" data-href="/sistema/postagens/uploadarquivo">
 								<input type="hidden" name="imagem">
 							</div>
@@ -81,7 +81,7 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 							</div>
 							<div class="card-panel panel-full">
 								<div class="card-content">
-									Email <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input" data-nome="MurEr" data-id="'+data.perfil[i].id+'" data-collum="email"><i class="fa fa-edit"></i></span>' : '' %>
+									Email <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input" data-nome="Email" data-id="'+data.perfil[i].id+'" data-collum="email"><i class="fa fa-edit"></i></span>' : '' %>
 								</div>
 								<div class="card-title">
 									<%= data.perfil[i].email %>
@@ -89,7 +89,7 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 							</div>
 							<div class="card-panel panel-full">
 								<div class="card-content">
-									Telefone <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input" data-nome="MurEr" data-id="'+data.perfil[i].id+'" data-collum="celular"><i class="fa fa-edit"></i></span>' : '' %>
+									Telefone <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input" data-nome="Telefone" data-id="'+data.perfil[i].id+'" data-collum="celular"><i class="fa fa-edit"></i></span>' : '' %>
 								</div>
 								<div class="card-title">
 									<%= data.perfil[i].celular %>
@@ -97,7 +97,7 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 							</div>
 							<div class="card-panel panel-full">
 								<div class="card-content">
-									Descrição <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input" data-nome="MurEr" data-id="'+data.perfil[i].id+'" data-collum="descricao"><i class="fa fa-edit"></i></span>' : '' %>
+									Descrição <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input" data-nome="Descrição" data-id="'+data.perfil[i].id+'" data-collum="descricao"><i class="fa fa-edit"></i></span>' : '' %>
 								</div>
 								<div class="card-title">
 									<%= data.perfil[i].descricao %>

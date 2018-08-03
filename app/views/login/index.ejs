@@ -7,6 +7,7 @@
 	<link rel='stylesheet' href='/assets/css/materialize.min.css' />
 	<link rel='stylesheet' href='/assets/css/style.css' />
 	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/jquery.mask.js"></script>
 	<script src="/assets/js/materialize.min.js"></script>
 </head>
 <body class="row login">
@@ -108,7 +109,7 @@
 					</div>
 					<div class="col s12 input-field">
 						<label>Telefone</label>
-						<input type="text" name="celular">
+						<input type="text" name="celular" class="tel" required="true">
 					</div>
 					<div class="col s12 input-field">
 						<label>Nome de Contato</label>
@@ -192,6 +193,14 @@
 	$(document).on('ready', function () {
 		$('.modal').modal();
 		getFaculdades();
+
+		$('.tel').mask('(00) Z0000-0000', {
+			translation: {
+				'Z': {
+					pattern: /[0-9]/, optional: true
+				}
+			}
+		});
 
 		function getFaculdades(){
 			$.ajax({
