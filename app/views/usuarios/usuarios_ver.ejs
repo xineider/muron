@@ -71,6 +71,7 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 					%>
 					<div class="container">
 						<div class="row">
+
 							<div class="card-panel panel-full">
 								<div class="card-content">
 									MurEr <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input" data-nome="MurEr" data-id="'+data.perfil[i].id+'" data-collum="nome_murer"><i class="fa fa-edit"></i></span>' : '' %>
@@ -79,6 +80,16 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 									<%= data.perfil[i].nome_murer %>
 								</div>
 							</div>
+
+							<div class="card-panel panel-full">
+								<div class="card-content">
+									Nome <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input" data-nome="Nome" data-id="'+data.perfil[i].id+'" data-collum="nome"><i class="fa fa-edit"></i></span>' : '' %>
+								</div>
+								<div class="card-title">
+									<%= data.perfil[i].nome %>
+								</div>
+							</div>
+
 							<div class="card-panel panel-full">
 								<div class="card-content">
 									Email <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input" data-nome="Email" data-id="'+data.perfil[i].id+'" data-collum="email"><i class="fa fa-edit"></i></span>' : '' %>
@@ -87,6 +98,7 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 									<%= data.perfil[i].email %>
 								</div>
 							</div>
+
 							<div class="card-panel panel-full">
 								<div class="card-content">
 									Telefone <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input" data-nome="Telefone" data-id="'+data.perfil[i].id+'" data-collum="celular"><i class="fa fa-edit"></i></span>' : '' %>
@@ -95,6 +107,21 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 									<%= data.perfil[i].celular %>
 								</div>
 							</div>
+
+							<% if(data.perfil[i].tipo == 2 ||  data.perfil[i].tipo == 3){%>
+
+							<div class="card-panel panel-full">
+								<div class="card-content">
+									Nome do Contato <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input" data-nome="Contato" data-id="'+data.perfil[i].id+'" data-collum="nome_contato"><i class="fa fa-edit"></i></span>' : '' %>
+								</div>
+								<div class="card-title">
+									<%= data.perfil[i].nome_contato %>
+								</div>
+							</div>
+
+							<%}%>
+
+
 							<div class="card-panel panel-full">
 								<div class="card-content">
 									Descrição <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input" data-nome="Descrição" data-id="'+data.perfil[i].id+'" data-collum="descricao"><i class="fa fa-edit"></i></span>' : '' %>
@@ -103,6 +130,16 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 									<%= data.perfil[i].descricao %>
 								</div>
 							</div>
+
+							<% if(data.perfil[i].id == usuario.id) {%>
+							<button style="width: 100%" href="/sistema/usuarios/alterar-senha/" class="btn waves-effect waves-light green darken-1 ajax-load">
+								Alterar Senha
+							</button>
+							<% } %>
+
+
+
+
 						</div>
 					</div>
 					<%

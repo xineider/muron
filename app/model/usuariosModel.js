@@ -59,6 +59,16 @@ class UsuariosModel {
 	}
 
 
+
+	GetUsuarioAlterarSenha(id,senhaAtual) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT * FROM usuarios WHERE deletado = ? AND id = ? AND senha = ?', [0, id,senhaAtual]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+
 	GetUsuario(id, id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT a.*, (SELECT COUNT(b.id) FROM usuarios_contatos as b WHERE b.id_usuario2 = a.id AND b.id_usuario = ? AND b.deletado = ? LIMIT 1) as amigos,\
@@ -139,6 +149,22 @@ class UsuariosModel {
 				});
 			});	
 	}
+
+	PesquisarUsuario(nomeMurer) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT id FROM usuarios WHERE nome_murer = ?', [nomeMurer]).then(result => {
+				console.log('^^^^^^^^^^^^^^^^^^^^^^ JÁ TEM NOME COM ISSO ^^^^^^^^^^^^^^^^^^^^^^');
+				console.log(result);
+				console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+				resolve(result);
+			});
+		});
+	}
+
+
+
+
+
 	InsertContato(post) {
 		var post2 = {};
 		post2.id_usuario = post.id_usuario2;

@@ -160,14 +160,6 @@ $(document).on('ready', function () {
 
 	$(document).on('change', 'input[type="file"]:not(#imagem_perfil)', function () {
 		console.log('aaaaaaaaaaa');
-		console.log('aaaaaaaaaaa');
-		console.log('aaaaaaaaaaa');
-		console.log('aaaaaaaaaaa');
-		console.log('aaaaaaaaaaa');
-		console.log('aaaaaaaaaaa');
-		console.log('aaaaaaaaaaa');
-		console.log('aaaaaaaaaaa');
-		console.log('aaaaaaaaaaa');
 		if($(this).val() != '') {
 			UploadFile($(this));
 		}
@@ -228,6 +220,7 @@ $(document).on('ready', function () {
 		var post = {id_usuario: id_usuario, id_usuario2: id_usuario2};
 		AdicionarContato(post);
 	});
+
 	$(document).on('change', 'select[name="tipo"]', function () {
 		console.log('estou selecionando o tipo');
 		console.log($(this).val());
@@ -237,6 +230,25 @@ $(document).on('ready', function () {
 			$('#add-tipo').html('');
 		}
 	});
+
+	$(document).on('click', '.alterar-senha-botao', function(e) {
+		e.preventDefault();
+		var form = $(this).parents('form');
+		var post = form.serializeArray();
+		var link = $(this).data('href');
+		var back = $(this).data('action');
+		var metodo = $(this).data('method');
+		var method = (metodo != undefined && metodo != '') ? metodo : 'POST';
+		if (VerificarForm(form) == true) {
+			SubmitAjax(post, link, back, method);
+		}
+		$('input[name="senha_atual"').val('');
+		$('#alterar_senha').val('');
+		$('#confirmar_alterar_senha').val('');
+		$('.erro-alterar-senha').hide();
+
+	});
+
 	$(document).on('click', '.define-tipo', function () {
 		$('.define-tipo').removeClass('active');
 		$(this).addClass('active');
@@ -486,6 +498,13 @@ function SubmitAjax(post, link, back, method) {
 			if (typeof back != 'undefined' && back != '') {
 				GoTo(back, true);
 			}
+			if (data == 'errorsenha') {
+				$('form').prepend('<div class="card-panel red darken-1 center-align erro-alterar-senha" style="margin-bottom: 25px;"> <span class="white-text">Senha atual incorreta, tente novamente.</span> </div>');
+			}
+			if(data == 'usuariojacadastrado'){
+				Materialize.toast('<div class="center-align" style="width:100%;">Nome Murer Já cadastrado !!</div>', 20000, 'rounded');
+			}
+
 		},
 	    error: function(xhr) { // if error occured
 	    	removerLoader();
@@ -648,6 +667,13 @@ function VerificarForm() {
 			error = true;
 			return false;
 		};
+
+		if($('#alterar_senha').val() != $('#confirmar_alterar_senha').val())
+		{
+			AddError($('#confirmar_alterar_senha'),'Senhas são diferentes');
+			error = true;
+			return false;
+		}
 	});
 	$('textarea:enabled[required="true"]').each(function(){
 		if(VerificaItem($(this)) == true) {
