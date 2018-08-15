@@ -36,7 +36,16 @@ $(document).on('ready', function () {
 		var link = $(this).data('link');
 		MountModalInteiro(modal, link);
 	});
+
 	$(document).on('click', '.modal-input', function (e) {
+		e.preventDefault();
+		$('#modalinput label').text($(this).data('nome'));
+		$('#modalinput input:not(#id)').prop('name', $(this).data('collum')).val('');
+		$('#modalinput #id').val($(this).data('id'));
+		$('#modalinput').modal('open');
+	});
+
+	$(document).on('click', '.modal-select', function (e) {
 		e.preventDefault();
 		$('#modalinput label').text($(this).data('nome'));
 		$('#modalinput input:not(#id)').prop('name', $(this).data('collum')).val('');
@@ -64,6 +73,7 @@ $(document).on('ready', function () {
 	$(document).on('click', '.ajax-submit', function(e) {
 		e.preventDefault();
 		var form = $(this).closest('form');
+		console.log(form);
 		
 		var post = form.serializeArray();
 		var link = $(this).data('href');
@@ -121,7 +131,7 @@ $(document).on('ready', function () {
 	    edge: 'right', // Choose the horizontal origin
 	    closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
 	    draggable: true // Choose whether you can drag to open on touch screens,
-	});
+	  });
 
 	window.onpopstate = function() {
 		GoTo(location.pathname, false);
@@ -280,29 +290,29 @@ function UploadFile(isso) {
 	formData.append('arquivo', isso[0].files[0]);
 
 	$.ajax({
-	    url: link,
-	    type: 'POST',
-	    data: formData,
-	    dataType: 'json',
-	    processData: false,
-	    contentType: false,
-	    beforeSend: function(request) {
+		url: link,
+		type: 'POST',
+		data: formData,
+		dataType: 'json',
+		processData: false,
+		contentType: false,
+		beforeSend: function(request) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-faculdade", $('input[name="id_faculdade_sessao"]').val());
 			adicionarLoader();
-	    },
-	    success: function (data) {
-	    	$('input[name="imagem"]').val(data);
-	    },
-	    error: function (xhr, e, t) {
-	    	removerLoader();
-	        console.debug((xhr.responseText));
-	    },
-	    complete: function() {
+		},
+		success: function (data) {
+			$('input[name="imagem"]').val(data);
+		},
+		error: function (xhr, e, t) {
 			removerLoader();
-	    }
+			console.debug((xhr.responseText));
+		},
+		complete: function() {
+			removerLoader();
+		}
 	});
 }
 function UploadFilePerfil(isso) {
@@ -311,27 +321,27 @@ function UploadFilePerfil(isso) {
 	formData.append('arquivo', isso[0].files[0]);
 
 	$.ajax({
-	    url: link,
-	    type: 'POST',
-	    data: formData,
-	    dataType: 'json',
-	    processData: false,
-	    contentType: false,
-	    beforeSend: function(request) {
+		url: link,
+		type: 'POST',
+		data: formData,
+		dataType: 'json',
+		processData: false,
+		contentType: false,
+		beforeSend: function(request) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-faculdade", $('input[name="id_faculdade_sessao"]').val());
 			adicionarLoader();
-	    },
-	    success: function (data) {
-	    	$('input[name="imagem"]').val(data);
-	    },
-	    error: function (xhr, e, t) {
-	    	removerLoader();
-	        console.debug((xhr.responseText));
-	    },
-	    complete: function() {
+		},
+		success: function (data) {
+			$('input[name="imagem"]').val(data);
+		},
+		error: function (xhr, e, t) {
+			removerLoader();
+			console.debug((xhr.responseText));
+		},
+		complete: function() {
 			removerLoader();
 			var form = isso.closest('form');
 			
@@ -343,7 +353,7 @@ function UploadFilePerfil(isso) {
 			if (VerificarForm(form) == true) {
 				SubmitAjax(post, link, back, method);
 			}
-	    }
+		}
 	});
 }
 function adicionarLoader() {
@@ -381,14 +391,14 @@ function GoTo(link, state, top) {
 	    },
 	    complete: function() {
 	    	if (typeof top == 'undefined') {
-    			$('html,body').animate({ scrollTop: 0 }, 'slow');
+	    		$('html,body').animate({ scrollTop: 0 }, 'slow');
 	    	}
 	    	removerLoader();
 	    	$('.material-tooltip').remove();
 	    	$('.tooltipped').tooltip({delay: 50});
 	    	$('.modal').modal('close');
 	    }
-	});
+	  });
 	if (state == true) {
 		window.history.pushState('Sistema Quorp', 'Sistema Quorp', link);
 	}
@@ -410,7 +420,7 @@ function FormatInputs(focus) {
     labelYearSelect: 'Selecione um ano',
     format: 'dd/mm/yyyy',
     closeOnSelect: false // Close upon selecting a date,
-});
+  });
 	$(document).ready(function(){
 		$('.collapsible').collapsible();
 	});
@@ -476,7 +486,7 @@ function GetEndereco(cep, pai) {
     complete: function() {
     	removerLoader();
     }
-});
+  });
 }
 function SubmitAjax(post, link, back, method) {
 	$.ajax({
@@ -502,7 +512,7 @@ function SubmitAjax(post, link, back, method) {
 				$('form').prepend('<div class="card-panel red darken-1 center-align erro-alterar-senha" style="margin-bottom: 25px;"> <span class="white-text">Senha atual incorreta, tente novamente.</span> </div>');
 			}
 			if(data == 'usuariojacadastrado'){
-				Materialize.toast('<div class="center-align" style="width:100%;">Nome Murer Já cadastrado !!</div>', 20000, 'rounded');
+				Materialize.toast('<div class="center-align" style="width:100%;">Nome Murer Já cadastrado !!</div>',8000, 'rounded');
 			}
 
 		},
@@ -514,7 +524,7 @@ function SubmitAjax(post, link, back, method) {
 	    	removerLoader();
 	    	$('.modal').modal('close');
 	    }
-	});
+	  });
 }
 function SendAjax(post, link, back, method) {
 	$.ajax({
@@ -543,9 +553,9 @@ function SendAjax(post, link, back, method) {
 	    	removerLoader();
 	    	$('.modal').modal('close');
 
-			$('html,body').animate({ scrollTop: $('html').height() }, 'slow');
+	    	$('html,body').animate({ scrollTop: $('html').height() }, 'slow');
 	    }
-	});
+	  });
 }
 function SearchAjax(post, link, method, to) {
 	$.ajax({
@@ -575,7 +585,7 @@ function SearchAjax(post, link, method, to) {
 	    	$('.tooltipped').tooltip({delay: 50});
 	    	$('.modal').modal('close');
 	    }
-	});
+	  });
 }
 function Reestruturar(str) {
 	var i = 1;
@@ -629,7 +639,7 @@ function MountModalInteiro(modal, link) {
 	    	$('.tooltipped').tooltip({delay: 50});
 	    	FormatInputs();
 	    }
-	});
+	  });
 }
 function MountModal(modal, link) {
 	$.ajax({
@@ -657,12 +667,12 @@ function MountModal(modal, link) {
 	    	$('.tooltipped').tooltip({delay: 50});
 	    	FormatInputs();
 	    }
-	});
+	  });
 }
-function VerificarForm() {
+function VerificarForm(form) {
 	var error = false;
 	$('.error').remove();
-	$('input:enabled:not([type="hidden"])[required="true"]').each(function(){
+	form.find('input:enabled:not([type="hidden"])[required="true"]').each(function(){
 		if(VerificaItem($(this)) == true) {
 			error = true;
 			return false;
@@ -675,13 +685,13 @@ function VerificarForm() {
 			return false;
 		}
 	});
-	$('textarea:enabled[required="true"]').each(function(){
+	form.find('textarea:enabled[required="true"]').each(function(){
 		if(VerificaItem($(this)) == true) {
 			error = true;
 			return false;
 		};
 	});
-	$('select:enabled[required="true"]').each(function(){
+	form.find('select:enabled[required="true"]').each(function(){
 		if(VerificaItem($(this)) == true) {
 			error = true;
 			return false;
@@ -691,16 +701,19 @@ function VerificarForm() {
 		return true;
 	}
 }
+
 function VerificaItem(isso) {
-	if (isso.val() == '') {
+	//Adicionei o isso.val() == null para fazer funcionar no select já que =='' não pega select
+	if (isso.val() == '' || isso.val() == null) {
 		AddError(isso);
 		return true;
 	}
 }
-function AddError(isso) {
-	
+
+function AddError(isso) {	
 	isso.focus().addClass('observe-post').parent().append('<div class="error">Complete corretamente</div>');
 }
+
 function DesativeOnConta(modo) {
 	if (modo == 3) {
 		$('.empregado_funcionario').attr('disabled', true).val('');
@@ -746,7 +759,7 @@ function AddLike(id, id_usuario, gostei) {
 	    complete: function() {
 	    	removerLoader();
 	    }
-	});
+	  });
 }
 function SubmitRemove(id, link, pai) {
 	var post = {id: id, deletado: 1};
@@ -772,7 +785,7 @@ function SubmitRemove(id, link, pai) {
 	    complete: function() {
 	    	removerLoader();
 	    }
-	});
+	  });
 }
 function AdicionarContato(post) {
 	$.ajax({
@@ -799,7 +812,7 @@ function AdicionarContato(post) {
 	    complete: function() {
 	    	removerLoader();
 	    }
-	});
+	  });
 }
 function MountToAdd(val, where) {
 	$.ajax({
@@ -824,5 +837,5 @@ function MountToAdd(val, where) {
 	    complete: function() {
 	    	removerLoader();
 	    }
-	});
+	  });
 }
