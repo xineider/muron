@@ -53,35 +53,37 @@
 							</li>
 							<li><a class="waves-effect ajax-load" href="/sistema">Início</a></li>
 							<% if(usuario.tipo == 1) {
-							%>
-							<li><div class="small-line"></div></li>
-							<li><a class="waves-effect ajax-load" href="/sistema/usuarios/grupos">Lista de Transmissão</a></li>
-							<li><div class="small-line"></div></li>
-							<li><a class="waves-effect ajax-load" href="/sistema/chats">Chat</a></li>
-	<!-- 						<li><div class="small-line"></div></li> -->
-							<!-- <li><a class="waves-effect ajax-load" href="/sistema/grupos">Lista de Transmissão</a></li> -->
-							<%
+								%>
+								<li><div class="small-line"></div></li>
+								<li><a class="waves-effect ajax-load" href="/sistema/usuarios/grupos">Lista de Transmissão</a></li>
+								<li><div class="small-line"></div></li>
+								<li><a class="waves-effect ajax-load" href="/sistema/chats">Chat</a></li>
+								<!-- 						<li><div class="small-line"></div></li> -->
+								<!-- <li><a class="waves-effect ajax-load" href="/sistema/grupos">Lista de Transmissão</a></li> -->
+								<%
 							} else if (usuario.tipo == 2) {
-							%>
-							<li><div class="small-line"></div></li>
-							<li><a class="waves-effect ajax-load" href="/sistema/usuarios/grupos">Lista de Transmissão</a></li>
-							<li><div class="small-line"></div></li>
-							<li><a class="waves-effect ajax-load" href="/sistema/chats">Chat</a></li>
-							<li><div class="small-line"></div></li>
-							<li><a class="waves-effect ajax-load" href="/sistema/faculdades/alunos/relacao">Relação dos Alunos</a></li>
-							<%
+								%>
+								<li><div class="small-line"></div></li>
+								<li><a class="waves-effect ajax-load" href="/sistema/usuarios/grupos">Lista de Transmissão</a></li>
+								<li><div class="small-line"></div></li>
+								<li><a class="waves-effect ajax-load" href="/sistema/chats">Chat</a></li>
+								<li><div class="small-line"></div></li>
+								<li><a class="waves-effect ajax-load" href="/sistema/faculdades/alunos/relacao">Relação dos Alunos</a></li>
+								<%
 							} else {
-							%>
+								%>
+								<li><div class="small-line"></div></li>
+								<li><a class="waves-effect ajax-load" href="/sistema/usuarios/grupos">Lista de Transmissão</a></li>
+								<li><div class="small-line"></div></li>
+								<li><a class="waves-effect ajax-load" href="/sistema/chats">Chat</a></li>
+								<li><div class="small-line"></div></li>
+								<li><a class="waves-effect ajax-load" href="/sistema/usuarios/ver/<%= usuario.id %>">Perfil</a></li>
+								<!-- <li><div class="small-line"></div></li> -->
+								<!-- ADMINISTRAÇÃO MURON -->
+								<%}if(usuario.id == 1){%>
 							<li><div class="small-line"></div></li>
-							<li><a class="waves-effect ajax-load" href="/sistema/usuarios/grupos">Lista de Transmissão</a></li>
-							<li><div class="small-line"></div></li>
-							<li><a class="waves-effect ajax-load" href="/sistema/chats">Chat</a></li>
-							<li><div class="small-line"></div></li>
-							<li><a class="waves-effect ajax-load" href="/sistema/usuarios/ver/<%= usuario.id %>">Perfil</a></li>
-							<!-- <li><div class="small-line"></div></li> -->
-							<%
-							}
-							%>
+							<li><a class="waves-effect ajax-load" href="/sistema/admin">Administração</a></li>
+							<%}%>
 							<li><div class="small-line"></div></li>
 							<li><a class="waves-effect ajax-load" href="/sistema/sobre">Sobre o App</a></li>
 							<li><div class="small-line"></div></li>

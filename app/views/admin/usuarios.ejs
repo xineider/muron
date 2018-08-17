@@ -1,0 +1,80 @@
+<section>
+
+
+
+
+	<% if (usuario.id == 1) {%>
+	<div class="row white">
+		<div class="col s12">
+
+			<!-- só um teste para ver se é o admin mesmo -->
+
+			<table id='tabela-admin-usuario' class="centered">
+				<thead>
+					<tr>
+						<td>Nome</td>
+						<td>Login</td>
+						<td>Tipo</td>
+						<td>Nome Contato</td>
+						<td>Acessar</td>
+					</tr>
+				</thead>
+				<tbody>
+
+
+
+
+					<% if (typeof data.usuarios != 'undefined' && data.usuarios.length > 0) {
+						for (var i = data.usuarios.length - 1; i >= 0; i--) {
+							%>
+
+							<tr>
+								<td><%= data.usuarios[i].nome %></td>
+								<td><%= data.usuarios[i].nome_murer %></td>
+								<td>
+									<% switch(data.usuarios[i].tipo){ 
+										case 0: %>
+										Não Definido
+										<% break;
+										case 1: %>
+										Murer
+										<% break;
+										case 2: %>
+										Faculdade
+										<% break;
+										case 3: %>
+										Divulgador
+										<% break;
+										case 4:	%>
+										Estágio
+										<%break;}%>
+									</td>
+									<td><%= data.usuarios[i].nome_contato %></td>
+									<td>
+										<a href="/sistema/usuarios/ver/<%= data.usuarios[i].id %>" class="ajax-load">
+											<i class="fas fa-user-edit"></i>
+										</a>
+
+
+									</td>
+								</tr>
+
+								<%}} else {%>
+								<tr>
+									<td>Nenhum usuário foi encontrado.</td>
+								</tr>
+								<%} %>
+
+							</tbody>
+
+						</table>
+					</div>
+				</div>
+				<%}else{	%>
+				<div>
+					<p>Desculpe, somente o administrador pode ver esta página!</p>
+				</div>
+
+
+				<%}%>
+			</section>

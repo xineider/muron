@@ -356,6 +356,35 @@ body > div.row .col {
     height: 56px;
     line-height: 56px;
   }
+
+
+  /*ADMINISTRAÇÃO*/
+  .circulo-admin{
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    background: #0576d3;
+    left: 50%;
+    position: relative;
+    margin-left: -40px;
+  }
+
+  .circulo-admin i{
+    color:#fff;
+    font-size: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+
+  }
+
+
+
+
+
   .card .card-content {
     padding: 10px;
   }
