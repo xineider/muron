@@ -228,6 +228,18 @@ body > div.row .col {
   }
 
   /*Alterações Materialize*/
+
+  .btn-small{
+    width: 30px;
+    height: 30px;
+    line-height: 36px;
+  }
+
+  .btn-small i{
+    font-size: 1.2rem;
+    line-height: 30px;
+  }
+
   .line {
     border-bottom: 2px solid rgba(196, 196, 196, 0.6);
   }
@@ -451,6 +463,7 @@ body > div.row .col {
   .tab .fa {
     font-size: 2.5em;
   }
+
 /*.valign-wrapper {
   display:-webkit-box;
   display:-webkit-flex;

@@ -67,6 +67,9 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
 	// Recebendo o valor do post
 	POST = req.body;
+	console.log('///////////////////////// ENVIANDO POST PARA / //////////////////////////////////////////////');
+	console.log(POST);
+	console.log('/////////////////////////////////////////////////////////////////////////////////////////////');
 	model.Login(POST).then(data => {
 		console.log(data);
 		if (data.length > 0) {

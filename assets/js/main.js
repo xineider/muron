@@ -60,11 +60,17 @@ $(document).on('ready', function () {
 		
 		GoTo(link, true, top);
 	});
+
 	$(document).on('click', '.ajax-load-to', function(e) {
 		e.preventDefault();
-		var link = $(this).attr('href');
-		var to = $(this).data('to');
-		LoadTo(link, to);
+		var link = $(this).data('href');
+		var to = $(this).data('load-to');
+		LoadToClass(link, to);
+	});
+
+	$(document).on('click', '.remove', function (e) {
+		e.preventDefault();
+		$(this).closest('.pai').remove();
 	});
 	// $(document).on('click', '.remove', function (e) {
 	// 	e.preventDefault();
@@ -124,6 +130,22 @@ $(document).on('ready', function () {
 
 	$(document).on('change', '.cep', function () {
 		GetEndereco($(this).val(), $(this).closest('.row'));
+	});
+
+	$(document).on('change', 'select[name="id_filtro"]', function () {
+		console.log('Estou alterando o select, o valor é:');
+		console.log($(this).val());
+		var father = $(this).parent().attr('class')
+
+		//1 - faculdade, 2 - UF, 3 - cidade
+		if($(this).val() == 1){
+			console.log($(this).parent().attr('class'));
+			console.log($(this).parent().find('.simple_filtro_container'));
+			console.log(father);
+			LoadToClass('/sistema/postagens/adicionar/filtro/faculdades',father)
+		}
+
+
 	});
 
 	$(".button-collapse").sideNav({
@@ -787,6 +809,40 @@ function SubmitRemove(id, link, pai) {
 	    }
 	  });
 }
+
+function LoadToClass(link, to) {
+	$.ajax({
+		method: "GET",
+		async: true,
+		url: link,
+		beforeSend: function(request) {
+			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-faculdade", $('input[name="id_faculdade_sessao"]').val());
+			adicionarLoader();
+		},
+		success: function(data) {
+			$('.'+to).append(data);
+		},
+		error: function(xhr) {
+			removerLoader();
+		},
+		complete: function() {
+			removerLoader();
+		}
+	});
+}
+
+
+
+
+
+
+
+
+
+
 function AdicionarContato(post) {
 	$.ajax({
 		method: 'POST',

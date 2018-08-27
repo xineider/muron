@@ -19,12 +19,12 @@ router.get('/ver/:id', function(req, res, next) {
 		title = 'Estágios';
 	} else if(id == 2) {
 
-			title = 'Projetos';
+		title = 'Projetos';
 	} else if (id == 3) {
-			title = 'Faculdade';
+		title = 'Faculdade';
 
 	} else {		
-			title = 'Divulgação';
+		title = 'Divulgação';
 	}
 	console.log('^^^^^^^^^^^^^^^^^^^ ID DA CATEGORIA CLICADA ^^^^^^^^^^^^^^^^^^^^^^^^');
 	console.log(id);
@@ -75,18 +75,29 @@ router.get('/pesquisar/:pesquisa', function(req, res, next) {
 	});
 });
 
+
+router.get('/adicionar/filtro', function(req, res, next) {
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_filtro', data: data, usuario: req.session.usuario});
+});
+
+router.get('/adicionar/filtro/faculdades', function(req, res, next) {
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_filtro_faculdades', data: data, usuario: req.session.usuario});
+});
+
+
+
 // POST
 router.post('/uploadarquivo', function(req, res, next) {
-  var sampleFile = req.files.arquivo;
-  var nome = control.DateTimeForFile()+'_'+sampleFile.name;
+	var sampleFile = req.files.arquivo;
+	var nome = control.DateTimeForFile()+'_'+sampleFile.name;
 
   // Use the mv() method to place the file somewhere on your server
   sampleFile.mv('./assets/uploads/'+nome, function(err) {
-    if (err) {
-      return res.status(500).send(err);
-    }
+  	if (err) {
+  		return res.status(500).send(err);
+  	}
 
-		res.json(nome);
+  	res.json(nome);
   });
 });
 router.post('/tipo', function(req, res, next) {
@@ -104,12 +115,41 @@ router.post('/gostei', function(req, res, next) {
 		res.json(data);
 	});
 });
+
+
+router.get('/filtro/pesquisar/teste', function(req, res, next) {
+
+	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+});
+
+
+
+router.get('/filtro/pesquisar/faculdade/:nomeFaculdade', function(req, res, next) {
+
+	nomeFaculdade = req.params.nomeFaculdade;
+	console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFF NOME FACULDADE FFFFFFFFFFFFFFFFFFFFFFF');
+	console.log(nomeFaculdade);
+	console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF');
+
+	model.PesquisarFaculdade(nomeFaculdade).then(data => {
+		console.log('========================= procurar faculdade ===================');
+		console.log(data);
+		console.log('===============================================================');
+		res.json(data);
+	});
+});
+
+
+
+
 router.post('/cadastrar', function(req, res, next) {
 	POST = req.body;
 	POST.id_usuario = req.session.usuario.id;
 	POST.id_faculdade = req.session.usuario.id_faculdade;
 	POST.id_tipo = req.session.usuario.tipo;
+	console.log('EEEEEEEEEEEEEEEEEEEEEE ESTOU CADASTRANDO UMA POSTAGEM EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
 	console.log(POST);
+	console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
 	model.InsertPostagem(POST).then(data => {
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_criar', data: data, usuario: req.session.usuario});
 	});

@@ -2,65 +2,83 @@
 	<div class="container">
 		<div class="row">
 			<%
-				if (usuario.tipo == 2) {
-			%>
+			if (usuario.tipo == 2) {
+				%>
 				<input type="hidden" name="id_categoria" value="3">
 				<input type="hidden" name="id_grupo" value="0">
 				<input type="hidden" name="id_contato" value="0">
-			<%
-				} else {
-			%>
-			<input type="hidden" name="id_grupo" value="0">
-			<input type="hidden" name="id_contato" value="0">
-			<div class="col s12 m6">
-			  <select required="true" class="browser-default" name="tipo">
-			    <option value="" disabled <% usuario.tipo != 3 ? 'selected' : ''%> >Para*</option>
-
-			    <option value="0" <% usuario.tipo == 3 ? 'selected' : ''%> >Geral</option>
-			    <%if (usuario.tipo != 3){%>
-			    <option value="1">Lista</option>
-			    <option value="2">Contato</option>
-			    <%}%>
-			  </select>
-			</div>
-			<div class="col s12 m6" id="add-tipo">
-				
-			</div>
-			<div class="col s12 m6" style="position:relative;">
-			  <select required="true" class="browser-default" name="id_categoria">
-			    <option value="1" selected disabled>Categoria*</option>
 				<%
-				if (typeof data != 'undefined' && data.length > 0) {
-					for (var i = data.length - 1; i >= 0; i--) {
-						%>
-			    		<option value="<%= data[i].id %>"><%= data[i].nome %></option>
-						<%
-					}
-				}
+			} else {
 				%>
-			  </select>
-			  <br>
-			</div>
-			<%
-				}
+				<input type="hidden" name="id_grupo" value="0">
+				<input type="hidden" name="id_contato" value="0">
+				<div class="col s12 m6">
+					<select required="true" class="browser-default" name="tipo">
+						<option value="" disabled <% usuario.tipo != 3 ? 'selected' : ''%> >Para*</option>
+
+						<option value="0" <% usuario.tipo == 3 ? 'selected' : ''%> >Geral</option>
+						<%if (usuario.tipo != 3){%>
+						<option value="1">Lista</option>
+						<option value="2">Contato</option>
+						<%}%>
+					</select>
+				</div>
+				<div class="col s12 m6" id="add-tipo">
+
+				</div>
+				<div class="col s12 m6" style="position:relative;">
+					<select required="true" class="browser-default" name="id_categoria">
+						<option value="1" selected disabled>Categoria*</option>
+						<%
+						if (typeof data != 'undefined' && data.length > 0) {
+							for (var i = data.length - 1; i >= 0; i--) {
+								%>
+								<option value="<%= data[i].id %>"><%= data[i].nome %></option>
+								<%
+							}
+						}
+						%>
+					</select>
+				</div>
+
+				<% if(usuario.tipo == 3){%>
+				<div class="col s12 filtro_container_postagem">
+
+					<div class="card-panel row">
+						<p>Filtros</p>
+						
+
+	
+						<div class="row filtro_container"></div>
+
+						<button class="btn blue col s12 ajax-load-to" data-load-to='filtro_container' data-href='/sistema/postagens/adicionar/filtro'>Adicionar Filtro</button>
+
+					</div>
+				</div>
+
+				<%}%>
+
+
+				<%
+			}
 			%>
-	        <div class="row uploads word-wrap">
-	        	<label>Imagem *</label>
-			    <div class="file-field input-field col s12 m7" style="height: 64px;">
-			      <div class="btn white col s12">
-			        <span class="black-text">Procurar <i class="fa fa-search" aria-hidden="true"></i></span>
-			        <input type="file" data-href="/sistema/postagens/uploadarquivo" id="arquivo">
-			      </div>
-			      <div class="file-path-wrapper col 12" style="width: 100%;">
-			        <input class="file-path validate" type="text" placeholder="Ou arraste seu arquivo aqui">
-			      </div>
-			    </div>
-			    <input type="hidden" name="imagem">
-	        </div>
-		    <div class="input-field col s12" style="margin-top: 28px;">
-		      <textarea id="descricao" class="validate materialize-textarea" name="descricao"></textarea>
-		      <label for="descricao">Descrição</label>
-		    </div>
+			<div class="row uploads word-wrap">
+				<label>Imagem *</label>
+				<div class="file-field input-field col s12 m7" style="height: 64px;">
+					<div class="btn white col s12">
+						<span class="black-text">Procurar <i class="fa fa-search" aria-hidden="true"></i></span>
+						<input type="file" data-href="/sistema/postagens/uploadarquivo" id="arquivo">
+					</div>
+					<div class="file-path-wrapper col 12" style="width: 100%;">
+						<input class="file-path validate" type="text" placeholder="Ou arraste seu arquivo aqui">
+					</div>
+				</div>
+				<input type="hidden" name="imagem">
+			</div>
+			<div class="input-field col s12" style="margin-top: 28px;">
+				<textarea id="descricao" class="validate materialize-textarea" name="descricao"></textarea>
+				<label for="descricao">Descrição</label>
+			</div>
 		</div>
 		<div class="col s12 center">
 			<button class="g-blue white-text btn-large ajax-submit" data-href="/sistema/postagens/cadastrar/" data-action="/sistema/" style="border-radius: 10px; font-size: 1.2em; font-weight: bold; margin-bottom: 5px;">Publicar</button>
