@@ -422,7 +422,7 @@ function GoTo(link, state, top) {
 	    }
 	  });
 	if (state == true) {
-		window.history.pushState('Sistema Quorp', 'Sistema Quorp', link);
+		window.history.pushState('Muron', 'Muron', link);
 	}
 }
 function FormatInputs(focus) {
