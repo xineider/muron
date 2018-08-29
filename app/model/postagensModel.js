@@ -110,22 +110,7 @@ class PostagensModel {
 			});
 	}
 
-	PesquisarFaculdade(nomeFaculdade) {
-		return new Promise(function(resolve, reject) {
-
-			console.log('000000000000000 NOME FACULDADE 00000000000000000000');
-			console.log(nomeFaculdade);
-			console.log('00000000000000000000000000000000000000000');			
-
-			helper.Query("SELECT id, NO_IES \
-				FROM faculdades_inep WHERE NO_IES LIKE %?% OR SGL_IES LIKE %?% "+ where,[0,array]).then(data => {
-					console.log('------------------- PESQUISA DE FACULDADES ---------------');
-					console.log(data);
-					console.log('----------------------------------------------------------');
-					resolve(dataProcessoPorNumero);
-				});
-			});
-	}
+	
 	GetComentarios(id) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT a.id,\

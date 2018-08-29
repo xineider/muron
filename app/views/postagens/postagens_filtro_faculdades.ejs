@@ -1,6 +1,6 @@
 <div class="col s12 pai valign-wrapper">
 	<div class="input-field col s10">
-		<input type="text" id="faculdade-filtro" class="autocomplete">
+		<input type="text" id="faculdade-filtro" class="autocomplete" placeholder="Digite o nome da faculdade">
 		<label for="faculdade-filtro">Faculdade</label>
 	</div>
 	<div class="col s2 center-align">
@@ -22,9 +22,10 @@
 				method:'GET',
 				async:true,
 				dataType:'json',
-				url:'/sistema/postagens/filtro/pesquisar/teste',
+				url:'/sistema/api/filtro/pesquisar/faculdade/'+request.term,
 				beforeSend: function() {
-					console.log(request);		
+					console.log(request);	
+					console.log(request.term);	
 				},
 				success: function(data) {
 					console.log(data);
@@ -35,8 +36,8 @@
 
 					response($.map(data, function (item) {
 						return {
-							label: item.nome,
-							value: item.id
+							label: item.name,
+							value: item.name
 						};
 					}));
 

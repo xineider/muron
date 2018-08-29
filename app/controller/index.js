@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
 
 		if (req.session.usuario.tipo == 1) {
 			model.GetCategoriasAtualizacoes(data_faculdade).then(cat_fac=>{
-				data.categorias = cat_fac;				
+				data.categorias = cat_fac;
 				model.GetCategoriasAtualizacoes(data_projeto).then(cat_proj=> {
 					data.categorias.push(cat_proj[0]);
 					model.GetCategoriasAtualizacoes(data_estagio).then(cat_est=> {

@@ -116,32 +116,6 @@ router.post('/gostei', function(req, res, next) {
 	});
 });
 
-
-router.get('/filtro/pesquisar/teste', function(req, res, next) {
-
-	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
-});
-
-
-
-router.get('/filtro/pesquisar/faculdade/:nomeFaculdade', function(req, res, next) {
-
-	nomeFaculdade = req.params.nomeFaculdade;
-	console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFF NOME FACULDADE FFFFFFFFFFFFFFFFFFFFFFF');
-	console.log(nomeFaculdade);
-	console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF');
-
-	model.PesquisarFaculdade(nomeFaculdade).then(data => {
-		console.log('========================= procurar faculdade ===================');
-		console.log(data);
-		console.log('===============================================================');
-		res.json(data);
-	});
-});
-
-
-
-
 router.post('/cadastrar', function(req, res, next) {
 	POST = req.body;
 	POST.id_usuario = req.session.usuario.id;

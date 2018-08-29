@@ -140,9 +140,9 @@ $(document).on('ready', function () {
 		//1 - faculdade, 2 - UF, 3 - cidade
 		if($(this).val() == 1){
 			console.log($(this).parent().attr('class'));
-			console.log($(this).parent().find('.simple_filtro_container'));
+			console.log($(this).parent().find('.select_filtro_container'));
 			console.log(father);
-			LoadToClass('/sistema/postagens/adicionar/filtro/faculdades',father)
+			LoadToClass('/sistema/postagens/adicionar/filtro/faculdades',father);
 		}
 
 
