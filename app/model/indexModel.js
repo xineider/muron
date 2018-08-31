@@ -147,7 +147,6 @@ class IndexModel {
 	
 	GetCategoriasAtualizacoes(POST) {
 		return new Promise(function(resolve, reject) {
-
 			/*Seleciona as datas de cadastro que forem maiores que o usuario acessou de 
 			acordo com a categoria selecionada*/
 			var selectGeral = 'SELECT a.id FROM postagens as a \
@@ -226,6 +225,19 @@ class IndexModel {
 	
 	GetCategoriasAtualizacoesFaculdade(POST) {
 		return new Promise(function(resolve, reject) {
+			console.log('DDDDDDDDDDDDDDDD DADOS DAS CATEGORIAS ATUALIZAÇÕES DDDDDDDDDDDDDDDD');
+			console.log(POST);
+			console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
+
+			var selectGeral = 'SELECT a.id FROM postagens as a \
+			LEFT JOIN postagens_categorias_view as b ON a.id_categoria = b.id_categoria\
+			WHERE \
+			(a.data_cadastro > b.data_acesso AND b.id_usuario = ? and b.id_categoria = ? AND a.deletado = ?) \
+			AND( \
+			(a.tipo = 0 AND  AND a.id_usuario IN (SELECT id_aluno FROM faculdades_relacoes_aluno WHERE id_faculdade = ? AND deletado = ?))  \
+			OR ()\
+			)' ;
+
 			var where_add = ' AND ((id_grupo = ? OR id_grupo IN ((SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?))) \
 			AND (id_contato = ? OR id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = postagens.id_usuario AND deletado = ?))) \
 			AND (SELECT data_acesso FROM postagens_categorias_view WHERE id_usuario = ? AND postagens.data_cadastro > data_acesso AND id_categoria = ?) \
