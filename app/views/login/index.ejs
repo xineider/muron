@@ -5,10 +5,12 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<link rel='stylesheet' href='/assets/css/font-awesome-login.min.css' />
 	<link rel='stylesheet' href='/assets/css/materialize.min.css' />
+	<link rel='stylesheet' href='/assets/css/jquery-ui.min.css' />
 	<link rel='stylesheet' href='/assets/css/style.css' />
 	<script src="/assets/js/jquery.min.js"></script>
 	<script src="/assets/js/jquery.mask.js"></script>
 	<script src="/assets/js/materialize.min.js"></script>
+	<script src="/assets/js/jquery-ui.min.js"></script>
 </head>
 <body class="row login">
 	<!-- Esqueceu Senha -->
@@ -42,161 +44,170 @@
 					</div>
 					<div class="col s12">
 						<label>Faculdade</label>
-						<select class="browser-default faculdade-lista" name="id_faculdade">
-							<option value="" disabled selected>Selecione</option>
-						</select>
+						<input class="faculdade_filtro" required="true" type="text" name="id_faculdade" placeholder="Nome da Faculdade">
 
-						<!-- <input required="true" type="text" name="faculdade"> -->
-					</div>
-					<div class="col s12 input-field">
-						<label>Curso</label>
-						<input type="text" name="curso">
-					</div>
-					<div class="col s12">
-						<label>Situação</label>
-						<select class="browser-default" name="status">
+<!-- 						<select class="browser-default faculdade-lista" name="id_faculdade">
 							<option value="" disabled selected>Selecione</option>
-							<option value="1">Aluno</option>
-							<option value="2">Ex-Aluno</option>
-							<option value="3">Professor</option>
-							<option value="4">Colaborador</option>
 						</select>
-					</div>
-					<div class="col s12 input-field">
-						<label>Login (Nome MurEr)</label>
-						<input required="true" type="text" name="nome_murer">
-					</div>
-					<div class="col s12 input-field">
-						<label>Senha</label>
-						<input required="true" type="password" name="senha">
-					</div>
-					<div class="col s12 input-field">
-						<label>Senha Confirmar</label>
-						<input required="true" type="password" name="senha_confirmar">
-					</div>
-					<div class="col s12">
-						<button class="btn blue white-text" style="width: 100%;">Finalizar Cadastro</button>
-					</div>
+					-->
+					<!-- <input required="true" type="text" name="faculdade"> -->
 				</div>
-			</form>
-		</div>
-	</div>
-	<!-- Cadastre-se Parceiro -->
-	<div id="modalparceiro" class="modal">
-		<div class="modal-content">
-			<p><b>Cadastro de Parceiro</b></p>
-			<form id="cadastra-parceiro" method="POST" action="" onsubmit="">
-				<div class="row">
-					<div class="col s12">
-						<label>Tipo de Parceiro</label>
-						<select required="true" class="browser-default" name="tipo">
-							<option value="" disabled selected>Selecione</option>
-							<option value="2">Faculdade</option>
-							<option value="3">Divulgador</option>
-						</select>
-					</div>
-					<div class="col s12 input-field">
-						<label>Nome</label>
-						<input required="true" type="text" name="nome">
-					</div>
-					<div class="col s12 input-field">
-						<label>Login (Nome MurEr)</label>
-						<input required="true" type="text" name="nome_murer">
-					</div>
-					<div class="col s12 input-field">
-						<label>E-mail</label>
-						<input required="true" type="email" name="email">
-					</div>
-					<div class="col s12 input-field">
-						<label>Telefone</label>
-						<input type="text" name="celular" class="tel" required="true">
-					</div>
-					<div class="col s12 input-field">
-						<label>Nome de Contato</label>
-						<input required="true" type="text" name="nome_contato">
-					</div>
-					<div class="col s12 input-field">
-						<label>Site</label>
-						<input type="text" name="site">
-					</div>
-					<div class="col s12 input-field">
-						<label>Descrição</label>
-						<textarea name="descricao" class="materialize-textarea" placeholder="Detalhes da sua atividade..."></textarea>
-					</div>
-					<div class="col s12 input-field">
-						<label>Senha</label>
-						<input required="true" type="password" name="senha">
-					</div>
-					<div class="col s12 input-field">
-						<label>Confirmar Senha</label>
-						<input required="true" type="password" name="senha_confirmar">
-					</div>
-					<div class="col s12">
-						<button class="btn blue white-text" style="width: 100%;">Finalizar Cadastro</button>
-					</div>
+				<div class="col s12 input-field">
+					<label>Curso</label>
+					<input type="text" name="curso">
 				</div>
-			</form>
-		</div>
+				<div class="col s12">
+					<label>Situação</label>
+					<select class="browser-default" name="status">
+						<option value="" disabled selected>Selecione</option>
+						<option value="1">Aluno</option>
+						<option value="2">Ex-Aluno</option>
+						<option value="3">Professor</option>
+						<option value="4">Colaborador</option>
+					</select>
+				</div>
+				<div class="col s12 input-field">
+					<label>Login (Nome MurEr)</label>
+					<input required="true" type="text" name="nome_murer">
+				</div>
+				<div class="col s12 input-field">
+					<label>Senha</label>
+					<input required="true" type="password" name="senha">
+				</div>
+				<div class="col s12 input-field">
+					<label>Senha Confirmar</label>
+					<input required="true" type="password" name="senha_confirmar">
+				</div>
+				<div class="col s12">
+					<button class="btn blue white-text" style="width: 100%;">Finalizar Cadastro</button>
+				</div>
+			</div>
+		</form>
 	</div>
-	<main>
-		<section>
-			<div>
-				<form method="POST" action="/">
-					<div class="icon center-align">
-						<img style="max-height: 320px;" src="/assets/imgs/logo.png">
-					</div>
-					<div class="box arrow_box">
-						<%
-						if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == '404') {
-							%>
-							<div class="card-panel red darken-1 center-align">
-								<span class="white-text"><%= erro %></span>
-							</div>
-							<%
-						} else if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == 'login') {
-							%>
-							<div class="card-panel red darken-1 center-align">
-								<span class="white-text"><%= erro %></span>
-							</div>
-							<%
-						}
+</div>
+<!-- Cadastre-se Parceiro -->
+<div id="modalparceiro" class="modal">
+	<div class="modal-content">
+		<p><b>Cadastro de Parceiro</b></p>
+		<form id="cadastra-parceiro" method="POST" action="" onsubmit="">
+			<div class="row">
+				<div class="col s12">
+					<label>Tipo de Parceiro</label>
+					<select id="tipo_parceiro_sel" required="true" class="browser-default" name="tipo">
+						<option value="" disabled selected>Selecione</option>
+						<option value="2">Faculdade</option>
+						<option value="3">Divulgador</option>
+					</select>
+				</div>
+				<div class="col s12 input-field">
+					<label>Nome</label>
+					<input required="true" type="text" name="nome" >
+				</div>
+				<div class="col s12 input-field">
+					<label>Login (Nome MurEr)</label>
+					<input required="true" type="text" name="nome_murer">
+				</div>
+				<div class="col s12 input-field">
+					<label>E-mail</label>
+					<input required="true" type="email" name="email">
+				</div>
+				<div class="col s12 input-field">
+					<label>Telefone</label>
+					<input type="text" name="celular" class="tel" required="true">
+				</div>
+				<div class="col s12 input-field">
+					<label>Nome de Contato</label>
+					<input required="true" type="text" name="nome_contato">
+				</div>
+				<div class="col s12 input-field">
+					<label>Site</label>
+					<input type="text" name="site">
+				</div>
+				<div class="col s12 input-field">
+					<label>Descrição</label>
+					<textarea name="descricao" class="materialize-textarea" placeholder="Detalhes da sua atividade..."></textarea>
+				</div>
+				<div class="col s12 input-field">
+					<label>Senha</label>
+					<input required="true" type="password" name="senha">
+				</div>
+				<div class="col s12 input-field">
+					<label>Confirmar Senha</label>
+					<input required="true" type="password" name="senha_confirmar">
+				</div>
+				<div class="col s12">
+					<button class="btn blue white-text" style="width: 100%;">Finalizar Cadastro</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<main>
+	<section>
+		<div>
+			<form method="POST" action="/">
+				<div class="icon center-align">
+					<img style="max-height: 320px;" src="/assets/imgs/logo.png">
+				</div>
+				<div class="box arrow_box">
+					<%
+					if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == '404') {
 						%>
-						<div class="container-small">
-							<div class="inputs">
-								<div class="input-field valign-wrapper">
-									<i class="fa fa-user-o prefix grey-text center-align" aria-hidden="true"></i>
-									<input type="text" name="nome_murer" id="nome_murer" class="validate" placeholder="Login (Nome MurEr)">
-								</div>
-								<div class="input-field">
-									<i class="fa fa-key prefix grey-text center-align" aria-hidden="true"></i>
-									<input type="password" name="senha" id="senha" class="validate" placeholder="Senha">
-								</div>
+						<div class="card-panel red darken-1 center-align">
+							<span class="white-text"><%= erro %></span>
+						</div>
+						<%
+					} else if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == 'login') {
+						%>
+						<div class="card-panel red darken-1 center-align">
+							<span class="white-text"><%= erro %></span>
+						</div>
+						<%
+					}else if(typeof alertaAcesso != 'undefined' && typeof tipo_alerta !='undefined' && tipo_alerta == 'login'){
+					%>
+						<div class="card-panel yellow darken-2 center-align">
+							<span class="white-text"><%= alertaAcesso %>
+								<i class="fa <%= iconeAlerta %>" aria-hidden="true"></i>
+							</span>
+						</div>
+
+					<%}%>
+					<div class="container-small">
+						<div class="inputs">
+							<div class="input-field valign-wrapper">
+								<i class="fa fa-user-o prefix grey-text center-align" aria-hidden="true"></i>
+								<input type="text" name="nome_murer" id="nome_murer" class="validate" placeholder="Login (Nome MurEr)">
 							</div>
-							<div class="center-align">
-								<button class="btn-large waves-effect waves-teal waves-light">
-									Entrar
-								</button>
-							</div>
-							<p class="acc">
-								<a class="white-text" href="#modalforgot">Esqueceu sua senha? <span class="blue-text text-darken-2">Clique aqui</span></a><br>
-								<a class="white-text" href="#modalnew">Ainda não tem conta? <span class="blue-text text-darken-2">Cadastre-se</span></a>
-							</p>
-							<div class="or"><span>OU</span></div>
-							<div class="row">
-								<br>
-								<a class="white-text" href="#modalparceiro">Quer ser um parceiro? <span class="blue-text text-darken-2">Cadastre-se</span></a><br>
+							<div class="input-field">
+								<i class="fa fa-key prefix grey-text center-align" aria-hidden="true"></i>
+								<input type="password" name="senha" id="senha" class="validate" placeholder="Senha">
 							</div>
 						</div>
+						<div class="center-align">
+							<button class="btn-large waves-effect waves-teal waves-light">
+								Entrar
+							</button>
+						</div>
+						<p class="acc">
+							<a class="white-text" href="#modalforgot">Esqueceu sua senha? <span class="blue-text text-darken-2">Clique aqui</span></a><br>
+							<a class="white-text" href="#modalnew">Ainda não tem conta? <span class="blue-text text-darken-2">Cadastre-se</span></a>
+						</p>
+						<div class="or"><span>OU</span></div>
+						<div class="row">
+							<br>
+							<a class="white-text" href="#modalparceiro">Quer ser um parceiro? <span class="blue-text text-darken-2">Cadastre-se</span></a><br>
+						</div>
 					</div>
-				</form>
-			</div>
-		</section>
-	</main>
+				</div>
+			</form>
+		</div>
+	</section>
+</main>
 </body>
 <script type="text/javascript">
 	$(document).on('ready', function () {
 		$('.modal').modal();
-		getFaculdades();
+
 
 		$('.tel').mask('(00) Z0000-0000', {
 			translation: {
@@ -206,39 +217,11 @@
 			}
 		});
 
-		function getFaculdades(){
-			$.ajax({
-				method:'GET',
-				async:true,
-				url:'/sistema/api/get-faculdades',
-				beforeSend: function() {			
-				},
-				success: function(data) {		
-					var select = $('.faculdade-lista');
-					var listitems = '';
-					$.each(data,function(key,value){
-						listitems += '<option value="'+value.id+'">'+ value.nome + '</option>';
-					});
-					listitems += "<option id='semfaculdade'>Minha Faculdade não está na lista</option>";
-					$('.faculdade-lista').append(listitems);
-
-				},
-				error: function(xhr) {
-					console.log(xhr);
-				},
-				complete: function() {
-				}
-			});
-		}
 
 		function showOptions(option){
 			console.log('estou sendo clicado no sem faculdade');
 			console.log(option);
 		}
-
-		$('#semfaculdade').on('click',function(e){
-			console.log('estou clicando no sem faculdade');
-		})
 
 		$('#cadastra-usuario').on('submit', function(e) {
 			e.preventDefault();
@@ -274,6 +257,7 @@
 			  });
 			};
 		});
+
 		$('#cadastra-parceiro').on('submit', function(e) {
 			e.preventDefault();
 			var form = $(this);
@@ -307,6 +291,7 @@
 				  });
 			}
 		});
+
 		$(document).on('click', '.resend-pass', function(e) {
 			e.preventDefault();
 			var form = $(this).closest('form');
@@ -324,6 +309,69 @@
 			    }
 			  });
 		});
+
+		$(document).on('change', 'select[id="tipo_parceiro_sel"]', function () {
+			console.log('estou mudando :D');
+			console.log($(this).val());
+
+			if($(this).val() == '2'){
+				console.log('faculdade');
+
+				// $(".container_nome_parceiro").append("<label>Faculdade</label> \
+				// 	<input class='faculdade_filtro' required='true' type='text' name='id_faculdade' placeholder='Nome da Faculdade'>");
+
+				// $(document).on('keydown.autocomplete',selector,function(){
+				// 	console.log('estou digitando algo no input do faculdade_filtro');
+				// 	console.log(this);
+				// 	$(this).autocomplete({sorce:options});
+				
+				// });
+			}else{
+				console.log('divulgador');
+			}
+
+		});
 	});
+
+function autoComplete(element,url){
+	$(element).autocomplete({
+		source: function( request, response ){
+			$.ajax({
+				method:'GET',
+				async:true,
+				dataType:'json',
+				url:url+request.term,
+				beforeSend: function() {
+					console.log(request);	
+					console.log(request.term);	
+				},
+				success: function(data) {
+					console.log(data);
+					response(data);
+					console.log('---------------- O REQUEST -----------');
+					console.log(request);
+					console.log('--------------------------------------');
+
+					response($.map(data, function (item) {
+						return {
+							label: item.name,
+							value: item.name
+						};
+					}));
+
+				},
+				error: function(xhr) {
+					console.log(xhr);
+				},
+				complete: function() {
+				}
+			});
+		}
+	});
+}
+
+autoComplete('.faculdade_filtro','/sistema/api/pesquisar/faculdade/');
+
 </script>
+
 </html>

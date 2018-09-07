@@ -21,7 +21,7 @@ router.get('/get-faculdades',function(req,res,next){
 	});
 });
 
-router.get('/filtro/pesquisar/faculdade/:nomeFaculdade', function(req, res, next) {
+router.get('/pesquisar/faculdade/:nomeFaculdade', function(req, res, next) {
 
 	nomeFaculdade = req.params.nomeFaculdade;
 	console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFF NOME FACULDADE FFFFFFFFFFFFFFFFFFFFFFF');
@@ -40,6 +40,7 @@ router.get('/filtro/pesquisar/faculdade/:nomeFaculdade', function(req, res, next
 router.post('/', function(req, res, next) {
 	res.json(0);
 });
+
 router.post('/recuperar/senha', function(req, res, next) {
 	var post = req.body;
 	var html = "<p>Sua nova senha é: <b>"+nova_senha+"</b>";
@@ -47,6 +48,7 @@ router.post('/recuperar/senha', function(req, res, next) {
 	control.SendMail(post.email, 'Recuperação de Senha - MurOn', html, text);
 	res.json(10);
 });
+
 router.post('/cadastrar/usuario', function(req, res, next) {
 	var post = req.body;
 	var post_limpo = model.VerificarSenha(post);
@@ -55,29 +57,29 @@ router.post('/cadastrar/usuario', function(req, res, next) {
 	console.log('888888888888888888888888888888888888888888888888888888888888888');
 
 	if (Object.keys(post_limpo).length > 0) {
-		model.CadastrarUsuario(post_limpo).then(id_usuario => {
-			console.log('ESTOU AQUI');
-			console.log(id_usuario);
-			console.log(id_usuario>0);
-			console.log(id_usuario[0]);
-			console.log(typeof id_usuario);
-			console.log('ola marilene');
-			console.log(id_usuario == '');
+		/*Para identificar se o nome do murer for muron, se tiver muron no nome não cadastrar*/
+		model.VerSeMuron(post_limpo.nome_murer).then(nome_murer_muron => {
+			if(nome_murer_muron == ''){
 
-			if(id_usuario != ''){
-				data_insert = {id_faculdade: post_limpo.id_faculdade, id_aluno: id_usuario};
-				console.log('7777777777777777777777777777 DATA INSERT 777777777777777777777777');
-				console.log(data_insert);
-				console.log('77777777777777777777777777777777777777777777777777777777777777777');
-				model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
-					res.json(data);
+				model.CadastrarUsuario(post_limpo).then(id_usuario => {
+					console.log('ESTOU AQUI');
+					console.log(id_usuario);
+
+					if(id_usuario != ''){
+						data_insert = {id_faculdade: post_limpo.id_faculdade, id_aluno: id_usuario};
+						console.log('7777777777777777777777777777 DATA INSERT 777777777777777777777777');
+						console.log(data_insert);
+						console.log('77777777777777777777777777777777777777777777777777777777777777777');
+						model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
+							res.json(data);
+						});
+					}else{
+						res.json([]);
+					}
 				});
 			}else{
 				res.json([]);
-			}
-
-
-			
+			};			
 		});
 	} else {
 		res.json([]);
@@ -92,17 +94,27 @@ router.post('/cadastrar/parceiro', function(req, res, next) {
 	console.log('0000000000000000000000000000000000000000000000000000000000');
 
 	if (Object.keys(post_limpo).length > 0) {
-		console.log('§§§§§§§§§§§§§ post_limpo > 0 §§§§§§§§§§§§§§§§§§§§§§§§§');
-		model.CadastrarParceiro(post_limpo).then(id_parceiro => {
-	
+		/*Para identificar se o nome do murer for muron, se tiver muron no nome não cadastrar*/
+		model.VerSeMuron(post_limpo.nome_murer).then(nome_murer_muron => {
+			if(nome_murer_muron == ''){
+				console.log('§§§§§§§§§§§§§ post_limpo > 0 §§§§§§§§§§§§§§§§§§§§§§§§§');
+				post_limpo.validacao = 1;
+				console.log('666666666 POST LIMPO APOS VALIDACAO 66666666666666666666666');
+				console.log(post_limpo);
+				console.log('66666666666666666666666666666666666666666666666666666666666');
+				model.CadastrarParceiro(post_limpo).then(id_parceiro => {
+					res.json(id_parceiro);
 
-			// if(post_limpo.tipo == 2){
-			// 	post_limpo.id_faculdade = id_parceiro; 
-			// 	model.InsertFaculdadeRelacao(post_limpo).then(id_faculdade =>{								
-			// 	});
-			// };
+					// if(post_limpo.tipo == 2){
+					// 	post_limpo.id_faculdade = id_parceiro; 
+					// 	model.InsertFaculdadeRelacao(post_limpo).then(id_faculdade =>{								
+					// 	});
+					// };				
+				});
 
-			res.json(id_parceiro);	
+			}else{
+				res.json([]);
+			};
 		});
 	} else {
 		res.json([]);

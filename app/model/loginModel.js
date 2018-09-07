@@ -8,7 +8,7 @@ class IndexModel {
 	Login(POST) {
 		return new Promise(function(resolve, reject) {
 			// Adicione a query com scape(?) e os respectivos valores em um array simples
-			helper.Query('SELECT id, tipo, nome_murer, email,id_faculdade FROM usuarios WHERE nome_murer = ? AND senha = ? AND deletado = ?', [POST.nome_murer, POST.senha, 0]).then(data => {
+			helper.Query('SELECT id, tipo, nome_murer, email,id_faculdade FROM usuarios WHERE nome_murer = ? AND senha = ?', [POST.nome_murer, POST.senha]).then(data => {
 		  		if (typeof data != 'undefined' && data.length > 0) {
 			        var hash_login = helper.Encrypt(Date());
 			        data[0].hash_login = hash_login;
@@ -28,5 +28,21 @@ class IndexModel {
 			});
 		});
 	}
+	VerificarValidado(id){
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT id,validacao FROM usuarios WHERE id = ?', [id]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	VerificarDeletado(id){
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT id FROM usuarios WHERE id = ? AND deletado = ?', [id,1]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+
 }
 module.exports = IndexModel;

@@ -79,11 +79,23 @@
 			console.log(nomeFaculdade);
 			console.log('00000000000000000000000000000000000000000');			
 
-			helper.Query('SELECT id, NO_IES as name \
+			/*Seleciono a pesquisa de acordo com o que foi digitado e coloco entre parênteses() a sigla se tiver alguma*/
+			helper.Query('SELECT id, \
+				(CASE WHEN SGL_IES = "" THEN NO_IES ELSE\
+				(CASE WHEN SGL_IES != "" THEN CONCAT(NO_IES," (",SGL_IES,")")\
+				END)END) as name\
 				FROM faculdades_inep WHERE NO_IES LIKE CONCAT("%", ?, "%") OR SGL_IES LIKE CONCAT("%", ?, "%") ORDER BY NO_IES ASC LIMIT 5',[nomeFaculdade,nomeFaculdade]).then(data => {
 					console.log('------------------- PESQUISA DE FACULDADES ---------------');
 					console.log(data);
 					console.log('----------------------------------------------------------');
+					resolve(data);
+				});
+			});
+	}
+
+	VerSeMuron(nome_murer){
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT id FROM usuarios WHERE ? LIKE CONCAT("%muron%") LIMIT 1',[nome_murer]).then(data => {
 					resolve(data);
 				});
 			});

@@ -111,10 +111,33 @@
 					<form method="POST" action="">
 						<input id="id" type="hidden" name="id">
 						<input type="hidden" name="deletado" value="1">
-						<button style="width: 100%; text-align: center;" class="modal-action modal-close waves-effect waves-green btn-flat red lighten-2 white-text ajax-submit"
+						<button style="width: 100%; text-align: center;" class="modal-action modal-close waves-effect waves-red btn-flat red lighten-2 white-text ajax-submit"
 						data-href=""
 						data-action=""
 						>Excluir</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="modalvalidar" class="modal" style="overflow: hidden;">
+		<div class="modal-content">
+			<p style="text-align: center;" id="texto">Validar</p>
+		</div>
+		<div class="modal-footer">
+			<div class="row">
+				<div class="col s12 m6">
+					<a style="width: 100%; text-align: center;" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat grey lighten-2">Cancelar</a>
+				</div>
+				<div class="col s12 m6">
+					<form method="POST" action="">
+						<input id="id" type="hidden" name="id">
+						<input type="hidden" name="validacao" value="0">
+						<button style="width: 100%; text-align: center;" class="modal-action modal-close waves-effect waves-green btn-flat green lighten-2 white-text ajax-submit"
+						data-href=""
+						data-action=""
+						>Validar</button>
 					</form>
 				</div>
 			</div>

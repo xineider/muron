@@ -10,16 +10,15 @@
 					<tr>
 						<td>Nome</td>
 						<td>Login</td>
-						<td>Tipo</td>
+						<td>E-mail</td>
+						<td>Telefone</td>
 						<td>Nome Contato</td>
-						<td>Acessar</td>
+						<td>Tipo</td>
+						<td>Validar</td>
 						<td>Excluir</td>
 					</tr>
 				</thead>
 				<tbody>
-
-
-
 
 					<% if (typeof data.usuarios != 'undefined' && data.usuarios.length > 0) {
 						for (var i = data.usuarios.length - 1; i >= 0; i--) {
@@ -28,6 +27,9 @@
 							<tr>
 								<td><%= data.usuarios[i].nome %></td>
 								<td><%= data.usuarios[i].nome_murer %></td>
+								<td><%= data.usuarios[i].email %></td>
+								<td><%= data.usuarios[i].celular %></td>
+								<td><%= data.usuarios[i].nome_contato %></td>
 								<td>
 									<% switch(data.usuarios[i].tipo){ 
 										case 0: %>
@@ -46,22 +48,21 @@
 										Estágio
 										<%break;}%>
 									</td>
-									<td><%= data.usuarios[i].nome_contato %></td>
+								<td>
+									<a class="modal-validate-mount" data-href="#modalvalidar" data-texto="Tem certeza que deseja aprovar esta conta? Esta ação não pode ser desfeita." data-to="/sistema/admin/aprovarUsuario/" data-back="/sistema/admin/permissao-faculdades" data-id="<%= data.usuarios[i].id %>">
+										<i class="fas fa-check green-text text-darken-1"></i>
+									</a>
+								</td>
 									<td>
-										<a href="/sistema/usuarios/ver/<%= data.usuarios[i].id %>" class="ajax-load">
-											<i class="fas fa-user-edit"></i>
-										</a>
-									</td>
-									<td>
-										<a class="modal-remover-mount" data-href="#modaldeletar" data-texto="Tem certeza que deseja desativar esta conta? Esta ação não pode ser desfeita." data-to="/sistema/usuarios/desativar/" data-back="/sistema/admin/usuarios" data-id="<%= data.usuarios[i].id %>" style="margin-bottom:10px;width: 100%;">
-										<i class="fas fa-user-times red-text text-darken-1"></i>
+										<a class="modal-remover-mount" data-href="#modaldeletar" data-texto="Tem certeza que deseja desativar esta conta? Esta ação não pode ser desfeita." data-to="/sistema/usuarios/desativar/" data-back="/sistema/admin/permissao-faculdades" data-id="<%= data.usuarios[i].id %>">
+											<i class="fas fa-times red-text text-darken-1"></i>
 										</a>
 									</td>
 								</tr>
 
 								<%}} else {%>
 								<tr>
-									<td>Nenhum usuário foi encontrado.</td>
+									<td colspan="8">Nenhum usuário foi encontrado.</td>
 								</tr>
 								<%} %>
 

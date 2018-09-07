@@ -393,6 +393,13 @@ body > div.row .col {
 
   }
 
+  .circulo-admin i.fa-cog,.circulo-admin i.fa-plus{
+    color: #f9f9f9;
+    top: 70%;
+    left: 70%;
+    font-size: 20px;
+  }
+
 
 
 
@@ -834,3 +841,8 @@ table.striped>tbody>tr>td {
     box-shadow: 0 1px 4px -1px black;
     text-shadow: 0 1px black;
   } 
+
+
+  .ui-widget-content{
+    z-index: 9999;
+  }

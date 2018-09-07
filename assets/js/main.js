@@ -24,6 +24,22 @@ $(document).on('ready', function () {
 		$(modal).find('#id').val(id);
 		$(modal).find('button').data('href', to).data('action', back);
 	});
+
+	$(document).on('click', '.modal-validate-mount', function (e) {
+		e.preventDefault();
+		var modal = $(this).data('href');
+		var texto = $(this).data('texto');
+		var id = $(this).data('id');
+		var to = $(this).data('to');
+		var back = $(this).data('back');
+
+		$(modal).modal('open');
+		$(modal).find('#texto').text(texto);
+		$(modal).find('#id').val(id);
+		$(modal).find('button').data('href', to).data('action', back);
+	});
+
+
 	$(document).on('click', '.modal-mount', function (e) {
 		e.preventDefault();
 		var modal = $(this).data('href');
@@ -84,6 +100,8 @@ $(document).on('ready', function () {
 		var post = form.serializeArray();
 		var link = $(this).data('href');
 		var back = $(this).data('action');
+		console.log(link);
+		console.log(back);
 		var metodo = $(this).data('method');
 		var method = (metodo != undefined && metodo != '') ? metodo : 'POST';
 		if (VerificarForm(form) == true) {
