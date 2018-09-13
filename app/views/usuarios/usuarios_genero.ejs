@@ -1,0 +1,21 @@
+
+    <h4>Alterar Campo</h4>
+    <form method="POST" action="" enctype="multipart/form-data">
+      <input type="hidden" name="id" value="<%= usuario.id %>">
+
+      <div class="row">
+        <div class="col s12">
+          <label>Gênero</label>
+          <select class="browser-default" name="genero">            
+            <option <%- data.perfil[0].genero == 'Não Declarado' ? 'selected':''%> value="Não Declarado">Não Declarado</option>
+            <option <%- data.perfil[0].genero == 'Masculino' ? 'selected':''%> value="Masculino">Masculino</option>
+            <option <%- data.perfil[0].genero == 'Feminino' ? 'selected':''%> value="Feminino">Feminino</option>
+            <option <%- data.perfil[0].genero == 'Transgênero' ? 'selected':''%> value="Transgênero">Transgênero</option>
+          </select>          
+        </div>
+      </div>
+
+
+   <a class="btn blue darken-1 ajax-submit" data-href="/sistema/usuarios/atualizar/" data-action="/sistema/usuarios/ver/<%= usuario.id %>#info-user">Alterar</a>
+   
+    </form>

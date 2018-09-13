@@ -1,0 +1,120 @@
+
+<h4>Alterar Campo</h4>
+<form method="POST" action="" enctype="multipart/form-data">
+  <input type="hidden" name="id" value="<%= usuario.id %>">
+
+  <div class="row">
+    <div class="col s12">
+      <label>UF</label>
+      <select class="browser-default" id="estados" name="estado" title="Escolha seu estado">
+        
+      </select>    
+    </div>
+  </div>
+  <div class="cpç s12">
+    <label>Cidade</label>
+    <input class="cidade_filtro" disabled="true" type="text" name="cidade_filtro" placeholder="Cidade"> 
+  </div>
+
+  <a class="btn blue darken-1 ajax-submit" data-href="/sistema/usuarios/atualizar/" data-action="/sistema/usuarios/ver/<%= usuario.id %>#info-user">Alterar</a>
+
+</form>
+<script src="/assets/js/jquery-ui.min.js"></script>
+
+<script type="text/javascript">
+
+ function autoComplete(element,url){
+  $(element).autocomplete({
+    source: function( request, response ){
+      $.ajax({
+        method:'GET',
+        async:true,
+        dataType:'json',
+        url:url+request.term,
+        beforeSend: function() {
+          console.log(request); 
+          console.log(request.term);  
+        },
+        success: function(data) {
+          console.log(data);
+          response(data);
+          console.log('---------------- O REQUEST -----------');
+          console.log(request);
+          console.log('--------------------------------------');
+
+          response($.map(data, function (item) {
+            return {
+              label: item.name,
+              value: item.name
+            };
+          }));
+
+        },
+        error: function(xhr) {
+          console.log(xhr);
+        },
+        complete: function() {
+        }
+      });
+    }
+  });
+}
+
+autoComplete('.uf_filtro','/sistema/api/pesquisar/faculdade/');
+
+
+function Estados_Cidades() {
+  $.getJSON('/assets/json/estados_cidades.json', function (data) {
+    var items = [];
+    var options = '<option value="0" disabled selected>Escolha seu estado</option>'; 
+    $.each(data, function (key, val) {
+      console.log('============ KEY ============');
+      console.log(key);
+      console.log('=============================');
+      console.log('____________ VAL ____________');
+      console.log(val);
+      console.log('_____________________________');
+      options += '<option value="' + val.nome + '">' + val.sigla + '</option>';
+    });         
+    $("#estados").html(options);
+    $("#estados").change(function () {
+      /*só para ter certeza que o disabled e o selected estão funcionando*/
+      if($('#estados').val() != 0){
+        $('.cidade_filtro').prop('disabled',false);
+        $('.cidade_filtro').focus();
+      }
+
+    });
+
+    //   var options_cidades = '';
+    //   var str = "";
+    //   $("#estados option:selected").each(function () {
+    //     str += $(this).text();
+    //   });
+    //   $.each(data, function (key, val) {
+    //     if(val.nome == str) {             
+    //       $.each(val.cidades, function (key_city, val_city) {
+    //         options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+    //       });             
+    //     }
+    //   });
+    //   $("#cidades").html(options_cidades);
+    // }).change();
+  });
+  // body...
+}
+
+Estados_Cidades();
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

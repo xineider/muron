@@ -1,0 +1,21 @@
+
+    <h4>Alterar Campo</h4>
+    <form method="POST" action="" enctype="multipart/form-data">
+      <input type="hidden" name="id" value="<%= usuario.id %>">
+
+      <div class="row">
+        <div class="col s12">
+          <label>Situação</label>
+          <select class="browser-default" name="status">            
+            <option <%- data.perfil[0].status == 1 ? 'selected':''%> value="1">Aluno</option>
+            <option <%- data.perfil[0].status == 2 ? 'selected':''%> value="2">Ex-Aluno</option>
+            <option <%- data.perfil[0].status == 3 ? 'selected':''%> value="3">Professor</option>
+            <option <%- data.perfil[0].status == 4 ? 'selected':''%> value="4">Colaborador</option>
+          </select>          
+        </div>
+      </div>
+
+
+   <a class="btn blue darken-1 ajax-submit" data-href="/sistema/usuarios/atualizar/" data-action="/sistema/usuarios/ver/<%= usuario.id %>#info-user">Alterar</a>
+   
+    </form>

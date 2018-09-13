@@ -58,6 +58,18 @@ class UsuariosModel {
 		});
 	}
 
+	GetSituacaoAluno(id){
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT status FROM usuarios WHERE id = ?', [id]).then(data => {
+				console.log('......................... STATUS ..............');
+				console.log(data);
+				console.log('...............................................');
+				resolve(data);
+			});
+		});
+
+	}
+
 
 
 	GetUsuarioAlterarSenha(id,senhaAtual) {

@@ -1,0 +1,60 @@
+
+<h4>Alterar Campo</h4>
+<form method="POST" action="" enctype="multipart/form-data">
+  <input type="hidden" name="id" value="<%= usuario.id %>">
+
+  <div class="row">
+    <div class="col s12">
+      <label>Faculdade</label>
+      <input class="faculdade_filtro" required="true" type="text" name="id_faculdade" placeholder="Nome da Faculdade">     
+    </div>
+  </div>
+
+
+  <a class="btn blue darken-1 ajax-submit" data-href="/sistema/usuarios/atualizar/" data-action="/sistema/usuarios/ver/<%= usuario.id %>#info-user">Alterar</a>
+
+</form>
+<script src="/assets/js/jquery-ui.min.js"></script>
+
+<script type="text/javascript">
+
+ function autoComplete(element,url){
+  $(element).autocomplete({
+    source: function( request, response ){
+      $.ajax({
+        method:'GET',
+        async:true,
+        dataType:'json',
+        url:url+request.term,
+        beforeSend: function() {
+          console.log(request); 
+          console.log(request.term);  
+        },
+        success: function(data) {
+          console.log(data);
+          response(data);
+          console.log('---------------- O REQUEST -----------');
+          console.log(request);
+          console.log('--------------------------------------');
+
+          response($.map(data, function (item) {
+            return {
+              label: item.name,
+              value: item.name
+            };
+          }));
+
+        },
+        error: function(xhr) {
+          console.log(xhr);
+        },
+        complete: function() {
+        }
+      });
+    }
+  });
+}
+
+autoComplete('.faculdade_filtro','/sistema/api/pesquisar/faculdade/');
+
+</script>

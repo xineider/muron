@@ -62,6 +62,40 @@ router.get('/grupos/ver/:id', function(req, res, next) {
 });
 
 
+router.get('/situacao/:id', function(req, res, next) {
+	id = req.params.id;
+	console.log('-------------- DATA DA SITUACAO ------------------------');
+	console.log(data);
+	console.log('--------------------------------------------------------');
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_situacao', data: data, usuario: req.session.usuario});
+});
+
+
+router.get('/genero/:id', function(req, res, next) {
+	id = req.params.id;
+	console.log('-------------- DATA DO GENERO ------------------------');
+	console.log(data);
+	console.log('--------------------------------------------------------');
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_genero', data: data, usuario: req.session.usuario});
+});
+
+router.get('/faculdade/:id', function(req, res, next) {
+	id = req.params.id;
+	console.log('-------------- DATA DA FACULDADE ------------------------');
+	console.log(data);
+	console.log('--------------------------------------------------------');
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_faculdade', data: data, usuario: req.session.usuario});
+});
+
+router.get('/ufcidade/:id', function(req, res, next) {
+	id = req.params.id;
+	console.log('-------------- DATA DA FACULDADE ------------------------');
+	console.log(data);
+	console.log('--------------------------------------------------------');
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_ufcidade', data: data, usuario: req.session.usuario});
+});
+
+
 router.get('/alterar-senha/', function(req, res, next) {
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/alterar_senha', data: data, usuario: req.session.usuario});
 });
@@ -191,7 +225,7 @@ model.GetUsuarioAlterarSenha(req.session.usuario.id,POST.senha_atual).then(data_
 		res.json('errorsenha');
 	}
 
-	});
+});
 });
 
 router.post('/cadastro', function(req, res, next) {

@@ -61,7 +61,7 @@ $(document).on('ready', function () {
 		$('#modalinput').modal('open');
 	});
 
-	$(document).on('click', '.modal-select', function (e) {
+	$(document).on('click', '.modal-include-html', function (e) {
 		e.preventDefault();
 		$('#modalinput label').text($(this).data('nome'));
 		$('#modalinput input:not(#id)').prop('name', $(this).data('collum')).val('');
@@ -324,6 +324,7 @@ $(window).on('load', function (e) {
 
 
 // Funções
+
 function UploadFile(isso) {
 	var link = isso.data('href');
 	var formData = new FormData();
@@ -355,6 +356,7 @@ function UploadFile(isso) {
 		}
 	});
 }
+
 function UploadFilePerfil(isso) {
 	var link = isso.data('href');
 	var formData = new FormData();

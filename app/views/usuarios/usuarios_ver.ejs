@@ -152,7 +152,7 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 
 						<div class="card-panel panel-full">
 							<div class="card-content">
-								Universidade
+								Faculdade <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-mount right" data-href="#modalinfo" data-link="/usuarios/faculdade/'+data.perfil[i].id+'"><i class="fa fa-edit"></i></span>' : '' %>
 							</div>
 							<div class="card-title">
 								<%= typeof data.perfil[i].faculdade != 'undefined' && data.perfil[i].faculdade != '' ? data.perfil[i].faculdade : 'Não Informado' %>
@@ -170,108 +170,116 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 
 						<div class="card-panel panel-full">
 							<div class="card-content">
+								Situação <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-mount right" data-href="#modalinfo" data-link="/usuarios/situacao/'+data.perfil[i].id+'"><i class="fa fa-edit"></i></span>' : '' %>
+							</div>
+
+									<!-- <div class="card-content">
 								Situação <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input right" data-nome="Situação" data-id="'+data.perfil[i].id+'" data-collum="status"><i class="fa fa-edit"></i></span>' : '' %>
 							</div>
+						-->
+
+						<div class="card-title">
+							<% switch(data.perfil[i].status){ 
+								case 0: %>
+								Não Definido
+								<% break;
+								case 1: %>
+								Aluno
+								<% break;
+								case 2: %>
+								Ex-Aluno
+								<% break;
+								case 3: %>
+								Professor
+								<% break;
+								case 4:	%>
+								Divulgador
+								<%break;}%>
+							</div>
+						</div>
+
+
+						<div class="card-panel panel-full">
+							<div class="card-content">
+								Gênero <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-mount right" data-href="#modalinfo" data-link="/usuarios/genero/'+data.perfil[i].id+'"><i class="fa fa-edit"></i></span>' : '' %>
+							</div>
 							<div class="card-title">
-								<% switch(data.perfil[i].status){ 
-									case 0: %>
-									Não Definido
-									<% break;
-									case 1: %>
-									Aluno
-									<% break;
-									case 2: %>
-									Ex-Aluno
-									<% break;
-									case 3: %>
-									Professor
-									<% break;
-									case 4:	%>
-									Divulgador
-									<%break;}%>
-								</div>
+								<%= data.perfil[i].genero %>
+							</div>
+						</div>
+
+						<div class="card-panel panel-full">
+							<div class="card-content">
+								Data de Nascimento <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input right" data-nome="Data de Nascimento" data-id="'+data.perfil[i].id+'" data-collum="nascimento"><i class="fa fa-edit"></i></span>' : '' %>
+							</div>
+							<div class="card-title">
+								<%= data.perfil[i].nascimento %>
+							</div>
+						</div>
+
+						<div class="card-panel panel-full">
+							<div class="card-content">
+								UF(onde reside) <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-mount right" data-href="#modalinfo" data-link="/usuarios/ufcidade/'+data.perfil[i].id+'"><i class="fa fa-edit"></i></span>' : '' %>
+							</div>
+							<div class="card-title">
+								<%= data.perfil[i].uf %>
 							</div>
 
+							<br/>
 
-							<div class="card-panel panel-full">
-								<div class="card-content">
-									Gênero <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input right" data-nome="Gênero" data-id="'+data.perfil[i].id+'" data-collum="genero"><i class="fa fa-edit"></i></span>' : '' %>
-								</div>
-								<div class="card-title">
-									<%= data.perfil[i].genero %>
-								</div>
+							<div class="card-content">
+								Cidade(onde reside)
 							</div>
-
-							<div class="card-panel panel-full">
-								<div class="card-content">
-									Data de Nascimento <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input right" data-nome="Data de Nascimento" data-id="'+data.perfil[i].id+'" data-collum="nascimento"><i class="fa fa-edit"></i></span>' : '' %>
-								</div>
-								<div class="card-title">
-									<%= data.perfil[i].nascimento %>
-								</div>
+							<div class="card-title">
+								<%= data.perfil[i].cidade %>
 							</div>
-
-							<div class=" col s6 card-panel panel-full">
-								<div class="card-content">
-									UF(onde reside) <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input right" data-nome="UF" data-id="'+data.perfil[i].id+'" data-collum="uf"><i class="fa fa-edit"></i></span>' : '' %>
-								</div>
-								<div class="card-title">
-									<%= data.perfil[i].uf %>
-								</div>
-							</div>
-
-							<div class=" col s6 card-panel panel-full">
-								<div class="card-content">
-									Cidade(onde reside) <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input right" data-nome="Cidade" data-id="'+data.perfil[i].id+'" data-collum="cidade"><i class="fa fa-edit"></i></span>' : '' %>
-								</div>
-								<div class="card-title">
-									<%= data.perfil[i].cidade %>
-								</div>
-							</div>
-
-							<%}%>
-
-							<!-- Sou o próprio usuário vendo meu perfil -->
-							<% if(data.perfil[i].id == usuario.id) {%>
-
-							<a href="/sistema/usuarios/alterar-senha/" class="btn waves-effect waves-light green darken-1 ajax-load" style="margin-bottom:10px;width: 100%;">
-								Alterar Senha
-							</a>
-
-							<%}%>
-
-
-							<% if(data.perfil[i].id == usuario.id || usuario.id == 1) {%>
-
-							<a class="red darken-1 btn modal-remover-mount" data-href="#modaldeletar" data-texto="Tem certeza que deseja desativar esta conta? Esta ação não pode ser desfeita." data-to="/sistema/usuarios/desativar/" data-back="/sistema/usuarios/contatos" data-id="<%= data.perfil[i].id %>" style="margin-bottom:10px;width: 100%;">
-								Desativar Conta
-							</a>
-
-
-							<%}%>
 
 
 						</div>
+
+						<%}%>
+
+						<!-- Sou o próprio usuário vendo meu perfil -->
+						<% if(data.perfil[i].id == usuario.id) {%>
+
+						<a href="/sistema/usuarios/alterar-senha/" class="btn waves-effect waves-light green darken-1 ajax-load" style="margin-bottom:10px;width: 100%;">
+							Alterar Senha
+						</a>
+
+						<%}%>
+
+
+						<% if(data.perfil[i].id == usuario.id || usuario.id == 1) {%>
+
+						<a class="red darken-1 btn modal-remover-mount" data-href="#modaldeletar" data-texto="Tem certeza que deseja desativar esta conta? Esta ação não pode ser desfeita." data-to="/sistema/usuarios/desativar/" data-back="/sistema/usuarios/contatos" data-id="<%= data.perfil[i].id %>" style="margin-bottom:10px;width: 100%;">
+							Desativar Conta
+						</a>
+
+
+						<%}%>
+
+
 					</div>
-
-
 				</div>
+
 
 			</div>
-			<%
-			if (usuario.tipo == 1) {
-				%>
-				<div id="test-swipe-3" class="swipe-margin">
-				</div>
-				<%
-			}
-			%>
-		</section>
-		<script type="text/javascript">
-			$('#footer').fadeOut('slow');
-		</script>
+
+		</div>
 		<%
-	}
+		if (usuario.tipo == 1) {
+			%>
+			<div id="test-swipe-3" class="swipe-margin">
+			</div>
+			<%
+		}
+		%>
+	</section>
+	<script type="text/javascript">
+		$('#footer').fadeOut('slow');
+	</script>
+	<%
+}
 } else {
 	if(error == 1){ %>
 
