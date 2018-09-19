@@ -41,6 +41,7 @@ router.get('/ver/:id', function(req, res, next) {
 	});
 });
 router.get('/contatos/', function(req, res, next) {
+	console.log('cliquei aqui nos contatos');
 	model.GetUsuarioContatos(req.session.usuario.id).then(data => {
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_contatos', data: data, usuario: req.session.usuario});
 	});
@@ -116,9 +117,24 @@ router.post('/uploadfoto/', function(req, res, next) {
 
 router.post('/contatos/', function(req, res, next) {
 	POST = req.body;
-	model.GetUsuarios(POST).then(data => {
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
-	});
+	console.log('AAAAAAAAAAAAA FIZ UM POST EM CONTATOS AAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	console.log(POST);
+	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	console.log(req.session.usuario);
+
+	if(req.session.usuario.tipo == 2){
+		model.GetUsuariosFaculdade(POST,req.session.usuario.id_faculdade).then(data => {
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
+		});
+	}else{
+		model.GetUsuarios(POST).then(data => {
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
+		});
+
+	}
+
+
+	
 });
 
 router.post('/grupos/sair', function(req, res, next) {

@@ -99,6 +99,18 @@ class UsuariosModel {
 			});
 		});
 	}
+
+	GetUsuariosFaculdade(data,id_faculdade) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT id as id_usuario2, nome_murer, imagem, email FROM usuarios WHERE deletado = ? AND id_faculdade = ? AND (nome_murer like CONCAT("%", ?, "%") OR nome like CONCAT("%", ?, "%") OR email like CONCAT("%", ?, "%"))', [0, id_faculdade,data.pesquisar, data.pesquisar, data.pesquisar]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+
+
+
 	GetUsuarioGrupos(id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT b.id, b.nome, b.id_lider FROM grupos_usuarios as a\
@@ -120,6 +132,9 @@ class UsuariosModel {
 				FROM usuarios_contatos as a\
 				LEFT JOIN usuarios as b ON b.id = a.id_usuario2\
 				WHERE a.deletado = ? AND b.deletado = ? AND a.id_usuario = ?', [0, 0, id]).then(data => {
+					console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGGG GETUSUARIOCONTATOS GGGGGGGGGGGGGGGGGGGGGGGGGGG');
+					console.log(data);
+					console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG');
 					resolve(data);
 				});
 			});
