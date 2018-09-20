@@ -26,10 +26,10 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 					<input type="hidden" name="id_usuario2" value="<%= data.perfil[i].id %>">
 					<%
 					if (data.perfil[i].amigos <= 0 && data.perfil[i].id != usuario.id) {
-						%>
-						<a href="" class="btn blue darken-2 ajax-submit" data-href="/sistema/usuarios/contatos/adicionar/" data-action="/sistema/usuarios/ver/<%= data.perfil[i].id %>" style="width: 100%;margin-top: -8px;">Adicionar Usuário</a>
+						if(data.perfil[i].tipo == 1 || usuario.tipo == 3 || (data.perfil[i].tipo == 2 && data.perfil[i].id_faculdade == usuario.id_faculdade)) {%>
+							<a href="" class="btn blue darken-2 ajax-submit" data-href="/sistema/usuarios/contatos/adicionar/" data-action="/sistema/usuarios/ver/<%= data.perfil[i].id %>" style="width: 100%;margin-top: -8px;">Adicionar Usuário</a>
 						<%
-					} else if(data.perfil[i].id != usuario.id) {
+					}} else if(data.perfil[i].id != usuario.id) {
 						%>
 						<a href="" class="btn red darken-2 ajax-submit" data-href="/sistema/usuarios/contatos/remover/" data-action="/sistema/usuarios/ver/<%= data.perfil[i].id %>" style="width: 100%;margin-top: -8px;">Excluir dos Contatos</a>
 						<%
