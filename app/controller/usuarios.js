@@ -49,6 +49,10 @@ router.get('/ver/:id', function(req, res, next) {
 router.get('/contatos/', function(req, res, next) {
 	console.log('cliquei aqui nos contatos');
 	model.GetUsuarioContatos(req.session.usuario.id).then(data => {
+		data.usuario = req.session.usuario;
+		console.log('[[[[[[[[[[[[[[[[[[[[[[ DADOS DOS CONTATOS [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[');
+		console.log(data);
+		console.log('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_contatos', data: data, usuario: req.session.usuario});
 	});
 });
@@ -133,7 +137,14 @@ router.post('/contatos/', function(req, res, next) {
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
 		});
 	}else{
+		POST.id_usuario = req.session.usuario.id;
 		model.GetUsuarios(POST).then(data => {
+
+			console.log('GGGGGGGGGGGGGGGGGGGGG DADOS DOS USUARIOS GGGGGGGGGGGGGGGGGGGG');
+			console.log(data);
+			console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG');
+
+
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
 		});
 

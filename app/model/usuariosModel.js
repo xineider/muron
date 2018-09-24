@@ -94,13 +94,32 @@ class UsuariosModel {
 			});
 	
 	}
+
+
 	GetUsuarios(data) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT id as id_usuario2, nome_murer, imagem, email FROM usuarios WHERE deletado = ? AND (nome_murer like CONCAT("%", ?, "%") OR nome like CONCAT("%", ?, "%") OR email like CONCAT("%", ?, "%"))', [0, data.pesquisar, data.pesquisar, data.pesquisar]).then(data => {
+			console.log('QQQQQQQQQQQQQQQQQQQQQQQQQ DATA PESQUISAR QQQQQQQQQQQQQQQQQQQQQ');
+			console.log(data);
+			console.log('QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ');
+
+			helper.Query('SELECT id as id_usuario2, nome_murer, imagem, email,tipo, \
+				(SELECT COUNT(b.id) FROM usuarios_contatos as b WHERE b.id_usuario2 = a.id AND b.id_usuario = ? AND b.deletado = ? LIMIT 1) as amigos\
+				FROM usuarios as a WHERE deletado = ? AND (nome_murer like CONCAT("%", ?, "%") OR nome like CONCAT("%", ?, "%") OR email like CONCAT("%", ?, "%"))', [data.id_usuario,0,0, data.pesquisar, data.pesquisar, data.pesquisar]).then(data => {
 				resolve(data);
 			});
 		});
 	}
+
+
+	// 	GetUsuarios(data) {
+	// 	return new Promise(function(resolve, reject) {
+	// 		helper.Query('SELECT id as id_usuario2, nome_murer, imagem, email FROM usuarios WHERE deletado = ? AND (nome_murer like CONCAT("%", ?, "%") OR nome like CONCAT("%", ?, "%") OR email like CONCAT("%", ?, "%"))', [0, data.pesquisar, data.pesquisar, data.pesquisar]).then(data => {
+	// 			resolve(data);
+	// 		});
+	// 	});
+	// }
+
+
 
 	GetUsuariosFaculdade(data,id_faculdade) {
 		return new Promise(function(resolve, reject) {

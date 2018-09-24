@@ -3,24 +3,40 @@
   <%
   if (typeof data != 'undefined' && data.length > 0) {
     for (var i = data.length - 1; i >= 0; i--) {
-  %>
-  <a href="/sistema/usuarios/ver/<%= data[i].id_usuario2 %>" class="ajax-load">
-    <li class="collection-item avatar">
-      <img src="/assets/uploads/<%= data[i].imagem %>" alt="" class="circle">
-      <span class="title"><%= data[i].nome_murer %></span>
-      <p style="line-height: 9px;"><small><%= data[i].nome %><br>
-        <%= data[i].email %></small>
-      </p>
-    </li>
-  </a>
-<%
-  }
-} else {
-%>
-  <li class="center-align">
-    Nenhum contato foi encontrado com essa pesquisa
-  </li>
-<%
-}
-%>
-</ul>
+      %>
+
+
+      <div style="position:relative">
+
+        <a href="/sistema/usuarios/ver/<%= data[i].id_usuario2 %>" class="ajax-load">
+          <li class="collection-item avatar">
+            <img src="/assets/uploads/<%= data[i].imagem %>" alt="" class="circle">
+            <span class="title"><%= data[i].nome_murer %></span>
+            <p style="line-height: 9px;"><small><%= data[i].nome %><br>
+              <%= data[i].email %></small>
+            </p>
+          </li>
+        </a>
+
+        <%if((data[i].amigos == 0) && (data[i].tipo == 1) ){%>
+
+        <div class="secondary-content" style="position: absolute;top: 16px;right: 16px;">
+          <p>
+            <input type="checkbox" id="selecionar-usuario-<%= data[i].id_usuario2%>" />
+            <label for="selecionar-usuario-<%= data[i].id_usuario2%>"></label>
+          </p>
+        </div>
+
+
+        <%
+      }
+    }
+    } else {
+      %>
+      <li class="center-align">
+        Nenhum contato foi encontrado com essa pesquisa
+      </li>
+      <%
+    }
+    %>
+  </ul>
