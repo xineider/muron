@@ -52,4 +52,45 @@ router.post('/aprovarUsuario/', function(req, res, next) {
 });
 
 
+
+router.post('/alterarSenhaUsuario/', function(req, res, next) {
+	POST = req.body;
+	console.log('JJJJJJJ ESTOU DENTRO DO alterarSenhaUsuario JJJJJJJJJJJJJJJJJJJJJJJJJJJJJ');
+	console.log(POST);
+	console.log('JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ');
+
+	var emailParceiro;
+
+	model.GetUsuarioById(POST.id).then(data_usuario=>{
+		console.log(data_usuario);
+
+
+
+	model.AlterarSenhaUsuario(POST).then(dataSenha=>{
+		console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRR RETORNO DA SENHA RRRRRRRRRRRRRRRRRRRRRRRRRR');
+		console.log(dataSenha);
+		console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
+
+		control.SendMail(data_usuario[0].email,'Senha Alterada em Muron',
+			'Olá, sua senha foi alterada pelo Administrado no Muron segue sua nova senha: ' + dataSenha + 
+			'Recomendamos assim que entrar alterar esta senha gerada.Não responda esta mensagem, ela é enviada automaticamente.',
+			'Olá, sua senha foi alterada pelo Administrado no Muron segue sua nova senha: '+ dataSenha +
+			'<br>Você pode acessar o Aplicativo do celular com seu Nome Murer e com esta senha, \
+			recomendamos fortemente que você troque a sua senha no seu perfil. '+
+			'<br>Não mostre seu login e senha para ninguém. A sua conta é responsabilidade sua.'+
+			'<br>Não responda esta mensagem, ela é enviada automaticamente.');
+
+
+	});
+		});
+});
+
+
+
+
+
+
+
+
+
 module.exports = router;

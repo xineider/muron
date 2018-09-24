@@ -14,6 +14,7 @@
 						<td>Nome Contato</td>
 						<td>Acessar</td>
 						<td>Excluir</td>
+						<td>Alterar Senha</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -57,6 +58,13 @@
 										<i class="fas fa-user-times red-text text-darken-1"></i>
 										</a>
 									</td>
+
+									<td>
+										<a class="modal-one-item-mount" data-href="#modaloneitem" data-texto="Tem certeza que deseja alterar a senha desta conta?" data-texto-botao="Alterar Senha" data-cor-botao="green lighten-2" data-to="/sistema/admin/alterarSenhaUsuario/" data-back="/sistema/admin/usuarios" data-id="<%= data.usuarios[i].id %>" style="margin-bottom:10px;width: 100%;">
+										<i class="fas fa-key yellow-text text-darken-2"></i>
+										</a>
+									</td>
+
 								</tr>
 
 								<%}} else {%>

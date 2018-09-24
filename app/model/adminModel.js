@@ -61,6 +61,28 @@ class PostagensModel {
 		});
 	}
 
+	AlterarSenhaUsuario(POST){
+		return new Promise(function(resolve, reject) {
+			
+			var senha = Math.random().toString(36).substr(2, 8);
+			console.log(senha);
+
+			POST.senha = helper.Encrypt(senha);
+
+			console.log('------------ DADOS DO POST DE ALTERAR SENHA USUARIO -----------');
+			console.log(POST);
+			console.log('---------------------------------------------------------');
+			
+
+
+			helper.Update('usuarios', POST).then(data => {
+				resolve(senha);
+			});
+		});
+	}
+
+
+
 	GetUsuarioById(id){
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT * FROM usuarios WHERE id = ? and deletado = ?', [id,0]).then(data => {

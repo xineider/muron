@@ -40,6 +40,30 @@ $(document).on('ready', function () {
 	});
 
 
+	$(document).on('click', '.modal-one-item-mount', function (e) {
+		e.preventDefault();
+		var modal = $(this).data('href');
+		var texto = $(this).data('texto');
+		var textoBotao = $(this).data('texto-botao');
+		var corBotao = $(this).data('cor-botao');
+		console.log(corBotao);
+		var id = $(this).data('id');
+		var to = $(this).data('to');
+		var back = $(this).data('back');
+
+		$(modal).modal('open');
+		$(modal).find('#texto').text(texto);
+		$(modal).find("#texto_botao").text(textoBotao);
+		$(modal).find("#texto_botao").addClass(corBotao);
+
+		$(modal).find('#id').val(id);
+		$(modal).find('button').data('href', to).data('action', back);
+	});
+
+
+
+
+
 	$(document).on('click', '.modal-mount', function (e) {
 		e.preventDefault();
 		var modal = $(this).data('href');

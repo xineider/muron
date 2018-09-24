@@ -99,9 +99,15 @@
 						<option value="3">Divulgador</option>
 					</select>
 				</div>
-				<div class="col s12 input-field">
+
+				<div class="col s12 hide faculdade_parceiro_container">
+						<label>Faculdade</label>
+						<input class="faculdade_filtro" required="true" type="text" name="id_faculdade" placeholder="Nome da Faculdade">
+				</div>
+
+				<div class="col s12 input-field nome_divulgador_container hide">
 					<label>Nome</label>
-					<input required="true" type="text" name="nome" >
+					<input required="true" type="text" name="nome">
 				</div>
 				<div class="col s12 input-field">
 					<label>Login (Nome MurEr)</label>
@@ -260,8 +266,14 @@
 
 		$('#cadastra-parceiro').on('submit', function(e) {
 			e.preventDefault();
+
+			if($(this).find('select[id="tipo_parceiro_sel"]').val() == '2'){
+				$(this).find('.nome_divulgador_container').find('input').val($(this).find('.faculdade_filtro').val());
+			}
+
 			var form = $(this);
 			var post = form.serializeArray();
+
 			if($('#cadastra-parceiro input[name="senha"]').val() != $('#cadastra-parceiro input[name="senha_confirmar"]').val()){
 				alert('Confirmação de Senha incorreta');
 			} else {
@@ -311,23 +323,17 @@
 		});
 
 		$(document).on('change', 'select[id="tipo_parceiro_sel"]', function () {
-			console.log('estou mudando :D');
-			console.log($(this).val());
-
 			if($(this).val() == '2'){
-				console.log('faculdade');
+				$('.nome_divulgador_container').addClass('hide');
+				$('.nome_divulgador_container').find('input').val(0);
+				$('.faculdade_parceiro_container').removeClass('hide');
+				$('.faculdade_parceiro_container').find('input').val('');
 
-				// $(".container_nome_parceiro").append("<label>Faculdade</label> \
-				// 	<input class='faculdade_filtro' required='true' type='text' name='id_faculdade' placeholder='Nome da Faculdade'>");
-
-				// $(document).on('keydown.autocomplete',selector,function(){
-				// 	console.log('estou digitando algo no input do faculdade_filtro');
-				// 	console.log(this);
-				// 	$(this).autocomplete({sorce:options});
-				
-				// });
-			}else{
-				console.log('divulgador');
+			}else if($(this).val() == '3'){
+				$('.nome_divulgador_container').removeClass('hide');
+				$('.nome_divulgador_container').find('input').val('');
+				$('.faculdade_parceiro_container').addClass('hide');
+				$('.faculdade_parceiro_container').find('input').val(0);
 			}
 
 		});
@@ -358,6 +364,8 @@ function autoComplete(element,url){
 							value: item.name
 						};
 					}));
+
+					
 
 				},
 				error: function(xhr) {

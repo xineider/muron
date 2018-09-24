@@ -29,6 +29,12 @@ router.get('/editar/:id', function(req, res, next) {
 });
 router.get('/ver/:id', function(req, res, next) {
 	id = req.params.id;
+	console.log('IIIIIIIIIIIII ID USUARIO IIIIIIIIIIIIIIIIIII');
+	console.log(id);
+	console.log('IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII');
+	console.log('DDDDDDDDDDDDDDDD ID DO USUARIO LOGADO DDDDDDDD');
+	console.log(req.session.usuario.id);
+	console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
 	model.GetUsuario(id, req.session.usuario.id).then(data_usuario => {
 		data.perfil = data_usuario;
 		model.GetPostagemByUser(id, req.session.usuario.id).then(data_postagens => {
