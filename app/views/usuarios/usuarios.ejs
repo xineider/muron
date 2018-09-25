@@ -22,7 +22,7 @@
 
           <div class="secondary-content" style="position: absolute;top: 16px;right: 16px;">
             <p>
-              <input type="checkbox" id="selecionar-usuario-<%= data[i].id_usuario2%>" data-id="<%= data[i].id_usuario2%>" />
+              <input type="checkbox" class="checkbox_selecionar_usuario" id="selecionar-usuario-<%= data[i].id_usuario2%>" data-id="<%= data[i].id_usuario2%>" name="lista[id_usuario2][]" value="<%= data[i].id_usuario2%>"/>
               <label for="selecionar-usuario-<%= data[i].id_usuario2%>"></label>
             </p>
           </div>
@@ -41,8 +41,8 @@
     %>
   </ul>
 
-  <div style="position:fixed;bottom:5px;width:100%;">
-    <button style="margin:0 auto;display:block;" class="btn blue darken-1 white-text ajax-submit" data-href="/sistema/usuarios/contatos/adicionar-varios" data-action="/sistema/usuarios/contatos">Adicionar Contatos</button>    
+  <div class="footer_adicionar_contatos blue lighten-1">
+    <button class="btn white blue-text text-lighten-1 ajax-submit" data-href="/sistema/usuarios/contatos/adicionar-varios" data-action="/sistema/usuarios/contatos">Adicionar Contatos</button>    
   </div>
 
 </form>

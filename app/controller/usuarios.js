@@ -191,10 +191,16 @@ router.post('/contatos/adicionar', function(req, res, next) {
 
 router.post('/contatos/adicionar-varios', function(req, res, next) {
 	POST = req.body;
+	POST.id_usuario = req.session.usuario.id;
 	console.log('ppppppppppppppppppppppppppp POST DE VARIOS ppppppppppppppppppppppppppppppppp');
 	console.log(POST);
 	console.log('pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp');
-	res.json([]);
+	
+	model.InsertVariosContatos(POST).then(data=>{
+		res.json(data);
+	});
+
+	
 
 });
 

@@ -846,3 +846,17 @@ table.striped>tbody>tr>td {
   .ui-widget-content{
     z-index: 9999!important;
   }
+
+  .footer_adicionar_contatos{
+    position:fixed;
+    bottom:0px;
+    width:100%; 
+    padding:10px;
+    opacity:0;
+    transition:0.3s ease;
+  }
+
+  .footer_adicionar_contatos >button{
+    margin:0 auto;
+    display:block;
+  }

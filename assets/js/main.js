@@ -191,6 +191,18 @@ $(document).on('ready', function () {
 
 	});
 
+
+	$(document).on('click','.checkbox_selecionar_usuario',function(){
+		if($('.checkbox_selecionar_usuario').prop('checked') == true){
+			console.log('estou checkado');
+			$('.footer_adicionar_contatos ').css('opacity',1);
+		}else{
+			console.log('NÃO ESTOU MAIS CHECKADO');
+			$('.footer_adicionar_contatos ').css('opacity',0);
+		}
+
+	});
+
 	$(".button-collapse").sideNav({
 	    menuWidth: 300, // Default is 300
 	    edge: 'right', // Choose the horizontal origin

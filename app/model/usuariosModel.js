@@ -92,7 +92,7 @@ class UsuariosModel {
 					resolve(data);
 				});
 			});
-	
+
 	}
 
 
@@ -105,9 +105,9 @@ class UsuariosModel {
 			helper.Query('SELECT id as id_usuario2, nome_murer, imagem, email,tipo, \
 				(SELECT COUNT(b.id) FROM usuarios_contatos as b WHERE b.id_usuario2 = a.id AND b.id_usuario = ? AND b.deletado = ? LIMIT 1) as amigos\
 				FROM usuarios as a WHERE deletado = ? AND (nome_murer like CONCAT("%", ?, "%") OR nome like CONCAT("%", ?, "%") OR email like CONCAT("%", ?, "%"))', [data.id_usuario,0,0, data.pesquisar, data.pesquisar, data.pesquisar]).then(data => {
-				resolve(data);
+					resolve(data);
+				});
 			});
-		});
 	}
 
 
@@ -232,6 +232,27 @@ class UsuariosModel {
 			});
 		});	
 	}
+
+
+	InsertVariosContatos(POST){
+		var POST2 = {};
+
+		var id_usuario = {id_usuario:POST.lista.id_usuario2};
+		POST2.lista = id_usuario;
+
+		POST.lista = helper.PrepareMultiple(POST.lista, 'id_usuario', POST.id_usuario);
+		POST2.lista = helper.PrepareMultiple(POST2.lista,'id_usuario2',POST.id_usuario);
+
+		return new Promise(function(resolve, reject) {
+			helper.InsertMultiple('usuarios_contatos', POST.lista).then(id_insercao1 => {
+				helper.InsertMultiple('usuarios_contatos', POST2.lista).then(id_insercao2 => {
+					resolve(id_insercao2);
+				});
+			});
+		});
+
+	}
+
 	DesativarContato(post) {
 		var post2 = {};
 		post2.id_usuario = post.id_usuario2;
@@ -244,6 +265,7 @@ class UsuariosModel {
 			});
 		});	
 	}
+	
 	SairGrupo(post) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('UPDATE grupos SET deletado = ? WHERE id = ? AND id_lider = ?', [1, post.id_grupo, post.id_usuario]).then(data => {
