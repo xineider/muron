@@ -124,6 +124,7 @@ $(document).on('ready', function () {
 		var post = form.serializeArray();
 		var link = $(this).data('href');
 		var back = $(this).data('action');
+		console.log(post);
 		console.log(link);
 		console.log(back);
 		var metodo = $(this).data('method');

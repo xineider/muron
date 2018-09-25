@@ -189,6 +189,17 @@ router.post('/contatos/adicionar', function(req, res, next) {
 	}
 });
 
+router.post('/contatos/adicionar-varios', function(req, res, next) {
+	POST = req.body;
+	console.log('ppppppppppppppppppppppppppp POST DE VARIOS ppppppppppppppppppppppppppppppppp');
+	console.log(POST);
+	console.log('pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp');
+	res.json([]);
+
+});
+
+
+
 router.post('/contatos/remover', function(req, res, next) {
 	POST = req.body;
 	model.DesativarContato(POST).then(data => {
