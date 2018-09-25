@@ -11,10 +11,9 @@
 					%>
 
 					<div class="col s3">
-						<a href="<%=data.categorias[i].link%><%= data.categorias[i].id %>" class="ajax-load">
-							<div class="circulo-header">
-								<i class="<%= data.categorias[i].icone %> icone-categoria-header" aria-hidden="true"></i>
-							</div>
+						<a href="<%= data.categorias[i].link%><%= data.categorias[i].id %>" class="ajax-load">
+							<img src="<%= data.categorias[i].icone %>" style="width:72px;height: 72px;">
+						
 							<p style="margin-top:5px;" class="center-align black-text">	
 								<%= data.categorias[i].nome %>
 							</p>

@@ -14,10 +14,10 @@ router.get('/', function(req, res, next) {
 	model.VeifyViews(req.session.usuario.id).then(ret => {
 		data_insert = {id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id};
 		
-		data_faculdade = {id_categoria:3,id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id, icone:'fa fa-university', link:'/sistema/postagens/ver/'}
-		data_projeto = {id_categoria:2, id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id, icone: 'fas fa-pencil-ruler',link:'/sistema/postagens/ver/'};
-		data_estagio = {id_categoria:1, id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id, icone: 'far fa-handshake',link:'/sistema/postagens/ver/'};
-		data_divulgacao = {id_categoria:4, id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id, icone:'fas fa-bullhorn',link:'/sistema/postagens/ver/'};
+		data_faculdade = {id_categoria:3,id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id, icone:'/assets/imgs/header-universidade-icon.png', link:'/sistema/postagens/ver/'}
+		data_projeto = {id_categoria:2, id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id, icone: '/assets/imgs/header-projeto-icon.png',link:'/sistema/postagens/ver/'};
+		data_estagio = {id_categoria:1, id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id, icone: '/assets/imgs/header-estagios-icon.png',link:'/sistema/postagens/ver/'};
+		data_divulgacao = {id_categoria:4, id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id, icone:'/assets/imgs/header-divulgacao-icon.png',link:'/sistema/postagens/ver/'};
 
 		if (req.session.usuario.tipo == 1) {
 			model.GetCategoriasAtualizacoes(data_faculdade).then(cat_fac=>{
