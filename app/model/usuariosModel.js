@@ -85,7 +85,7 @@ class UsuariosModel {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT a.*, \
 				(SELECT COUNT(b.id) FROM usuarios_contatos as b WHERE b.id_usuario2 = a.id AND b.id_usuario = ? AND b.deletado = ? LIMIT 1) as amigos,\
-				(SELECT nome FROM faculdades as c WHERE id IN (SELECT id_faculdade FROM faculdades_relacoes_aluno as d WHERE d.id_aluno = ? and deletado = ?)) as faculdade,\
+				(SELECT NO_IES FROM faculdades_inep as c WHERE id IN (SELECT id_faculdade FROM faculdades_relacoes_aluno as d WHERE d.id_aluno = ? and deletado = ?)) as faculdade,\
 				DATE_FORMAT(a.nascimento, "%d/%m/%Y") as nascimento\
 				FROM usuarios as a WHERE a.deletado = ? AND a.id = ?', [id_usuario, 0, id, 0, 0, id]).then(data => {
 					console.log(data);
