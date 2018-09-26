@@ -7,7 +7,7 @@ var helper = new Helper;
 class FaculdadesModel {
 	Inicio() {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT * FROM faculdades WHERE deletado = ?', [0]).then(data => {
+			helper.Query('SELECT * FROM faculdades_inep WHERE deletado = ?', [0]).then(data => {
 				resolve(data);
 			});
 		});
@@ -27,7 +27,7 @@ class FaculdadesModel {
 		return new Promise(function(resolve, reject) {
 			//Seleciona o nome da Faculdade do Usuario
 			if(id_usuario != 1){
-				helper.Query('SELECT nome FROM faculdades WHERE id = ? AND deletado = ?', [id_faculdade, 0]).then(data_user => {
+				helper.Query('SELECT nome FROM faculdades_inep WHERE id = ? AND deletado = ?', [id_faculdade, 0]).then(data_user => {
 					console.log('************* Existe Faculdade ********************');
 					console.log(data_user);
 					console.log('***************************************************');
@@ -97,7 +97,7 @@ class FaculdadesModel {
 	GetFaculdade(id) {
 		// Para retornar quando chamar a função
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT *, (SELECT b.nome FROM faculdades as b WHERE b.id = a.id_usuario LIMIT 1) as nome_usuario FROM obras as a WHERE a.deletado = ? AND a.id = ?', [0, id]).then(data => {
+			helper.Query('SELECT *, (SELECT b.nome FROM faculdades_inep as b WHERE b.id = a.id_usuario LIMIT 1) as nome_usuario FROM obras as a WHERE a.deletado = ? AND a.id = ?', [0, id]).then(data => {
 				resolve(data);
 			});
 		});
@@ -136,34 +136,25 @@ class FaculdadesModel {
 	}
 	InsertFaculdade(post) {
 		return new Promise(function(resolve, reject) {
-			helper.Insert('faculdades', post).then(data => {
+			helper.Insert('faculdades_inep', post).then(data => {
 				resolve(data);
 			});
 		});
 	}
 	UpdateFaculdade(post) {
 		return new Promise(function(resolve, reject) {
-			helper.Update('faculdades', post).then(data => {
+			helper.Update('faculdades_inep', post).then(data => {
 				resolve(data);
 			});
 		});
 	}
 	DesativarFaculdade(post) {
 		return new Promise(function(resolve, reject) {
-			helper.Desativar('faculdades', post).then(data => {
+			helper.Desativar('faculdades_inep', post).then(data => {
 				resolve(data);
 			});
 		});
 	}
-
-
-	// SelectFaculdade(nome) {
-	// 	return new Promise(function(resolve, reject) {
-	// 		helper.Query('SELECT * FROM faculdades WHERE faculdades = ?', [nome]).then(data => {
-	// 			console.log(data);
-	// 			resolve(data);
-	// 		});
-	// 	});
-	// }
+	
 }
 module.exports = FaculdadesModel;

@@ -6,12 +6,13 @@
   <div class="row">
     <div class="col s12">
       <label>Faculdade</label>
-      <input class="faculdade_filtro" required="true" type="text" name="id_faculdade" placeholder="Nome da Faculdade">     
+      <input class="faculdade_filtro" required="true" type="text" placeholder="Nome da Faculdade">
+      <input type="hidden" name="id_faculdade"> 
     </div>
   </div>
 
 
-  <a class="btn blue darken-1 ajax-submit" data-href="/sistema/usuarios/atualizar/" data-action="/sistema/usuarios/ver/<%= usuario.id %>#info-user">Alterar</a>
+  <a class="btn blue darken-1 ajax-submit" data-href="/sistema/usuarios/atualizar/faculdade" data-action="/sistema/usuarios/ver/<%= usuario.id %>#info-user">Alterar</a>
 
 </form>
 <script src="/assets/js/jquery-ui.min.js"></script>
@@ -40,7 +41,8 @@
           response($.map(data, function (item) {
             return {
               label: item.name,
-              value: item.name
+              value: item.name,
+              id: item.id
             };
           }));
 
@@ -51,6 +53,11 @@
         complete: function() {
         }
       });
+    },
+    select:function(event,ui){
+      $(this).parent().find('input[name="id_faculdade"]').val(ui.item.id);
+      console.log('DENTRO DO SELECT ------------------');
+      console.log($(this).parent().find('input[name="id_faculdade"]'));
     }
   });
 }

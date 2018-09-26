@@ -22,14 +22,18 @@
  	CadastrarParceiro(data) {
  		return new Promise(function(resolve, reject) {
  			helper.Query('SELECT id FROM usuarios WHERE nome_murer = ?', [data.nome_murer]).then(result => {
+ 				
+ 				console.log('^^^^^^^^^^^^^^^DADOS CADASTRAR PARCEIRO ^^^^^^^^^^^^^^^^^^');
+ 				console.log(data);
+ 				console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+
  				if (result.length <= 0) {
  					if(data.tipo == 2 ){
- 						var dataFaculdade = {nome:data.nome,nome_contato:data.nome_contato, descricao:data.descricao};
+ 						var dataFaculdade = {id:data.id_faculdade,nome_contato:data.nome_contato, descricao:data.descricao};
  						console.log('*************** DATA INSERÇÃO FACULDADE ********************');
  						console.log(dataFaculdade);
  						console.log('************************************************************');
- 						helper.Insert('faculdades', dataFaculdade).then(id_faculdade => {
- 							data.id_faculdade = id_faculdade;
+ 						helper.Update('faculdades_inep', dataFaculdade).then(id_faculdade => {
  							console.log('))))))))))))) DADOS PARA INSERIR NA TABELA FACULDADES )))))))))))))))))))))))))))');
  							console.log(data);
  							console.log(')))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))');

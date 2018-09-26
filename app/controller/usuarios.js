@@ -329,6 +329,29 @@ router.post('/atualizar', function(req, res, next) {
 
 });
 
+
+router.post('/atualizar/faculdade', function(req, res, next) {
+	console.log(req.session);
+	POST = req.body;
+	console.log('==================== POST ATUALIZAR FACULDADE ======================');
+	console.log(POST);
+	console.log('====================================================================');
+
+	model.UpdateUsuario(POST).then(data=> {
+		model.UpdateUsuarioFaculdadeRelacao(POST).then(id_relacao=>{
+			res.json(data);			
+		});
+	});
+
+});
+
+
+
+
+
+
+
+
 router.post('/desativar', function(req, res, next) {
 	// Recebendo o valor do post
 	POST = req.body;

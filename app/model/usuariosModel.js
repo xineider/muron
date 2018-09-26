@@ -311,6 +311,24 @@ class UsuariosModel {
 			});
 		});
 	}
+
+	//Dar update na relação de faculdades com alunos quando o usuario no perfil alterar sua faculdade
+	//para tal é necessário encontrar o id vinculado ao aluno, depois disso dar update com o id da faculdade_relacoes_aluno
+
+	UpdateUsuarioFaculdadeRelacao(post){
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT id FROM faculdades_relacoes_aluno WHERE id_aluno = ? LIMIT 1', [post.id]).then(id_relacoes_aluno => {
+				var post_relacao = {id:id_relacoes_aluno[0].id,id_faculdade:post.id_faculdade};
+				
+				helper.Update('faculdades_relacoes_aluno', post_relacao).then(data => {
+					resolve(data);
+
+				});
+			});
+		});
+
+	}
+
 	UpdateFoto(post) {
 		console.log(post);
 		return new Promise(function(resolve, reject) {
