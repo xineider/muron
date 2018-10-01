@@ -38,9 +38,9 @@
  							console.log(data);
  							console.log(')))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))');
 
-	 						helper.Insert('usuarios', data).then(data => {
-	 							resolve(data);
-	 						});
+ 							helper.Insert('usuarios', data).then(data => {
+ 								resolve(data);
+ 							});
  						});
  					}else{
  						data.id_faculdade = 0;
@@ -49,8 +49,8 @@
  						console.log('_____________________________________________________________');
 
  						helper.Insert('usuarios', data).then(data => {
-	 							resolve(data);
-	 						});
+ 							resolve(data);
+ 						});
  					}
  					
 
@@ -77,33 +77,41 @@
  	}
 
  	PesquisarFaculdade(nomeFaculdade) {
-		return new Promise(function(resolve, reject) {
+ 		return new Promise(function(resolve, reject) {
 
-			console.log('000000000000000 NOME FACULDADE 00000000000000000000');
-			console.log(nomeFaculdade);
-			console.log('00000000000000000000000000000000000000000');			
+ 			console.log('000000000000000 NOME FACULDADE 00000000000000000000');
+ 			console.log(nomeFaculdade);
+ 			console.log('00000000000000000000000000000000000000000');			
 
-			/*Seleciono a pesquisa de acordo com o que foi digitado e coloco entre parênteses() a sigla se tiver alguma*/
-			helper.Query('SELECT id, \
-				(CASE WHEN SGL_IES = "" THEN NO_IES ELSE\
-				(CASE WHEN SGL_IES != "" THEN CONCAT(NO_IES," (",SGL_IES,")")\
-				END)END) as name\
-				FROM faculdades_inep WHERE NO_IES LIKE CONCAT("%", ?, "%") OR SGL_IES LIKE CONCAT("%", ?, "%") ORDER BY NO_IES ASC LIMIT 5',[nomeFaculdade,nomeFaculdade]).then(data => {
-					console.log('------------------- PESQUISA DE FACULDADES ---------------');
-					console.log(data);
-					console.log('----------------------------------------------------------');
-					resolve(data);
-				});
-			});
-	}
+ 			/*Seleciono a pesquisa de acordo com o que foi digitado e coloco entre parênteses() a sigla se tiver alguma*/
+ 			helper.Query('SELECT id, \
+ 				(CASE WHEN SGL_IES = "" THEN NO_IES ELSE\
+ 				(CASE WHEN SGL_IES != "" THEN CONCAT(NO_IES," (",SGL_IES,")")\
+ 				END)END) as name\
+ 				FROM faculdades_inep WHERE NO_IES LIKE CONCAT("%", ?, "%") OR SGL_IES LIKE CONCAT("%", ?, "%") ORDER BY NO_IES ASC LIMIT 5',[nomeFaculdade,nomeFaculdade]).then(data => {
+ 					console.log('------------------- PESQUISA DE FACULDADES ---------------');
+ 					console.log(data);
+ 					console.log('----------------------------------------------------------');
+ 					resolve(data);
+ 				});
+ 			});
+ 	}
 
-	VerSeMuron(nome_murer){
-		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT id FROM usuarios WHERE ? LIKE CONCAT("%muron%") LIMIT 1',[nome_murer]).then(data => {
-					resolve(data);
-				});
-			});
-	}
+ 	VerSeMuron(nome_murer){
+ 		return new Promise(function(resolve, reject) {
+ 			helper.Query('SELECT id FROM usuarios WHERE ? LIKE CONCAT("%muron%") LIMIT 1',[nome_murer]).then(data => {
+ 				resolve(data);
+ 			});
+ 		});
+ 	}
+
+ 	VerSeExisteParceiroFaculdade(id_faculdade){
+ 		return new Promise(function(resolve, reject) {
+ 			helper.Query('SELECT id FROM usuarios WHERE id_faculdade = ? AND tipo = ? AND deletado = ? LIMIT 1 ',[id_faculdade,2,0]).then(data => {
+ 				resolve(data);
+ 			});
+ 		});
+ 	}
 
  	VerificarSenha(data) {
  		if (typeof data.senha != 'undefined') {
@@ -121,16 +129,16 @@
  	}
 
  	InserFaculdade(POST){
-		return new Promise(function(resolve, reject) {
-			console.log('77777777777777777 Inserindo na Faculdade 7777777777777777777');
-			console.log(POST);
-			console.log('777777777777777777777777777777777777777777777777777777777777');
+ 		return new Promise(function(resolve, reject) {
+ 			console.log('77777777777777777 Inserindo na Faculdade 7777777777777777777');
+ 			console.log(POST);
+ 			console.log('777777777777777777777777777777777777777777777777777777777777');
 
-			delete POST.tipo;
-			delete POST.nome_murer
-			delete POST.email;
-			delete POST.celular;
-			delete POST.senha;
+ 			delete POST.tipo;
+ 			delete POST.nome_murer
+ 			delete POST.email;
+ 			delete POST.celular;
+ 			delete POST.senha;
 
 
  			helper.Insert('faculdades', POST).then(data => {

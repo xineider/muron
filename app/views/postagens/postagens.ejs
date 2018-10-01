@@ -18,9 +18,9 @@ if (typeof data.postagens != 'undefined' && data.postagens.length > 0) {
 						<i class="fa fa-comment"></i>
 						<%- data.postagens[i].qtd_comentario >= 1 ? '<span class="qtd_likes">'+data.postagens[i].qtd_comentario+'</span>' : '' %>
 					</a>
-					<a onclick="alert('aguardando envio para dominio definitivo para ser implementado, requisito de alguns compartilhamentos.')">
+	<!-- 				<a onclick="alert('aguardando envio para dominio definitivo para ser implementado, requisito de alguns compartilhamentos.')">
 						<i class="fa fa-share-alt"></i>
-					</a>
+					</a> -->
 				</div>
 				<%
 				if (data.postagens[i].id_usuario == usuario.id || usuario.id == 1) {

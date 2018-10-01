@@ -102,9 +102,9 @@
 				</div>
 
 				<div class="col s12 hide faculdade_parceiro_container">
-						<label>Faculdade</label>
-						<input class="faculdade_filtro" required="true" type="text" placeholder="Nome da Faculdade">
-						<input type="hidden" name="id_faculdade">
+					<label>Faculdade</label>
+					<input class="faculdade_filtro" required="true" type="text" placeholder="Nome da Faculdade">
+					<input type="hidden" name="id_faculdade">
 				</div>
 
 				<div class="col s12 input-field nome_divulgador_container hide">
@@ -146,6 +146,10 @@
 				<div class="col s12">
 					<button class="btn blue white-text" style="width: 100%;">Finalizar Cadastro</button>
 				</div>
+				<div class="col s12 error_container_parceiro hide">
+					<div class="error_parceiro_mensagem red white-text" style="margin-top: 10px;padding: 5px;text-align: center;"></div>
+				</div>
+
 			</div>
 		</form>
 	</div>
@@ -172,45 +176,52 @@
 						</div>
 						<%
 					}else if(typeof alertaAcesso != 'undefined' && typeof tipo_alerta !='undefined' && tipo_alerta == 'login'){
-					%>
+						%>
 						<div class="card-panel yellow darken-2 center-align">
 							<span class="white-text"><%= alertaAcesso %>
 								<i class="fa <%= iconeAlerta %>" aria-hidden="true"></i>
 							</span>
 						</div>
 
-					<%}%>
-					<div class="container-small">
-						<div class="inputs">
-							<div class="input-field valign-wrapper">
-								<i class="fa fa-user-o prefix grey-text center-align" aria-hidden="true"></i>
-								<input type="text" name="nome_murer" id="nome_murer" class="validate" placeholder="Login (Nome MurEr)">
+						<%}%>
+						<div class="container-small">
+							<div class="inputs">
+								<div class="input-field valign-wrapper">
+									<i class="fa fa-user-o prefix grey-text center-align" aria-hidden="true"></i>
+									<input type="text" name="nome_murer" id="nome_murer" class="validate" placeholder="Login (Nome MurEr)">
+								</div>
+								<div class="input-field">
+									<i class="fa fa-key prefix grey-text center-align" aria-hidden="true"></i>
+									<input type="password" name="senha" id="senha" class="validate" placeholder="Senha">
+								</div>
 							</div>
-							<div class="input-field">
-								<i class="fa fa-key prefix grey-text center-align" aria-hidden="true"></i>
-								<input type="password" name="senha" id="senha" class="validate" placeholder="Senha">
+							<div class="center-align">
+								<button class="btn-large waves-effect waves-teal waves-light">
+									Entrar
+								</button>
 							</div>
-						</div>
-						<div class="center-align">
-							<button class="btn-large waves-effect waves-teal waves-light">
-								Entrar
-							</button>
-						</div>
-						<p class="acc">
-							<a class="white-text" href="#modalforgot">Esqueceu sua senha? <span class="blue-text text-darken-2">Clique aqui</span></a><br>
-							<a class="white-text" href="#modalnew">Ainda não tem conta? <span class="blue-text text-darken-2">Cadastre-se</span></a>
-						</p>
-						<div class="or"><span>OU</span></div>
-						<div class="row">
-							<br>
-							<a class="white-text" href="#modalparceiro">Quer ser um parceiro? <span class="blue-text text-darken-2">Cadastre-se</span></a><br>
+							<p class="acc">
+								<a class="white-text" href="#modalforgot">Esqueceu sua senha? <span class="blue-text text-darken-2">Clique aqui</span></a><br>
+								<a class="white-text" href="#modalnew">Ainda não tem conta? <span class="blue-text text-darken-2">Cadastre-se</span></a>
+							</p>
+							<div class="or"><span>OU</span></div>
+							<div class="row">
+								<br>
+								<a class="white-text" href="#modalparceiro">Quer ser um parceiro? <span class="blue-text text-darken-2">Cadastre-se</span></a><br>
+							</div>
 						</div>
 					</div>
-				</div>
-			</form>
+				</form>
+			</div>
+		</section>
+
+		<div class="container-small">
+			<div class="footer white-text">
+				Está com problemas para fazer login? Tente entrar em contato com <a class="blue-text text-darken-2" href="mailto:suporte@muron.com.br">suporte@muron.com.br</a>
+			</div>
 		</div>
-	</section>
-</main>
+
+	</main>
 </body>
 <script type="text/javascript">
 	$(document).on('ready', function () {
@@ -262,7 +273,7 @@
 			    },
 			    complete: function() {
 			    }
-			  });
+			});
 			};
 		});
 
@@ -287,22 +298,36 @@
 					beforeSend: function(request) {
 					},
 					success: function(data) {
-						if(data.length == 0) {
-							alert('Usuário já cadastrado, tente novamente com outro Login');
-						} else {
-							var nome_murer = form.find('input[name="nome_murer"]').val();
-							var senha = form.find('input[name="senha"]').val();
-							$('.inputs').find('input[name="nome_murer"]').val(nome_murer);
-							$('.inputs').find('input[name="senha"]').val(senha);
-							$('.modal').modal('close');
+						console.log('DDDDDDDDDDDDDDDDD DATAAAAAAAAAAAAAAA DDDDDDDDDDDDDDDDDDDDDD');
+						console.log(data);
+						console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
+						if(data == "possui_gerente"){
+							console.log('SOU UM ERRO');
+							$('.error_container_parceiro').removeClass('hide');
+							$('.error_container_parceiro').find('.error_parceiro_mensagem').html('Já existe um Gerente para esta Faculdade!');
+
+						}else{
+							if(data.length == 0) {
+								alert('Usuário já cadastrado, tente novamente com outro Login');
+							}else {
+								var nome_murer = form.find('input[name="nome_murer"]').val();
+								var senha = form.find('input[name="senha"]').val();
+								$('.inputs').find('input[name="nome_murer"]').val(nome_murer);
+								$('.inputs').find('input[name="senha"]').val(senha);
+								$('.modal').modal('close');
+							}
+
+
 						}
+						
+
 					},
 				    error: function(xhr) { // if error occured
 				    	alert("Error, contate o administrador ou reinicie a pagina.");
 				    },
 				    complete: function() {
 				    }
-				  });
+				});
 			}
 		});
 
@@ -321,7 +346,7 @@
 			    error: function(xhr) { // if error occured
 			    	alert("Error, contate o administrador ou reinicie a pagina.");
 			    }
-			  });
+			});
 		});
 
 		$(document).on('change', 'select[id="tipo_parceiro_sel"]', function () {

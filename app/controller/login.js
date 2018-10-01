@@ -56,7 +56,7 @@ router.post('/', function(req, res, next) {
 
 				/*Usuário não verificado ou seja é parceiro aguardando validação para acessar*/
 				}else if(dataVerificado[0].validacao == 1){
-					res.render('login/index', { alertaAcesso: 'Agora é só aguardar dentro de 1 a 2 dias úteis o e-mail de confirmação de parceria com o Muron.', tipo_alerta: 'login', iconeAlerta:'fa-handshake-o', usuario: req.session.usuario });
+					res.render('login/index', { alertaAcesso: 'Agora é só aguardar o e-mail de confirmação de parceria com o Muron.', tipo_alerta: 'login', iconeAlerta:'fa-handshake-o', usuario: req.session.usuario });
 					/*Usuário parceiro não aceito pela Administração*/
 				}else if(dataVerificado[0].validacao == 2){
 					res.render('login/index', { erro: 'No momento não temos disponibilidade para este tipo de parceria.', tipo_erro: 'login', usuario: req.session.usuario });
