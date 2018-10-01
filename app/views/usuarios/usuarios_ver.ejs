@@ -208,14 +208,14 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 							</div>
 						</div>
 
-						<div class="card-panel panel-full">
+<!-- 						<div class="card-panel panel-full">
 							<div class="card-content">
 								Data de Nascimento <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input right" data-nome="Data de Nascimento" data-id="'+data.perfil[i].id+'" data-collum="nascimento"><i class="fa fa-edit"></i></span>' : '' %>
 							</div>
 							<div class="card-title">
 								<%= data.perfil[i].nascimento %>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="card-panel panel-full">
 							<div class="card-content">
@@ -242,7 +242,7 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 						<!-- Sou o próprio usuário vendo meu perfil -->
 						<% if(data.perfil[i].id == usuario.id) {%>
 
-						<a href="/sistema/usuarios/alterar-senha/" class="btn waves-effect waves-light green darken-1 ajax-load" style="margin-bottom:10px;width: 100%;">
+						<a href="/sistema/usuarios/alterar-senha/" class="btn waves-effect waves-light blue darken-2 ajax-load" style="margin-bottom:10px;width: 100%;">
 							Alterar Senha
 						</a>
 

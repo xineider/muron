@@ -102,15 +102,40 @@ router.post('/cadastrar/parceiro', function(req, res, next) {
 				console.log('666666666 POST LIMPO APOS VALIDACAO 66666666666666666666666');
 				console.log(post_limpo);
 				console.log('66666666666666666666666666666666666666666666666666666666666');
-				model.CadastrarParceiro(post_limpo).then(id_parceiro => {
-					res.json(id_parceiro);
 
-					// if(post_limpo.tipo == 2){
-					// 	post_limpo.id_faculdade = id_parceiro; 
-					// 	model.InsertFaculdadeRelacao(post_limpo).then(id_faculdade =>{								
-					// 	});
-					// };				
-				});
+				if(post_limpo.tipo == 2){
+
+					model.VerSeExisteParceiroFaculdade(post_limpo.id_faculdade).then(temParceiro=>{
+						if(temParceiro == ''){
+							model.CadastrarParceiro(post_limpo).then(id_parceiro => {
+								res.json(id_parceiro);
+							});
+						}else{
+							/*Dizer Resposta que já existe gerente para aquela faculdade*/
+							res.json(['possui_gerente']);
+						}
+					});
+
+
+				}else{
+					model.CadastrarParceiro(post_limpo).then(id_parceiro => {
+						res.json(id_parceiro);
+					});
+				}
+				
+
+
+
+				// if(post_limpo.tipo == 2){
+				// 	post_limpo.id_faculdade = id_parceiro; 
+				// 	model.InsertFaculdadeRelacao(post_limpo).then(id_faculdade =>{								
+				// 	});
+				// };				
+
+
+
+
+
 
 			}else{
 				res.json([]);
