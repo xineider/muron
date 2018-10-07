@@ -44,7 +44,7 @@
 					</div>
 					<div class="col s12">
 						<label>Faculdade</label>
-						<input class="faculdade_filtro" required="true" type="text" placeholder="Nome da Faculdade">
+						<input class="faculdade_filtro" required="true" type="text" placeholder="Nome da Faculdade" name="nome_faculdade" >						
 						<input type="hidden" name="id_faculdade">
 
 <!-- 						<select class="browser-default faculdade-lista" name="id_faculdade">
@@ -82,6 +82,9 @@
 				<div class="col s12">
 					<button class="btn blue white-text" style="width: 100%;">Finalizar Cadastro</button>
 				</div>
+				<div class="col s12 error_container_muron hide">
+					<div class="error_muron_mensagem red white-text" style="margin-top: 10px;padding: 5px;text-align: center;"></div>
+				</div>
 			</div>
 		</form>
 	</div>
@@ -103,7 +106,7 @@
 
 				<div class="col s12 hide faculdade_parceiro_container">
 					<label>Faculdade</label>
-					<input class="faculdade_filtro" required="true" type="text" placeholder="Nome da Faculdade">
+					<input class="faculdade_filtro" required="true" type="text" placeholder="Nome da Faculdade" name="nome_faculdade">
 					<input type="hidden" name="id_faculdade">
 				</div>
 
@@ -258,14 +261,26 @@
 					beforeSend: function(request) {
 					},
 					success: function(data) {
-						if(data.length == 0) {
-							alert('Usuário já cadastrado, tente novamente com outro Login');
-						} else {
-							var nome_murer = form.find('input[name="nome_murer"]').val();
-							var senha = form.find('input[name="senha"]').val();
-							$('.inputs').find('input[name="nome_murer"]').val(nome_murer);
-							$('.inputs').find('input[name="senha"]').val(senha);
-							$('.modal').modal('close');
+
+						if(data == "muron_existente"){
+							$('.error_container_muron').removeClass('hide');
+							$('.error_container_muron').find('.error_muron_mensagem').html('Já existe alguém com este nome de Murer!');
+						}else if(data == "possui_muron"){
+							$('.error_container_muron').removeClass('hide');
+							$('.error_container_muron').find('.error_muron_mensagem').html('Não é possível cadastrar este usuário!');
+						}else if(data == 'dado_invalido'){
+							$('.error_container_muron').removeClass('hide');
+							$('.error_container_muron').find('.error_muron_mensagem').html('Por-favor Validar se Todos os Dados estão corretos.');
+						}else{
+							if(data.length == 0) {
+								alert('Usuário já cadastrado, tente novamente com outro Login');
+							} else {
+								var nome_murer = form.find('input[name="nome_murer"]').val();
+								var senha = form.find('input[name="senha"]').val();
+								$('.inputs').find('input[name="nome_murer"]').val(nome_murer);
+								$('.inputs').find('input[name="senha"]').val(senha);
+								$('.modal').modal('close');
+							}
 						}
 					},
 			    error: function(xhr) { // if error occured
@@ -306,6 +321,14 @@
 							$('.error_container_parceiro').removeClass('hide');
 							$('.error_container_parceiro').find('.error_parceiro_mensagem').html('Já existe um Gerente para esta Faculdade!');
 
+						}else if(data == "possui_muron"){
+
+							$('.error_container_parceiro').removeClass('hide');
+							$('.error_container_parceiro').find('.error_parceiro_mensagem').html('Não é possível cadastrar este usuário!');
+
+						}else if(data == 'dado_invalido'){
+							$('.error_container_parceiro').removeClass('hide');
+							$('.error_container_parceiro').find('.error_parceiro_mensagem').html('Por-favor Validar se Todos os Dados estão corretos.');
 						}else{
 							if(data.length == 0) {
 								alert('Usuário já cadastrado, tente novamente com outro Login');
@@ -392,9 +415,6 @@ function autoComplete(element,url){
 							id: item.id
 						};
 					}));
-
-					
-
 				},
 				error: function(xhr) {
 					console.log(xhr);
@@ -405,7 +425,6 @@ function autoComplete(element,url){
 		},
 		select:function(event,ui){
 			$(this).parent().find('input[name="id_faculdade"]').val(ui.item.id);
-			console.log($(this).parent().find('input[name="id_faculdade"]'));
 		}
 
 	});

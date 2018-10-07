@@ -55,39 +55,87 @@ router.post('/cadastrar/usuario', function(req, res, next) {
 	console.log('88888888888888 POST LIMPO ALUNO 8888888888888888888888888888888');
 	console.log(post_limpo);
 	console.log('888888888888888888888888888888888888888888888888888888888888888');
+	var nome_facul = post_limpo.nome_faculdade;
+	var data_insert;
+	delete post_limpo.nome_faculdade;
 
 	if (Object.keys(post_limpo).length > 0) {
 		/*Para identificar se o nome do murer for muron, se tiver muron no nome não cadastrar*/
 		model.VerSeMuron(post_limpo.nome_murer).then(nome_murer_muron => {
 			if(nome_murer_muron == ''){
+				if(post_limpo.id_faculdade == ''){
+					model.CadastrarFaculdadeCasoNaoExistir(nome_facul).then(id_faculdade_criada =>{
+						console.log('jjjjjjjjjjjjjjjjjjjjj id da faculdade criada jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
+						console.log(id_faculdade_criada);
+						console.log('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
+						post_limpo.id_faculdade = id_faculdade_criada;
+						model.CadastrarUsuario(post_limpo).then(id_usuario => {
 
-				model.CadastrarUsuario(post_limpo).then(id_usuario => {
-					console.log('ESTOU AQUI');
-					console.log(id_usuario);
+							console.log('AAAAAAAAAAAAAAAA ID DO ALUNO AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+							console.log(id_usuario);
+							console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
 
-					if(id_usuario != ''){
-						data_insert = {id_faculdade: post_limpo.id_faculdade, id_aluno: id_usuario};
-						console.log('7777777777777777777777777777 DATA INSERT 777777777777777777777777');
-						console.log(data_insert);
-						console.log('77777777777777777777777777777777777777777777777777777777777777777');
-						model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
-							res.json(data);
+							if(id_usuario != ''){
+								data_insert = {id_faculdade: id_faculdade_criada,id_aluno:id_usuario};
+								console.log('888888888888888888888888888 DATA INSERT 88888888888888888888888');
+								console.log(data_insert);
+								console.log('888888888888888888888888888888888888888888888888888888888888888');
+								model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
+									res.json(data);
+								});
+
+							}else{
+								res.json(['muron_existente']);
+							}
+						});					
+					});
+				}else{
+					model.FaculdadeRecorrenciaAluno(post_limpo.id_faculdade).then(id_faculdade_recorrencia =>{
+						console.log('RRRRRRRRRRRRRRR ID DA FACULDADE RECORRENCIA RRRRRRRRRRRRRRRRR');
+						console.log(id_faculdade_recorrencia);
+						console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');	
+						model.CadastrarUsuario(post_limpo).then(id_usuario => {
+							if(id_usuario != ''){
+								data_insert = {id_faculdade: post_limpo.id_faculdade, id_aluno: id_usuario};
+								console.log('7777777777777777777777777777 DATA INSERT 777777777777777777777777');
+								console.log(data_insert);
+								console.log('77777777777777777777777777777777777777777777777777777777777777777');
+								model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
+									res.json(data);
+								});
+							}else{
+								res.json(['muron_existente']);
+							}
 						});
-					}else{
-						res.json([]);
-					}
-				});
+					});
+
+				}
+
+				// model.CadastrarFaculdadeCasoNaoExistir(faculdade_sem_sigla[0]).then(id_faculdade => {
+
+				// });
+
+
 			}else{
-				res.json([]);
+				res.json(['possui_muron']);
 			};			
 		});
 	} else {
-		res.json([]);
+		res.json(['dado_invalido']);
 	}
 });
 router.post('/cadastrar/parceiro', function(req, res, next) {
 	var post = req.body;
 	var post_limpo = model.VerificarSenha(post);
+	var nome_facul;
+
+	if(post_limpo.nome_faculdade != ''){
+		nome_facul = post_limpo.nome_faculdade;
+		delete post_limpo.nome_faculdade;
+	}
+	var data_insert;
+	post_limpo.validacao = 1;
+	
 
 	console.log('00000000000000000 POST LIMPO 00000000000000000000000000000');
 	console.log(post_limpo);
@@ -97,52 +145,40 @@ router.post('/cadastrar/parceiro', function(req, res, next) {
 		/*Para identificar se o nome do murer for muron, se tiver muron no nome não cadastrar*/
 		model.VerSeMuron(post_limpo.nome_murer).then(nome_murer_muron => {
 			if(nome_murer_muron == ''){
-				console.log('§§§§§§§§§§§§§ post_limpo > 0 §§§§§§§§§§§§§§§§§§§§§§§§§');
-				post_limpo.validacao = 1;
-				console.log('666666666 POST LIMPO APOS VALIDACAO 66666666666666666666666');
-				console.log(post_limpo);
-				console.log('66666666666666666666666666666666666666666666666666666666666');
 
 				if(post_limpo.tipo == 2){
-
-					model.VerSeExisteParceiroFaculdade(post_limpo.id_faculdade).then(temParceiro=>{
-						if(temParceiro == ''){
+					if(post_limpo.id_faculdade == ''){
+						model.CadastrarFaculdadeCasoNaoExistir(nome_facul).then(id_faculdade_criada =>{
+							post_limpo.id_faculdade = id_faculdade_criada;
 							model.CadastrarParceiro(post_limpo).then(id_parceiro => {
 								res.json(id_parceiro);
-							});
-						}else{
-							/*Dizer Resposta que já existe gerente para aquela faculdade*/
-							res.json(['possui_gerente']);
-						}
-					});
+							});						
+						});
 
-
+					}else{
+						model.VerSeExisteParceiroFaculdade(post_limpo.id_faculdade).then(temParceiro=>{
+							if(temParceiro == ''){
+								model.CadastrarParceiro(post_limpo).then(id_parceiro => {
+									res.json(id_parceiro);
+								});
+							}else{
+								/*Dizer Resposta que já existe gerente para aquela faculdade*/
+								res.json(['possui_gerente']);
+							}
+						});						
+					}
 				}else{
 					model.CadastrarParceiro(post_limpo).then(id_parceiro => {
 						res.json(id_parceiro);
 					});
 				}
-				
-
-
-
-				// if(post_limpo.tipo == 2){
-				// 	post_limpo.id_faculdade = id_parceiro; 
-				// 	model.InsertFaculdadeRelacao(post_limpo).then(id_faculdade =>{								
-				// 	});
-				// };				
-
-
-
-
-
 
 			}else{
-				res.json([]);
+				res.json(['possui_muron']);
 			};
 		});
 	} else {
-		res.json([]);
+		res.json(['dado_invalido']);
 	}
 });
 module.exports = router;
