@@ -52,9 +52,6 @@
  							resolve(data);
  						});
  					}
- 					
-
- 					
 
  				} else {
  					resolve([]);
@@ -64,6 +61,15 @@
  	}
 
 
+ 	CadastrarFaculdadeCasoNaoExistir(nome_faculdade){
+ 		return new Promise(function(resolve, reject) {
+ 			var post_insert = {NO_IES:nome_faculdade,SGL_IES:'',ativacao:1,recorrencia:1};
+ 			
+ 			helper.Insert('faculdades_inep', post_insert).then(data => {
+ 				resolve(data);
+ 			});
+ 		});
+ 	}
 
  	SelecionarFaculdades(){
  		return new Promise(function(resolve, reject) {
@@ -76,6 +82,26 @@
  		});
  	}
 
+
+ 	FaculdadeRecorrenciaAluno(id_faculdade){
+ 		return new Promise(function(resolve, reject) {
+ 			helper.Query('SELECT * FROM faculdades_inep WHERE id = ?', [id_faculdade]).then(result => {
+ 				//se a ativacao for por aluno eu adiciono 1 na recorrencia
+ 				if(result[0].ativacao == 1){
+ 					var recorrencia_new = result[0].recorrencia + 1;
+ 					var data_update = {id:result[0].id,recorrencia:recorrencia_new};
+ 					helper.Update('faculdades_inep', data_update).then(id_faculdade_upd => {
+ 						resolve(id_faculdade_upd);
+ 					});
+ 				}else{
+ 					resolve([]);
+ 				}
+ 			});
+ 		});
+
+ 	}
+
+
  	PesquisarFaculdade(nomeFaculdade) {
  		return new Promise(function(resolve, reject) {
 
@@ -84,7 +110,7 @@
  			console.log('00000000000000000000000000000000000000000');			
 
  			/*Seleciono a pesquisa de acordo com o que foi digitado e coloco entre parênteses() a sigla se tiver alguma*/
- 			helper.Query('SELECT id, \
+ 			helper.Query('SELECT id,\
  				(CASE WHEN SGL_IES = "" THEN NO_IES ELSE\
  				(CASE WHEN SGL_IES != "" THEN CONCAT(NO_IES," (",SGL_IES,")")\
  				END)END) as name\

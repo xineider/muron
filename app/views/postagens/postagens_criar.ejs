@@ -84,6 +84,24 @@
 				<textarea id="descricao" class="validate materialize-textarea" name="descricao"></textarea>
 				<label for="descricao">Descrição</label>
 			</div>
+
+			<%
+			if (usuario.tipo == 2) { %>
+			<div class="col s12">
+				<p>Enviar para</p> 
+				<select class="browser-default" name="filtro_status_faculdade">
+						<option value="0" selected>Todos</option>
+						<option value="1">Aluno</option>
+						<option value="2">Ex-Aluno</option>
+						<option value="3">Professor</option>
+						<option value="4">Colaborador</option>
+					</select>
+
+				</div>
+			<% }%>
+
+
+
 		</div>
 		<div class="col s12 center">
 			<button class="g-blue white-text btn-large ajax-submit" data-href="/sistema/postagens/cadastrar/" data-action="/sistema/" style="border-radius: 10px; font-size: 1.2em; font-weight: bold; margin-bottom: 5px;">Publicar</button>

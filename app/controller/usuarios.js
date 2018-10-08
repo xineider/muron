@@ -12,6 +12,7 @@ app.use(require('express-is-ajax-request'));
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {
 	model.SelectUsuario().then(data=> {
+		console.log('ADASDASD / DO CONTATO');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
 	});
 });
@@ -48,6 +49,8 @@ router.get('/ver/:id', function(req, res, next) {
 });
 router.get('/contatos/', function(req, res, next) {
 	console.log('cliquei aqui nos contatos');
+	console.log('id');
+	console.log(req.session.usuario.id);
 	model.GetUsuarioContatos(req.session.usuario.id).then(data => {
 		data.usuario = req.session.usuario;
 		console.log('[[[[[[[[[[[[[[[[[[[[[[ DADOS DOS CONTATOS [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[');
@@ -133,7 +136,12 @@ router.post('/contatos/', function(req, res, next) {
 	console.log(req.session.usuario);
 
 	if(req.session.usuario.tipo == 2){
-		model.GetUsuariosFaculdade(POST,req.session.usuario.id_faculdade).then(data => {
+		model.GetUsuariosFaculdade(POST,req.session.usuario.id_faculdade, req.session.usuario.id).then(data => {
+			console.log('aAaAaAaAaAaAaAaaAaAaAa ALUNOS DA FACULDADE aAaAaAaAaAaAaAaaAaAaAa');
+			console.log(data);
+			console.log('aAaAaAaAaAaAaAaaAaAaAaaAaAaAaAaAaAaAaaAaAaAaaAaAaAaAaAaAaAaaAaAaAa');
+
+
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
 		});
 	}else{

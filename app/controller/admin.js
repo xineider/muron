@@ -32,6 +32,17 @@ router.get('/permissao-faculdades', function(req, res, next) {
 });
 
 
+
+router.get('/usuario-faculdade', function(req, res, next) {
+	console.log('Clicando nos usuarios');
+	model.GetUsuariosFaculdade().then(data_usuarios => {
+		data.usuarios = data_usuarios;
+		console.log(data);
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'admin/usuario_faculdade', data: data, usuario: req.session.usuario});
+	});
+});
+
+
 router.post('/aprovarUsuario/', function(req, res, next) {
 	POST = req.body;
 	var emailParceiro;

@@ -193,13 +193,52 @@ $(document).on('ready', function () {
 
 
 	$(document).on('click','.checkbox_selecionar_usuario',function(){
-		if($('.checkbox_selecionar_usuario').prop('checked') == true){
+
+		var itenscheckados = 0;
+
+		if($(this).prop('checked') == true){
 			console.log('estou checkado');
+			$('.footer_adicionar_contatos ').css('display','block');
 			$('.footer_adicionar_contatos ').css('opacity',1);
-		}else{
-			console.log('NÃO ESTOU MAIS CHECKADO');
+			itenscheckados++;
+		}
+
+		$('#contatos').find('.checkbox_selecionar_usuario').each(function(){
+			if($(this).prop('checked') == true){
+				itenscheckados++;
+			}
+		});
+
+		if(itenscheckados == 0){
+			$('.footer_adicionar_contatos ').css('display','none');
 			$('.footer_adicionar_contatos ').css('opacity',0);
 		}
+
+	});
+
+	$(document).on('click','.checkbox_selecionar_aluno',function(){
+		console.log('estou sendo clicado no checkbox_selecionar_aluno');
+		var itensnaocheckados = 0;
+
+		if($(this).prop('checked') == false){
+			console.log('estou sendo deselecionado');
+			$('.footer_remover_aluno ').css('display','block');
+			$('.footer_remover_aluno ').css('opacity',1);
+			itensnaocheckados++;
+		}
+
+		$('#contatos').find('.checkbox_selecionar_aluno').each(function(){
+			if($(this).prop('checked') == false){
+				itensnaocheckados++;
+			}
+		});
+
+		if(itensnaocheckados == 0){
+			$('.footer_remover_aluno ').css('display','none');
+			$('.footer_remover_aluno ').css('opacity',0);
+		}
+
+
 
 	});
 
@@ -208,7 +247,7 @@ $(document).on('ready', function () {
 	    edge: 'right', // Choose the horizontal origin
 	    closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
 	    draggable: true // Choose whether you can drag to open on touch screens,
-	  });
+	});
 
 	window.onpopstate = function() {
 		GoTo(location.pathname, false);
@@ -477,7 +516,7 @@ function GoTo(link, state, top) {
 	    	$('.tooltipped').tooltip({delay: 50});
 	    	$('.modal').modal('close');
 	    }
-	  });
+	});
 	if (state == true) {
 		window.history.pushState('Muron', 'Muron', link);
 	}
@@ -499,7 +538,7 @@ function FormatInputs(focus) {
     labelYearSelect: 'Selecione um ano',
     format: 'dd/mm/yyyy',
     closeOnSelect: false // Close upon selecting a date,
-  });
+});
 	$(document).ready(function(){
 		$('.collapsible').collapsible();
 	});
@@ -565,7 +604,7 @@ function GetEndereco(cep, pai) {
     complete: function() {
     	removerLoader();
     }
-  });
+});
 }
 function SubmitAjax(post, link, back, method) {
 	$.ajax({
@@ -603,7 +642,7 @@ function SubmitAjax(post, link, back, method) {
 	    	removerLoader();
 	    	$('.modal').modal('close');
 	    }
-	  });
+	});
 }
 function SendAjax(post, link, back, method) {
 	$.ajax({
@@ -634,7 +673,7 @@ function SendAjax(post, link, back, method) {
 
 	    	$('html,body').animate({ scrollTop: $('html').height() }, 'slow');
 	    }
-	  });
+	});
 }
 function SearchAjax(post, link, method, to) {
 	$.ajax({
@@ -664,7 +703,7 @@ function SearchAjax(post, link, method, to) {
 	    	$('.tooltipped').tooltip({delay: 50});
 	    	$('.modal').modal('close');
 	    }
-	  });
+	});
 }
 function Reestruturar(str) {
 	var i = 1;
@@ -718,7 +757,7 @@ function MountModalInteiro(modal, link) {
 	    	$('.tooltipped').tooltip({delay: 50});
 	    	FormatInputs();
 	    }
-	  });
+	});
 }
 function MountModal(modal, link) {
 	$.ajax({
@@ -746,7 +785,7 @@ function MountModal(modal, link) {
 	    	$('.tooltipped').tooltip({delay: 50});
 	    	FormatInputs();
 	    }
-	  });
+	});
 }
 function VerificarForm(form) {
 	var error = false;
@@ -838,7 +877,7 @@ function AddLike(id, id_usuario, gostei) {
 	    complete: function() {
 	    	removerLoader();
 	    }
-	  });
+	});
 }
 function SubmitRemove(id, link, pai) {
 	var post = {id: id, deletado: 1};
@@ -864,7 +903,7 @@ function SubmitRemove(id, link, pai) {
 	    complete: function() {
 	    	removerLoader();
 	    }
-	  });
+	});
 }
 
 function LoadToClass(link, to) {
@@ -925,7 +964,7 @@ function AdicionarContato(post) {
 	    complete: function() {
 	    	removerLoader();
 	    }
-	  });
+	});
 }
 function MountToAdd(val, where) {
 	$.ajax({
@@ -950,5 +989,5 @@ function MountToAdd(val, where) {
 	    complete: function() {
 	    	removerLoader();
 	    }
-	  });
+	});
 }

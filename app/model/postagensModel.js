@@ -37,13 +37,16 @@ class PostagensModel {
 		return new Promise(function(resolve, reject) {
 			var where_add = '';
 			var values = [];
+			console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP POST DA CATEGORIA PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
+			console.log(POST);
+			console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
 			if (POST.id_usuario != 1) {
 				console.log('&&&&&&&&&&&&&&& Não sou administrador &&&&&&&&&&&&&&&&&&');
 
 				if(POST.id_categoria == 3){
 					//quer dizer que é uma faculdade
-					where_add = "AND id_faculdade = ?"
-					values = [0, POST.id_usuario, 0, 0, 0, 0, POST.id_categoria,POST.id_faculdade];
+					where_add = "AND id_faculdade = ? AND (filtro_status_faculdade = ? OR filtro_status_faculdade = ?) "
+					values = [0, POST.id_usuario, 0, 0, 0, 0, POST.id_categoria,POST.id_faculdade,0,POST.status];
 					console.log('((((((((( É FACULDADE ((((((((((((((((((((((((((((')
 
 				}else{
@@ -212,5 +215,23 @@ class PostagensModel {
 			});
 		});
 	}
+
+	GetUsuario(id_usuario){
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT * FROM usuarios WHERE deletado = ? AND id = ?', [0, id_usuario]).then(data => {
+				console.log(data);
+				resolve(data);
+			});
+		});
+	}
+
+
+
+
+
+
+
+
+
 }
 module.exports = PostagensModel;

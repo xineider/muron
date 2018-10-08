@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 25-Set-2018 às 23:31
+-- Generation Time: 08-Out-2018 às 02:54
 -- Versão do servidor: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -129,7 +129,7 @@ INSERT INTO `faculdades` (`id`, `nome`, `nome_contato`, `descricao`, `deletado`,
 (2, 'tt3', 'tt3', 'tt3', 0, '2018-07-13 18:11:13', '2018-07-13 18:11:13'),
 (3, 'apis', 'Contato', '', 0, '2018-07-13 18:11:13', '2018-08-31 12:48:24'),
 (4, 'test123', 'test123', 'test123', 0, '2018-07-13 18:11:13', '2018-07-13 18:11:13'),
-(5, 'teste123', 'teste123', 'teste123', 0, '2018-07-13 18:11:13', '2018-07-13 18:11:13'),
+(5, 'Jarvis', 'teste123', 'teste123', 0, '2018-07-13 18:11:13', '2018-09-23 05:42:34'),
 (6, 'Upis', 'Teste', 'Xxxx', 0, '2018-07-13 18:11:13', '2018-07-13 18:11:13'),
 (7, 'faculdade1', 'Teste', 'Teste para o cadastro de faculdade senha 12345', 0, '2018-07-13 18:11:13', '2018-07-13 18:11:13'),
 (8, '23213', '312321', '123213213', 0, '2018-07-13 18:11:13', '2018-07-13 18:11:13'),
@@ -141,7 +141,10 @@ INSERT INTO `faculdades` (`id`, `nome`, `nome_contato`, `descricao`, `deletado`,
 (14, 'faculdade35', 'Pedro', 'faculdade35', 0, '2018-07-13 21:40:08', '2018-07-13 21:40:08'),
 (15, 'AGIS', 'Pedro', '', 0, '2018-08-16 13:05:35', '2018-08-16 13:05:35'),
 (16, 'FaculdadeRe', 'Faculdade Rê', 'Oi eu sou a faculdadeRe', 0, '2018-09-05 18:15:37', '2018-09-05 18:15:37'),
-(17, 'Criaredeletar', 'CriareDeletar', '', 0, '2018-09-06 19:13:27', '2018-09-06 19:13:27');
+(17, 'Criaredeletar', 'CriareDeletar', '', 0, '2018-09-06 19:13:27', '2018-09-06 19:13:27'),
+(18, '0', 'Jefferson', '', 0, '2018-09-23 19:32:30', '2018-09-23 19:32:30'),
+(19, 'FACULDADE DE TECNOLOGIA SENAC SÃO MIGUEL DO OESTE (5133)', 'Heitor', '', 0, '2018-09-23 20:45:22', '2018-09-23 20:45:22'),
+(20, 'CENTRO DE ENSINO SUPERIOR DE VALENÇA (CESVA)', 'Valesca', '', 0, '2018-09-26 02:42:43', '2018-09-26 02:42:43');
 
 -- --------------------------------------------------------
 
@@ -501,7 +504,7 @@ INSERT INTO `faculdades_inep` (`id`, `NO_IES`, `SGL_IES`, `nome_contato`, `descr
 (334, 'FACULDADE DE DIREITO PADRE ARNALDO JANSSEN', 'FAJANSSEN', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:25'),
 (335, 'FACULDADE DE CIÊNCIAS GERENCIAIS PADRE ARNALDO JANSSEN', 'FAJANSSEN', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:25'),
 (336, 'PONTIFÍCIA UNIVERSIDADE CATÓLICA DE MINAS GERAIS', 'PUC MINAS', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:25'),
-(337, 'CENTRO DE ENSINO SUPERIOR DE JUIZ DE FORA', 'CES/JF', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:25'),
+(337, 'CENTRO DE ENSINO SUPERIOR DE JUIZ DE FORA', 'CES/JF', 'Graça', '', 0, 0, 0, '2018-08-22 18:24:25'),
 (338, 'FACULDADE CATÓLICA DE UBERLÂNDIA', 'FCU', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:25'),
 (339, 'FACULDADE METODISTA DE CIÊNCIAS HUMANAS E EXATAS', 'METODISTA', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:25'),
 (340, 'CENTRO UNIVERSITÁRIO NEWTON PAIVA', 'NEWTON PAIVA', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:25'),
@@ -1128,7 +1131,7 @@ INSERT INTO `faculdades_inep` (`id`, `NO_IES`, `SGL_IES`, `nome_contato`, `descr
 (960, 'Faculdade de Educação Tecnológica do Estado do Rio de Janeiro', 'FAETERJ CAXIAS', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
 (961, 'FACULDADE CARLOS DRUMMOND DE ANDRADE', 'FCDA', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
 (962, 'FACULDADE CATÓLICA DOM ORIONE', 'FACDO', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
-(963, 'FACULDADE UBAENSE OZANAM COELHO', 'FAGOC', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
+(963, 'FACULDADE UBAENSE OZANAM COELHO', 'FAGOC', '123', '', 0, 0, 0, '2018-08-22 18:24:26'),
 (964, 'FACULDADE CASA BRANCA', 'FACAB', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
 (965, 'FACULDADE CATÓLICA RAINHA DA PAZ DE ARAPUTANGA', 'FCARP', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
 (966, 'FACULDADE MARTHA FALCÃO', 'FMF', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
@@ -1153,7 +1156,7 @@ INSERT INTO `faculdades_inep` (`id`, `NO_IES`, `SGL_IES`, `nome_contato`, `descr
 (985, 'FACULDADE DO CENTRO LESTE', 'UCL', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
 (986, 'Faculdade do Centro Leste - Cariacica', 'UCL', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26');
 INSERT INTO `faculdades_inep` (`id`, `NO_IES`, `SGL_IES`, `nome_contato`, `descricao`, `ativacao`, `recorrencia`, `deletado`, `data_cadastro`) VALUES
-(987, 'ÁREA1 - FACULDADE DE CIÊNCIA E TECNOLOGIA', 'ÁREA1', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
+(987, 'ÁREA1 - FACULDADE DE CIÊNCIA E TECNOLOGIA', 'ÁREA1', '111111', '', 0, 0, 0, '2018-08-22 18:24:26'),
 (988, 'FACULDADE DOIS DE JULHO', 'F2J', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
 (989, 'FACULDADE DE PRIMAVERA', 'CESPRI', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
 (990, 'CENTRO UNIVERSITÁRIO SÃO LUCAS', 'FSL', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
@@ -1760,7 +1763,7 @@ INSERT INTO `faculdades_inep` (`id`, `NO_IES`, `SGL_IES`, `nome_contato`, `descr
 (1590, 'FACULDADE FUTURA', '', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
 (1591, 'FACULDADE SANTO ANTONIO', 'FSA', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
 (1592, 'FACULDADE DE TECNOLOGIA SENAC FLORIANÓPOLIS', 'SENAC FLORIANÓPOLIS', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
-(1593, 'FACULDADE DE TECNOLOGIA SENAC SÃO MIGUEL DO OESTE', '5133', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
+(1593, 'FACULDADE DE TECNOLOGIA SENAC SÃO MIGUEL DO OESTE', '5133', 'len', '', 0, 0, 0, '2018-08-22 18:24:26'),
 (1594, 'FACULDADE DE TECNOLOGIA SENAC CAÇADOR', 'SENAC', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
 (1595, 'FACULDADE DE TECNOLOGIA SENAC JARAGUÁ DO SUL', '', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
 (1596, 'FACULDADE DE TECNOLOGIA SENAC BLUMENAU', 'SENAC', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:26'),
@@ -2409,7 +2412,7 @@ INSERT INTO `faculdades_inep` (`id`, `NO_IES`, `SGL_IES`, `nome_contato`, `descr
 (2238, 'UNIVERSIDADE FEDERAL DE ALFENAS', 'UNIFAL-MG', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:27'),
 (2239, 'Faculdade Batista do Cariri', 'FBC', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:27'),
 (2240, 'Instituto Superior de Ciencias Policiais', 'ISCP', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:27'),
-(2241, 'FACULDADE 2001', '', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:27'),
+(2241, 'FACULDADE 2001', '', 'Juliana', '', 0, 0, 0, '2018-08-22 18:24:27'),
 (2242, 'Faculdade DeVry João Pessoa', 'DVJP', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:27'),
 (2243, 'FACULDADE CAPIXABA DA SERRA', 'MULTIVIX SERRA', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:27'),
 (2244, 'Faculdade Católica Paulista', 'FACAP', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:27'),
@@ -2576,7 +2579,13 @@ INSERT INTO `faculdades_inep` (`id`, `NO_IES`, `SGL_IES`, `nome_contato`, `descr
 (2405, 'UNIVERSIDADE DA INTEGRAÇÃO INTERNACIONAL DA LUSOFONIA AFRO-BRASILEIRA', 'UNILAB', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:27'),
 (2406, 'Faculdade Unyleya', '', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:27'),
 (2407, 'UNIVERSIDADE ESTADUAL DO OESTE DO PARANÁ', 'UNIOESTE', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:27'),
-(2408, 'INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE RORAIMA', 'IFRR', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:27');
+(2408, 'INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE RORAIMA', 'IFRR', NULL, NULL, 0, 0, 0, '2018-08-22 18:24:27'),
+(2409, 'murilo', '', NULL, NULL, 1, 1, 0, '2018-10-07 04:53:43'),
+(2410, 'chico', NULL, NULL, NULL, 1, 1, 0, '2018-10-07 05:03:11'),
+(2411, 'chico', NULL, NULL, NULL, 1, 1, 0, '2018-10-07 05:04:11'),
+(2412, 'bussula', '', 'Berlirze', '', 1, 5, 0, '2018-10-07 05:05:18'),
+(2413, 'jaqueta', '', NULL, NULL, 1, 1, 0, '2018-10-07 05:42:04'),
+(2414, 'aaaaaaaa', '', 'aaaaaaaaa', '', 1, 1, 0, '2018-10-07 21:52:09');
 
 -- --------------------------------------------------------
 
@@ -2607,24 +2616,30 @@ INSERT INTO `faculdades_relacoes_aluno` (`id`, `id_faculdade`, `id_aluno`, `dele
 (8, 3, 43, 0, '2018-04-09 22:58:23'),
 (9, 4, 22, 0, '2018-04-09 23:00:02'),
 (10, 4, 27, 0, '2018-06-15 23:35:26'),
-(11, 5, 1, 0, '2018-07-04 17:00:46'),
+(11, 5, 35, 0, '2018-07-04 17:00:46'),
 (12, 6, 34, 0, '2018-07-09 21:02:15'),
 (13, 6, 40, 0, '2018-07-09 21:29:35'),
 (14, 8, 10, 0, '2018-07-10 21:16:49'),
 (15, 9, 13, 1, '2018-07-10 21:16:51'),
-(16, 31, 0, 1, '2018-07-10 21:16:53'),
-(17, 31, 0, 1, '2018-07-10 21:16:54'),
-(18, 31, 0, 1, '2018-07-12 21:45:46'),
-(19, 31, 0, 1, '2018-07-13 18:56:39'),
+(16, 31, 9, 1, '2018-07-10 21:16:53'),
+(17, 31, 25, 1, '2018-07-10 21:16:54'),
+(18, 31, 5, 1, '2018-07-12 21:45:46'),
+(19, 31, 3, 1, '2018-07-13 18:56:39'),
 (20, 10, 44, 0, '2018-07-16 21:55:11'),
 (21, 10, 55, 0, '2018-07-17 12:22:38'),
 (22, 9, 56, 0, '2018-07-17 12:33:13'),
-(23, 3, 10, 0, '2018-07-25 21:10:35'),
+(23, 3, 12, 0, '2018-07-25 21:10:35'),
 (24, 3, 57, 1, '2018-07-26 17:29:24'),
-(25, 3, 57, 1, '2018-07-27 12:12:06'),
+(25, 3, 57, 0, '2018-07-27 12:12:06'),
 (26, 3, 57, 1, '2018-07-27 12:12:23'),
 (27, 7, 59, 0, '2018-09-03 18:18:46'),
-(28, 3, 1, 0, '2018-09-05 18:54:51');
+(28, 3, 1, 0, '2018-09-05 18:54:51'),
+(29, 923, 70, 0, '2018-09-26 02:41:34'),
+(30, 2412, 78, 0, '2018-10-07 05:05:18'),
+(31, 2412, 80, 0, '2018-10-07 05:40:52'),
+(32, 987, 81, 0, '2018-10-07 05:41:23'),
+(33, 2413, 82, 0, '2018-10-07 05:42:04'),
+(34, 2412, 87, 0, '2018-10-07 23:50:50');
 
 -- --------------------------------------------------------
 
@@ -2823,6 +2838,7 @@ CREATE TABLE `postagens` (
   `id_faculdade` int(11) NOT NULL,
   `id_tipo` int(11) NOT NULL COMMENT '1 - murer cadastrou, 2 - faculdade cadastrou, 3 - divulgador cadastrou',
   `tipo` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0 = geral, 1 = grupo, 2 =contato',
+  `filtro_status_faculdade` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0 - todos, 1 - aluno, 2 - ex-aluno, 3 - professor, 4 - colaborador',
   `descricao` text,
   `imagem` varchar(150) NOT NULL,
   `deletado` tinyint(1) NOT NULL DEFAULT '0',
@@ -2834,55 +2850,56 @@ CREATE TABLE `postagens` (
 -- Extraindo dados da tabela `postagens`
 --
 
-INSERT INTO `postagens` (`id`, `id_usuario`, `id_categoria`, `id_grupo`, `id_contato`, `id_faculdade`, `id_tipo`, `tipo`, `descricao`, `imagem`, `deletado`, `data_cadastro`, `data_atualizado`) VALUES
-(2, 10, 4, 0, 0, 8, 1, 0, ' ', '19_03_2018_15_40_33_518_dia internacional da mulher 3.jpg', 1, '2018-03-19 21:40:34', '2018-07-17 20:52:11'),
-(3, 10, 2, 0, 0, 8, 1, 0, 'Testando 123 Bla Bla', '21_03_2018_16_07_22_30_wtf.jpg', 0, '2018-03-21 22:07:30', '2018-07-17 20:52:14'),
-(4, 10, 4, 0, 0, 8, 1, 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed commodo massa, quis lacinia est. Vivamus egestas convallis tellus, et commodo odio rhoncus lacinia. Integer efficitur mattis facilisis. Maecenas nec eros tellus. Sed sit amet scelerisque ligula. Morbi suscipit ex sagittis metus porta, vel sollicitudin sem congue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam a hendrerit est, at porttitor tellus. Donec vel tincidunt felis, a molestie metus. Duis at bibendum leo. Duis at ex sit amet mi molestie efficitur vel ac purus. Aliquam sit amet felis leo. Pellentesque lobortis euismod lectus, ac sodales mauris consequat a. Aliquam aliquet neque vel quam volutpat mattis.', '21_03_2018_19_30_36_456_wtf2.jpg', 0, '2018-03-22 01:30:56', '2018-07-17 20:52:16'),
-(5, 11, 2, 0, 0, 0, 3, 0, 'teste', '09_04_2018_13_51_49_807_cadastro.jpg', 0, '2018-04-09 19:51:52', '2018-07-17 20:39:50'),
-(6, 12, 3, 1, 0, 1, 2, 0, 'teste', '09_04_2018_15_38_37_661_Camada 1 (1).png', 0, '2018-04-09 21:38:39', '2018-07-17 20:52:40'),
-(7, 12, 3, 1, 0, 1, 2, 0, 'teste', '09_04_2018_15_38_37_661_Camada 1 (1).png', 0, '2018-04-09 21:38:44', '2018-07-17 20:52:42'),
-(8, 1, 2, 0, 0, 5, 1, 0, 'fewfwe', '09_04_2018_17_37_35_932_canva-photo-editor.png', 0, '2018-04-09 23:37:39', '2018-07-17 20:51:51'),
-(9, 1, 4, 0, 8, 5, 1, 2, 'fewfwfwe', '12_04_2018_09_22_57_945_123.jpg', 0, '2018-04-12 15:23:00', '2018-07-17 20:51:54'),
-(10, 15, 4, 0, 0, 3, 1, 0, 'Baby baby do biruleibe', '12_04_2018_19_13_32_85_images.jpeg', 1, '2018-04-12 22:14:10', '2018-07-27 12:35:50'),
-(11, 18, 4, 0, 0, 0, 3, 0, 'Vaga para trabalho', '12_04_2018_19_14_53_722_enhanced-buzz-17140-1421685799-11.jpg', 1, '2018-04-12 22:15:10', '2018-07-27 12:41:25'),
-(12, 1, 4, 0, 0, 5, 1, 0, 'Interesse público', '12_04_2018_19_20_40_78_IMG-20180412-WA0006.jpg', 1, '2018-04-12 22:21:07', '2018-07-27 12:35:02'),
-(13, 21, 2, 0, 0, 0, 3, 2, 'Cinema', '17_04_2018_00_56_12_520_IMG-20180406-WA0012.jpg', 1, '2018-04-17 03:56:30', '2018-07-27 12:41:39'),
-(14, 21, 2, 0, 0, 0, 3, 0, 'Cinema', '17_04_2018_00_57_08_625_IMG-20180406-WA0012.jpg', 1, '2018-04-17 03:57:17', '2018-07-27 12:41:46'),
-(15, 1, 1, 0, 15, 5, 1, 2, 'Garçom', '17_04_2018_01_20_39_996_enhanced-buzz-17140-1421685799-11.jpg', 1, '2018-04-17 04:20:50', '2018-07-27 12:34:39'),
-(16, 22, 2, 0, 0, 4, 1, 2, '', '17_04_2018_01_43_07_387_IMG-20180330-WA0019.jpg', 1, '2018-04-17 04:43:13', '2018-07-27 12:41:55'),
-(17, 24, 4, 0, 0, 0, 3, 0, 'fwefwe', '17_04_2018_12_03_41_947_123.jpg', 0, '2018-04-17 18:03:43', '2018-07-17 20:50:31'),
-(18, 29, 4, 0, 0, 0, 3, 0, 'teste', '15_06_2018_02_39_57_649_1 (1).jpeg', 0, '2018-06-15 05:40:11', '2018-07-17 20:50:44'),
-(19, 1, 4, 0, 0, 5, 1, 0, 'teste', '15_06_2018_03_57_28_701_1 (1).jpeg', 1, '2018-06-15 06:57:33', '2018-07-17 20:52:00'),
-(20, 1, 4, 0, 0, 5, 1, 0, 'Teste amor', '04_07_2018_14_06_37_193_love facebook.png', 0, '2018-07-04 17:06:42', '2018-07-17 20:52:02'),
-(21, 33, 1, 8, 0, 3, 1, 1, 'belo rio', '12_07_2018_15_35_55_62_bloubergstrand.jpg', 0, '2018-07-12 18:36:03', '2018-07-17 20:54:03'),
-(22, 1, 4, 8, 0, 5, 1, 1, 'Somente para você felipe', '18_07_2018_10_42_13_570_fofinho.jpg', 0, '2018-07-18 13:42:21', '2018-07-18 13:42:21'),
-(23, 33, 2, 0, 0, 3, 1, 0, 'Para a Universidade Apis Visualizar', '18_07_2018_18_25_37_400_caesgatos.jpg', 0, '2018-07-18 21:25:51', '2018-07-18 21:25:51'),
-(24, 33, 2, 0, 0, 3, 1, 0, 'Para a Universidade Apis Visualizar 2', '18_07_2018_18_25_37_400_caesgatos.jpg', 0, '2018-07-18 21:25:51', '2018-07-25 18:37:19'),
-(25, 33, 1, 0, 0, 3, 1, 0, 'Para a Universidade Apis Visualizar 2', '18_07_2018_18_25_37_400_caesgatos.jpg', 0, '2018-07-16 16:49:28', '2018-07-25 18:37:21'),
-(26, 40, 2, 0, 0, 6, 1, 0, 'Outro teste da apis em projetos', '20_07_2018_16_10_21_39_download.jpg', 0, '2018-07-20 19:10:29', '2018-07-20 19:10:29'),
-(27, 33, 2, 0, 0, 3, 1, 0, 'Teste de um aluno de verdade para apis poder ver', '20_07_2018_16_11_10_675_download (1).jpg', 0, '2018-07-20 19:11:27', '2018-07-20 19:11:27'),
-(28, 30, 3, 0, 0, 6, 2, 0, 'Teste da faculdade para a cintia', '20_07_2018_16_10_21_39_download.jpg', 0, '2018-07-20 19:10:29', '2018-07-27 19:16:25'),
-(29, 20, 3, 0, 0, 3, 2, 0, 'Teste que a cintia não pode ver', '20_07_2018_16_10_21_39_download.jpg', 0, '2018-07-20 19:10:29', '2018-07-27 19:16:29'),
-(30, 20, 3, 0, 0, 3, 2, 0, 'POSTAGEM DA FACULDADE APIS', '25_07_2018_16_16_35_257_raca-cachorro-latido-forte.jpg', 0, '2018-07-25 19:16:46', '2018-07-25 19:16:46'),
-(31, 40, 4, 0, 0, 6, 1, 0, '', '30_07_2018_11_15_30_24_caes.jpg', 0, '2018-07-30 14:15:31', '2018-07-30 14:15:31'),
-(32, 18, 4, 0, 0, 0, 3, 0, 'tete', '14_08_2018_16_55_22_474_250px-Two_adult_Guinea_Pigs_(Cavia_porcellus).jpg', 1, '2018-08-14 19:55:31', '2018-08-14 20:13:34'),
-(33, 18, 1, 0, 0, 0, 3, 0, 'que fofo', '14_08_2018_17_13_38_690_250px-Two_adult_Guinea_Pigs_(Cavia_porcellus).jpg', 0, '2018-08-14 20:13:47', '2018-08-14 20:13:47'),
-(34, 33, 4, 0, 0, 3, 1, 0, 'Felipe postou em Divulgação', '28_08_2018_17_23_43_444_c3f296awgsunj1knkhujp3ef1.jpg', 0, '2018-08-28 20:23:52', '2018-08-28 20:23:52'),
-(35, 33, 1, 0, 40, 3, 1, 1, 'não tem lista', '28_08_2018_18_44_22_205_cobras-fofas-8.jpg', 0, '2018-08-28 21:44:27', '2018-08-28 21:44:27'),
-(36, 33, 4, 0, 0, 3, 1, 1, 'nao tem lista mesmo', '28_08_2018_18_45_01_732_cobras-fofas-8.jpg', 0, '2018-08-28 21:45:06', '2018-08-28 21:45:06'),
-(37, 33, 2, 0, 0, 3, 1, 0, 'Cobras fofas', '28_08_2018_19_15_21_326_cobras-fofas-8.jpg', 0, '2018-08-28 22:15:28', '2018-08-28 22:15:28'),
-(38, 20, 3, 0, 0, 3, 2, 0, 'Postagem da apis', '28_08_2018_19_44_10_961_download (4).jpg', 0, '2018-08-28 22:44:17', '2018-08-28 22:44:17'),
-(39, 40, 4, 0, 33, 6, 1, 2, 'Somente para o contato felipe', '29_08_2018_09_36_15_103_types-of-hamsters.jpg', 0, '2018-08-29 12:36:21', '2018-08-29 12:36:21'),
-(40, 20, 3, 0, 0, 3, 2, 0, 'Publicação da apis, o Muron deve visualizar', '29_08_2018_14_16_25_749_images (2).jpg', 0, '2018-08-29 17:16:39', '2018-08-29 17:16:39'),
-(41, 20, 3, 0, 0, 3, 2, 0, 'Postagem da Apis, Teste das atualizações da categoria para o Muron', '29_08_2018_14_21_26_92_download (14).jpg', 0, '2018-08-29 17:21:44', '2018-08-29 17:21:44'),
-(42, 18, 1, 0, 0, 0, 3, 0, 'Aumentar o numero do muron em estágios', '29_08_2018_14_22_07_867_coleho.jpg', 0, '2018-08-29 17:22:18', '2018-08-29 17:22:18'),
-(43, 18, 4, 0, 0, 0, 3, 0, 'Atualização para o muron em divulgação', '29_08_2018_14_22_51_435_caes.jpg', 0, '2018-08-29 17:22:59', '2018-08-29 17:22:59'),
-(44, 40, 4, 19, 0, 6, 1, 1, 'Para a lista para o felipe :D', '29_08_2018_14_41_05_554_types-of-hamsters.jpg', 0, '2018-08-29 17:41:14', '2018-08-29 17:41:14'),
-(45, 33, 4, 0, 0, 3, 1, 0, 'apis não deve ver', '31_08_2018_09_24_29_297_coleho.jpg', 0, '2018-08-31 12:24:33', '2018-08-31 12:24:33'),
-(46, 33, 4, 0, 0, 3, 1, 0, 'Outro teste para apis não ver', '31_08_2018_09_48_55_42_download (12).jpg', 0, '2018-08-31 12:49:01', '2018-08-31 12:49:01'),
-(47, 18, 4, 0, 0, 0, 3, 0, 'top', '06_09_2018_11_47_54_849_250px-Two_adult_Guinea_Pigs_(Cavia_porcellus).jpg', 0, '2018-09-06 14:47:57', '2018-09-06 14:47:57'),
-(48, 18, 4, 0, 0, 0, 3, 0, 'qq', '06_09_2018_13_41_24_477_gatos-de-interior.jpg', 1, '2018-09-06 16:41:26', '2018-09-06 19:24:20'),
-(49, 18, 1, 0, 0, 0, 3, 0, 'divulgador\r\n', '06_09_2018_13_41_31_201_download (13).jpg', 1, '2018-09-06 16:41:42', '2018-09-06 19:23:35');
+INSERT INTO `postagens` (`id`, `id_usuario`, `id_categoria`, `id_grupo`, `id_contato`, `id_faculdade`, `id_tipo`, `tipo`, `filtro_status_faculdade`, `descricao`, `imagem`, `deletado`, `data_cadastro`, `data_atualizado`) VALUES
+(2, 10, 4, 0, 0, 8, 1, 0, 0, ' ', '19_03_2018_15_40_33_518_dia internacional da mulher 3.jpg', 1, '2018-03-19 21:40:34', '2018-07-17 20:52:11'),
+(3, 10, 2, 0, 0, 8, 1, 0, 0, 'Testando 123 Bla Bla', '21_03_2018_16_07_22_30_wtf.jpg', 0, '2018-03-21 22:07:30', '2018-07-17 20:52:14'),
+(4, 10, 4, 0, 0, 8, 1, 0, 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed commodo massa, quis lacinia est. Vivamus egestas convallis tellus, et commodo odio rhoncus lacinia. Integer efficitur mattis facilisis. Maecenas nec eros tellus. Sed sit amet scelerisque ligula. Morbi suscipit ex sagittis metus porta, vel sollicitudin sem congue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam a hendrerit est, at porttitor tellus. Donec vel tincidunt felis, a molestie metus. Duis at bibendum leo. Duis at ex sit amet mi molestie efficitur vel ac purus. Aliquam sit amet felis leo. Pellentesque lobortis euismod lectus, ac sodales mauris consequat a. Aliquam aliquet neque vel quam volutpat mattis.', '21_03_2018_19_30_36_456_wtf2.jpg', 0, '2018-03-22 01:30:56', '2018-07-17 20:52:16'),
+(5, 11, 2, 0, 0, 0, 3, 0, 0, 'teste', '09_04_2018_13_51_49_807_cadastro.jpg', 0, '2018-04-09 19:51:52', '2018-07-17 20:39:50'),
+(6, 12, 3, 1, 0, 1, 2, 0, 0, 'teste', '09_04_2018_15_38_37_661_Camada 1 (1).png', 0, '2018-04-09 21:38:39', '2018-07-17 20:52:40'),
+(7, 12, 3, 1, 0, 1, 2, 0, 0, 'teste', '09_04_2018_15_38_37_661_Camada 1 (1).png', 0, '2018-04-09 21:38:44', '2018-07-17 20:52:42'),
+(8, 1, 2, 0, 0, 5, 1, 0, 0, 'fewfwe', '09_04_2018_17_37_35_932_canva-photo-editor.png', 0, '2018-04-09 23:37:39', '2018-07-17 20:51:51'),
+(9, 1, 4, 0, 8, 5, 1, 2, 0, 'fewfwfwe', '12_04_2018_09_22_57_945_123.jpg', 0, '2018-04-12 15:23:00', '2018-07-17 20:51:54'),
+(10, 15, 4, 0, 0, 3, 1, 0, 0, 'Baby baby do biruleibe', '12_04_2018_19_13_32_85_images.jpeg', 1, '2018-04-12 22:14:10', '2018-07-27 12:35:50'),
+(11, 18, 4, 0, 0, 0, 3, 0, 0, 'Vaga para trabalho', '12_04_2018_19_14_53_722_enhanced-buzz-17140-1421685799-11.jpg', 1, '2018-04-12 22:15:10', '2018-07-27 12:41:25'),
+(12, 1, 4, 0, 0, 5, 1, 0, 0, 'Interesse público', '12_04_2018_19_20_40_78_IMG-20180412-WA0006.jpg', 1, '2018-04-12 22:21:07', '2018-07-27 12:35:02'),
+(13, 21, 2, 0, 0, 0, 3, 2, 0, 'Cinema', '17_04_2018_00_56_12_520_IMG-20180406-WA0012.jpg', 1, '2018-04-17 03:56:30', '2018-07-27 12:41:39'),
+(14, 21, 2, 0, 0, 0, 3, 0, 0, 'Cinema', '17_04_2018_00_57_08_625_IMG-20180406-WA0012.jpg', 1, '2018-04-17 03:57:17', '2018-07-27 12:41:46'),
+(15, 1, 1, 0, 15, 5, 1, 2, 0, 'Garçom', '17_04_2018_01_20_39_996_enhanced-buzz-17140-1421685799-11.jpg', 1, '2018-04-17 04:20:50', '2018-07-27 12:34:39'),
+(16, 22, 2, 0, 0, 4, 1, 2, 0, '', '17_04_2018_01_43_07_387_IMG-20180330-WA0019.jpg', 1, '2018-04-17 04:43:13', '2018-07-27 12:41:55'),
+(17, 24, 4, 0, 0, 0, 3, 0, 0, 'fwefwe', '17_04_2018_12_03_41_947_123.jpg', 0, '2018-04-17 18:03:43', '2018-07-17 20:50:31'),
+(18, 29, 4, 0, 0, 0, 3, 0, 0, 'teste', '15_06_2018_02_39_57_649_1 (1).jpeg', 0, '2018-06-15 05:40:11', '2018-07-17 20:50:44'),
+(19, 1, 4, 0, 0, 5, 1, 0, 0, 'teste', '15_06_2018_03_57_28_701_1 (1).jpeg', 1, '2018-06-15 06:57:33', '2018-07-17 20:52:00'),
+(20, 1, 4, 0, 0, 5, 1, 0, 0, 'Teste amor', '04_07_2018_14_06_37_193_love facebook.png', 0, '2018-07-04 17:06:42', '2018-07-17 20:52:02'),
+(21, 33, 1, 8, 0, 3, 1, 1, 0, 'belo rio', '12_07_2018_15_35_55_62_bloubergstrand.jpg', 0, '2018-07-12 18:36:03', '2018-07-17 20:54:03'),
+(22, 1, 4, 8, 0, 5, 1, 1, 0, 'Somente para você felipe', '18_07_2018_10_42_13_570_fofinho.jpg', 0, '2018-07-18 13:42:21', '2018-07-18 13:42:21'),
+(23, 33, 2, 0, 0, 3, 1, 0, 0, 'Para a Universidade Apis Visualizar', '18_07_2018_18_25_37_400_caesgatos.jpg', 0, '2018-07-18 21:25:51', '2018-07-18 21:25:51'),
+(24, 33, 2, 0, 0, 3, 1, 0, 0, 'Para a Universidade Apis Visualizar 2', '18_07_2018_18_25_37_400_caesgatos.jpg', 0, '2018-07-18 21:25:51', '2018-07-25 18:37:19'),
+(25, 33, 1, 0, 0, 3, 1, 0, 0, 'Para a Universidade Apis Visualizar 2', '18_07_2018_18_25_37_400_caesgatos.jpg', 0, '2018-07-16 16:49:28', '2018-07-25 18:37:21'),
+(26, 40, 2, 0, 0, 6, 1, 0, 0, 'Outro teste da apis em projetos', '20_07_2018_16_10_21_39_download.jpg', 0, '2018-07-20 19:10:29', '2018-07-20 19:10:29'),
+(27, 33, 2, 0, 0, 3, 1, 0, 0, 'Teste de um aluno de verdade para apis poder ver', '20_07_2018_16_11_10_675_download (1).jpg', 0, '2018-07-20 19:11:27', '2018-07-20 19:11:27'),
+(28, 30, 3, 0, 0, 6, 2, 0, 0, 'Teste da faculdade para a cintia', '20_07_2018_16_10_21_39_download.jpg', 0, '2018-07-20 19:10:29', '2018-07-27 19:16:25'),
+(29, 20, 3, 0, 0, 3, 2, 0, 0, 'Teste que a cintia não pode ver', '20_07_2018_16_10_21_39_download.jpg', 0, '2018-07-20 19:10:29', '2018-07-27 19:16:29'),
+(30, 20, 3, 0, 0, 3, 2, 0, 0, 'POSTAGEM DA FACULDADE APIS', '25_07_2018_16_16_35_257_raca-cachorro-latido-forte.jpg', 0, '2018-07-25 19:16:46', '2018-07-25 19:16:46'),
+(31, 40, 4, 0, 0, 6, 1, 0, 0, '', '30_07_2018_11_15_30_24_caes.jpg', 0, '2018-07-30 14:15:31', '2018-07-30 14:15:31'),
+(32, 18, 4, 0, 0, 0, 3, 0, 0, 'tete', '14_08_2018_16_55_22_474_250px-Two_adult_Guinea_Pigs_(Cavia_porcellus).jpg', 1, '2018-08-14 19:55:31', '2018-08-14 20:13:34'),
+(33, 18, 1, 0, 0, 0, 3, 0, 0, 'que fofo', '14_08_2018_17_13_38_690_250px-Two_adult_Guinea_Pigs_(Cavia_porcellus).jpg', 0, '2018-08-14 20:13:47', '2018-08-14 20:13:47'),
+(34, 33, 4, 0, 0, 3, 1, 0, 0, 'Felipe postou em Divulgação', '28_08_2018_17_23_43_444_c3f296awgsunj1knkhujp3ef1.jpg', 0, '2018-08-28 20:23:52', '2018-08-28 20:23:52'),
+(35, 33, 1, 0, 40, 3, 1, 1, 0, 'não tem lista', '28_08_2018_18_44_22_205_cobras-fofas-8.jpg', 0, '2018-08-28 21:44:27', '2018-08-28 21:44:27'),
+(36, 33, 4, 0, 0, 3, 1, 1, 0, 'nao tem lista mesmo', '28_08_2018_18_45_01_732_cobras-fofas-8.jpg', 0, '2018-08-28 21:45:06', '2018-08-28 21:45:06'),
+(37, 33, 2, 0, 0, 3, 1, 0, 0, 'Cobras fofas', '28_08_2018_19_15_21_326_cobras-fofas-8.jpg', 0, '2018-08-28 22:15:28', '2018-08-28 22:15:28'),
+(38, 20, 3, 0, 0, 3, 2, 0, 0, 'Postagem da apis', '28_08_2018_19_44_10_961_download (4).jpg', 0, '2018-08-28 22:44:17', '2018-08-28 22:44:17'),
+(39, 40, 4, 0, 33, 6, 1, 2, 0, 'Somente para o contato felipe', '29_08_2018_09_36_15_103_types-of-hamsters.jpg', 0, '2018-08-29 12:36:21', '2018-08-29 12:36:21'),
+(40, 20, 3, 0, 0, 3, 2, 0, 0, 'Publicação da apis, o Muron deve visualizar', '29_08_2018_14_16_25_749_images (2).jpg', 0, '2018-08-29 17:16:39', '2018-08-29 17:16:39'),
+(41, 20, 3, 0, 0, 3, 2, 0, 0, 'Postagem da Apis, Teste das atualizações da categoria para o Muron', '29_08_2018_14_21_26_92_download (14).jpg', 0, '2018-08-29 17:21:44', '2018-08-29 17:21:44'),
+(42, 18, 1, 0, 0, 0, 3, 0, 0, 'Aumentar o numero do muron em estágios', '29_08_2018_14_22_07_867_coleho.jpg', 0, '2018-08-29 17:22:18', '2018-08-29 17:22:18'),
+(43, 18, 4, 0, 0, 0, 3, 0, 0, 'Atualização para o muron em divulgação', '29_08_2018_14_22_51_435_caes.jpg', 0, '2018-08-29 17:22:59', '2018-08-29 17:22:59'),
+(44, 40, 4, 19, 0, 6, 1, 1, 0, 'Para a lista para o felipe :D', '29_08_2018_14_41_05_554_types-of-hamsters.jpg', 0, '2018-08-29 17:41:14', '2018-08-29 17:41:14'),
+(45, 33, 4, 0, 0, 3, 1, 0, 0, 'apis não deve ver', '31_08_2018_09_24_29_297_coleho.jpg', 0, '2018-08-31 12:24:33', '2018-08-31 12:24:33'),
+(46, 33, 4, 0, 0, 3, 1, 0, 0, 'Outro teste para apis não ver', '31_08_2018_09_48_55_42_download (12).jpg', 0, '2018-08-31 12:49:01', '2018-08-31 12:49:01'),
+(47, 18, 4, 0, 0, 0, 3, 0, 0, 'top', '06_09_2018_11_47_54_849_250px-Two_adult_Guinea_Pigs_(Cavia_porcellus).jpg', 0, '2018-09-06 14:47:57', '2018-09-06 14:47:57'),
+(48, 18, 4, 0, 0, 0, 3, 0, 0, 'qq', '06_09_2018_13_41_24_477_gatos-de-interior.jpg', 1, '2018-09-06 16:41:26', '2018-09-06 19:24:20'),
+(49, 18, 1, 0, 0, 0, 3, 0, 0, 'divulgador\r\n', '06_09_2018_13_41_31_201_download (13).jpg', 1, '2018-09-06 16:41:42', '2018-09-06 19:23:35'),
+(50, 88, 3, 0, 0, 2412, 2, 0, 1, 'Foto para todos os alunos', '07_10_2018_21_10_17_393_Gintama_ep66.png', 0, '2018-10-08 00:10:29', '2018-10-08 01:03:57');
 
 -- --------------------------------------------------------
 
@@ -2985,7 +3002,7 @@ CREATE TABLE `postagens_categorias_view` (
 
 INSERT INTO `postagens_categorias_view` (`id`, `id_usuario`, `id_categoria`, `qtd_acesso`, `data_acesso`, `data_cadastro`) VALUES
 (16, 1, 4, 19, '2018-08-29 14:22:31', '2018-06-15 03:59:25'),
-(15, 1, 3, 4, '2018-08-29 14:16:52', '2018-06-15 03:59:25'),
+(15, 1, 3, 5, '2018-09-23 02:52:57', '2018-06-15 03:59:25'),
 (14, 1, 2, 17, '2018-09-05 15:45:48', '2018-06-15 03:59:25'),
 (13, 1, 1, 11, '2018-09-05 14:51:22', '2018-06-15 03:59:25'),
 (17, 30, 1, 0, '2018-06-15 23:19:53', '2018-06-15 23:19:53'),
@@ -3047,7 +3064,23 @@ INSERT INTO `postagens_categorias_view` (`id`, `id_usuario`, `id_categoria`, `qt
 (73, 61, 1, 0, '2018-09-05 15:15:39', '2018-09-05 15:15:39'),
 (74, 61, 2, 0, '2018-09-05 15:15:39', '2018-09-05 15:15:39'),
 (75, 61, 3, 0, '2018-09-05 15:15:39', '2018-09-05 15:15:39'),
-(76, 61, 4, 0, '2018-09-05 15:15:39', '2018-09-05 15:15:39');
+(76, 61, 4, 0, '2018-09-05 15:15:39', '2018-09-05 15:15:39'),
+(77, 70, 1, 0, '2018-09-25 23:41:44', '2018-09-25 23:41:44'),
+(78, 70, 2, 0, '2018-09-25 23:41:44', '2018-09-25 23:41:44'),
+(79, 70, 3, 0, '2018-09-25 23:41:44', '2018-09-25 23:41:44'),
+(80, 70, 4, 0, '2018-09-25 23:41:44', '2018-09-25 23:41:44'),
+(81, 80, 1, 0, '2018-10-07 19:12:05', '2018-10-07 19:12:05'),
+(82, 80, 2, 0, '2018-10-07 19:12:05', '2018-10-07 19:12:05'),
+(83, 80, 3, 0, '2018-10-07 19:12:05', '2018-10-07 19:12:05'),
+(84, 80, 4, 0, '2018-10-07 19:12:05', '2018-10-07 19:12:05'),
+(85, 88, 1, 0, '2018-10-07 20:52:37', '2018-10-07 20:52:37'),
+(86, 88, 2, 1, '2018-10-07 22:50:19', '2018-10-07 20:52:37'),
+(87, 88, 3, 0, '2018-10-07 20:52:37', '2018-10-07 20:52:37'),
+(88, 88, 4, 0, '2018-10-07 20:52:37', '2018-10-07 20:52:37'),
+(89, 78, 1, 0, '2018-10-07 21:21:33', '2018-10-07 21:21:33'),
+(90, 78, 2, 0, '2018-10-07 21:21:33', '2018-10-07 21:21:33'),
+(91, 78, 3, 9, '2018-10-07 22:04:00', '2018-10-07 21:21:33'),
+(92, 78, 4, 0, '2018-10-07 21:21:33', '2018-10-07 21:21:33');
 
 -- --------------------------------------------------------
 
@@ -3218,7 +3251,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `id_curso`, `id_faculdade`, `hash_login`, `hash_social`, `tipo_social`, `senha`, `nome`, `nome_murer`, `nome_contato`, `celular`, `descricao`, `nascimento`, `genero`, `pais`, `uf`, `cidade`, `curso`, `status`, `email`, `imagem`, `site`, `tipo`, `validacao`, `deletado`, `data_cadastro`, `data_atualizado`) VALUES
-(1, 0, 5, 'fb939024123550c51089e2f4977049da', NULL, 0, '745536f0652656dae49565e5fa26152b', 'Admin', 'Muron', NULL, 'Não Definido', NULL, '0000-00-00', 'Masculino', 'teste', 'RS', 'Porto Alegre', 'Mecânico', 0, 'contato@muron.com.br', '14_06_2018_20_57_34_936_perfil-1.png', '', 1, 0, 0, '2018-03-12 15:11:23', '2018-09-10 12:12:39'),
+(1, 0, 5, '2c014449990f17c4915210a3985cf808', NULL, 0, '745536f0652656dae49565e5fa26152b', 'Admin', 'Muron', NULL, 'Não Definido', NULL, '0000-00-00', 'Masculino', 'teste', 'RS', 'Porto Alegre', 'Mecânico', 0, 'contato@muron.com.br', '14_06_2018_20_57_34_936_perfil-1.png', '', 1, 0, 0, '2018-03-12 15:11:23', '2018-10-07 23:52:22'),
 (8, 0, 2, NULL, NULL, 0, '5914b69e5c80c212d47a8ff4d267cdce', '123', '123', NULL, 'Não Definido', 'Não Definido', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, '123@123.com', 'perfil-1.png', '', 1, 0, 1, '2018-03-28 21:02:47', '2018-07-13 18:39:29'),
 (9, 0, 3, 'a7583a99c754544ba4ff19dc1fe31ec6', NULL, 0, 'b692df4163e3a2d35fd731c727f2f0ac', '1', '1', NULL, 'Não Definido', 'Não Definido', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, '1@1.com', 'perfil-1.png', '', 1, 0, 1, '2018-03-28 21:23:06', '2018-07-13 18:40:16'),
 (10, 0, 3, 'cfde4c0847631abf1573ffd190d1b974', NULL, 0, 'bd5d0601e308dc66ffab27269ab1617e', 'Leonardo Peixe', 'Leo Peixe', NULL, 'Não Definido', 'Não Definido', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'leonardopeixe42@gmail.com', 'perfil-1.png', '', 1, 0, 0, '2018-03-28 21:27:01', '2018-07-25 22:04:53'),
@@ -3229,9 +3262,9 @@ INSERT INTO `usuarios` (`id`, `id_curso`, `id_faculdade`, `hash_login`, `hash_so
 (15, 0, 3, 'a52d6cc126749f3e2be742142684301f', NULL, 0, '745536f0652656dae49565e5fa26152b', 'Marcos', 'Teste2', NULL, 'Não Definido', NULL, NULL, 'Lindo', 'Não Definido', 'Sp', 'Não Definido', 'Administração', 1, 'markosss13@gmail.com', 'perfil-1.png', '', 1, 0, 0, '2018-04-12 20:59:01', '2018-07-13 18:37:35'),
 (16, 0, 0, NULL, NULL, 0, '51a45c85811a980a91b1c0171d479442', 'Joaquim', '', '', '', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, '', 'perfil-1.png', '', 3, 0, 0, '2018-04-12 21:04:22', '2018-06-14 23:40:32'),
 (17, 0, 0, NULL, NULL, 0, '8bbac6c43b91980fa049d2f61e15aeb4', 'Joaquim', 'Jonas', 'Eu', '123455553', 'Corta cabelo ganha su-co!', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'rs@scaabcars.cf', 'perfil-1.png', '', 3, 0, 0, '2018-04-12 21:05:59', '2018-06-14 23:40:32'),
-(18, 0, 0, '83771a7bba72ed6380caab89bc6a7b9e', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Divulgador22', 'divulgador', 'Sérgio', '111111111111', 'Nnnnnn', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, '195@195.com', 'perfil-1.png', 'www.google.com.br', 3, 0, 0, '2018-04-12 22:13:41', '2018-09-25 22:17:37'),
+(18, 0, 0, '159b7a6e7607d2a5d8f14bcb8558acdd', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Divulgador22', 'divulgador', 'Sérgio', '111111111111', 'Nnnnnn', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, '195@195.com', 'perfil-1.png', 'www.google.com.br', 3, 0, 0, '2018-04-12 22:13:41', '2018-09-30 05:35:00'),
 (19, 0, 3, 'b9242dbb04b0167725e58d757d6b20e5', NULL, 0, '745536f0652656dae49565e5fa26152b', 'Renato', 'Teste', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'Administração', 1, 'markosss13@gmail.com', 'perfil-1.png', '', 1, 0, 0, '2018-04-12 22:27:50', '2018-07-13 18:37:33'),
-(20, 0, 3, '6b37673c411d5fe4c3717873178a4b06', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Faculdade 1', 'apis', 'Contato', 'Xxxxxxx', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, '123@123.com', 'perfil-1.png', '', 2, 0, 0, '2018-04-17 01:35:39', '2018-09-25 22:19:05'),
+(20, 0, 3, '70ae316d4756261d9c6871d5b9dc1a79', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Faculdade 1', 'apis', 'Contato', 'Xxxxxxx', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, '123@123.com', 'perfil-1.png', '', 2, 0, 0, '2018-04-17 01:35:39', '2018-09-30 05:44:05'),
 (21, 0, 0, '2ecc35062d00ed0a64125db661dce0af', NULL, 0, '5914b69e5c80c212d47a8ff4d267cdce', 'Divulgador 3', 'Divulgador 3', 'Divulgador', 'Xxxxxxx', 'Xxxxc', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, '123@123.com', 'perfil-1.png', '', 3, 0, 0, '2018-04-17 03:51:21', '2018-06-14 23:40:32'),
 (22, 0, 4, '59fc1c7c9e2699dce1b22389d2b32c12', NULL, 0, '5914b69e5c80c212d47a8ff4d267cdce', 'Teste3', 'Teste3', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'Teste', 0, '123@123.com', 'perfil-1.png', '', 1, 0, 0, '2018-04-17 04:35:49', '2018-07-13 18:38:09'),
 (23, 0, 4, 'fb114ed6aa218d5013d6b1f892eec1d8', NULL, 0, 'ccf25b46b499772699b4c16e033af2e5', 'test123', 'test123', 'test123', '12312312312', 'test123', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'teste123@123.com', 'perfil-1.png', '', 2, 0, 0, '2018-04-17 17:56:08', '2018-07-13 18:30:05'),
@@ -3244,14 +3277,14 @@ INSERT INTO `usuarios` (`id`, `id_curso`, `id_faculdade`, `hash_login`, `hash_so
 (30, 0, 6, '8904c7d8efe4b036f764d81e8573700b', NULL, 0, '5914b69e5c80c212d47a8ff4d267cdce', 'Upis', 'Teste15/4', 'Teste', '', 'Xxxx', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, '', 'perfil-1.png', '', 2, 0, 0, '2018-06-15 23:19:39', '2018-07-13 18:31:46'),
 (31, 0, 7, '797e3d1b56772652f3acdd77dc8dfe4c', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'faculdade1', 'faculdade1', 'Teste', '519999999', 'Teste para o cadastro de faculdade senha 12345', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'teste@faculdade', '10_07_2018_18_30_25_225_cpers preto.png', '', 2, 0, 0, '2018-07-04 17:00:46', '2018-07-16 19:00:39'),
 (32, 0, 3, '0cdf5f4aa6cbf96dc5992bbdf668c4f9', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'junior', 'junior', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'Administração', 1, 'junior@junior', 'perfil-1.png', '', 1, 0, 0, '2018-07-05 18:44:25', '2018-07-13 18:38:27'),
-(33, 0, 3, 'c0f44dffe4bc18ce77974925c8ffb6fa', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'felipe', 'felipe', NULL, 'qqqqq', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'Ciência', 1, 'felipe@felipe.com.br', '31_08_2018_12_20_16_512_download (2).jpg', '', 1, 0, 0, '2018-07-05 18:47:39', '2018-09-25 23:16:57'),
+(33, 0, 3, 'f52f0f3dc8737e5d62719b439b3382bf', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'felipe', 'felipe', NULL, 'qqqqq', NULL, NULL, 'Feminino', 'Não Definido', 'Alagoas', 'Arapiraca', 'Ciência', 2, 'felipe@felipe.com.br', '31_08_2018_12_20_16_512_download (2).jpg', '', 1, 0, 0, '2018-07-05 18:47:39', '2018-10-07 21:59:10'),
 (34, 0, 6, 'd7e73b52d356f84e910f328d26ef06a9', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'felipe', 'felipinho', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'Ciência', 1, 'felipe@felipe.com.br', 'perfil-1.png', '', 1, 0, 0, '2018-07-05 18:48:35', '2018-07-13 18:37:06'),
-(35, 0, 3, 'f3367b0492d0b645fbc3b57645849444', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'bruno', 'bruno', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'Administração', 1, 'bruno@bruno.com', 'perfil-1.png', '', 1, 0, 0, '2018-07-05 19:32:53', '2018-07-13 18:38:23'),
+(35, 0, 5, 'd70a15b5dcf0dd197930c88de83f83d0', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'bruno', 'bruno', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'Administração', 1, 'bruno@bruno.com', 'perfil-1.png', '', 1, 0, 0, '2018-07-05 19:32:53', '2018-09-23 05:47:37'),
 (36, 0, 8, NULL, NULL, 0, '51a45c85811a980a91b1c0171d479442', '23213', '123123', '312321', '3123', '123213213', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, '312321', 'perfil-1.png', '', 2, 0, 0, '2018-07-09 21:02:15', '2018-07-13 18:31:59'),
 (37, 0, 1, NULL, NULL, 0, '154088cdc2f49a19c7baf265242c446e', 'teste', '99999', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', '', 1, 'teste@teste.com.br', 'perfil-1.png', '', 1, 0, 0, '2018-07-09 21:27:41', '2018-07-13 18:38:32'),
 (38, 0, 9, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', '312321', 'faculdade24', 'Renato', '', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'markosss13@hotmail.com', 'perfil-1.png', '', 2, 0, 0, '2018-07-09 21:29:35', '2018-07-13 18:32:05'),
 (39, 0, 3, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Renato', '21', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', '', 0, 'renatinho@faculdade.com', 'perfil-1.png', '', 1, 0, 0, '2018-07-09 21:33:52', '2018-07-13 18:40:18'),
-(40, 0, 6, 'da83ed43f051afb711d6e058f0e02616', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Cintia', 'cintia', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'Jornalismo', 1, 'cintia@gmail.com', 'perfil-1.png', '', 1, 0, 0, '2018-07-11 21:48:48', '2018-09-25 22:28:41'),
+(40, 0, 6, 'f797857cf5d197d5954d1e218081d8c0', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Cintia', 'cintia', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'Jornalismo', 1, 'cintia@gmail.com', 'perfil-1.png', '', 1, 0, 0, '2018-07-11 21:48:48', '2018-10-07 06:19:41'),
 (41, 0, 14, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'faculdade35', 'faculdade35', 'Pedro', '51999999999999', 'faculdade35', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'faculdade35@gmail.com', 'perfil-1.png', '', 2, 0, 0, '2018-07-13 21:40:08', '2018-07-13 21:40:08'),
 (42, 0, 0, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Divulgador9', 'divulgador9', 'divulgador9', '519999999999', 'divulgador9', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'divulgador9@gmail.com', 'perfil-1.png', '', 3, 0, 0, '2018-07-13 21:46:56', '2018-07-13 21:46:56'),
 (43, 0, 3, 'b4a91e7b137ae757612f32f24eff4bf1', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'mauricio', 'mauricio', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'Direito', 1, 'mauricio@gmail.com', 'perfil-1.png', '', 1, 0, 0, '2018-07-16 16:31:52', '2018-07-16 16:36:57'),
@@ -3271,12 +3304,35 @@ INSERT INTO `usuarios` (`id`, `id_curso`, `id_faculdade`, `hash_login`, `hash_so
 (57, 0, 3, '608f66d3886cb541f4081ea5a6fd92b1', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Cassia', 'cassia', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'Odontologia', 1, 'cassia@gmail.com', 'perfil-1.png', '', 1, 0, 0, '2018-07-26 17:29:24', '2018-07-26 18:34:34'),
 (58, 0, 15, '3c670a6f4a275701e314bc3e6f9d5883', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'AGIS', 'agis', 'Pedro', '(51) 99999-9999', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'contato@agis.com.br', 'perfil-1.png', 'www.agis.com.br', 2, 0, 0, '2018-08-16 13:05:35', '2018-08-16 13:07:38'),
 (59, 0, 7, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Bruninho', 'bernardomuro', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'Advogados', 1, 'bruno@brunim.com', 'perfil-1.png', NULL, 1, 0, 0, '2018-09-03 18:18:46', '2018-09-03 18:18:46'),
-(60, 0, 0, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Pedro', 'pedrodivulgador', 'Renato', '(12) 31231-2312', 'Renato', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'pedro@gmail.com', 'perfil-1.png', 'www.renato.com.br', 3, 0, 0, '2018-09-03 18:30:15', '2018-09-03 18:30:15'),
+(60, 0, 0, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Pedro', 'pedrodivulgador', 'Renato', '(12) 31231-2312', 'Renato', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'pedro@gmail.com', 'perfil-1.png', 'www.renato.com.br', 3, 0, 0, '2018-09-03 18:30:15', '2018-09-23 07:52:22'),
 (61, 0, 16, '11e5055480bf7a625c99f53b4d1115ad', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'FaculdadeRe', 'faculdadre', 'Faculdade Rê', '(51) 99999-9999', 'Oi eu sou a faculdadeRe', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'faculdadere@gmail.com', 'perfil-1.png', 'www.faculdadere.com.br', 2, 0, 0, '2018-09-05 18:15:37', '2018-09-06 21:17:33'),
-(62, 0, 0, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'divulgadorre', 'divulgadorre', 'Bruno', '(51) 99999-9999', 'Sou divulgador da empresa', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'divulgadorre@gmail.com', 'perfil-1.png', 'divugadorre@gmail.com', 3, 0, 0, '2018-09-06 18:25:54', '2018-09-06 21:42:59'),
+(62, 0, 0, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'divulgadorre', 'divulgadorre', 'Bruno', '(51) 99999-9999', 'Sou divulgador da empresa', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'divulgadorre@gmail.com', 'perfil-1.png', 'divugadorre@gmail.com', 3, 0, 0, '2018-09-06 18:25:54', '2018-09-23 07:52:16'),
 (63, 0, 17, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Criaredeletar', 'criaredeletar', 'CriareDeletar', '(51) 99999-9999', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'teste@teste.com.br', 'perfil-1.png', 'bruno@bruno.com', 2, 0, 1, '2018-09-06 19:13:27', '2018-09-06 19:13:50'),
 (64, 0, 0, 'bd683cc0957f1423c2646d11f8462441', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Geraldinho', 'geraldinho_divulgador', 'Geraldo Antares', '(51) 99999-9999', 'Sou da academia maxxi', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'geraldinho@gmail.com', 'perfil-1.png', 'maxxi.com.br', 3, 1, 0, '2018-09-07 16:34:56', '2018-09-07 19:31:04'),
-(65, 0, 0, 'a165162a590c3a044ecb9506b503cf10', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'novo', 'novo_divulgador', 'Pedro Barbosa', '(51) 99999-9999', 'Sou novo divulgador para teste', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'novo@gmail.com', 'perfil-1.png', 'novo.com.br', 3, 0, 1, '2018-09-07 19:32:17', '2018-09-07 19:34:12');
+(65, 0, 0, 'a165162a590c3a044ecb9506b503cf10', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'novo', 'novo_divulgador', 'Pedro Barbosa', '(51) 99999-9999', 'Sou novo divulgador para teste', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'novo@gmail.com', 'perfil-1.png', 'novo.com.br', 3, 0, 1, '2018-09-07 19:32:17', '2018-09-07 19:34:12'),
+(66, 0, 0, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Divulgador Cesar', 'cesardiv', 'Cesar', '(99) 99999-9999', 'cesar', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'cesar@gmail.com', 'perfil-1.png', 'cesar', 3, 1, 0, '2018-09-23 19:12:20', '2018-09-23 19:12:20'),
+(67, 0, 0, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Divulgador Denis', 'denisdiv', 'denis', '(99) 99999-9999', '231231', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'denis@gmail.com', 'perfil-1.png', '', 3, 1, 0, '2018-09-23 19:15:34', '2018-09-23 19:15:34'),
+(68, 0, 18, '0da6506d752c36159b6a120ae115b5a5', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', '0', 'area1', 'Jefferson', '(99) 99999-9999', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'contato@area1.com.br', 'perfil-1.png', '', 2, 1, 0, '2018-09-23 19:32:30', '2018-09-23 19:32:39'),
+(69, 0, 19, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'FACULDADE DE TECNOLOGIA SENAC SÃO MIGUEL DO OESTE (5133)', 'senac', 'Heitor', '(51) 99999-9999', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'sao@gmail.com', 'perfil-1.png', '', 2, 1, 0, '2018-09-23 20:45:22', '2018-09-23 20:45:22'),
+(70, 0, 923, '5de85b2e74997d23ce355ab18c109b48', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Rafael', 'rafael', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'TI', 1, 'rafael@gmail.com', 'perfil-1.png', NULL, 1, 0, 0, '2018-09-26 02:41:34', '2018-09-26 02:45:54'),
+(71, 0, 20, 'e3b3c1837d629999962cf25c601eff40', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'CENTRO DE ENSINO SUPERIOR DE VALENÇA (CESVA)', 'cesva', 'Valesca', '(51) 99999-9999', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'contato@cesva.com.br', 'perfil-1.png', '', 2, 1, 0, '2018-09-26 02:42:43', '2018-09-26 02:42:45'),
+(72, 0, 2241, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'FACULDADE 2001', '2001', 'Juliana', '(51) 99999-9999', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'juliana@gmail.com', 'perfil-1.png', '', 2, 1, 0, '2018-10-01 01:28:40', '2018-10-01 01:28:40'),
+(73, 0, 1593, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'FACULDADE DE TECNOLOGIA SENAC SÃO MIGUEL DO OESTE (5133)', 'nhe', 'len', '(51) 99999-9999', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'neh@gmail.com', 'perfil-1.png', '', 2, 1, 0, '2018-10-01 01:50:59', '2018-10-01 01:50:59'),
+(74, 0, 987, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'ÁREA1 - FACULDADE DE CIÊNCIA E TECNOLOGIA (ÁREA1)', 'brunnnnn', '111111', '(51) 11111-1111', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, '124124@gmail.com', 'perfil-1.png', '', 2, 1, 0, '2018-10-01 01:54:35', '2018-10-01 01:54:35'),
+(75, 0, 963, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'FACULDADE UBAENSE OZANAM COELHO (FAGOC)', '123123213123123', '123', '(51) 51251-2512', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, '1234@gmail.com', 'perfil-1.png', '', 2, 1, 0, '2018-10-01 02:03:21', '2018-10-01 02:03:21'),
+(76, 0, 0, 'aeb538177023ed849d7769f89d50bb54', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'renatinha', 'renatinha', 'renata', '(51) 99999-9999', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'renatinha@gmail.com', 'perfil-1.png', '', 3, 1, 0, '2018-10-03 02:13:29', '2018-10-03 02:27:00'),
+(77, 0, 2410, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'chico', 'chicho', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'chico', 1, 'chico@gmail.com', 'perfil-1.png', NULL, 1, 0, 0, '2018-10-07 05:03:11', '2018-10-07 05:03:11'),
+(78, 0, 2412, '2199d54e68e0c5a81f2b60039158c61a', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'bussula', 'bussula', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'bussula', 1, 'bussula@gmail.com', 'perfil-1.png', NULL, 1, 0, 0, '2018-10-07 05:05:18', '2018-10-08 02:53:10'),
+(79, 0, 2412, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'girso', 'girso', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'bussula', 1, 'girso@gmail.com', 'perfil-1.png', NULL, 1, 0, 0, '2018-10-07 05:36:28', '2018-10-07 05:36:28'),
+(80, 0, 2412, 'c8d36a82007fb8a4fdd4fb1cf1cfc0e3', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'camisa', 'camisa', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'bussula', 1, 'camisa@gmail.com', 'perfil-1.png', NULL, 1, 0, 0, '2018-10-07 05:40:52', '2018-10-07 22:12:05'),
+(81, 0, 987, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'moleton', 'moleton', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'moleton', 1, 'moleton@gmail.com', 'perfil-1.png', NULL, 1, 0, 0, '2018-10-07 05:41:23', '2018-10-07 05:41:23'),
+(82, 0, 2413, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'jaqueta', 'jaqueta', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'jaqueta', 1, 'jaqueta@gmail.com', 'perfil-1.png', NULL, 1, 0, 0, '2018-10-07 05:42:04', '2018-10-07 05:42:04'),
+(83, 0, 0, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'Juliana', 'juuu', 'Ju', '(51) 99999-9999', 'oi', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'juliana@gmail.com', 'perfil-1.png', 'ju.com.br', 3, 1, 0, '2018-10-07 21:26:13', '2018-10-07 21:26:13'),
+(84, 0, 337, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'CENTRO DE ENSINO SUPERIOR DE JUIZ DE FORA (CES/JF)', 'juizfora', 'Graça', '(99) 99999-9999', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'juizfora@gmail.com', 'perfil-1.png', '', 2, 1, 0, '2018-10-07 21:27:15', '2018-10-07 21:27:15'),
+(85, 0, 0, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'juu', 'juu', 'Juliana', '(51) 99999-9999', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'ju@gmail.com', 'perfil-1.png', '', 3, 1, 0, '2018-10-07 21:28:44', '2018-10-07 21:28:44'),
+(86, 0, 2414, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'aaaaaaaa', 'aaaaaaaaaa', 'aaaaaaaaa', '(51) 99999-9999', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'aaaaaa@gmail.com', 'perfil-1.png', '', 2, 1, 0, '2018-10-07 21:52:09', '2018-10-07 21:52:09'),
+(87, 0, 2412, NULL, NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'brick', 'brick', NULL, 'Não Definido', NULL, NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', 'Letras', 2, 'brick@gmail.com', 'perfil-1.png', NULL, 1, 0, 0, '2018-10-07 23:50:50', '2018-10-07 23:50:50'),
+(88, 0, 2412, 'b3a19a3594a873652e8bf5bcb14abd6d', NULL, 0, '0ef219d1f0829be9f21ee5ce6633dac8', 'bussula', 'fac_bussula', 'Berlirze', '(51) 99999-9999', '', NULL, 'Não Declarado', 'Não Definido', 'Não Definido', 'Não Definido', NULL, 0, 'bussula@gmail.com', 'perfil-1.png', '', 2, 0, 0, '2018-10-07 23:52:17', '2018-10-08 02:53:26');
 
 -- --------------------------------------------------------
 
@@ -3386,38 +3442,24 @@ INSERT INTO `usuarios_contatos` (`id`, `id_usuario`, `id_usuario2`, `deletado`, 
 (40, 59, 1, 1, '2018-09-05 18:37:26'),
 (41, 40, 46, 0, '2018-09-05 19:10:36'),
 (42, 46, 40, 0, '2018-09-05 19:10:36'),
-(43, 33, 59, 0, '2018-09-25 18:35:13'),
-(44, 33, 57, 0, '2018-09-25 18:35:13'),
-(45, 33, 56, 0, '2018-09-25 20:38:53'),
-(46, 33, 55, 0, '2018-09-25 20:38:53'),
-(47, 56, 33, 0, '2018-09-25 20:38:53'),
-(48, 55, 33, 0, '2018-09-25 20:38:53'),
-(49, 33, 46, 0, '2018-09-25 20:39:44'),
-(50, 33, 45, 0, '2018-09-25 20:39:44'),
-(51, 46, 33, 0, '2018-09-25 20:39:44'),
-(52, 45, 33, 0, '2018-09-25 20:39:44'),
-(53, 33, 44, 0, '2018-09-25 20:40:42'),
-(54, 33, 43, 0, '2018-09-25 20:40:42'),
-(55, 44, 33, 0, '2018-09-25 20:40:42'),
-(56, 43, 33, 0, '2018-09-25 20:40:42'),
-(57, 33, 37, 0, '2018-09-25 20:51:38'),
-(58, 33, 35, 0, '2018-09-25 20:51:38'),
-(59, 37, 33, 0, '2018-09-25 20:51:38'),
-(60, 35, 33, 0, '2018-09-25 20:51:38'),
-(61, 33, 39, 0, '2018-09-25 20:53:05'),
-(62, 33, 32, 0, '2018-09-25 20:53:05'),
-(63, 39, 33, 0, '2018-09-25 20:53:05'),
-(64, 32, 33, 0, '2018-09-25 20:53:05'),
-(65, 33, 34, 1, '2018-09-25 21:26:40'),
-(66, 33, 33, 0, '2018-09-25 21:26:40'),
-(67, 34, 33, 1, '2018-09-25 21:26:40'),
-(68, 33, 33, 0, '2018-09-25 21:26:40'),
-(69, 33, 22, 0, '2018-09-25 21:26:49'),
-(70, 33, 19, 1, '2018-09-25 21:26:49'),
-(71, 22, 33, 0, '2018-09-25 21:26:49'),
-(72, 19, 33, 1, '2018-09-25 21:26:49'),
-(73, 40, 59, 0, '2018-09-25 22:13:48'),
-(74, 59, 40, 0, '2018-09-25 22:13:48');
+(43, 35, 57, 0, '2018-09-23 05:46:57'),
+(44, 57, 35, 0, '2018-09-23 05:46:57'),
+(45, 70, 57, 0, '2018-09-26 02:46:32'),
+(46, 57, 70, 0, '2018-09-26 02:46:32'),
+(47, 78, 87, 0, '2018-10-08 02:51:58'),
+(48, 87, 78, 0, '2018-10-08 02:51:58'),
+(49, 78, 82, 0, '2018-10-08 02:52:05'),
+(50, 78, 81, 0, '2018-10-08 02:52:05'),
+(51, 78, 80, 0, '2018-10-08 02:52:05'),
+(52, 78, 78, 0, '2018-10-08 02:52:05'),
+(53, 82, 78, 0, '2018-10-08 02:52:05'),
+(54, 81, 78, 0, '2018-10-08 02:52:05'),
+(55, 80, 78, 0, '2018-10-08 02:52:05'),
+(56, 78, 78, 0, '2018-10-08 02:52:05'),
+(57, 78, 79, 0, '2018-10-08 02:53:17'),
+(58, 78, 77, 0, '2018-10-08 02:53:17'),
+(59, 79, 78, 0, '2018-10-08 02:53:17'),
+(60, 77, 78, 0, '2018-10-08 02:53:17');
 
 -- --------------------------------------------------------
 
@@ -3644,17 +3686,17 @@ ALTER TABLE `chats_mensagens_bkp`
 -- AUTO_INCREMENT for table `faculdades`
 --
 ALTER TABLE `faculdades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `faculdades_inep`
 --
 ALTER TABLE `faculdades_inep`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2409;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2415;
 --
 -- AUTO_INCREMENT for table `faculdades_relacoes_aluno`
 --
 ALTER TABLE `faculdades_relacoes_aluno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `faculdades_relacoes_bkp`
 --
@@ -3684,7 +3726,7 @@ ALTER TABLE `grupos_usuarios_bkp`
 -- AUTO_INCREMENT for table `postagens`
 --
 ALTER TABLE `postagens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 --
 -- AUTO_INCREMENT for table `postagens_bkp`
 --
@@ -3704,7 +3746,7 @@ ALTER TABLE `postagens_categorias_bkp`
 -- AUTO_INCREMENT for table `postagens_categorias_view`
 --
 ALTER TABLE `postagens_categorias_view`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 --
 -- AUTO_INCREMENT for table `postagens_comentarios`
 --
@@ -3729,7 +3771,7 @@ ALTER TABLE `postagens_gostei_bkp`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 --
 -- AUTO_INCREMENT for table `usuarios_bkp`
 --
@@ -3739,7 +3781,7 @@ ALTER TABLE `usuarios_bkp`
 -- AUTO_INCREMENT for table `usuarios_contatos`
 --
 ALTER TABLE `usuarios_contatos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 --
 -- AUTO_INCREMENT for table `usuarios_contatos_bkp`
 --

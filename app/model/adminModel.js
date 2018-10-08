@@ -22,6 +22,19 @@ class PostagensModel {
 		});	
 	}
 
+	GetUsuariosFaculdade(){
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.*,\
+				(SELECT NO_IES FROM faculdades_inep as c WHERE id IN  (SELECT id_faculdade FROM faculdades_relacoes_aluno as d WHERE d.id_aluno = a.id and deletado = ?)) as faculdade \
+				FROM usuarios as a WHERE a.deletado = ? AND a.tipo = ? ORDER BY a.data_cadastro', [0, 0, 1]).then(data => {
+					console.log('DDDDDDDDDDDDDDDDDDDDDDD DADOS DOS USUARIOS DDDDDDDDDDDDDDDDDD');
+					console.log(data);
+					console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
+					resolve(data);
+				});
+			});	
+	}
+
 
 	GetCategorias() {
 		return new Promise(function(resolve, reject) {
