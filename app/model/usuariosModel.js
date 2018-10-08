@@ -121,9 +121,13 @@ class UsuariosModel {
 
 
 
-	GetUsuariosFaculdade(data,id_faculdade) {
+	GetUsuariosFaculdade(data,id_faculdade,id_usuario_facul) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT id as id_usuario2, nome_murer, imagem, email FROM usuarios WHERE deletado = ? AND id_faculdade = ? AND (nome_murer like CONCAT("%", ?, "%") OR nome like CONCAT("%", ?, "%") OR email like CONCAT("%", ?, "%"))', [0, id_faculdade,data.pesquisar, data.pesquisar, data.pesquisar]).then(data => {
+			helper.Query('SELECT id as id_usuario2, nome_murer, imagem, email, ? as aluno \
+			 FROM usuarios WHERE deletado = ? AND id_faculdade = ? AND id != ? AND (nome_murer like CONCAT("%", ?, "%") OR nome like CONCAT("%", ?, "%") OR email like CONCAT("%", ?, "%"))', [ 1, 0, id_faculdade,id_usuario_facul ,data.pesquisar, data.pesquisar, data.pesquisar]).then(data => {
+				console.log('FFFFFFFFFFFFFFFF GETUSUARIOSFACULDADE FFFFFFFFFFFFFFFFFFFFFFFFFF');
+				console.log(data);
+				console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF');
 				resolve(data);
 			});
 		});
