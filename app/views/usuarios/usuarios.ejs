@@ -19,10 +19,10 @@
           </a>
 
 
-          <%if(data[i].aluno == 1 ){%>
+          <%if(data[i].aluno_faculdade == 1 ){%>
           <div class="secondary-content" style="position: absolute;top: 16px;right: 16px;">
             <p>
-              <input type="checkbox" class="checkbox_selecionar_aluno" id="selecionar-usuario-<%= data[i].id_usuario2%>" data-id="<%= data[i].id_usuario2%>" name="lista[id_usuario2][]" value="<%= data[i].id_usuario2%>" checked/>
+              <input type="checkbox" class="checkbox_selecionar_aluno" id="selecionar-usuario-<%= data[i].id_usuario2%>" data-id="<%= data[i].id_usuario2%>" name="lista[id_usuario2][]" value="<%= data[i].id_usuario2%>" <%= data[i].aluno == 0 ? "checked " : "" %> >
               <label for="selecionar-usuario-<%= data[i].id_usuario2%>"></label>
             </p>
           </div>

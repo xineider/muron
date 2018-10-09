@@ -123,8 +123,9 @@ class UsuariosModel {
 
 	GetUsuariosFaculdade(data,id_faculdade,id_usuario_facul) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT id as id_usuario2, nome_murer, imagem, email, ? as aluno \
-			 FROM usuarios WHERE deletado = ? AND id_faculdade = ? AND id != ? AND (nome_murer like CONCAT("%", ?, "%") OR nome like CONCAT("%", ?, "%") OR email like CONCAT("%", ?, "%"))', [ 1, 0, id_faculdade,id_usuario_facul ,data.pesquisar, data.pesquisar, data.pesquisar]).then(data => {
+			helper.Query('SELECT a.id as id_usuario2, a.nome_murer, a.imagem, a.email, ? as aluno_faculdade, \
+				(SELECT deletado FROM faculdades_relacoes_aluno as b WHERE b.id_faculdade = ? AND b.id_aluno = a.id) as aluno\
+			 FROM usuarios as a WHERE a.deletado = ? AND a.id_faculdade = ? AND a.id != ? AND (a.nome_murer like CONCAT("%", ?, "%") OR a.nome like CONCAT("%", ?, "%") OR a.email like CONCAT("%", ?, "%"))', [1,id_faculdade, 0, id_faculdade,id_usuario_facul ,data.pesquisar, data.pesquisar, data.pesquisar]).then(data => {
 				console.log('FFFFFFFFFFFFFFFF GETUSUARIOSFACULDADE FFFFFFFFFFFFFFFFFFFFFFFFFF');
 				console.log(data);
 				console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF');
