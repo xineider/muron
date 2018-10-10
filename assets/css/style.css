@@ -847,7 +847,7 @@ table.striped>tbody>tr>td {
     z-index: 9999!important;
   }
 
-  .footer_adicionar_contatos,.footer_remover_aluno{
+  .footer_adicionar_contatos,.footer_remover_aluno,.footer_adicionar_aluno{
     position:fixed;
     bottom:0px;
     width:100%; 
@@ -857,12 +857,7 @@ table.striped>tbody>tr>td {
     display: none;
   }
 
-  .footer_adicionar_contatos >button,.footer_remover_aluno>button{
+  .footer_adicionar_contatos >button,.footer_remover_aluno>button, .footer_adicionar_aluno>button{
     margin:0 auto;
     display:block;
   }
-
-  .footer_remover_aluno{
-    display: none;
-  }
-

@@ -215,28 +215,68 @@ $(document).on('ready', function () {
 		}
 
 	});
+	var jafoiclicadocheckbox = 0;
 
 	$(document).on('click','.checkbox_selecionar_aluno',function(){
 		console.log('estou sendo clicado no checkbox_selecionar_aluno');
 		var itensnaocheckados = 0;
 
-		if($(this).prop('checked') == false){
-			console.log('estou sendo deselecionado');
-			$('.footer_remover_aluno ').css('display','block');
-			$('.footer_remover_aluno ').css('opacity',1);
-			itensnaocheckados++;
-		}
+		console.log('****************************** ALUNO VALOR DO DELETADO **********************************');
+		console.log($(this).data('aluno_deletado'));
+		console.log('*****************************************************************************************');
 
-		$('#contatos').find('.checkbox_selecionar_aluno').each(function(){
-			if($(this).prop('checked') == false){
-				itensnaocheckados++;
+
+		if(jafoiclicadocheckbox == 0){
+
+
+			if($(this).data('aluno_deletado') == 1 && $(this).prop('checked') == true){
+				console.log('@@@@@@@@@@@@@@@@@@@ USUARIO DELETADO E FOI SELECIONADO @@@@@@@@@@@@@@@@@@@@@@@@');
+				$('.footer_adicionar_aluno').css('display','block');
+				$('.footer_adicionar_aluno').css('opacity',1);
+				jafoiclicadocheckbox = 1;
 			}
-		});
 
-		if(itensnaocheckados == 0){
-			$('.footer_remover_aluno ').css('display','none');
-			$('.footer_remover_aluno ').css('opacity',0);
+			else if($(this).data('aluno_deletado') == 0 && $(this).prop('checked') == false ){
+				console.log('############### USUARIO NÃO DELETADO E FOI DESELECIONADO ###################');
+				$('.footer_remover_aluno ').css('display','block');
+				$('.footer_remover_aluno ').css('opacity',1);
+				jafoiclicadocheckbox = 1;
+			}
+
+			
+
+		}else if (jafoiclicadocheckbox == 1){
+			if($(this).data('aluno_deletado') == 1 && $(this).prop('checked') == false){
+				console.log('---------- USUARIO DELETADO E FOI DESECELIONADO ------------------------')
+				$('.footer_adicionar_aluno').css('display','none');
+				$('.footer_adicionar_aluno').css('opacity',0);
+				jafoiclicadocheckbox = 0;
+			}
+			else if ($(this).data('aluno_deletado') == 0 && $(this).prop('checked') == true){
+				console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ USUARIO NÃO DELETADO E FOI SELECIONADO $$$$$$$$$$$$$$$$');
+				$('.footer_remover_aluno ').css('display','none');
+				$('.footer_remover_aluno ').css('opacity',0);
+				jafoiclicadocheckbox=0;
+			}
 		}
+
+
+		// if($(this).prop('checked') == false){
+		// 	console.log('estou sendo deselecionado');
+		
+		// 	itensnaocheckados++;
+		// }
+
+		// $('#contatos').find('.checkbox_selecionar_aluno').each(function(){
+		// 	if($(this).prop('checked') == false){
+		// 		itensnaocheckados++;
+		// 	}
+		// });
+
+		// if(itensnaocheckados == 0){
+		// 	$('.footer_remover_aluno ').css('display','none');
+		// 	$('.footer_remover_aluno ').css('opacity',0);
+		// }
 
 
 
