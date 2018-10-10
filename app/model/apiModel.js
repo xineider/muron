@@ -71,6 +71,17 @@
  		});
  	}
 
+
+ 	CadastrarCursoCasoNaoExistir(nome_curso){
+ 		return new Promise(function(resolve, reject) {
+ 			var post_insert = {NO_CURSO:nome_curso,ativacao:1};
+ 			
+ 			helper.Insert('cursos', post_insert).then(data => {
+ 				resolve(data);
+ 			});
+ 		});
+ 	}
+
  	SelecionarFaculdades(){
  		return new Promise(function(resolve, reject) {
  			helper.Query('SELECT nome,id FROM faculdades WHERE deletado = ? ORDER BY nome ', [0]).then(data => {
@@ -115,6 +126,26 @@
  				(CASE WHEN SGL_IES != "" THEN CONCAT(NO_IES," (",SGL_IES,")")\
  				END)END) as name\
  				FROM faculdades_inep WHERE NO_IES LIKE CONCAT("%", ?, "%") OR SGL_IES LIKE CONCAT("%", ?, "%") ORDER BY NO_IES ASC LIMIT 5',[nomeFaculdade,nomeFaculdade]).then(data => {
+ 					console.log('------------------- PESQUISA DE FACULDADES ---------------');
+ 					console.log(data);
+ 					console.log('----------------------------------------------------------');
+ 					resolve(data);
+ 				});
+ 			});
+ 	}
+
+
+
+ 	PesquisarCurso(nomeCurso) {
+ 		return new Promise(function(resolve, reject) {
+
+ 			console.log('11111111111 NOME CURSO 11111111111111');
+ 			console.log(nomeCurso);
+ 			console.log('1111111111111111111111111111111111111');			
+
+ 			/*Seleciono a pesquisa de acordo com o que foi digitado e coloco entre parênteses() a sigla se tiver alguma*/
+ 			helper.Query('SELECT id, NO_CURSO as name  \
+ 				FROM cursos WHERE NO_CURSO LIKE CONCAT("%", ?, "%") ORDER BY NO_CURSO ASC LIMIT 5',[nomeCurso]).then(data => {
  					console.log('------------------- PESQUISA DE FACULDADES ---------------');
  					console.log(data);
  					console.log('----------------------------------------------------------');

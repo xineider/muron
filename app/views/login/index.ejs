@@ -55,7 +55,8 @@
 				</div>
 				<div class="col s12 input-field">
 					<label>Curso</label>
-					<input type="text" name="curso">
+					<input class="curso_filtro" type="text" name="nome_curso" placeholder="Nome do Curso">
+					<input type="hidden" name="id_curso">
 				</div>
 				<div class="col s12">
 					<label>Situação</label>
@@ -389,7 +390,7 @@
 		});
 	});
 
-function autoComplete(element,url){
+function autoComplete(element,url,select_el){
 	$(element).autocomplete({
 		source: function( request, response ){
 			$.ajax({
@@ -424,13 +425,17 @@ function autoComplete(element,url){
 			});
 		},
 		select:function(event,ui){
-			$(this).parent().find('input[name="id_faculdade"]').val(ui.item.id);
+			$(this).parent().find(select_el).val(ui.item.id);
 		}
 
 	});
 }
 
-autoComplete('.faculdade_filtro','/sistema/api/pesquisar/faculdade/');
+
+
+
+autoComplete('.faculdade_filtro','/sistema/api/pesquisar/faculdade/','input[name="id_faculdade"]');
+autoComplete('.curso_filtro','/sistema/api/pesquisar/curso/','input[name="id_curso"]');
 
 </script>
 
