@@ -181,12 +181,12 @@ class IndexModel {
 				se ele pertence a faculdade,ou se ele	está no grupo, ou se ele está no contato específico*/
 				selectGeral = selectGeral + ' AND(\
 				(a.id_tipo != ? AND a.id_categoria = ? AND tipo = ?)\
-				OR (a.id_tipo = ? AND a.id_categoria = ? AND tipo = ? AND a.id_faculdade = ?)\
+				OR (a.id_tipo = ? AND a.id_categoria = ? AND tipo = ? AND a.id_faculdade = ? AND filtro_status_faculdade = ?)\
 				OR (a.id_grupo IN (SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?))\
 				OR (a.id_contato IN (SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = a.id_usuario AND deletado = ?))\
 				) GROUP BY a.id';
 
-				valuesGeral = [POST.id_usuario,POST.id_categoria,0, 2,POST.id_categoria, 0, 2, POST.id_categoria, 0, POST.id_faculdade,POST.id_usuario,0,0];
+				valuesGeral = [POST.id_usuario,POST.id_categoria,0, 2,POST.id_categoria, 0, 2, POST.id_categoria, 0, POST.id_faculdade,POST.filtro_status_faculdade,POST.id_usuario,0,0];
 				verificador = 1;
 			}else{
 				/*somente para setar quando o usuário não é o Admin, para cair no if abaixo,
