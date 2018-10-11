@@ -63,10 +63,17 @@
 
  	CadastrarFaculdadeCasoNaoExistir(nome_faculdade){
  		return new Promise(function(resolve, reject) {
- 			var post_insert = {NO_IES:nome_faculdade,SGL_IES:'',ativacao:1,recorrencia:1};
- 			
- 			helper.Insert('faculdades_inep', post_insert).then(data => {
- 				resolve(data);
+
+ 			helper.Query('SELECT id FROM faculdades_inep WHERE NO_IES = ? LIMIT 1', [nome_faculdade]).then(dataFaculdade => {
+
+ 				if(dataFaculdade == ''){
+ 					var post_insert = {NO_IES:nome_faculdade,SGL_IES:'',ativacao:1,recorrencia:1};
+ 					helper.Insert('faculdades_inep', post_insert).then(data => {
+ 						resolve(data);
+ 					});
+ 				}else{
+ 					resolve(dataFaculdade[0].id)
+ 				}
  			});
  		});
  	}
@@ -74,11 +81,24 @@
 
  	CadastrarCursoCasoNaoExistir(nome_curso){
  		return new Promise(function(resolve, reject) {
- 			var post_insert = {NO_CURSO:nome_curso,ativacao:1};
- 			
- 			helper.Insert('cursos', post_insert).then(data => {
- 				resolve(data);
+
+
+ 			helper.Query('SELECT id FROM cursos WHERE NO_CURSO = ? LIMIT 1', [nome_curso]).then(dataCurso => {
+ 				console.log('--------------- SELECIONANDO CURSO -----------------');
+ 				console.log(dataCurso);
+ 				console.log('----------------------------------------------------');
+
+ 				if(dataCurso == ''){
+ 					var post_insert = {NO_CURSO:nome_curso,ativacao:1};
+
+ 					helper.Insert('cursos', post_insert).then(data => {
+ 						resolve(data);
+ 					});
+ 				}else{
+ 					resolve(dataCurso[0].id);
+ 				}
  			});
+
  		});
  	}
 
