@@ -174,6 +174,68 @@ router.post('/cadastrar/usuario', function(req, res, next) {
 		res.json(['dado_invalido']);
 	}
 });
+
+
+router.post('/entrar_sistema', function(req, res, next) {
+	// Recebendo o valor do post
+	POST = req.body;
+	POST.senha = control.Encrypt(POST.senha);
+	console.log('QQQQQQQQQQQQQQQ ESTOU NO TESTE_ENTRAR SEM USAR O POST NORMAL DO LOGIN QQQQQQQQQQQQQQQQQQQQQQQ');
+	console.log(POST);
+	console.log('QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ');
+	
+	model.Login(POST).then(data => {
+		if(data.length > 0){
+			model.VerificarValidado(data[0].id).then(dataVerificado =>{
+				console.log('XXXXXXXXXXXXXXXXXXXX DATA VERIFICADO XXXXXXXXXXXXXXXXXXXX');
+				console.log(dataVerificado);
+				console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+				if(dataVerificado[0].validacao == 0){
+					model.VerificarDeletado(data[0].id).then(dataDeletado => {
+						console.log('YYYYYYYYYYYYYYYYYYYYYYY DATA DELETADO YYYYYYYYYYYYYYYYYYYYYY');
+						console.log(dataDeletado);
+						console.log('YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY');
+						if(dataDeletado == ''){
+							console.log('2ZZZZZZZZZZZZZZZZZL DATA LOGIN ZZZZZZZZZZZZZZZZZZZZZZZZZZ');
+							console.log(data);
+							console.log('2ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ');
+							req.session.usuario = {};
+							req.session.usuario.id = data[0].id;
+							req.session.usuario.hash_login = data[0].hash_login;
+							req.session.usuario.tipo = data[0].tipo;
+							req.session.usuario.id_faculdade = data[0].id_faculdade;
+							req.session.usuario.nome_murer = data[0].nome_murer;
+							req.session.usuario.email = data[0].email;
+							
+							res.send({result: 'redirect', url:'/sistema'});
+							// res.redirect('/sistema');
+
+							/*Usuário deletado*/
+						}else{
+							res.render('login/index', { erro: 'Usuário banido do aplicativo pela Administração', tipo_erro: 'login', usuario: req.session.usuario });
+						}
+					});
+
+				/*Usuário não verificado ou seja é parceiro aguardando validação para acessar*/
+				}else if(dataVerificado[0].validacao == 1){
+					res.render('login/index', { alertaAcesso: 'Agora é só aguardar o e-mail de confirmação de parceria com o Muron.', tipo_alerta: 'login', iconeAlerta:'fa-handshake-o', usuario: req.session.usuario });
+					/*Usuário parceiro não aceito pela Administração*/
+				}else if(dataVerificado[0].validacao == 2){
+					res.render('login/index', { erro: 'No momento não temos disponibilidade para este tipo de parceria.', tipo_erro: 'login', usuario: req.session.usuario });
+					/*Caso de algum problema de adicionar mais validações ele ter onde entrar no if*/
+				}else{
+					res.render('login/index', { erro: 'Problemas no Servidor de resposta.', tipo_erro: 'login', usuario: req.session.usuario });
+				}
+
+			});
+			/*Não existe login ou senha no banco*/
+		}else{
+			res.render('login/index', { erro: 'Login ou senha incorreto(s).', tipo_erro: 'login', usuario: req.session.usuario });
+		};
+	});
+});
+
+
 router.post('/cadastrar/parceiro', function(req, res, next) {
 	var post = req.body;
 	var post_limpo = model.VerificarSenha(post);

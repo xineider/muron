@@ -161,7 +161,8 @@
 <main>
 	<section>
 		<div>
-			<form method="POST" action="/">
+
+			<form id="entra-sistema" method="POST" action="">
 				<div class="icon center-align">
 					<img style="max-height: 320px;" src="/assets/imgs/logo.png">
 				</div>
@@ -246,6 +247,90 @@
 			console.log(option);
 		}
 
+
+
+		$('#entra-sistema').on('submit', function(e) {
+			e.preventDefault();
+			var form = $(this);
+			var post = form.serializeArray();
+			console.log('ppppppppp post');
+			console.log(post);
+			console.log('pppppppppppppp');
+
+
+			// $.ajax({
+			// 	method: 'POST',
+			// 	async: true,
+			// 	data: post,
+			// 	url: '/sistema/api/teste_entrar/',
+			// 	beforeSend: function(request) {
+			// 		console.log('ANTES DE ENVIAR :D');
+			// 	},
+			// 	sucess: function(data){
+			// 		console.log('RRRRRRRRRRRRR RECEBIMENTO DATA RRRRRRRRRRRRRRRR');
+			// 		console.log(data);
+			// 		console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
+			// 		if(data.result == 'redirect'){
+			// 			window.location.replace(data.url);
+			// 		}
+
+			// 	},
+			// 	error: function(xhr) { // if error occured
+			// 		console.log('deu erro');
+			// 		alert("Error, contate o administrador ou reinicie a pagina.");
+			// 	},
+			// 	complete: function() {
+			// 		console.log('deu completado');
+			// 		}
+			// 	});
+
+
+
+
+
+			$.ajax({
+				method: 'POST',
+				async: true,
+				data: post,
+				url: '/sistema/api/entrar_sistema/',
+				beforeSend: function(request) {
+					// request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
+					// request.setRequestHeader("Authority-Optima-nivel", $('input[name="nivel_usuario_sessao"]').val());
+					// request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+
+					console.log('ANTES DE ENVIAR :D');
+				},
+				success: function(data) {
+					console.log('RRRRRRRRRRRRR RECEBIMENTO DATA RRRRRRRRRRRRRRRR');
+					console.log(data);
+					console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
+					if(data.result == 'redirect'){
+						window.location.replace(data.url);
+					}
+				},
+    		error: function(xhr) { 	// if error occured
+    			console.log(xhr.statusText);
+    		},
+    		complete: function(data) {
+    			console.log('deu completado');	
+    		}
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+		});
+
+
+
 		$('#cadastra-usuario').on('submit', function(e) {
 			e.preventDefault();
 			var form = $(this);
@@ -289,7 +374,7 @@
 			    },
 			    complete: function() {
 			    }
-			});
+			  });
 			};
 		});
 
@@ -351,7 +436,7 @@
 				    },
 				    complete: function() {
 				    }
-				});
+				  });
 			}
 		});
 
@@ -370,7 +455,7 @@
 			    error: function(xhr) { // if error occured
 			    	alert("Error, contate o administrador ou reinicie a pagina.");
 			    }
-			});
+			  });
 		});
 
 		$(document).on('change', 'select[id="tipo_parceiro_sel"]', function () {
