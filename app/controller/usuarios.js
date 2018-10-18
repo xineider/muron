@@ -130,18 +130,10 @@ router.post('/uploadfoto/', function(req, res, next) {
 
 router.post('/contatos/', function(req, res, next) {
 	POST = req.body;
-	console.log('AAAAAAAAAAAAA FIZ UM POST EM CONTATOS AAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-	console.log(POST);
-	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
 	console.log(req.session.usuario);
 
 	if(req.session.usuario.tipo == 2){
 		model.GetUsuariosFaculdade(POST,req.session.usuario.id_faculdade, req.session.usuario.id).then(data => {
-			console.log('aAaAaAaAaAaAaAaaAaAaAa ALUNOS DA FACULDADE aAaAaAaAaAaAaAaaAaAaAa');
-			console.log(data);
-			console.log('aAaAaAaAaAaAaAaaAaAaAaaAaAaAaAaAaAaAaaAaAaAaaAaAaAaAaAaAaAaaAaAaAa');
-
-
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
 		});
 	}else{
@@ -207,10 +199,40 @@ router.post('/contatos/adicionar-varios', function(req, res, next) {
 	model.InsertVariosContatos(POST).then(data=>{
 		res.json(data);
 	});
+});
 
-	
+
+router.post('/contatos/adicionar-varios-alunos', function(req, res, next) {
+	POST = req.body;
+	POST.id_usuario = req.session.usuario.id;
+	POST.id_faculdade = req.session.usuario.id_faculdade;
+	console.log('66666666666666666 POST DE VARIOS ALUNOS 6666666666666666');
+	console.log(POST);
+	console.log('66666666666666666666666666666666666666666666666666666666');
+
+
+	model.AdicionarVariosAlunosUpdate(POST).then(data=>{
+		res.json(data);
+	});
+});
+
+
+router.post('/contatos/remover-varios-alunos', function(req, res, next) {
+	POST = req.body;
+	POST.id_usuario = req.session.usuario.id;
+	POST.id_faculdade = req.session.usuario.id_faculdade;
+	console.log('7777777777777 POST DE VARIOS ALUNOS 777777777777');
+	console.log(POST);
+	console.log('777777777777777777777777777777777777777777777777');
+
+
+	model.RemoverVariosAlunosUpdate(POST).then(data=>{
+		res.json(data);
+	});
+
 
 });
+
 
 
 

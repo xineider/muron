@@ -22,7 +22,7 @@
           <%if(data[i].aluno_faculdade == 1 ){%>
           <div class="secondary-content" style="position: absolute;top: 16px;right: 16px;">
             <p>
-              <input type="checkbox" class="checkbox_selecionar_aluno" id="selecionar-usuario-<%= data[i].id_usuario2%>" data-id="<%= data[i].id_usuario2%>" name="lista[id_usuario2][]" data-aluno_deletado = "<%= data[i].aluno %>"value="<%= data[i].id_usuario2%>" <%= data[i].aluno == 0 ? "checked " : "" %> >
+              <input type="checkbox" class="checkbox_selecionar_aluno" id="selecionar-usuario-<%= data[i].id_usuario2%>" data-id="<%= data[i].id_usuario2%>" name="lista[id][]" data-aluno_deletado = "<%= data[i].aluno %>"value="<%= data[i].id_relacao%>" <%= data[i].aluno == 0 ? "checked " : "" %> >
               <label for="selecionar-usuario-<%= data[i].id_usuario2%>"></label>
             </p>
           </div>
@@ -61,11 +61,11 @@
 
 
   <div class="footer_remover_aluno blue lighten-1">
-    <button class="btn white blue-text text-lighten-1 ajax-submit" data-href="/sistema/usuarios/contatos/remover-varios" data-action="/sistema/usuarios/contatos">Remover Aluno</button>    
+    <button class="btn white blue-text text-lighten-1 ajax-submit" data-href="/sistema/usuarios/contatos/remover-varios-alunos" data-action="/sistema/usuarios/contatos">Remover Aluno</button>    
   </div>
 
     <div class="footer_adicionar_aluno blue lighten-1">
-    <button class="btn white blue-text text-lighten-1 ajax-submit" data-href="/sistema/usuarios/contatos/remover-varios" data-action="/sistema/usuarios/contatos">Adicionar Aluno</button>    
+    <button class="btn white blue-text text-lighten-1 ajax-submit" data-href="/sistema/usuarios/contatos/adicionar-varios-alunos" data-action="/sistema/usuarios/contatos">Adicionar Aluno</button>    
   </div>
 
 

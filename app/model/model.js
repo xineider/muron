@@ -1,18 +1,18 @@
 'use strict';
 var crypto = require('crypto');
 
-var config = {
-				"host"     : "tyduzbv3ggpf15sx.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-				"user"     : "f1g48qsphymfjk99",
-				"password" : "ebndzz273sqpvr4m",
-				"database" : "iokb5znwkva64bqf"
-			};
 // var config = {
-// 	"host"     : "localhost",
-// 	"user"     : "root",
-// 	"password" : "root",
-// 	"database" : "muron"
-// };
+// 				"host"     : "tyduzbv3ggpf15sx.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+// 				"user"     : "f1g48qsphymfjk99",
+// 				"password" : "ebndzz273sqpvr4m",
+// 				"database" : "iokb5znwkva64bqf"
+// 			};
+var config = {
+	"host"     : "localhost",
+	"user"     : "root",
+	"password" : "root",
+	"database" : "muron"
+};
 
 
 
@@ -189,46 +189,105 @@ class Helper {
 			  });
 		});
 	}
+	// UpdateMultiple(table, data) {
+	// 	for (var key in data) {
+	// 		var names = '';
+	// 		var values2 = '';
+	// 		var values = [];
+	// 		var values_final = [];
+	// 		var array = [];
+	// 		var array_final = [];
+	// 		names += ','+key;
+	// 		for (var key2 in data[key]) {
+	// 			if (key == 'id') {
+	// 				var where = ' WHERE id = ' + data[key][key2];
+	// 				console.log('LLLLLLLLLLLLLLLL WHERE DO UPDATE MULTIPLE LLLLLLLLLLLLLLLLLL');
+	// 				console.log(where);
+	// 				console.log('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL');
+	// 			} else {
+	// 				if (this.Isset(array[key2], false)) {
+	// 					array[key2] = [];
+	// 					values[key2] = [];
+	// 				} 
+	// 				values[key2].push(' '+key + ' = ?');
+	// 				array[key2].push(data[key][key2]);
+	// 			}
+	// 		}
+	// 		for (var key in values) {
+	// 			values2 += ',' + values[key].join();
+	// 		}
+	// 		for (var key in array) {
+	// 			array_final = array_final.concat(array[key]);
+	// 		}
+	// 		values2 = values2.slice(1);
+	// 		names = names.slice(1);
+	// 		values_final = values2;
+			
+	// 		console.log('ttttttttttttttttttttt Table ttttttttttttttttttttttttt');
+	// 		console.log(table);
+	// 		console.log('ttttttttttttttttttttttttttttttttttttttttttttttttttttt');
+	// 		console.log('MMMMMMMMMMMMMMMMMMMMMMMMMM VALUE MMMMMMMMMMMMMMMMMMMMMM');
+	// 		console.log(values);
+	// 		console.log('MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM');
+	// 		console.log('OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO Array OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
+	// 		console.log(array);
+	// 		console.log('OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
+	// 		console.log('WWWWWWWWWW WHERE WWWWWWWWWWWWWWWWWWWWWWWWWWWW');
+	// 		console.log(where);
+	// 		console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW');
+
+	// 	  // Adicione a query com scape(?) e os respectivos valores em um array simples
+	// 	  connection.query('UPDATE '+ table +' SET ' + values + where, array, function (error, results, fields) {
+	// 	  	if (error && query != '') console.log('ERROR SQL ------------- '+error+' ------------- SQL ERROR');
+	// 		  // console.log(results);
+	// 		});
+	// 	}
+	// 	return new Promise(function(resolve, reject) {
+	// 		resolve('Ok');
+	// 	});
+	// }
+
 	UpdateMultiple(table, data) {
-		for (var key in data) {
-			var names = '';
-			var values2 = '';
-			var values = [];
-			var values_final = [];
-			var array = [];
-			var array_final = [];
-			names += ','+key;
-			for (var key2 in data[key]) {
-				if (key == 'id') {
-					var where = ' WHERE id = ' + data[key][key2] + ' AND deletado = 0';
-				} else {
-					if (this.Isset(array[key2], false)) {
-						array[key2] = [];
-						values[key2] = [];
-					} 
-					values[key2].push(' '+key + ' = ?');
-					array[key2].push(data[key][key2]);
-				}
-			}
-			for (var key in values) {
-				values2 += ',' + values[key].join();
-			}
-			for (var key in array) {
-				array_final = array_final.concat(array[key]);
-			}
-			values2 = values2.slice(1);
-			names = names.slice(1);
-			values_final = values2;
-		  // Adicione a query com scape(?) e os respectivos valores em um array simples
-		  connection.query('UPDATE '+ table +' SET ' + values + where, array, function (error, results, fields) {
-		  	if (error && query != '') console.log('ERROR SQL ------------- '+error+' ------------- SQL ERROR');
-			  // console.log(results);
-			});
-		}
 		return new Promise(function(resolve, reject) {
-			resolve('Ok');
+			// VERIFICA SE DATA É VAZIO
+			if (Object.keys(data).length <= 0) {
+				resolve('NULO');
+			} else {
+				// ADICIONA OS NOMES DOS VALORES
+				var keys = [];
+		  	for (var key in data) {
+		  		keys.push(key);
+		  	}
+		  	for (var key in keys) {
+			  	for (var i = data[keys[key]].length - 1; i >= 0; i--) { 
+						var array = [];
+						var text = '';
+						var where = '';
+		  			for (var key2 in keys) {
+				  		var valor = data[keys[key2]][i];
+				  		var nome = keys[key2];
+
+					    if (nome == 'id') {
+					    	where = ' WHERE id = '+valor;
+					    } else {
+					    	text += ','+nome+'=?';
+					    	array.push(valor);
+					    }
+					  }
+		  			text = text.slice(1);
+						connection.query('UPDATE '+ table +' SET ' + text + where, array, function (error, results, fields) {
+						  if (error) console.log('ERROR SQL ------------- '+error+' ------------- SQL ERROR');
+						  console.log(results);
+						  if (i <= 0) {
+								resolve('Ok');
+						  }
+						});
+					}
+		  	}
+		  }
 		});
 	}
+
 	Update(table, data) {
 		var values = '';
 		var array = [];

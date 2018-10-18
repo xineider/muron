@@ -119,11 +119,13 @@ $(document).on('ready', function () {
 	$(document).on('click', '.ajax-submit', function(e) {
 		e.preventDefault();
 		var form = $(this).closest('form');
+		console.log('form');
 		console.log(form);
 		
 		var post = form.serializeArray();
 		var link = $(this).data('href');
 		var back = $(this).data('action');
+		console.log('post');
 		console.log(post);
 		console.log(link);
 		console.log(back);
@@ -215,121 +217,127 @@ $(document).on('ready', function () {
 		}
 
 	});
-	var jafoiclicadocheckbox = 0;
+	var primeiravezcheckbox = 0;
+	var itenscheckados = 0;
+	var alunodeletado = 0;
+	var alunoativo = 0;
 
 	$(document).on('click','.checkbox_selecionar_aluno',function(){
 		console.log('estou sendo clicado no checkbox_selecionar_aluno');
-		var itensnaocheckados = 0;
-
+		
 		console.log('****************************** ALUNO VALOR DO DELETADO **********************************');
 		console.log($(this).data('aluno_deletado'));
 		console.log('*****************************************************************************************');
 
+		
+		/*aluno ativo e está selecionando para remover*/
 
-		if(jafoiclicadocheckbox == 0){
+		if(primeiravezcheckbox == 0){
 
-
-			if($(this).data('aluno_deletado') == 1 && $(this).prop('checked') == true){
-				console.log('@@@@@@@@@@@@@@@@@@@ USUARIO DELETADO E FOI SELECIONADO @@@@@@@@@@@@@@@@@@@@@@@@');
-				$('.footer_adicionar_aluno').css('display','block');
-				$('.footer_adicionar_aluno').css('opacity',1);
-				jafoiclicadocheckbox = 1;
-			}
-
-			else if($(this).data('aluno_deletado') == 0 && $(this).prop('checked') == false ){
-				console.log('############### USUARIO NÃO DELETADO E FOI DESELECIONADO ###################');
+			if($(this).data('aluno_deletado') == 0 && $(this).prop('checked') == false ){
+				console.log('############### ALUNO ATIVO E FOI DESELECIONADO ###################');
 				$('.footer_remover_aluno ').css('display','block');
 				$('.footer_remover_aluno ').css('opacity',1);
-				jafoiclicadocheckbox = 1;
+				primeiravezcheckbox = 1;
+				itenscheckados++;
+				alunoativo = 1;
+			}else if ($(this).data('aluno_deletado') == 1 && $(this).prop('checked') == true){
+				$('.footer_adicionar_aluno').css('display','block');
+				$('.footer_adicionar_aluno').css('opacity',1);
+				primeiravezcheckbox = 1;
+				itenscheckados++;
+				alunodeletado = 1;
 			}
 
-			
-
-		}else if (jafoiclicadocheckbox == 1){
-			if($(this).data('aluno_deletado') == 1 && $(this).prop('checked') == false){
-				console.log('---------- USUARIO DELETADO E FOI DESECELIONADO ------------------------')
-				$('.footer_adicionar_aluno').css('display','none');
-				$('.footer_adicionar_aluno').css('opacity',0);
-				jafoiclicadocheckbox = 0;
-			}
-			else if ($(this).data('aluno_deletado') == 0 && $(this).prop('checked') == true){
-				console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ USUARIO NÃO DELETADO E FOI SELECIONADO $$$$$$$$$$$$$$$$');
-				$('.footer_remover_aluno ').css('display','none');
-				$('.footer_remover_aluno ').css('opacity',0);
-				jafoiclicadocheckbox=0;
+		}else{
+			/*se foi selecionado um aluno ativo ele deve permanecer sempre com aquele*/
+			if(alunoativo == 1){
+				/*se selecionar outro aluno ele incrementa*/
+				if($(this).data('aluno_deletado') == 0 && $(this).prop('checked') == false){
+					itenscheckados++;
+					/*se ele deselecionar um aluno ele descrementa*/
+				}else if($(this).data('aluno_deletado') == 0 && $(this).prop('checked') == true){
+					itenscheckados--;
+				}
+				/*se selecionar um aluno deletado enquanto estiver selecionando um aluno ativo ele volta o checked*/
+				if($(this).data('aluno_deletado') == 1){
+					$(this).prop('checked',false);
+				}
+				/*se foi selecionado um aluno deletado ele deve permanecer sempre com aquele*/
+			}else if(alunodeletado == 1){
+				if($(this).data('aluno_deletado') == 1 && $(this).prop('checked') == true){
+					itenscheckados++;
+				}else if($(this).data('aluno_deletado') == 1 && $(this).prop('checked') == false){
+					itenscheckados--;
+				}
+				if($(this).data('aluno_deletado') == 0){
+					$(this).prop('checked',true);
+				}
 			}
 		}
 
+		/*Se não tiver item checkado remover tudo e limpar os valores*/
 
-		// if($(this).prop('checked') == false){
-		// 	console.log('estou sendo deselecionado');
-		
-		// 	itensnaocheckados++;
-		// }
-
-		// $('#contatos').find('.checkbox_selecionar_aluno').each(function(){
-		// 	if($(this).prop('checked') == false){
-		// 		itensnaocheckados++;
-		// 	}
-		// });
-
-		// if(itensnaocheckados == 0){
-		// 	$('.footer_remover_aluno ').css('display','none');
-		// 	$('.footer_remover_aluno ').css('opacity',0);
-		// }
-
-
+		if(itenscheckados == 0){
+			primeiravezcheckbox = 0;
+			alunoativo = 0;
+			alunodeletado = 0;
+			$('.footer_remover_aluno ').css('display','none');
+			$('.footer_remover_aluno ').css('opacity',0);
+			$('.footer_adicionar_aluno').css('display','none');
+			$('.footer_adicionar_aluno').css('opacity',0);
+		}
 
 	});
 
-	$(".button-collapse").sideNav({
+$(".button-collapse").sideNav({
 	    menuWidth: 300, // Default is 300
 	    edge: 'right', // Choose the horizontal origin
 	    closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
 	    draggable: true // Choose whether you can drag to open on touch screens,
-	});
+	  });
 
-	window.onpopstate = function() {
-		GoTo(location.pathname, false);
-	};
-	$(document).on('change', '.empresa-banco', function () {
-		LoadBancos($(this).val(), 'banco-empresa');
-	});
-	$(document).on('change', '.modo-emprestimo', function () {
-		if ($(this).val() == 3) {
-			$('.empresa-emprestimo').attr('disabled', false);
-			DesativeOnConta(3);
-		} else if ($(this).val() == 4) {
-			LoadProprietarios($('select[name="id_empresa"]').val(), 'empregado_funcionario');
-			DesativeOnConta(4);
-		} else if ($(this).val() == 5) {
-			LoadFuncionarios($('select[name="id_empresa"]').val(), 'empregado_funcionario');
-			DesativeOnConta(5);
-		} else {
-			DesativeOnConta(0);
-		}
-	});
-	$(document).on('change', '.empresa-emprestimo', function (e) {
-		if ($(this).val() == $('.empresa-banco').val()) {
-			alert('A empresa que realizara o emprestimo não pode ser a mesma a recebe-lo');
-			$(this).val('');
-		} else {
-			LoadBancos($(this).val(), 'banco-empresa-emprestimo');
-		}
-	});
-	$(document).on('change', '.observe-post', function () {
-		if ($(this).val() != '') {
-			$('.error').remove();
-			$(this).removeClass('observe-post');
-		}
-	});
+window.onpopstate = function() {
+	GoTo(location.pathname, false);
+};
+$(document).on('change', '.empresa-banco', function () {
+	LoadBancos($(this).val(), 'banco-empresa');
+});
+$(document).on('change', '.modo-emprestimo', function () {
+	if ($(this).val() == 3) {
+		$('.empresa-emprestimo').attr('disabled', false);
+		DesativeOnConta(3);
+	} else if ($(this).val() == 4) {
+		LoadProprietarios($('select[name="id_empresa"]').val(), 'empregado_funcionario');
+		DesativeOnConta(4);
+	} else if ($(this).val() == 5) {
+		LoadFuncionarios($('select[name="id_empresa"]').val(), 'empregado_funcionario');
+		DesativeOnConta(5);
+	} else {
+		DesativeOnConta(0);
+	}
+});
+$(document).on('change', '.empresa-emprestimo', function (e) {
+	if ($(this).val() == $('.empresa-banco').val()) {
+		alert('A empresa que realizara o emprestimo não pode ser a mesma a recebe-lo');
+		$(this).val('');
+	} else {
+		LoadBancos($(this).val(), 'banco-empresa-emprestimo');
+	}
+});
+$(document).on('change', '.observe-post', function () {
+	if ($(this).val() != '') {
+		$('.error').remove();
+		$(this).removeClass('observe-post');
+	}
+});
 
-	$(document).on('change', 'input[type="file"]:not(#imagem_perfil)', function () {
-		console.log('aaaaaaaaaaa');
-		if($(this).val() != '') {
-			UploadFile($(this));
-		}
-	});
+$(document).on('change', 'input[type="file"]:not(#imagem_perfil)', function () {
+	console.log('aaaaaaaaaaa');
+	if($(this).val() != '') {
+		UploadFile($(this));
+	}
+});
 
 
 	// NOVAS
@@ -354,9 +362,19 @@ $(document).on('ready', function () {
 		var pai = $(this).closest('.parent');
 		SubmitRemove(id, link, pai);
 	});
+
 	$(document).on('click', '#pesquisar_contato', function(e) {
+		/*limpar contatos_alunos*/
+		primeiravezcheckbox = 0;
+		itenscheckados = 0;
+		alunodeletado = 0;
+		alunoativo = 0;
+
+
 		e.preventDefault();
 		var form = $(this).closest('form');
+
+
 		
 		var post = form.serializeArray();
 		var link = $(this).data('href');
@@ -556,7 +574,7 @@ function GoTo(link, state, top) {
 	    	$('.tooltipped').tooltip({delay: 50});
 	    	$('.modal').modal('close');
 	    }
-	});
+	  });
 	if (state == true) {
 		window.history.pushState('Muron', 'Muron', link);
 	}
@@ -578,7 +596,7 @@ function FormatInputs(focus) {
     labelYearSelect: 'Selecione um ano',
     format: 'dd/mm/yyyy',
     closeOnSelect: false // Close upon selecting a date,
-});
+  });
 	$(document).ready(function(){
 		$('.collapsible').collapsible();
 	});
@@ -644,7 +662,7 @@ function GetEndereco(cep, pai) {
     complete: function() {
     	removerLoader();
     }
-});
+  });
 }
 function SubmitAjax(post, link, back, method) {
 	$.ajax({
@@ -682,7 +700,7 @@ function SubmitAjax(post, link, back, method) {
 	    	removerLoader();
 	    	$('.modal').modal('close');
 	    }
-	});
+	  });
 }
 function SendAjax(post, link, back, method) {
 	$.ajax({
@@ -713,7 +731,7 @@ function SendAjax(post, link, back, method) {
 
 	    	$('html,body').animate({ scrollTop: $('html').height() }, 'slow');
 	    }
-	});
+	  });
 }
 function SearchAjax(post, link, method, to) {
 	$.ajax({
@@ -743,7 +761,7 @@ function SearchAjax(post, link, method, to) {
 	    	$('.tooltipped').tooltip({delay: 50});
 	    	$('.modal').modal('close');
 	    }
-	});
+	  });
 }
 function Reestruturar(str) {
 	var i = 1;
@@ -797,7 +815,7 @@ function MountModalInteiro(modal, link) {
 	    	$('.tooltipped').tooltip({delay: 50});
 	    	FormatInputs();
 	    }
-	});
+	  });
 }
 function MountModal(modal, link) {
 	$.ajax({
@@ -825,7 +843,7 @@ function MountModal(modal, link) {
 	    	$('.tooltipped').tooltip({delay: 50});
 	    	FormatInputs();
 	    }
-	});
+	  });
 }
 function VerificarForm(form) {
 	var error = false;
@@ -917,7 +935,7 @@ function AddLike(id, id_usuario, gostei) {
 	    complete: function() {
 	    	removerLoader();
 	    }
-	});
+	  });
 }
 function SubmitRemove(id, link, pai) {
 	var post = {id: id, deletado: 1};
@@ -943,7 +961,7 @@ function SubmitRemove(id, link, pai) {
 	    complete: function() {
 	    	removerLoader();
 	    }
-	});
+	  });
 }
 
 function LoadToClass(link, to) {
@@ -1004,7 +1022,7 @@ function AdicionarContato(post) {
 	    complete: function() {
 	    	removerLoader();
 	    }
-	});
+	  });
 }
 function MountToAdd(val, where) {
 	$.ajax({
@@ -1029,5 +1047,5 @@ function MountToAdd(val, where) {
 	    complete: function() {
 	    	removerLoader();
 	    }
-	});
+	  });
 }

@@ -124,14 +124,12 @@ class UsuariosModel {
 	GetUsuariosFaculdade(data,id_faculdade,id_usuario_facul) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT a.id as id_usuario2, a.nome_murer, a.imagem, a.email, ? as aluno_faculdade, \
-				(SELECT deletado FROM faculdades_relacoes_aluno as b WHERE b.id_faculdade = ? AND b.id_aluno = a.id) as aluno\
-			 FROM usuarios as a WHERE a.deletado = ? AND a.id_faculdade = ? AND a.id != ? AND (a.nome_murer like CONCAT("%", ?, "%") OR a.nome like CONCAT("%", ?, "%") OR a.email like CONCAT("%", ?, "%"))', [1,id_faculdade, 0, id_faculdade,id_usuario_facul ,data.pesquisar, data.pesquisar, data.pesquisar]).then(data => {
-				console.log('FFFFFFFFFFFFFFFF GETUSUARIOSFACULDADE FFFFFFFFFFFFFFFFFFFFFFFFFF');
-				console.log(data);
-				console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF');
-				resolve(data);
+				(SELECT deletado FROM faculdades_relacoes_aluno as b WHERE b.id_faculdade = ? AND b.id_aluno = a.id) as aluno,\
+				(SELECT id FROM faculdades_relacoes_aluno as c WHERE c.id_faculdade = ? AND c.id_aluno = a.id) as id_relacao \
+				FROM usuarios as a WHERE a.deletado = ? AND a.id_faculdade = ? AND a.id != ? AND (a.nome_murer like CONCAT("%", ?, "%") OR a.nome like CONCAT("%", ?, "%") OR a.email like CONCAT("%", ?, "%"))', [1,id_faculdade, id_faculdade, 0, id_faculdade,id_usuario_facul ,data.pesquisar, data.pesquisar, data.pesquisar]).then(data => {
+					resolve(data);
+				});
 			});
-		});
 	}
 
 
@@ -243,10 +241,21 @@ class UsuariosModel {
 		var POST2 = {};
 
 		var id_usuario = {id_usuario:POST.lista.id_usuario2};
+		console.log('---------------- ID USUARIO --------------');
+		console.log(id_usuario);
+		console.log('------------------------------------------');
 		POST2.lista = id_usuario;
 
 		POST.lista = helper.PrepareMultiple(POST.lista, 'id_usuario', POST.id_usuario);
 		POST2.lista = helper.PrepareMultiple(POST2.lista,'id_usuario2',POST.id_usuario);
+
+		console.log('PPPPPP POST.LISTA PPPPPPPPPPPPPPPPPPPPP');
+		console.log(POST.lista);
+		console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
+
+		console.log('DDDDDDDDDDDDDDDDDD POST DDDDDDDDDDDDDDDDDDDDDDDDDDDD');
+		console.log(POST);
+		console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
 
 		return new Promise(function(resolve, reject) {
 			helper.InsertMultiple('usuarios_contatos', POST.lista).then(id_insercao1 => {
@@ -333,6 +342,85 @@ class UsuariosModel {
 		});
 
 	}
+
+	AdicionarVariosAlunosUpdate(POST){
+		
+		POST.lista = helper.PrepareMultiple(POST.lista, 'deletado', 0);
+
+		console.log('7777777777 POST DEPOIS DE TUDO 777777777777777');
+		console.log(POST);
+		console.log('7777777777777777777777777777777777777777777777');
+
+		return new Promise(function(resolve, reject) {
+			helper.UpdateMultiple('faculdades_relacoes_aluno', POST.lista).then(id_insercao1 => {
+				resolve(id_insercao1);
+			});
+		});
+
+	}		
+
+
+	RemoverVariosAlunosUpdate(POST){
+
+		var id_faculdade = POST.id_faculdade;
+
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT id FROM faculdades_relacoes_aluno WHERE id_faculdade = ?', [id_faculdade]).then(id_todos_alunos => {
+				
+				/*vejo todos os alunos chave por chave*/
+				for(var key in id_todos_alunos){
+					/*se a lista estiver vazia, ou seja foi desmarcado tudo não precisa
+					fazer essa validação pois não há nada para deletar, ele quer remover
+					todos os usuários*/
+					if(POST.lista != undefined){
+						/*vejo os alunos que foram ''selecionados'' porque eu na verdade faço o inverso
+						eu vejo os que foram selecionados e a partir daí eu removo eles,pois preciso alterar
+						os que NÃO foram selecionados*/
+						for(var key2 in POST.lista.id){
+							/*se os ids forem iguais da lista que recebi eu removo, então sobra os
+							outros que devem ser deletados*/
+							if(id_todos_alunos[key].id == POST.lista.id[key2]){
+								delete id_todos_alunos[key].id;
+							}
+						}
+					}
+				}
+
+				/*Limpo o array dos itens que ficaram indefinidos,pois quando deleta
+				ele fica com undefined na posição da chave*/
+				Object.keys(id_todos_alunos).forEach(key => id_todos_alunos[key].id === undefined && delete id_todos_alunos[key]);
+
+				/*crio dois arrays auxiliares para poder colocar os ids e os deletados*/
+				var arrayid = [];
+				var arraydeletado = [];
+
+				for(var key4 in id_todos_alunos){
+					/*para cada item que tem em todos os alunos (depois de limpo) eu dou push no
+					array, e faço o mesmo para o deletado para ter a mesma quantidade
+					de id e deletado*/
+					arrayid.push(id_todos_alunos[key4].id);
+					arraydeletado.push(1);
+				}
+
+				/*crio uma nova lista porque pode acontecer de eu deletar todos os usuario
+				e então não vai enviar uma lista */
+				POST.novalista = [];
+
+				POST.novalista.id = arrayid;
+				POST.novalista.deletado = arraydeletado;
+
+				/*depois daqui o POST.novalista já está certo então é só dar update*/
+
+				console.log('OOOOOOOOOOOOOO POST DEPOIS DE TUDO OOOOOOOOOOOOOOOOOO');
+				console.log(POST);
+				console.log('OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
+
+				helper.UpdateMultiple('faculdades_relacoes_aluno', POST.novalista).then(id_insercao1 => {
+					resolve(id_insercao1);
+				});
+			});
+		});
+	}	
 
 	UpdateFoto(post) {
 		console.log(post);
