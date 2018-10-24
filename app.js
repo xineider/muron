@@ -37,39 +37,39 @@ app.use(session({
 }));
 
 // Verifica usuario se esta logado ou não
-app.use(function (req, res, next) {
-  var pathname = parseurl(req).pathname;
-  if ((pathname != '/' && pathname != '') && pathname.indexOf("api") == -1 &&
-      (pathname.indexOf("css") == -1 && pathname.indexOf("js") == -1 && pathname.indexOf("imgs") == -1 && pathname.indexOf("fonts") == -1) && 
-        req.isAjaxRequest() == true){
-    var id = req.headers['authority-optima-id'];
-    var hash = req.headers['authority-optima-hash'];
-    var tipo = req.headers['authority-optima-tipo'];
-    var id_faculdade = req.headers['authority-optima-faculdade'];
-    verificacao.VerificarUsuario(id, hash, tipo).then(data => {
-      if (data.length > 0) {
-        req.session.usuario = {};
-        req.session.usuario.id = id;
-        req.session.usuario.hash_login = hash;
-        req.session.usuario.tipo = tipo;
-        req.session.usuario.id_faculdade = data[0].id_faculdade;
-        req.session.usuario.nome_murer = data[0].nome_murer;
-        req.session.usuario.email = data[0].email;
-        next();
-      } else {
-        req.session.destroy(function(err) {
-          res.json('<script>window.location.replace("/");</script>');
-        });
-      }
-    });
-  } else if (control.Isset(req.session.usuario, false)
-    && (pathname != '/' && pathname != '') && pathname.indexOf("api") == -1
-      && (pathname.indexOf("css") == -1 && pathname.indexOf("js") == -1 && pathname.indexOf("imgs") == -1 && pathname.indexOf("fonts") == -1)) {
-    res.redirect('/');
-  } else {
-    next();
-  }
-});
+// app.use(function (req, res, next) {
+//   var pathname = parseurl(req).pathname;
+//   if ((pathname != '/' && pathname != '') && pathname.indexOf("api") == -1 &&
+//       (pathname.indexOf("css") == -1 && pathname.indexOf("js") == -1 && pathname.indexOf("imgs") == -1 && pathname.indexOf("fonts") == -1) && 
+//         req.isAjaxRequest() == true){
+//     var id = req.headers['authority-optima-id'];
+//     var hash = req.headers['authority-optima-hash'];
+//     var tipo = req.headers['authority-optima-tipo'];
+//     var id_faculdade = req.headers['authority-optima-faculdade'];
+//     verificacao.VerificarUsuario(id, hash, tipo).then(data => {
+//       if (data.length > 0) {
+//         req.session.usuario = {};
+//         req.session.usuario.id = id;
+//         req.session.usuario.hash_login = hash;
+//         req.session.usuario.tipo = tipo;
+//         req.session.usuario.id_faculdade = data[0].id_faculdade;
+//         req.session.usuario.nome_murer = data[0].nome_murer;
+//         req.session.usuario.email = data[0].email;
+//         next();
+//       } else {
+//         req.session.destroy(function(err) {
+//           res.json('<script>window.location.replace("/");</script>');
+//         });
+//       }
+//     });
+//   } else if (control.Isset(req.session.usuario, false)
+//     && (pathname != '/' && pathname != '') && pathname.indexOf("api") == -1
+//       && (pathname.indexOf("css") == -1 && pathname.indexOf("js") == -1 && pathname.indexOf("imgs") == -1 && pathname.indexOf("fonts") == -1)) {
+//     res.redirect('/');
+//   } else {
+//     next();
+//   }
+// });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app/views'));
