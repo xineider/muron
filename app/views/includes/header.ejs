@@ -2,6 +2,7 @@
 <html>
 <head>
 <!-- 	<title>MurOn</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<link rel='stylesheet' href='/assets/css/all.min.css' />
 	<link rel='stylesheet' href='/assets/css/materialize.min.css' />
 	<link rel='stylesheet' href='/assets/css/jquery-ui.min.css' />
@@ -10,8 +11,7 @@
 	<script src="/assets/js/jquery.min.js"></script>
 	<script src="/assets/js/jquery.mask.js"></script>
 	<script src="/assets/js/materialize.min.js"></script>
-	<script src="/assets/js/main.js"></script>
- -->
+	<script src="/assets/js/main.js"></script> -->
 </head>
 <body class="row g-white">
 	<input type="hidden" value="<%= usuario.id %>" name="id_usuario_sessao">
@@ -36,7 +36,7 @@
 						<a class="logo-container ajax-load" href="/sistema"><img src="/assets/imgs/mini-logo.png"></a>
 					</div>
 					<div class="row col s3">
-						<ul id="slide-out" class="side-nav white-text">
+						<ul id="slide-out" class="sidenav white-text">
 							<li>
 								<div class="user-view g-blue">
 									<div class="row center-align" style="margin: 0;">
@@ -91,7 +91,7 @@
 							<li><div class="small-line"></div></li>
 							<li><a class="waves-effect" href="/logout" onclick="return confirm('Você deseja sair?');">Sair</a></li>
 						</ul>
-						<a href="#" data-activates="slide-out" class="right button-collapse"><i class="fa fa-bars"></i></a>
+						<a href="#" data-activates="slide-out" class="right sidenav-trigger"><i class="fa fa-bars"></i></a>
 					</div>
 				</div>
 			</div>

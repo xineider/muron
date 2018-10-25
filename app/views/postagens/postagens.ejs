@@ -8,7 +8,7 @@ if (typeof data.postagens != 'undefined' && data.postagens.length > 0) {
 			<div class="card-image mur-card-img">
 				<img src="/assets/uploads/<%= data.postagens[i].imagem %>">
 			</div>
-			<div class="row grey lighten-3 blue-text actions row relative">
+			<div class=" grey lighten-3 blue-text actions relative col s12">
 				<div class="left-align col s6">
 					<a class="GiveLike <%= data.postagens[i].gostei >= 1 ? 'active' : '' %>" data-id="<%= data.postagens[i].id %>" data-id_usuario="<%= usuario.id %>" data-gostei="<%= data.postagens[i].gostei %>">
 						<i class="fa fa-thumbs-up"></i>

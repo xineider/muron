@@ -1,5 +1,9 @@
 // Eventos DOM
 $(document).on('ready', function () {
+	M.AutoInit();
+	var modalW = document.querySelector('.modal')
+	var modal = M.Modal.getInstance(modalW);
+
 	$('.modal').modal();
 	InitBar();
 	adicionarLoader();
@@ -8,7 +12,7 @@ $(document).on('ready', function () {
 
 	$(document).ajaxComplete(function () {
 		FormatInputs();
-		Materialize.updateTextFields();
+		M.updateTextFields();
 	});
 
 	$(document).on('click', '.modal-remover-mount', function (e) {
@@ -97,8 +101,11 @@ $(document).on('ready', function () {
 		e.preventDefault();
 		var link = $(this).attr('href');
 		var top = $(this).data('top');
-		
-		GoTo(link, true, top);
+
+		if(link != ''){
+			$(".sidenav").sidenav('close');	
+			GoTo(link, true, top);
+		}
 	});
 
 	$(document).on('click', '.ajax-load-to', function(e) {
@@ -290,54 +297,59 @@ $(document).on('ready', function () {
 
 	});
 
-$(".button-collapse").sideNav({
-	    menuWidth: 300, // Default is 300
-	    edge: 'right', // Choose the horizontal origin
-	    closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-	    draggable: true // Choose whether you can drag to open on touch screens,
-	  });
+	$(".sidenav-trigger").sidenav();
 
-window.onpopstate = function() {
-	GoTo(location.pathname, false);
-};
-$(document).on('change', '.empresa-banco', function () {
-	LoadBancos($(this).val(), 'banco-empresa');
-});
-$(document).on('change', '.modo-emprestimo', function () {
-	if ($(this).val() == 3) {
-		$('.empresa-emprestimo').attr('disabled', false);
-		DesativeOnConta(3);
-	} else if ($(this).val() == 4) {
-		LoadProprietarios($('select[name="id_empresa"]').val(), 'empregado_funcionario');
-		DesativeOnConta(4);
-	} else if ($(this).val() == 5) {
-		LoadFuncionarios($('select[name="id_empresa"]').val(), 'empregado_funcionario');
-		DesativeOnConta(5);
-	} else {
-		DesativeOnConta(0);
-	}
-});
-$(document).on('change', '.empresa-emprestimo', function (e) {
-	if ($(this).val() == $('.empresa-banco').val()) {
-		alert('A empresa que realizara o emprestimo não pode ser a mesma a recebe-lo');
-		$(this).val('');
-	} else {
-		LoadBancos($(this).val(), 'banco-empresa-emprestimo');
-	}
-});
-$(document).on('change', '.observe-post', function () {
-	if ($(this).val() != '') {
-		$('.error').remove();
-		$(this).removeClass('observe-post');
-	}
-});
+	// $(".button-collapse").sideNav({
+	//     menuWidth: 300, // Default is 300
+	//     edge: 'right', // Choose the horizontal origin
+	//     closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+	//     draggable: true // Choose whether you can drag to open on touch screens,
+	//   });
 
-$(document).on('change', 'input[type="file"]:not(#imagem_perfil)', function () {
-	console.log('aaaaaaaaaaa');
-	if($(this).val() != '') {
-		UploadFile($(this));
-	}
-});
+	window.onpopstate = function() {
+		console.log('EEEEEEEEEEEEEE ESTOU NO ONPOPSTATE EEEEEEEEEEE');
+		console.log(location.pathname);
+		console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
+		GoTo(location.pathname, false);
+	};
+	$(document).on('change', '.empresa-banco', function () {
+		LoadBancos($(this).val(), 'banco-empresa');
+	});
+	$(document).on('change', '.modo-emprestimo', function () {
+		if ($(this).val() == 3) {
+			$('.empresa-emprestimo').attr('disabled', false);
+			DesativeOnConta(3);
+		} else if ($(this).val() == 4) {
+			LoadProprietarios($('select[name="id_empresa"]').val(), 'empregado_funcionario');
+			DesativeOnConta(4);
+		} else if ($(this).val() == 5) {
+			LoadFuncionarios($('select[name="id_empresa"]').val(), 'empregado_funcionario');
+			DesativeOnConta(5);
+		} else {
+			DesativeOnConta(0);
+		}
+	});
+	$(document).on('change', '.empresa-emprestimo', function (e) {
+		if ($(this).val() == $('.empresa-banco').val()) {
+			alert('A empresa que realizara o emprestimo não pode ser a mesma a recebe-lo');
+			$(this).val('');
+		} else {
+			LoadBancos($(this).val(), 'banco-empresa-emprestimo');
+		}
+	});
+	$(document).on('change', '.observe-post', function () {
+		if ($(this).val() != '') {
+			$('.error').remove();
+			$(this).removeClass('observe-post');
+		}
+	});
+
+	$(document).on('change', 'input[type="file"]:not(#imagem_perfil)', function () {
+		console.log('aaaaaaaaaaa');
+		if($(this).val() != '') {
+			UploadFile($(this));
+		}
+	});
 
 
 	// NOVAS
@@ -546,6 +558,8 @@ function InitBar() {
 	}
 }
 function GoTo(link, state, top) {
+	var elem = document.querySelector('.sidenav');
+	var instance = M.Sidenav.init(elem);
 	$.ajax({
 		method: "GET",
 		async: true,
@@ -573,6 +587,9 @@ function GoTo(link, state, top) {
 	    	$('.material-tooltip').remove();
 	    	$('.tooltipped').tooltip({delay: 50});
 	    	$('.modal').modal('close');
+	    	$(".sidenav-trigger").sidenav('close');
+	    	$(".sidenav").sidenav('close');
+	    	instance.close();
 	    }
 	  });
 	if (state == true) {
@@ -580,7 +597,7 @@ function GoTo(link, state, top) {
 	}
 }
 function FormatInputs(focus) {
-	$('.datepicker').pickadate({
+	$('.datepicker').datepicker({
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 15, // Creates a dropdown of 15 years to control year,
     monthsFull: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
@@ -679,7 +696,7 @@ function SubmitAjax(post, link, back, method) {
 		},
 		success: function(data) {
 			if (typeof data != undefined && data > 0) {
-				Materialize.toast('<div class="center-align" style="width:100%;">Cadastrado com sucesso</div>', 5000, 'rounded');
+				M.toast({html:'<div class="center-align" style="width:100%;">Cadastrado com sucesso</div>'}, 5000, 'rounded');
 			}
 			if (typeof back != 'undefined' && back != '') {
 				GoTo(back, true);
@@ -688,7 +705,7 @@ function SubmitAjax(post, link, back, method) {
 				$('form').prepend('<div class="card-panel red darken-1 center-align erro-alterar-senha" style="margin-bottom: 25px;"> <span class="white-text">Senha atual incorreta, tente novamente.</span> </div>');
 			}
 			if(data == 'usuariojacadastrado'){
-				Materialize.toast('<div class="center-align" style="width:100%;">Nome Murer Já cadastrado !!</div>',8000, 'rounded');
+				M.toast({html:'<div class="center-align" style="width:100%;">Nome Murer Já cadastrado !!</div>'},8000, 'rounded');
 			}
 
 		},
@@ -923,9 +940,9 @@ function AddLike(id, id_usuario, gostei) {
 		},
 		success: function(data) {
 			if (gostei >= 1) {
-				Materialize.toast('Publicação Descurtida!', 3000);
+				M.toast({html:'Publicação Descurtida!'}, 3000);
 			} else {
-				Materialize.toast('Publicação Curtida!', 3000);
+				M.toast({html:'Publicação Curtida!'}, 3000);
 			}
 		},
 	    error: function(xhr) { // if error occured
