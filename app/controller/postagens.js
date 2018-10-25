@@ -52,7 +52,7 @@ router.get('/comentarios/:id', function(req, res, next) {
 	model.GetComentarios(id).then(data_comentarios => {
 		data.comentarios = data_comentarios;
 		data.postagem = id;
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_comentarios', data: data, usuario: req.session.usuario});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'postagens/postagens_comentarios', data: data, usuario: req.session.usuario});
 	});
 });
 router.get('/criar', function(req, res, next) {

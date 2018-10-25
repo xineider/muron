@@ -98,7 +98,7 @@ router.get('/faculdade/:id', function(req, res, next) {
 	console.log('-------------- DATA DA FACULDADE ------------------------');
 	console.log(data);
 	console.log('--------------------------------------------------------');
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_faculdade', data: data, usuario: req.session.usuario});
+	res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'usuarios/usuarios_faculdade', data: data, usuario: req.session.usuario});
 });
 
 router.get('/ufcidade/:id', function(req, res, next) {
