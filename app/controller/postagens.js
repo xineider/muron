@@ -45,7 +45,7 @@ router.get('/ver/:id', function(req, res, next) {
 	});
 });
 router.get('/pesquisar', function(req, res, next) {
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_pesquisar', data: data, usuario: req.session.usuario});
+	res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'postagens/postagens_pesquisar', data: data, usuario: req.session.usuario});
 });
 router.get('/comentarios/:id', function(req, res, next) {
 	id = req.params.id;
