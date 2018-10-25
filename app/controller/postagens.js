@@ -57,7 +57,7 @@ router.get('/comentarios/:id', function(req, res, next) {
 });
 router.get('/criar', function(req, res, next) {
 	model.GetCategorias().then(data=> {
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_criar', data: data, usuario: req.session.usuario});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'postagens/postagens_criar', data: data, usuario: req.session.usuario});
 	});
 });
 router.get('/pesquisar/:pesquisa', function(req, res, next) {
