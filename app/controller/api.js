@@ -212,25 +212,30 @@ router.post('/entrar_sistema', function(req, res, next) {
 
 							/*Usuário deletado*/
 						}else{
-							res.render('login/index', { erro: 'Usuário banido do aplicativo pela Administração', tipo_erro: 'login', usuario: req.session.usuario });
+							res.send({result: 'banido', mensagem:'Usuário banido do aplicativo pela Administração',erro:'warn'});
+							// res.render('login/index', { erro: 'Usuário banido do aplicativo pela Administração', tipo_erro: 'login', usuario: req.session.usuario });
 						}
 					});
 
 				/*Usuário não verificado ou seja é parceiro aguardando validação para acessar*/
 				}else if(dataVerificado[0].validacao == 1){
-					res.render('login/index', { alertaAcesso: 'Agora é só aguardar o e-mail de confirmação de parceria com o Muron.', tipo_alerta: 'login', iconeAlerta:'fa-handshake-o', usuario: req.session.usuario });
+					res.send({result: 'aguardarparceria', mensagem:'Agora é só aguardar o e-mail de confirmação de parceria com o Muron.',erro:'alert'});
+					// res.render('login/index', { alertaAcesso: 'Agora é só aguardar o e-mail de confirmação de parceria com o Muron.', tipo_alerta: 'login', iconeAlerta:'fa-handshake-o', usuario: req.session.usuario });
 					/*Usuário parceiro não aceito pela Administração*/
 				}else if(dataVerificado[0].validacao == 2){
-					res.render('login/index', { erro: 'No momento não temos disponibilidade para este tipo de parceria.', tipo_erro: 'login', usuario: req.session.usuario });
+					res.send({result: 'parcerianegada', mensagem:'No momento não temos disponibilidade para este tipo de parceria.',erro:'warn'});
+					// res.render('login/index', { erro: 'No momento não temos disponibilidade para este tipo de parceria.', tipo_erro: 'login', usuario: req.session.usuario });
 					/*Caso de algum problema de adicionar mais validações ele ter onde entrar no if*/
 				}else{
-					res.render('login/index', { erro: 'Problemas no Servidor de resposta.', tipo_erro: 'login', usuario: req.session.usuario });
+					res.send({result: 'servidorresposta', mensagem:'Problemas no Servidor de resposta.',erro:'warn'});
+					// res.render('login/index', { erro: 'Problemas no Servidor de resposta.', tipo_erro: 'login', usuario: req.session.usuario });
 				}
 
 			});
 			/*Não existe login ou senha no banco*/
 		}else{
-			res.render('login/index', { erro: 'Login ou senha incorreto(s).', tipo_erro: 'login', usuario: req.session.usuario });
+			res.send({result: 'loginerrado', mensagem:'Login ou senha incorreto(s).',erro:'warn'});
+			// res.render('login/index', { erro: 'Login ou senha incorreto(s).', tipo_erro: 'login', usuario: req.session.usuario });
 		};
 	});
 });
