@@ -134,7 +134,7 @@ router.post('/contatos/', function(req, res, next) {
 
 	if(req.session.usuario.tipo == 2){
 		model.GetUsuariosFaculdade(POST,req.session.usuario.id_faculdade, req.session.usuario.id).then(data => {
-			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
+			res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
 		});
 	}else{
 		POST.id_usuario = req.session.usuario.id;
@@ -145,7 +145,7 @@ router.post('/contatos/', function(req, res, next) {
 			console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG');
 
 
-			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
+			res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
 		});
 
 	}
