@@ -119,10 +119,6 @@ $(document).on('ready', function () {
 		e.preventDefault();
 		$(this).closest('.pai').remove();
 	});
-	// $(document).on('click', '.remove', function (e) {
-	// 	e.preventDefault();
-	// 	$(this).closest('.pai').remove();
-	// });
 	$(document).on('click', '.ajax-submit', function(e) {
 		e.preventDefault();
 		var form = $(this).closest('form');
