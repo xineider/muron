@@ -15,7 +15,7 @@ if (typeof data.postagens != 'undefined' && data.postagens.length > 0) {
 						<%- data.postagens[i].qtd_gostei >= 1 ? '<span class="qtd_likes">'+data.postagens[i].qtd_gostei+'</span>' : '' %>
 					</a>
 					<a href="" class="modal-mount-inteiro" data-href="#modalinfo-footer" data-link="/postagens/comentarios/<%= data.postagens[i].id %>">
-						<i class="fa fa-comment"></i>
+						<i class="fa fa-comments"></i>
 						<%- data.postagens[i].qtd_comentario >= 1 ? '<span class="qtd_likes">'+data.postagens[i].qtd_comentario+'</span>' : '' %>
 					</a>
 	<!-- 				<a onclick="alert('aguardando envio para dominio definitivo para ser implementado, requisito de alguns compartilhamentos.')">

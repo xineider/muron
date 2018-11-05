@@ -27,7 +27,7 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 					<%
 					if (data.perfil[i].amigos <= 0 && data.perfil[i].id != usuario.id) {
 						if(data.perfil[i].tipo == 1 || usuario.tipo == 3 || (data.perfil[i].tipo == 2 && data.perfil[i].id_faculdade == usuario.id_faculdade)) {%>
-							<a href="" class="btn blue darken-2 ajax-submit" data-href="/sistema/usuarios/contatos/adicionar/" data-action="/sistema/usuarios/ver/<%= data.perfil[i].id %>" style="width: 100%;margin-top: -8px;">Adicionar Usuário</a>
+						<a href="" class="btn blue darken-2 ajax-submit" data-href="/sistema/usuarios/contatos/adicionar/" data-action="/sistema/usuarios/ver/<%= data.perfil[i].id %>" style="width: 100%;margin-top: -8px;">Adicionar Usuário</a>
 						<%
 					}} else if(data.perfil[i].id != usuario.id) {
 						%>
@@ -150,6 +150,10 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 						<% if((data.perfil[i].tipo == 1 && data.perfil[i].amigos == 1 || 
 						data.perfil[i].tipo == 1 && data.perfil[i].id == usuario.id) || data.perfil[i].tipo == 1 && usuario.id == 1){%>
 
+						<!-- Se for Administrador ou seja é muron não tem esses dados -->
+
+						<% if(data.perfil[i].id != 1){%>
+
 						<div class="card-panel panel-full">
 							<div class="card-content">
 								Faculdade <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-mount right" data-href="#modalinfo" data-link="/usuarios/faculdade/'+data.perfil[i].id+'"><i class="fa fa-edit"></i></span>' : '' %>
@@ -158,6 +162,8 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 								<%= typeof data.perfil[i].faculdade != 'undefined' && data.perfil[i].faculdade != '' ? data.perfil[i].faculdade : 'Não Informado' %>
 							</div>
 						</div>
+
+						
 
 						<div class="card-panel panel-full">
 							<div class="card-content">
@@ -168,6 +174,10 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 							</div>
 						</div>
 
+						<%}%>
+
+						<% if(data.perfil[i].id != 1){%>
+						
 						<div class="card-panel panel-full">
 							<div class="card-content">
 								Situação <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-mount right" data-href="#modalinfo" data-link="/usuarios/situacao/'+data.perfil[i].id+'"><i class="fa fa-edit"></i></span>' : '' %>
@@ -198,7 +208,8 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 							</div>
 						</div>
 
-
+						
+						
 						<div class="card-panel panel-full">
 							<div class="card-content">
 								Gênero <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-mount right" data-href="#modalinfo" data-link="/usuarios/genero/'+data.perfil[i].id+'"><i class="fa fa-edit"></i></span>' : '' %>
@@ -207,6 +218,9 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 								<%= data.perfil[i].genero %>
 							</div>
 						</div>
+
+						<%}%>
+
 
 <!-- 						<div class="card-panel panel-full">
 							<div class="card-content">
