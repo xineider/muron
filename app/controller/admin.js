@@ -31,6 +31,9 @@ router.get('/permissao-faculdades', function(req, res, next) {
 	});
 });
 
+router.get('/loginfake', function(req, res, next) {
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/login_fake', data: data, usuario: req.session.usuario});
+});
 
 
 router.get('/usuario-faculdade', function(req, res, next) {
