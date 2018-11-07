@@ -75,7 +75,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/loginfake', function(req, res, next) {
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/login_fake', data: data, usuario: req.session.usuario});
+	res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'inicio/login_fake', data: data, usuario: req.session.usuario});
 });
 
 /* POST enviando o login para verificação. */
