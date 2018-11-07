@@ -2,7 +2,7 @@
       <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
     </div>
     <!-- Esqueceu Senha -->
-    <div id="modalforgot" class="modal">
+    <div id="modalforgot2" class="modal">
       <div class="modal-content">
         <form method="POST">
           <p><b>Recuperação de Senha</b></p>
@@ -17,7 +17,7 @@
       </div>
     </div>
     <!-- Cadastre-se -->
-    <div id="modalnew" class="modal">
+    <div id="modalnew2" class="modal">
       <div class="modal-content">
         <p><b>Cadastro de Usuário/ MurEr</b></p>
         <form id="cadastra-usuario-again" method="POST" action="" onsubmit="">
@@ -73,7 +73,7 @@
       </div>
     </div>
     <!-- Cadastre-se Parceiro -->
-    <div id="modalparceiro" class="modal">
+    <div id="modalparceiro2" class="modal">
       <div class="modal-content">
         <p><b>Cadastro de Parceiro</b></p>
         <form id="cadastra-parceiro" method="POST" action="" onsubmit="">
@@ -173,13 +173,13 @@
                   </button>
                 </div>
                 <p class="acc">
-                  <a class="white-text modal-trigger" href="#modalforgot">Esqueceu sua senha? <span class="blue-text text-darken-2">Clique aqui</span></a><br>
-                  <a class="white-text modal-trigger" href="#modalnew">Ainda não tem conta? <span class="blue-text text-darken-2">Cadastre-se</span></a>
+                  <a class="white-text modal-trigger" href="#modalforgot2">Esqueceu sua senha? <span class="blue-text text-darken-2">Clique aqui</span></a><br>
+                  <a class="white-text modal-trigger" href="#modalnew2">Ainda não tem conta? <span class="blue-text text-darken-2">Cadastre-se</span></a>
                 </p>
                 <div class="or"><span>OU LOGOUTTTTTTTTTTTTTTTT</span></div>
                 <div class="row">
                   <br>
-                  <a class="white-text modal-trigger" href="#modalparceiro">Quer ser um parceiro? <span class="blue-text text-darken-2">Cadastre-se</span></a><br>
+                  <a class="white-text modal-trigger" href="#modalparceiro2">Quer ser um parceiro? <span class="blue-text text-darken-2">Cadastre-se</span></a><br>
                 </div>
               </div>
             </div>
@@ -215,6 +215,8 @@
       var post = form.serializeArray();
       var naoremoveloaderagain = 0;
 
+      console.log('teste do entra-sistema-again');
+
       $.ajax({
         method: 'POST',
         async: true,
@@ -225,8 +227,14 @@
           request.setRequestHeader("Authority-Optima-nivel", $('input[name="nivel_usuario_sessao"]').val());
           request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
           adicionarLoader();
+          console.log('url');
+          console.log($('body').data('site') + '/sistema/api/entrar_sistema/');
         },
         success: function(data) {
+          console.log('--------- data ----------');
+          console.log(data);
+          console.log('-------------------------');
+
           if(data.result == 'redirect'){
             GoToAgain($('body').data('site') + '/sistema', true);
             naoremoveloaderagain = 1;
