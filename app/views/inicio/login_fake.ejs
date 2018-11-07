@@ -20,7 +20,7 @@
     <div id="modalnew" class="modal">
       <div class="modal-content">
         <p><b>Cadastro de Usuário/ MurEr</b></p>
-        <form id="cadastra-usuario" method="POST" action="" onsubmit="">
+        <form id="cadastra-usuario-again" method="POST" action="" onsubmit="">
           <div class="row">
             <div class="col s12 input-field">
               <label>Nome</label>
@@ -32,12 +32,12 @@
             </div>
             <div class="col s12">
               <label>Faculdade</label>
-              <input class="faculdade_filtro" required="true" type="text" placeholder="Nome da Faculdade" name="nome_faculdade" >           
+              <input class="faculdade_filtro_again" required="true" type="text" placeholder="Nome da Faculdade" name="nome_faculdade" >           
               <input type="hidden" name="id_faculdade">
             </div>
             <div class="col s12 input-field">
               <label>Curso</label>
-              <input class="curso_filtro" type="text" name="nome_curso" placeholder="Nome do Curso">
+              <input class="curso_filtro_again" type="text" name="nome_curso" placeholder="Nome do Curso">
               <input type="hidden" name="id_curso">
             </div>
             <div class="col s12">
@@ -65,8 +65,8 @@
             <div class="col s12">
               <button class="btn blue white-text" style="width: 100%;">Finalizar Cadastro</button>
             </div>
-            <div class="col s12 error_container_muron hide">
-              <div class="error_muron_mensagem red white-text" style="margin-top: 10px;padding: 5px;text-align: center;"></div>
+            <div class="col s12 error_container_muron_again hide">
+              <div class="error_muron_mensagem_again red white-text" style="margin-top: 10px;padding: 5px;text-align: center;"></div>
             </div>
           </div>
         </form>
@@ -89,7 +89,7 @@
 
             <div class="col s12 hide faculdade_parceiro_container">
               <label>Faculdade</label>
-              <input class="faculdade_filtro" required="true" type="text" placeholder="Nome da Faculdade" name="nome_faculdade">
+              <input class="faculdade_filtro_again" required="true" type="text" placeholder="Nome da Faculdade" name="nome_faculdade">
               <input type="hidden" name="id_faculdade">
             </div>
 
@@ -107,7 +107,7 @@
             </div>
             <div class="col s12 input-field">
               <label>Telefone</label>
-              <input type="tel" name="celular" class="tel" required="true">
+              <input type="tel" name="celular" class="telefone" required="true">
             </div>
             <div class="col s12 input-field">
               <label>Nome do Responsável</label>
@@ -143,13 +143,13 @@
     <main>
       <section>
         <div>
-          <form id="entra-sistema" method="POST" action="" >
+          <form id="entra-sistema-again" method="POST" action="" >
             <div class="icon center-align">
-              <img style="max-height: 320px;" src="assets/imgs/logo.png">
+              <img style="max-height: 320px;" src="/assets/imgs/logo.png">
             </div>
             <div class="box arrow_box">
 
-              <div class="error_box hide center-align">
+              <div class="error_box_again hide center-align">
                 <div class="card-panel">
                   <span class="white-text"></span>
                 </div>
@@ -191,4 +191,278 @@
         <div class="footer white-text">
           Está com problemas para fazer login? Contate <a class="blue-text text-darken-2" href="mailto:suporte@muron.com.br">suporte@muron.com.br</a>
         </div>
-      </div> 
+      </div>
+
+
+
+
+
+<script type="text/javascript">
+  $(document).on('ready', function () {
+
+    $('.telefone').mask('(00) Z0000-0000', {
+      translation: {
+        'Z': {
+          pattern: /[0-9]/, optional: true
+        }
+      }
+    });
+
+    
+    $('#entra-sistema-again').on('submit', function(e) {
+      e.preventDefault();
+      var form = $(this);
+      var post = form.serializeArray();
+      var naoremoveloaderagain = 0;
+
+      $.ajax({
+        method: 'POST',
+        async: true,
+        data: post,
+        url: $('body').data('site') + '/sistema/api/entrar_sistema/',
+        beforeSend: function(request) {
+          request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
+          request.setRequestHeader("Authority-Optima-nivel", $('input[name="nivel_usuario_sessao"]').val());
+          request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+          adicionarLoader();
+        },
+        success: function(data) {
+          if(data.result == 'redirect'){
+            GoToAgain($('body').data('site') + '/sistema', true);
+            naoremoveloaderagain = 1;
+          }else{
+            $('.error_box_again').removeClass('hide');
+            $('.error_box_again').find('span').text(data.mensagem);
+
+            var cardpanel = $('.error_box_again').find('.card-panel');
+
+            if(data.erro == 'warn'){
+              /* Limpar o alert caso ele já está ativo*/
+              $('.error_box_again').find('span').find('.fa').remove();
+              cardpanel.removeClass('yellow darken-2');              
+              cardpanel.addClass('red darken-1');
+
+            }else if(data.erro == 'alert'){
+              /*Limpar o warn caso ele já está ativo*/
+              cardpanel.removeClass('red darken-1');
+              cardpanel.addClass('yellow darken-2');
+              $('.error_box_again').find('span').append('<i class="fa fa-handshake"></i>')
+            }
+          }
+        },
+        error: function(xhr) {  // if error occured
+        },
+        complete: function(data) {
+          if(naoremoveloader == 0){
+            removerLoader();
+          }
+        }
+      });
+    });
+
+    $('#cadastra-usuario-again').on('submit', function(e) {
+      e.preventDefault();
+      var form = $(this);
+      var post = form.serializeArray();
+      if($('.modal input[name="senha"]').val() != $('.modal input[name="senha_confirmar"]').val())
+      {
+        alert('Confirmação de Senha incorreta')
+      }else{
+        $.ajax({
+          method: 'POST',
+          async: true,
+          data: post,
+          url: $('body').data('site') + '/sistema/api/cadastrar/usuario',
+          beforeSend: function(request) {
+          },
+          success: function(data) {
+
+            if(data == "muron_existente"){
+              $('.error_container_muron_again').removeClass('hide');
+              $('.error_container_muron_again').find('.error_muron_mensagem_again').html('Já existe alguém com este nome de Murer!');
+            }else if(data == "possui_muron"){
+              $('.error_container_muron_again').removeClass('hide');
+              $('.error_container_muron_again').find('.error_muron_mensagem_again').html('Não é possível cadastrar este usuário!');
+            }else if(data == 'dado_invalido'){
+              $('.error_container_muron_again').removeClass('hide');
+              $('.error_container_muron_again').find('.error_muron_mensagem_again').html('Por-favor Validar se Todos os Dados estão corretos.');
+            }else{
+              if(data.length == 0) {
+                alert('Usuário já cadastrado, tente novamente com outro Login');
+              } else {
+                var nome_murer = form.find('input[name="nome_murer"]').val();
+                var senha = form.find('input[name="senha"]').val();
+                $('.inputs').find('input[name="nome_murer"]').val(nome_murer);
+                $('.inputs').find('input[name="senha"]').val(senha);
+                $('.modal').modal('close');
+              }
+            }
+          },
+          error: function(xhr) { // if error occured
+            alert("Error, contate o administrador ou reinicie a pagina.");
+          },
+          complete: function() {
+          }
+        });
+      };
+    });
+
+    $('#cadastra-parceiro').on('submit', function(e) {
+      e.preventDefault();
+
+      if($(this).find('select[id="tipo_parceiro_sel"]').val() == '2'){
+        $(this).find('.nome_divulgador_container').find('input').val($(this).find('.faculdade_filtro_again').val());
+      }
+
+      var form = $(this);
+      var post = form.serializeArray();
+
+      if($('#cadastra-parceiro input[name="senha"]').val() != $('#cadastra-parceiro input[name="senha_confirmar"]').val()){
+        alert('Confirmação de Senha incorreta');
+      } else {
+        $.ajax({
+          method: 'POST',
+          async: true,
+          data: post,
+          url: $('body').data('site') + '/sistema/api/cadastrar/parceiro',
+          beforeSend: function(request) {
+          },
+          success: function(data) {
+            if(data == "possui_gerente"){
+              $('.error_container_parceiro').removeClass('hide');
+              $('.error_container_parceiro').find('.error_parceiro_mensagem').html('Já existe um Gerente para esta Faculdade!');
+
+            }else if(data == "possui_muron"){
+
+              $('.error_container_parceiro').removeClass('hide');
+              $('.error_container_parceiro').find('.error_parceiro_mensagem').html('Não é possível cadastrar este usuário!');
+
+            }else if(data == 'dado_invalido'){
+              $('.error_container_parceiro').removeClass('hide');
+              $('.error_container_parceiro').find('.error_parceiro_mensagem').html('Por-favor Validar se Todos os Dados estão corretos.');
+            }else{
+              if(data.length == 0) {
+                alert('Usuário já cadastrado, tente novamente com outro Login');
+              }else {
+                var nome_murer = form.find('input[name="nome_murer"]').val();
+                var senha = form.find('input[name="senha"]').val();
+                $('.inputs').find('input[name="nome_murer"]').val(nome_murer);
+                $('.inputs').find('input[name="senha"]').val(senha);
+                $('.modal').modal('close');
+              }
+
+            }
+
+
+          },
+            error: function(xhr) { // if error occured
+              alert("Error, contate o administrador ou reinicie a pagina.");
+            },
+            complete: function() {
+            }
+          });
+      }
+    });
+
+    $(document).on('click', '.resend-pass', function(e) {
+      e.preventDefault();
+      var form = $(this).closest('form');
+      var post = form.serializeArray();
+      $.ajax({
+        method: 'POST',
+        async: true,
+        data: post,
+        url: $('body').data('site') + '/sistema/api/recuperar/senha',
+        success: function(data) {
+          Materialize.toast('<div class="center-align" style="width:100%;">Mensagem enviada com sucesso.</div>', 5000, 'rounded');
+        },
+          error: function(xhr) { // if error occured
+            alert("Error, contate o administrador ou reinicie a pagina.");
+          }
+        });
+    });
+
+    $(document).on('change', 'select[id="tipo_parceiro_sel"]', function () {
+      if($(this).val() == '2'){
+        $('.nome_divulgador_container').addClass('hide');
+        $('.nome_divulgador_container').find('input').val(0);
+        $('.faculdade_parceiro_container').removeClass('hide');
+        $('.faculdade_parceiro_container').find('input').val('');
+
+      }else if($(this).val() == '3'){
+        $('.nome_divulgador_container').removeClass('hide');
+        $('.nome_divulgador_container').find('input').val('');
+        $('.faculdade_parceiro_container').addClass('hide');
+        $('.faculdade_parceiro_container').find('input').val(0);
+      }
+
+    });
+
+
+    function GoToAgain(link, state) {
+      $.ajax({
+        method: "GET",
+        async: true,
+        url: link,
+        beforeSend: function() {
+        },
+        success: function(data) {
+          $('body').html(data);
+          $('body').removeClass('login');
+          $('body').addClass('g-white');
+        },
+        error: function(xhr) { // if error occured
+          // removerLoader();
+          alert("Error, contate o administrador ou reinicie a pagina.");
+        },
+        complete: function() {
+          removerLoader();
+          $('.material-tooltip').remove();
+          $('.tooltipped').tooltip({delay: 50});
+        }
+      });
+      if (state == true) {
+        window.history.pushState('Sistema Quorp', 'Sistema Quorp', link);
+      }
+    }
+  });
+
+function autoComplete(element,url,select_el){
+  $(element).autocomplete({
+    source: function( request, response ){
+      $.ajax({
+        method:'GET',
+        async:true,
+        dataType:'json',
+        url:$('body').data('site') +url+request.term,
+        beforeSend: function() {
+ 
+        },
+        success: function(data) {
+          response(data);
+          response($.map(data, function (item) {
+            return {
+              label: item.name,
+              value: item.name,
+              id: item.id
+            };
+          }));
+        },
+        error: function(xhr) {
+
+        },
+        complete: function() {
+        }
+      });
+    },
+    select:function(event,ui){
+      $(this).parent().find(select_el).val(ui.item.id);
+    }
+
+  });
+}
+
+autoComplete('.faculdade_filtro_again','/sistema/api/pesquisar/faculdade/','input[name="id_faculdade"]');
+autoComplete('.curso_filtro_again','/sistema/api/pesquisar/curso/','input[name="id_curso"]');
+
+</script>
