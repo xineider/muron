@@ -74,10 +74,6 @@ router.get('/', function(req, res, next) {
 	});
 });
 
-router.get('/loginfake', function(req, res, next) {
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorLimpo', {html: 'inicio/login_fake', data: data, usuario: req.session.usuario});
-});
-
 /* POST enviando o login para verificação. */
 router.post('/', function(req, res, next) {
 	// Recebendo o valor do post
