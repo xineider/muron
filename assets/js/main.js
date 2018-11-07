@@ -108,6 +108,25 @@ $(document).on('ready', function () {
 		}
 	});
 
+		$(document).on('click', '.ajax-load-back', function(e) {
+		e.preventDefault();
+		
+
+		var link = $(this).attr('href');
+		var top = $(this).data('top');
+
+		console.log('BACK CORDOVA');
+
+		if(link!=""){
+			var navAjaxbE = document.querySelector('.sidenav');
+			var navAjaxbI = M.Sidenav.getInstance(navAjaxbE);
+			if(navAjaxbI != undefined){
+				navAjaxbI.close();
+			}
+			GoToBackToIndex(link, true, top);
+		}
+	});
+
 	$(document).on('click', '.ajax-load-to', function(e) {
 		e.preventDefault();
 		var link = $(this).data('href');
@@ -585,6 +604,48 @@ function GoTo(link, state, top) {
 		window.history.pushState('Muron', 'Muron', link);
 	}
 }
+
+function GoToBackToIndex(link, state, top) {
+	$.ajax({
+		method: "GET",
+		async: true,
+		url: link,
+		beforeSend: function(request) {
+			adicionarLoader();
+			$('#sair').fadeIn('slow');
+		},
+		success: function(data) {
+			console.log('GOTOBAKCINDEX MURON NORMAL');
+			$('body').addClass('login');
+			$('body').removeClass('g-white');
+			$('body').html(data);
+			
+		},
+	  error: function(xhr) { // if error occured
+	  	removerLoader();
+	  	alert("Error, contate o administrador ou reinicie a pagina.");
+	  },
+	  complete: function() {
+	  	if (typeof top == 'undefined') {
+	  		$('html,body').animate({ scrollTop: 0 }, 'slow');
+	  	}
+	  	removerLoader();
+	  	$('.material-tooltip').remove();
+	  	$('.tooltipped').tooltip({delay: 50});
+	  }
+	});
+	if (state == true) {
+		window.history.pushState('Muron', 'Muron', link);
+	}
+}
+
+
+
+
+
+
+
+
 function FormatInputs(focus) {
 	$('.datepicker').datepicker({
     selectMonths: true, // Creates a dropdown to control month
