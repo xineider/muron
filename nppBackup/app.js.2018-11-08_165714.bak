@@ -35,7 +35,6 @@ var adminMob = require('./app/controller/adminMob');
 var postagensMob = require('./app/controller/postagensMob');
 var sobreMob = require('./app/controller/sobreMob');
 var apiMob = require('./app/controller/apiMob');
-var configuracoesMob = require('./app/controller/configuracoesMob');
 
 
 
@@ -123,8 +122,8 @@ app.use('/mobsmart/faculdades', faculdadesMob);
 app.use('/mobsmart/admin', adminMob);
 app.use('/mobsmart/postagens', postagensMob);
 app.use('/mobsmart/sobre', sobreMob);
-app.use('/mobsmart/api', apiMob);
-app.use('/mobsmart/configuracoes', configuracoesMob);
+app.use('/mobsmart/api', api);
+app.use('/mobsmart/configuracoes', configuracoes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

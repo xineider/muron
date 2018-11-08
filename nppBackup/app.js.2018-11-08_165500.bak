@@ -29,13 +29,9 @@ var configuracoes = require('./app/controller/configuracoes');
 var indexMob = require('./app/controller/indexMob');
 var usuariosMob = require('./app/controller/usuariosMob');
 var gruposMob = require('./app/controller/gruposMob');
-var chatsMob = require('./app/controller/chatsMob');
-var faculdadesMob = require('./app/controller/faculdadesMob');
-var adminMob = require('./app/controller/adminMob');
-var postagensMob = require('./app/controller/postagensMob');
-var sobreMob = require('./app/controller/sobreMob');
-var apiMob = require('./app/controller/apiMob');
-var configuracoesMob = require('./app/controller/configuracoesMob');
+
+
+
 
 
 
@@ -117,14 +113,14 @@ app.use('/sistema/configuracoes', configuracoes);
 
 app.use('/mobsmart', indexMob);
 app.use('/mobsmart/usuarios', usuariosMob);
-app.use('/mobsmart/grupos', gruposMob);
-app.use('/mobsmart/chats', chatsMob);
-app.use('/mobsmart/faculdades', faculdadesMob);
-app.use('/mobsmart/admin', adminMob);
-app.use('/mobsmart/postagens', postagensMob);
-app.use('/mobsmart/sobre', sobreMob);
-app.use('/mobsmart/api', apiMob);
-app.use('/mobsmart/configuracoes', configuracoesMob);
+app.use('/mobsmart/grupos', grupos);
+app.use('/mobsmart/chats', chats);
+app.use('/mobsmart/faculdades', faculdades);
+app.use('/mobsmart/admin', admin);
+app.use('/mobsmart/postagens', postagens);
+app.use('/mobsmart/sobre', sobre);
+app.use('/mobsmart/api', api);
+app.use('/mobsmart/configuracoes', configuracoes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

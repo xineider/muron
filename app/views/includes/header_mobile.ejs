@@ -28,12 +28,12 @@
 				<div class="row valign-wrapper">
 					<div class="col s3">
 						<!-- 		    			<a href="/" class="left"><i class="fa fa-home"></i></a> -->
-						<a id="sair" class="left ajax-load" href="/sistema">
+						<a id="sair" class="left ajax-load" href="/mobsmart">
 							<i class="fa fa-chevron-left"></i>
 						</a>
 					</div>
 					<div class="col s6 center">
-						<a class="logo-container ajax-load" href="/sistema"><img src="/assets/imgs/mini-logo.png"></a>
+						<a class="logo-container ajax-load" href="/mobsmart"><img src="/assets/imgs/mini-logo.png"></a>
 					</div>
 					<div class="row col s3">
 						<ul id="slide-out" class="sidenav white-text">
@@ -53,43 +53,43 @@
 									</div>
 								</div>
 							</li>
-							<li><a class="waves-effect ajax-load" href="/sistema">Início</a></li>
+							<li><a class="waves-effect ajax-load" href="/mobsmart">Início</a></li>
 							<% if(usuario.tipo == 1) {
 								%>
 							<!-- 	<li><div class="small-line"></div></li>
-								<li><a class="waves-effect ajax-load" href="/sistema/usuarios/grupos">Lista de Transmissão</a></li> -->
+								<li><a class="waves-effect ajax-load" href="/mobsmart/usuarios/grupos">Lista de Transmissão</a></li> -->
 						<!-- 		<li><div class="small-line"></div></li>
-								<li><a class="waves-effect ajax-load" href="/sistema/chats">Chat</a></li> -->
+								<li><a class="waves-effect ajax-load" href="/mobsmart/chats">Chat</a></li> -->
 								<!-- 						<li><div class="small-line"></div></li> -->
-								<!-- <li><a class="waves-effect ajax-load" href="/sistema/grupos">Lista de Transmissão</a></li> -->
+								<!-- <li><a class="waves-effect ajax-load" href="/mobsmart/grupos">Lista de Transmissão</a></li> -->
 								<%
 							} else if (usuario.tipo == 2) {
 								%>
 						<!-- 		<li><div class="small-line"></div></li>
-								<li><a class="waves-effect ajax-load" href="/sistema/usuarios/grupos">Lista de Transmissão</a></li> -->
+								<li><a class="waves-effect ajax-load" href="/mobsmart/usuarios/grupos">Lista de Transmissão</a></li> -->
 						<!-- 		<li><div class="small-line"></div></li>
-								<li><a class="waves-effect ajax-load" href="/sistema/chats">Chat</a></li> -->
+								<li><a class="waves-effect ajax-load" href="/mobsmart/chats">Chat</a></li> -->
 <!-- 								<li><div class="small-line"></div></li>
-								<li><a class="waves-effect ajax-load" href="/sistema/faculdades/alunos/relacao">Relação dos Alunos</a></li> -->
+								<li><a class="waves-effect ajax-load" href="/mobsmart/faculdades/alunos/relacao">Relação dos Alunos</a></li> -->
 								<%
 							} else {
 								%>
 		<!-- 						<li><div class="small-line"></div></li>
-								<li><a class="waves-effect ajax-load" href="/sistema/usuarios/grupos">Lista de Transmissão</a></li> -->
+								<li><a class="waves-effect ajax-load" href="/mobsmart/usuarios/grupos">Lista de Transmissão</a></li> -->
 						<!-- 		<li><div class="small-line"></div></li>
-								<li><a class="waves-effect ajax-load" href="/sistema/chats">Chat</a></li> -->
+								<li><a class="waves-effect ajax-load" href="/mobsmart/chats">Chat</a></li> -->
 								<li><div class="small-line"></div></li>
-								<li><a class="waves-effect ajax-load" href="/sistema/usuarios/ver/<%= usuario.id %>">Perfil</a></li>
+								<li><a class="waves-effect ajax-load" href="/mobsmart/usuarios/ver/<%= usuario.id %>">Perfil</a></li>
 								<!-- <li><div class="small-line"></div></li> -->
 								<!-- ADMINISTRAÇÃO MURON -->
 								<%}if(usuario.id == 1){%>
 							<li><div class="small-line"></div></li>
-							<li><a class="waves-effect ajax-load" href="/sistema/admin">Administração</a></li>
+							<li><a class="waves-effect ajax-load" href="/mobsmart/admin">Administração</a></li>
 							<%}%>
 							<li><div class="small-line"></div></li>
-							<li><a class="waves-effect ajax-load" href="/sistema/sobre">Sobre o App</a></li>
+							<li><a class="waves-effect ajax-load" href="/mobsmart/sobre">Sobre o App</a></li>
 							<li><div class="small-line"></div></li>
-							<li><a class="waves-effect ajax-load-back" href="/sistema/admin/loginfake" onclick="return confirm('Você deseja sair?');">Sair</a></li>
+							<li><a class="waves-effect ajax-load-back" href="/mobsmart/admin/loginfake" onclick="return confirm('Você deseja sair?');">Sair</a></li>
 						</ul>
 						<a data-target="slide-out" class="right sidenav-trigger"><i class="fa fa-bars"></i></a>
 					</div>
@@ -188,7 +188,7 @@
 				<input type="hidden" name="id" id="id">
 				<label></label>
 				<input type="text" name="">
-				<a class="btn blue darken-1 ajax-submit" data-href="/sistema/usuarios/atualizar/" data-action="/sistema/usuarios/ver/<%= usuario.id %>#info-user" >Alterar</a>
+				<a class="btn blue darken-1 ajax-submit" data-href="/mobsmart/usuarios/atualizar/" data-action="/mobsmart/usuarios/ver/<%= usuario.id %>#info-user" >Alterar</a>
 			</form>
 		</div>
 	</div>
