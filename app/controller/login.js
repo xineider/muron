@@ -18,6 +18,117 @@ router.get('/', function(req, res, next) {
 	}
 });
 
+router.post('/cadastrar/usuario', function(req, res, next) {
+	var post = req.body;
+	var post_limpo = model.VerificarSenha(post);
+	console.log('88888888888888 POST LIMPO ALUNO 8888888888888888888888888888888');
+	console.log(post_limpo);
+	console.log('888888888888888888888888888888888888888888888888888888888888888');
+	var nome_facul = post_limpo.nome_faculdade;
+	var nome_curso = post_limpo.nome_curso;
+	var data_insert;
+	delete post_limpo.nome_faculdade;
+	delete post_limpo.nome_curso;
+
+	if (Object.keys(post_limpo).length > 0) {
+		/*Para identificar se o nome do murer for muron, se tiver muron no nome não cadastrar*/
+		model.VerSeMuron(post_limpo.nome_murer).then(nome_murer_muron => {
+			if(nome_murer_muron == ''){
+
+				/*Vê se tem faculdade previamente cadastrada, se não cadastra*/
+				if(post_limpo.id_faculdade == ''){
+					model.CadastrarFaculdadeCasoNaoExistir(nome_facul).then(id_faculdade_criada =>{
+						post_limpo.id_faculdade = id_faculdade_criada;
+
+						/*Vê se não tem o curso previamente cadastrado, se não cadastra*/
+						if(post_limpo.id_curso == ''){
+							model.CadastrarCursoCasoNaoExistir(nome_curso).then(id_curso_criado =>{
+								post_limpo.id_curso = id_curso_criado;
+
+								model.CadastrarUsuario(post_limpo).then(id_usuario => {
+									if(id_usuario != ''){
+										data_insert = {id_faculdade: id_faculdade_criada,id_aluno:id_usuario};
+										model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
+											res.json(data);
+										});
+
+									}else{
+										res.json(['muron_existente']);
+									}
+								});	
+
+							});	
+
+							/*Quer dizer que já existe o curso, então pode cadastrar o usuário*/
+						}else{
+
+							model.CadastrarUsuario(post_limpo).then(id_usuario => {
+								if(id_usuario != ''){
+									data_insert = {id_faculdade: id_faculdade_criada,id_aluno:id_usuario};
+									model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
+										res.json(data);
+									});
+
+								}else{
+									res.json(['muron_existente']);
+								}
+							});
+						}	
+					});
+
+					/*Quer dizer que já existe faculdade*/
+
+				}else{
+
+					model.FaculdadeRecorrenciaAluno(post_limpo.id_faculdade).then(id_faculdade_recorrencia =>{
+
+						/*Vê se não tem o curso previamente cadastrado, se não cadastra*/
+						if(post_limpo.id_curso == ''){
+
+							model.CadastrarCursoCasoNaoExistir(nome_curso).then(id_curso_criado =>{
+								post_limpo.id_curso = id_curso_criado;
+
+								model.CadastrarUsuario(post_limpo).then(id_usuario => {
+									if(id_usuario != ''){
+										data_insert = {id_faculdade: post_limpo.id_faculdade,id_aluno:id_usuario};
+										model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
+											res.json(data);
+										});
+									}else{
+										res.json(['muron_existente']);
+									}
+								});	
+
+							});
+
+
+							/*Quer dizer que já existe curso*/
+						}else{
+							model.CadastrarUsuario(post_limpo).then(id_usuario => {
+								if(id_usuario != ''){
+									data_insert = {id_faculdade: post_limpo.id_faculdade, id_aluno: id_usuario};
+									model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
+										res.json(data);
+									});
+								}else{
+									res.json(['muron_existente']);
+								}
+							});
+						}
+					});
+
+				}
+
+				/*Quer dizer que o nome possui muron nele*/
+			}else{
+				res.json(['possui_muron']);
+			};			
+		});
+	} else {
+		res.json(['dado_invalido']);
+	}
+});
+
 
 /* POST enviando o login para verificação. */
 router.post('/', function(req, res, next) {

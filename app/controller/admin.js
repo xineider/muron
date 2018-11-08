@@ -46,6 +46,7 @@ router.get('/usuario-faculdade', function(req, res, next) {
 });
 
 
+
 router.post('/aprovarUsuario/', function(req, res, next) {
 	POST = req.body;
 	var emailParceiro;

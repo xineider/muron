@@ -5,6 +5,7 @@
  var helper = new Helper;
 
  class ApiModel {
+
  	CadastrarUsuario(data) {
  		return new Promise(function(resolve, reject) {
  			helper.Query('SELECT id FROM usuarios WHERE nome_murer = ?', [data.nome_murer]).then(result => {
@@ -102,18 +103,6 @@
  		});
  	}
 
- 	SelecionarFaculdades(){
- 		return new Promise(function(resolve, reject) {
- 			helper.Query('SELECT nome,id FROM faculdades WHERE deletado = ? ORDER BY nome ', [0]).then(data => {
- 				console.log('*********************** Faculdades do MODEL ***********************');
- 				console.log(data);
- 				console.log('*******************************************************************');
- 				resolve(data);
- 			});
- 		});
- 	}
-
-
  	FaculdadeRecorrenciaAluno(id_faculdade){
  		return new Promise(function(resolve, reject) {
  			helper.Query('SELECT * FROM faculdades_inep WHERE id = ?', [id_faculdade]).then(result => {
@@ -131,6 +120,47 @@
  		});
 
  	}
+
+ 	VerSeMuron(nome_murer){
+ 		return new Promise(function(resolve, reject) {
+ 			helper.Query('SELECT id FROM usuarios WHERE ? LIKE CONCAT("%muron%") LIMIT 1',[nome_murer]).then(data => {
+ 				resolve(data);
+ 			});
+ 		});
+ 	}
+
+ 	VerSeExisteParceiroFaculdade(id_faculdade){
+ 		return new Promise(function(resolve, reject) {
+ 			helper.Query('SELECT id FROM usuarios WHERE id_faculdade = ? AND tipo = ? AND deletado = ? LIMIT 1 ',[id_faculdade,2,0]).then(data => {
+ 				resolve(data);
+ 			});
+ 		});
+ 	}
+
+ 	CadastrarRelacaoAlunoFaculdade(POST){
+ 		return new Promise(function(resolve, reject) {
+ 			helper.Insert('faculdades_relacoes_aluno', POST).then(data => {
+ 				resolve(data);
+ 			});
+ 		});
+ 	}
+
+
+
+
+ 	SelecionarFaculdades(){
+ 		return new Promise(function(resolve, reject) {
+ 			helper.Query('SELECT nome,id FROM faculdades WHERE deletado = ? ORDER BY nome ', [0]).then(data => {
+ 				console.log('*********************** Faculdades do MODEL ***********************');
+ 				console.log(data);
+ 				console.log('*******************************************************************');
+ 				resolve(data);
+ 			});
+ 		});
+ 	}
+
+
+
 
 
  	PesquisarFaculdade(nomeFaculdade) {
@@ -174,21 +204,9 @@
  			});
  	}
 
- 	VerSeMuron(nome_murer){
- 		return new Promise(function(resolve, reject) {
- 			helper.Query('SELECT id FROM usuarios WHERE ? LIKE CONCAT("%muron%") LIMIT 1',[nome_murer]).then(data => {
- 				resolve(data);
- 			});
- 		});
- 	}
 
- 	VerSeExisteParceiroFaculdade(id_faculdade){
- 		return new Promise(function(resolve, reject) {
- 			helper.Query('SELECT id FROM usuarios WHERE id_faculdade = ? AND tipo = ? AND deletado = ? LIMIT 1 ',[id_faculdade,2,0]).then(data => {
- 				resolve(data);
- 			});
- 		});
- 	}
+
+
 
  	VerificarSenha(data) {
  		if (typeof data.senha != 'undefined') {
@@ -225,13 +243,6 @@
 
  	}
 
- 	CadastrarRelacaoAlunoFaculdade(POST){
- 		return new Promise(function(resolve, reject) {
- 			helper.Insert('faculdades_relacoes_aluno', POST).then(data => {
- 				resolve(data);
- 			});
- 		});
- 	}
 
 
 
@@ -255,58 +266,45 @@
 
 
 
-/*LLLLLLLLLLLLLLLLLLLLLLLLL LOGIN MODEL LLLLLLLLLLLLLLLLLLLLLLLLLLLL*/
+ 	/*LLLLLLLLLLLLLLLLLLLLLLLLL LOGIN MODEL LLLLLLLLLLLLLLLLLLLLLLLLLLLL*/
 
-Login(POST) {
-		return new Promise(function(resolve, reject) {
+ 	Login(POST) {
+ 		return new Promise(function(resolve, reject) {
 			// Adicione a query com scape(?) e os respectivos valores em um array simples
 			helper.Query('SELECT id, tipo, nome_murer, email,id_faculdade FROM usuarios WHERE nome_murer = ? AND senha = ?', [POST.nome_murer, POST.senha]).then(data => {
-		  		if (typeof data != 'undefined' && data.length > 0) {
-			        var hash_login = helper.Encrypt(Date());
-			        data[0].hash_login = hash_login;
-			        helper.Update('usuarios', {id: data[0].id, hash_login: hash_login}).then(data_up => {
-		          		resolve(data);
-			        });
-		      	} else {
-			      	resolve(data);
-		      	}
+				if (typeof data != 'undefined' && data.length > 0) {
+					var hash_login = helper.Encrypt(Date());
+					data[0].hash_login = hash_login;
+					helper.Update('usuarios', {id: data[0].id, hash_login: hash_login}).then(data_up => {
+						resolve(data);
+					});
+				} else {
+					resolve(data);
+				}
 			});
 		});
-	}
-	LoadConfig(id) {
-		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT * FROM configuracoes WHERE id_usuario = ?', [id]).then(data => {
-				resolve(data);
-			});
-		});
-	}
-	VerificarValidado(id){
-		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT id,validacao FROM usuarios WHERE id = ?', [id]).then(data => {
-				resolve(data);
-			});
-		});
-	}
-	VerificarDeletado(id){
-		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT id FROM usuarios WHERE id = ? AND deletado = ?', [id,1]).then(data => {
-				resolve(data);
-			});
-		});
-	}
-
-/*LLLLLLLLLLLLLLLLLLLLLLLLL LOGIN MODEL LLLLLLLLLLLLLLLLLLLLLLLLLLLL*/
-
-
-
-
-
-
-
-
-
-
-
+ 	}
+ 	LoadConfig(id) {
+ 		return new Promise(function(resolve, reject) {
+ 			helper.Query('SELECT * FROM configuracoes WHERE id_usuario = ?', [id]).then(data => {
+ 				resolve(data);
+ 			});
+ 		});
+ 	}
+ 	VerificarValidado(id){
+ 		return new Promise(function(resolve, reject) {
+ 			helper.Query('SELECT id,validacao FROM usuarios WHERE id = ?', [id]).then(data => {
+ 				resolve(data);
+ 			});
+ 		});
+ 	}
+ 	VerificarDeletado(id){
+ 		return new Promise(function(resolve, reject) {
+ 			helper.Query('SELECT id FROM usuarios WHERE id = ? AND deletado = ?', [id,1]).then(data => {
+ 				resolve(data);
+ 			});
+ 		});
+ 	}
 
 
  }
