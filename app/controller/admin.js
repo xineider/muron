@@ -81,25 +81,135 @@ router.post('/alterarSenhaUsuario/', function(req, res, next) {
 
 
 
-	model.AlterarSenhaUsuario(POST).then(dataSenha=>{
-		console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRR RETORNO DA SENHA RRRRRRRRRRRRRRRRRRRRRRRRRR');
-		console.log(dataSenha);
-		console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
+		model.AlterarSenhaUsuario(POST).then(dataSenha=>{
+			console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRR RETORNO DA SENHA RRRRRRRRRRRRRRRRRRRRRRRRRR');
+			console.log(dataSenha);
+			console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
 
-		control.SendMail(data_usuario[0].email,'Senha Alterada em Muron',
-			'Olá, sua senha foi alterada pelo Administrado no Muron segue sua nova senha: ' + dataSenha + 
-			'Recomendamos assim que entrar alterar esta senha gerada.Não responda esta mensagem, ela é enviada automaticamente.',
-			'Olá, sua senha foi alterada pelo Administrado no Muron segue sua nova senha: '+ dataSenha +
-			'<br>Você pode acessar o Aplicativo do celular com seu Nome Murer e com esta senha, \
-			recomendamos fortemente que você troque a sua senha no seu perfil. '+
-			'<br>Não mostre seu login e senha para ninguém. A sua conta é responsabilidade sua.'+
-			'<br>Não responda esta mensagem, ela é enviada automaticamente.');
+			control.SendMail(data_usuario[0].email,'Senha Alterada em Muron',
+				'Olá, sua senha foi alterada pelo Administrado no Muron segue sua nova senha: ' + dataSenha + 
+				'Recomendamos assim que entrar alterar esta senha gerada.Não responda esta mensagem, ela é enviada automaticamente.',
+				'Olá, sua senha foi alterada pelo Administrado no Muron segue sua nova senha: '+ dataSenha +
+				'<br>Você pode acessar o Aplicativo do celular com seu Nome Murer e com esta senha, \
+				recomendamos fortemente que você troque a sua senha no seu perfil. '+
+				'<br>Não mostre seu login e senha para ninguém. A sua conta é responsabilidade sua.'+
+				'<br>Não responda esta mensagem, ela é enviada automaticamente.');
 
 
-	});
 		});
+	});
 });
 
+router.post('/cadastrar/usuario', function(req, res, next) {
+	var post = req.body;
+	var post_limpo = model.VerificarSenha(post);
+	console.log('88888888888888 POST LIMPO ALUNO 8888888888888888888888888888888');
+	console.log(post_limpo);
+	console.log('888888888888888888888888888888888888888888888888888888888888888');
+	var nome_facul = post_limpo.nome_faculdade;
+	var nome_curso = post_limpo.nome_curso;
+	var data_insert;
+	delete post_limpo.nome_faculdade;
+	delete post_limpo.nome_curso;
+
+	if (Object.keys(post_limpo).length > 0) {
+		/*Para identificar se o nome do murer for muron, se tiver muron no nome não cadastrar*/
+		model.VerSeMuron(post_limpo.nome_murer).then(nome_murer_muron => {
+			if(nome_murer_muron == ''){
+
+				/*Vê se tem faculdade previamente cadastrada, se não cadastra*/
+				if(post_limpo.id_faculdade == ''){
+					model.CadastrarFaculdadeCasoNaoExistir(nome_facul).then(id_faculdade_criada =>{
+						post_limpo.id_faculdade = id_faculdade_criada;
+
+						/*Vê se não tem o curso previamente cadastrado, se não cadastra*/
+						if(post_limpo.id_curso == ''){
+							model.CadastrarCursoCasoNaoExistir(nome_curso).then(id_curso_criado =>{
+								post_limpo.id_curso = id_curso_criado;
+
+								model.CadastrarUsuario(post_limpo).then(id_usuario => {
+									if(id_usuario != ''){
+										data_insert = {id_faculdade: id_faculdade_criada,id_aluno:id_usuario};
+										model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
+											res.json(data);
+										});
+
+									}else{
+										res.json(['muron_existente']);
+									}
+								});	
+
+							});	
+
+							/*Quer dizer que já existe o curso, então pode cadastrar o usuário*/
+						}else{
+
+							model.CadastrarUsuario(post_limpo).then(id_usuario => {
+								if(id_usuario != ''){
+									data_insert = {id_faculdade: id_faculdade_criada,id_aluno:id_usuario};
+									model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
+										res.json(data);
+									});
+
+								}else{
+									res.json(['muron_existente']);
+								}
+							});
+						}	
+					});
+
+					/*Quer dizer que já existe faculdade*/
+
+				}else{
+
+					model.FaculdadeRecorrenciaAluno(post_limpo.id_faculdade).then(id_faculdade_recorrencia =>{
+
+						/*Vê se não tem o curso previamente cadastrado, se não cadastra*/
+						if(post_limpo.id_curso == ''){
+
+							model.CadastrarCursoCasoNaoExistir(nome_curso).then(id_curso_criado =>{
+								post_limpo.id_curso = id_curso_criado;
+
+								model.CadastrarUsuario(post_limpo).then(id_usuario => {
+									if(id_usuario != ''){
+										data_insert = {id_faculdade: post_limpo.id_faculdade,id_aluno:id_usuario};
+										model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
+											res.json(data);
+										});
+									}else{
+										res.json(['muron_existente']);
+									}
+								});	
+
+							});
+
+
+							/*Quer dizer que já existe curso*/
+						}else{
+							model.CadastrarUsuario(post_limpo).then(id_usuario => {
+								if(id_usuario != ''){
+									data_insert = {id_faculdade: post_limpo.id_faculdade, id_aluno: id_usuario};
+									model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
+										res.json(data);
+									});
+								}else{
+									res.json(['muron_existente']);
+								}
+							});
+						}
+					});
+
+				}
+
+				/*Quer dizer que o nome possui muron nele*/
+			}else{
+				res.json(['possui_muron']);
+			};			
+		});
+	} else {
+		res.json(['dado_invalido']);
+	}
+});
 
 
 

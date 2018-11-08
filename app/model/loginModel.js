@@ -44,7 +44,7 @@ class IndexModel {
 	}
 
 
-	 	CadastrarUsuario(data) {
+	CadastrarUsuario(data) {
  		return new Promise(function(resolve, reject) {
  			helper.Query('SELECT id FROM usuarios WHERE nome_murer = ?', [data.nome_murer]).then(result => {
  				console.log(result);
@@ -182,18 +182,6 @@ class IndexModel {
  			});
  		});
  	}
-
-
-
-
-
-
-
-
-
-
-	
-
 
 }
 module.exports = IndexModel;
