@@ -14,7 +14,7 @@ var verificacao = new VerificacaoModel;
 
 var login = require('./app/controller/login');
 var index = require('./app/controller/index');
-var index = require('./app/controller/indexMob');
+var indexMob = require('./app/controller/indexMob');
 var usuarios = require('./app/controller/usuarios');
 var grupos = require('./app/controller/grupos');
 var chats = require('./app/controller/chats');
