@@ -14,6 +14,7 @@ var verificacao = new VerificacaoModel;
 
 var login = require('./app/controller/login');
 var index = require('./app/controller/index');
+var index = require('./app/controller/indexMob');
 var usuarios = require('./app/controller/usuarios');
 var grupos = require('./app/controller/grupos');
 var chats = require('./app/controller/chats');
@@ -100,7 +101,7 @@ app.use('/sistema/configuracoes', configuracoes);
 
 
 
-app.use('/mobsmart', index);
+app.use('/mobsmart', indexMob);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
