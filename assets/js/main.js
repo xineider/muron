@@ -10,6 +10,9 @@ $(document).on('ready', function () {
 	FormatInputs();
 	GoTo(location.pathname, false);
 
+	adicionarPaddingMain();
+
+
 	$(document).ajaxComplete(function () {
 		FormatInputs();
 		M.updateTextFields();
@@ -108,7 +111,7 @@ $(document).on('ready', function () {
 		}
 	});
 
-		$(document).on('click', '.ajax-load-back', function(e) {
+	$(document).on('click', '.ajax-load-back', function(e) {
 		e.preventDefault();
 		
 
@@ -1060,7 +1063,38 @@ function LoadToClass(link, to) {
 
 
 
+// function adicionarPaddingMain(){
+// 	var headerHeight = $('header').height();
 
+// 	if(headerHeight != undefined && headerHeight>0) {
+// 		console.log('HHHHHHHHHH HEADERHEIGHT HHHHHHHHHHHHHHH');
+// 		console.log(headerHeight);
+// 		console.log('HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
+
+// 		var paddingTop = headerHeight - 70 + 10;
+// 		if(paddingTop>0){
+// 			console.log('pppppppppp paddingTop ppppppppppppppppp');
+// 			console.log(paddingTop);
+// 			console.log('pppppppppppppppppppppppppppppppppppppp');
+// 			// var mainTypes = $('.tipos_categorias > row');
+// 			var mainTypes = $('#teste_naosumir');
+			
+// 			console.log('mmmmmmmmmmmmm mainTypes mmmmmmmmmmmmmmm');
+// 			console.log(mainTypes);
+// 			console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
+			
+// 			$('main').css('background','yellow');
+// 			if($('#teste_naosumir') != undefined ){
+// 				mainTypes.css('padding-top',paddingTop);
+// 				$('#teste_naosumir').css('background','yellow');
+// 				console.log('não é undefined');
+// 			}
+// 			else{
+// 				console.log('É UNDEFINED');
+// 			}
+// 		}
+// 	}
+// }
 
 
 

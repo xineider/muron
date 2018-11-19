@@ -225,6 +225,10 @@ body > div.row .col {
       left: 50%;
       margin-left: -110px;
     }
+
+    header .logo-container img{
+      max-height: 60px;
+    }
   }
 
   /*Alterações Materialize*/
@@ -658,15 +662,15 @@ table.striped>tbody>tr>td {
   header {
     box-shadow: 0px -1px 4px black;
   }
-  .types {
+  .tipos_categorias {
     background-color: aliceblue;
     padding-top: 5px;
     box-shadow: 0px -1px 4px black;
   }
-  .types img {
+  .tipos_categorias img {
     max-width: 100%;
   }
-  .types p {
+  .tipos_categorias p {
     font-size: 0.8em;
     margin: 0;
   }
@@ -824,10 +828,10 @@ table.striped>tbody>tr>td {
 
 
 
-  .types .col {
+  .tipos_categorias .col {
     position: relative;
   }
-  .types .col .atualizacoes {
+  .tipos_categorias .col .atualizacoes {
     position: absolute;
     top: 0px;
     right: 2px;
