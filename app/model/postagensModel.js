@@ -89,10 +89,12 @@ class PostagensModel {
 				console.log(pesquisa);
 				console.log(pesquisa);
 			}
+			console.log('$$$$$$$$$$$$$$$$$$$ PESQUISA MODEL $$$$$$$$$$$$$$$$$$$$$$$');
 			console.log(pesquisa);
+			console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
 			if (id_usuario != 1) {
 				where_add = "AND ((id_grupo = ? OR id_grupo IN ((SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?)))\
-				AND (id_contato = ? OR id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = postagens.id_usuario AND deletado = ?)))\
+				AND (id_contato = ? OR id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = a.id_usuario AND deletado = ?)))\
 				OR id_usuario = ?)";
 				values = [id_usuario, 0, 0, 0, 0, pesquisa, pesquisa, pesquisa, pesquisa, pesquisa, 0, id_usuario, 0, 0, 0, id_usuario];
 			} else {
