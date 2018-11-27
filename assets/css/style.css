@@ -233,6 +233,10 @@ body > div.row .col {
 
   /*Alterações Materialize*/
 
+    nav a.sidenav-trigger{
+    display: block;
+  }
+
   .btn-small{
     width: 30px;
     height: 30px;
@@ -410,6 +414,7 @@ body > div.row .col {
 
   .card .card-content {
     padding: 10px;
+    min-height: 40px;
   }
   .post-bottom>.card-content {
     padding: 10px 14px;
@@ -669,6 +674,8 @@ table.striped>tbody>tr>td {
   }
   .tipos_categorias img {
     max-width: 100%;
+    display: block;
+    margin: 0 auto;
   }
   .tipos_categorias p {
     font-size: 0.8em;
@@ -834,7 +841,7 @@ table.striped>tbody>tr>td {
   .tipos_categorias .col .atualizacoes {
     position: absolute;
     top: 0px;
-    right: 2px;
+/*    right: 2px;*/
     background-color: #0979d5;
     color: #fff;
     line-height: 24px;
@@ -844,6 +851,7 @@ table.striped>tbody>tr>td {
     border-radius: 50%;
     box-shadow: 0 1px 4px -1px black;
     text-shadow: 0 1px black;
+    right:calc(50% - 58px);
   } 
 
 

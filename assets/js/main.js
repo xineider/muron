@@ -1,8 +1,10 @@
 // Eventos DOM
 $(document).on('ready', function () {
 	M.AutoInit();
-	var modalW = document.querySelector('.modal')
-	var modal = M.Modal.getInstance(modalW);
+	var modalW = document.querySelector('.modal');
+	var modalinstance = M.Modal.init(modalW);
+	var modalParaAbrir;
+	var modalAbrirInstance;
 
 	$('.modal').modal();
 	InitBar();
@@ -26,7 +28,10 @@ $(document).on('ready', function () {
 		var to = $(this).data('to');
 		var back = $(this).data('back');
 
-		$(modal).modal('open');
+		var modalremover = document.querySelector('#modaldeletar');
+		var modalremoverInstance = M.Modal.init(modalremover);
+		modalremoverInstance.open();
+
 		$(modal).find('#texto').text(texto);
 		$(modal).find('#id').val(id);
 		$(modal).find('button').data('href', to).data('action', back);
@@ -40,7 +45,10 @@ $(document).on('ready', function () {
 		var to = $(this).data('to');
 		var back = $(this).data('back');
 
-		$(modal).modal('open');
+		var modalvalidate = document.querySelector('#modalvalidar');
+		var modalvalidateInstance = M.Modal.init(modalvalidate);
+		modalvalidateInstance.open();
+
 		$(modal).find('#texto').text(texto);
 		$(modal).find('#id').val(id);
 		$(modal).find('button').data('href', to).data('action', back);
@@ -58,7 +66,10 @@ $(document).on('ready', function () {
 		var to = $(this).data('to');
 		var back = $(this).data('back');
 
-		$(modal).modal('open');
+		var modaloneitem = document.querySelector('#modaloneitem');
+		var modaloneitemInstance = M.Modal.init(modaloneitem);
+		modaloneitemInstance.open();
+
 		$(modal).find('#texto').text(texto);
 		$(modal).find("#texto_botao").text(textoBotao);
 		$(modal).find("#texto_botao").addClass(corBotao);
@@ -89,7 +100,10 @@ $(document).on('ready', function () {
 		$('#modalinput label').text($(this).data('nome'));
 		$('#modalinput input:not(#id)').prop('name', $(this).data('collum')).val('');
 		$('#modalinput #id').val($(this).data('id'));
-		$('#modalinput').modal('open');
+		
+		var modalinput = document.querySelector('#modalinput');
+		var modalinputInstance = M.Modal.init(modalinput);
+		modalinputInstance.open();
 	});
 
 	$(document).on('click', '.modal-include-html', function (e) {
@@ -97,7 +111,9 @@ $(document).on('ready', function () {
 		$('#modalinput label').text($(this).data('nome'));
 		$('#modalinput input:not(#id)').prop('name', $(this).data('collum')).val('');
 		$('#modalinput #id').val($(this).data('id'));
-		$('#modalinput').modal('open');
+		var modalinclude = document.querySelector('#modalinput');
+		var modalincludeInstance = M.Modal.init(modalinclude);
+		modalincludeInstance.open();
 	});
 
 	$(document).on('click', '.ajax-load', function(e) {
@@ -106,7 +122,11 @@ $(document).on('ready', function () {
 		var top = $(this).data('top');
 
 		if(link != ''){
-			$(".sidenav").sidenav('close');	
+			var navAjaxE = document.querySelector('.sidenav');
+			var navAjaxI = M.Sidenav.getInstance(navAjaxE);
+			if(navAjaxI != undefined){
+				navAjaxI.close();
+			}		
 			GoTo(link, true, top);
 		}
 	});
@@ -323,31 +343,8 @@ $(document).on('ready', function () {
 		console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
 		GoTo(location.pathname, false);
 	};
-	$(document).on('change', '.empresa-banco', function () {
-		LoadBancos($(this).val(), 'banco-empresa');
-	});
-	$(document).on('change', '.modo-emprestimo', function () {
-		if ($(this).val() == 3) {
-			$('.empresa-emprestimo').attr('disabled', false);
-			DesativeOnConta(3);
-		} else if ($(this).val() == 4) {
-			LoadProprietarios($('select[name="id_empresa"]').val(), 'empregado_funcionario');
-			DesativeOnConta(4);
-		} else if ($(this).val() == 5) {
-			LoadFuncionarios($('select[name="id_empresa"]').val(), 'empregado_funcionario');
-			DesativeOnConta(5);
-		} else {
-			DesativeOnConta(0);
-		}
-	});
-	$(document).on('change', '.empresa-emprestimo', function (e) {
-		if ($(this).val() == $('.empresa-banco').val()) {
-			alert('A empresa que realizara o emprestimo não pode ser a mesma a recebe-lo');
-			$(this).val('');
-		} else {
-			LoadBancos($(this).val(), 'banco-empresa-emprestimo');
-		}
-	});
+
+
 	$(document).on('change', '.observe-post', function () {
 		if ($(this).val() != '') {
 			$('.error').remove();
@@ -438,6 +435,19 @@ $(document).on('ready', function () {
 		}
 	});
 
+	$(document).on('click', '.sidenav-trigger', function(e) {
+		var navbarE = document.querySelector('.sidenav');
+		var navbarI = M.Sidenav.init(navbarE,{edge:'right'});
+		navbarI.open();
+	});
+
+
+	$(document).on('click', '.fixed-action-btn', function(e) {
+
+		var fixedE = document.querySelectorAll('.fixed-action-btn');
+		var fixedI = M.FloatingActionButton.init(fixedE,{hoverEnabled:false});
+	});
+
 	$(document).on('click', '.alterar-senha-botao', function(e) {
 		e.preventDefault();
 		var form = $(this).parents('form');
@@ -455,6 +465,8 @@ $(document).on('ready', function () {
 		$('.erro-alterar-senha').hide();
 
 	});
+
+
 
 	$(document).on('click', '.define-tipo', function () {
 		$('.define-tipo').removeClass('active');
@@ -872,8 +884,10 @@ function MountModalInteiro(modal, link) {
 			adicionarLoader();
 		},
 		success: function(data) {
+			var modalelement = document.querySelector(modal);
+			var modalInstance = M.Modal.init(modalelement);
 			$(modal).html(data);
-			$(modal).modal('open');
+			modalInstance.open();
 		},
 	    error: function(xhr) { // if error occured
 	    	removerLoader();
@@ -900,8 +914,10 @@ function MountModal(modal, link) {
 			adicionarLoader();
 		},
 		success: function(data) {
+			var modalelement = document.querySelector(modal);
+			var modalInstance = M.Modal.init(modalelement);
 			$(modal).find('.modal-content').html(data);
-			$(modal).modal('open');
+			modalInstance.open();
 		},
 	    error: function(xhr) { // if error occured
 	    	removerLoader();
@@ -958,22 +974,6 @@ function VerificaItem(isso) {
 
 function AddError(isso) {	
 	isso.focus().addClass('observe-post').parent().append('<div class="error">Complete corretamente</div>');
-}
-
-function DesativeOnConta(modo) {
-	if (modo == 3) {
-		$('.empregado_funcionario').attr('disabled', true).val('');
-	} else if (modo == 4) {
-		$('.empresa-emprestimo').attr('disabled', true).val('');
-		$('.banco-empresa-emprestimo').attr('disabled', true).val('');
-	} else if (modo == 5) {
-		$('.empresa-emprestimo').attr('disabled', true).val('');
-		$('.banco-empresa-emprestimo').attr('disabled', true).val('');
-	} else {
-		$('.empregado_funcionario').attr('disabled', true).val('');
-		$('.empresa-emprestimo').attr('disabled', true).val('');
-		$('.banco-empresa-emprestimo').attr('disabled', true).val('');
-	}
 }
 
 // NEW
@@ -1078,11 +1078,11 @@ function LoadToClass(link, to) {
 // 			console.log('pppppppppppppppppppppppppppppppppppppp');
 // 			// var mainTypes = $('.tipos_categorias > row');
 // 			var mainTypes = $('#teste_naosumir');
-			
+
 // 			console.log('mmmmmmmmmmmmm mainTypes mmmmmmmmmmmmmmm');
 // 			console.log(mainTypes);
 // 			console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
-			
+
 // 			$('main').css('background','yellow');
 // 			if($('#teste_naosumir') != undefined ){
 // 				mainTypes.css('padding-top',paddingTop);
