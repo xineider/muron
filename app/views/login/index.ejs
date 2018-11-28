@@ -31,7 +31,7 @@
 	<!-- Cadastre-se -->
 	<div id="modalnew" class="modal">
 		<div class="modal-content">
-			<p><b>Cadastro de Usuário</b></p>
+			<p><b>Cadastro de Usuário/ MurEr</b></p>
 			<form id="cadastra-usuario" method="POST" action="" onsubmit="">
 				<div class="row">
 					<div class="col s12 input-field">
@@ -125,10 +125,10 @@
 				</div>
 				<div class="col s12 input-field">
 					<label>Telefone</label>
-					<input type="text" name="celular" class="tel" required="true">
+					<input type="tel" name="celular" class="tel" required="true">
 				</div>
 				<div class="col s12 input-field">
-					<label>Nome de Contato</label>
+					<label>Nome do Responsável</label>
 					<input required="true" type="text" name="nome_contato">
 				</div>
 				<div class="col s12 input-field">
@@ -167,70 +167,56 @@
 					<img style="max-height: 320px;" src="/assets/imgs/logo.png">
 				</div>
 				<div class="box arrow_box">
-					<%
-					if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == '404') {
-						%>
-						<div class="card-panel red darken-1 center-align">
-							<span class="white-text"><%= erro %></span>
-						</div>
-						<%
-					} else if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == 'login') {
-						%>
-						<div class="card-panel red darken-1 center-align">
-							<span class="white-text"><%= erro %></span>
-						</div>
-						<%
-					}else if(typeof alertaAcesso != 'undefined' && typeof tipo_alerta !='undefined' && tipo_alerta == 'login'){
-						%>
-						<div class="card-panel yellow darken-2 center-align">
-							<span class="white-text"><%= alertaAcesso %>
-								<i class="fa <%= iconeAlerta %>" aria-hidden="true"></i>
-							</span>
+
+					<div class="error_box hide center-align">
+						<div class="card-panel">
+							<span class="white-text"></span>
 						</div>
 
-						<%}%>
-						<div class="container-small">
-							<div class="inputs">
-								<div class="input-field valign-wrapper">
-									<i class="fa fa-user-o prefix grey-text center-align" aria-hidden="true"></i>
-									<input type="text" name="nome_murer" id="nome_murer" class="validate" placeholder="Login (Nome MurEr)">
-								</div>
-								<div class="input-field">
-									<i class="fa fa-key prefix grey-text center-align" aria-hidden="true"></i>
-									<input type="password" name="senha" id="senha" class="validate" placeholder="Senha">
-								</div>
+					</div>
+
+					<div class="container-small">
+						<div class="inputs">
+							<div class="input-field valign-wrapper">
+								<i class="fa fa-user-o prefix grey-text center-align" aria-hidden="true"></i>
+								<input type="text" name="nome_murer" id="nome_murer" class="validate" placeholder="Login (Nome MurEr)">
 							</div>
-							<div class="center-align">
-								<button class="btn-large waves-effect waves-teal waves-light">
-									Entrar
-								</button>
+							<div class="input-field">
+								<i class="fa fa-key prefix grey-text center-align" aria-hidden="true"></i>
+								<input type="password" name="senha" id="senha" class="validate" placeholder="Senha">
 							</div>
-							<p class="acc">
-								<a class="white-text" href="#modalforgot">Esqueceu sua senha? <span class="blue-text text-darken-2">Clique aqui</span></a><br>
-								<a class="white-text" href="#modalnew">Ainda não tem conta? <span class="blue-text text-darken-2">Cadastre-se</span></a>
-							</p>
-							<div class="or"><span>OU</span></div>
-							<div class="row">
-								<br>
-								<a class="white-text" href="#modalparceiro">Quer ser um parceiro? <span class="blue-text text-darken-2">Cadastre-se</span></a><br>
-							</div>
+						</div>
+						<div class="center-align">
+							<button class="btn-large waves-effect waves-teal waves-light">
+								Entrar
+							</button>
+						</div>
+						<p class="acc">
+							<a class="white-text" href="#modalforgot">Esqueceu sua senha? <span class="blue-text text-darken-2">Clique aqui</span></a><br>
+							<a class="white-text" href="#modalnew">Ainda não tem conta? <span class="blue-text text-darken-2">Cadastre-se</span></a>
+						</p>
+						<div class="or"><span>OU</span></div>
+						<div class="row">
+							<br>
+							<a class="white-text" href="#modalparceiro">Quer ser um parceiro? <span class="blue-text text-darken-2">Cadastre-se</span></a><br>
 						</div>
 					</div>
-				</form>
-			</div>
-		</section>
-
-		<div class="container-small">
-			<div class="footer white-text">
-				Está com problemas para fazer login? Tente entrar em contato com <a class="blue-text text-darken-2" href="mailto:suporte@muron.com.br">suporte@muron.com.br</a>
-			</div>
+				</div>
+			</form>
 		</div>
+	</section>
 
-	</main>
+	<div class="container-small">
+		<div class="footer white-text">
+			Está com problemas para fazer login? Contete <a class="blue-text text-darken-2" href="mailto:suporte@muron.com.br">suporte@muron.com.br</a>
+		</div>
+	</div>
+
+</main>
 </body>
 <script type="text/javascript">
 	$(document).on('ready', function () {
-		$('.modal').modal();
+		// $('.modal').modal();
 
 
 		$('.tel').mask('(00) Z0000-0000', {
@@ -240,13 +226,6 @@
 				}
 			}
 		});
-
-
-		function showOptions(option){
-			console.log('estou sendo clicado no sem faculdade');
-			console.log(option);
-		}
-
 
 
 		$('#entra-sistema').on('submit', function(e) {
@@ -306,6 +285,24 @@
 					console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
 					if(data.result == 'redirect'){
 						window.location.replace(data.url);
+					}else{
+						$('.error_box').removeClass('hide');
+						$('.error_box').find('span').text(data.mensagem);
+
+						var cardpanel = $('.error_box').find('.card-panel');
+
+						if(data.erro == 'warn'){
+							/* Limpar o alert caso ele já está ativo*/
+							$('.error_box').find('span').find('.fa').remove();
+							cardpanel.removeClass('yellow darken-2');              
+							cardpanel.addClass('red darken-1');
+
+						}else if(data.erro == 'alert'){
+							/*Limpar o warn caso ele já está ativo*/
+							cardpanel.removeClass('red darken-1');
+							cardpanel.addClass('yellow darken-2');
+							$('.error_box').find('span').append('<i class="fa fa-handshake"></i>')
+						}
 					}
 				},
     		error: function(xhr) { 	// if error occured
@@ -315,7 +312,7 @@
     		complete: function(data) {
     			console.log('deu completado');	
     		}
-  });
+    	});
 
 
 
@@ -375,7 +372,7 @@
 			    },
 			    complete: function() {
 			    }
-			  });
+			});
 			};
 		});
 
@@ -437,7 +434,7 @@
 				    },
 				    complete: function() {
 				    }
-				  });
+				});
 			}
 		});
 
@@ -456,7 +453,7 @@
 			    error: function(xhr) { // if error occured
 			    	alert("Error, contate o administrador ou reinicie a pagina.");
 			    }
-			  });
+			});
 		});
 
 		$(document).on('change', 'select[id="tipo_parceiro_sel"]', function () {
