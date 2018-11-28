@@ -1,0 +1,178 @@
+<section id="chat" class="hide-footer">
+  <div class="chat_background"></div>
+  <div class="container">
+    <%
+    if (typeof data != 'undefined' && data.length > 0) {
+      for (var i = data.length - 1; i >= 0; i--) {
+        if (data[i].id_usuario == usuario.id) {
+    %>
+        <div class="message-wrapper me">
+          <div class="text-wrapper animated fadeIn"><%= data[i].texto %></div>
+        </div>
+    <%
+        } else {
+    %>
+        <div class="message-wrapper them">
+          <div class="text-wrapper animated fadeIn"><%= data[i].texto %></div>
+        </div>
+    <%
+        }
+    %>
+    <%
+      }
+    } else {
+    %>
+      <div class="center-align grey lighten-3 black-text" style="border-radius: 5px; padding: 10px;">
+        <small> Nenhuma mensagem foi enviada ainda </small>
+      </div>
+    <%
+    }
+    %>
+  </div>
+  <form method="POST" action="" id="chat_enviar">
+    <input type="hidden" name="id_usuario" value="<%= usuario.id %>">
+    <input type="hidden" name="id_usuario_para" value="<%= usuario_chat %>">
+    <input type="text" name="texto" placeholder="Escreva sua mensagem" id="mensagem">
+    <button class="center-align ajax-send blue-text"  data-href="/mobsmart/chats/enviar/mensagem/" data-link="/mobsmart/chats/ver/<%= usuario_chat %>"><i class="fa fa-chevron-circle-right"></i></button>
+  </form>
+</section>
+
+<style type="text/css">
+  #chat {
+    padding: 0.5em 0.1em 0em 0.2em;
+    padding-bottom: 50px;
+  }
+  input#mensagem_enviar {
+    border-bottom: none;
+/*    bottom: 10px;
+    left: 10px;*/
+  }
+  #message-area.row {
+    margin-bottom: 0;
+  }
+/*  #message-area .input-field {
+    top: 0.2em;
+    left: 0.9em;
+  }*/
+  #message-area > .input-field {
+    margin-bottom: 0;
+    padding: 10px;
+  }
+  input[type=text]:not(.browser-default):focus:not([readonly])+label {
+    color: #000;
+  }
+  .input-field label:not(.label-icon).active {
+    transform: translateY(-10px) scale(0.9);
+    -webkit-transform: translateY(-10px) scale(0.9);
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+  }
+  .send-button {
+    position: fixed;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 0;
+    background: #ddeafd;
+    color: #ffffff;
+    bottom: 10px;
+    right: 10px;
+  }
+  .message-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin: 10.6666666667px 0;
+    padding: 10.6666666667px 0;
+  }
+  .message-wrapper.them .circle-wrapper, .message-wrapper.them .text-wrapper {
+    background: #fff;
+    float: left;
+    color: #000;
+  }
+  .message-wrapper.me .text-wrapper {
+    background: #3588cb;
+    float: right;
+    color: #ffffff;
+  }
+  .message-wrapper.me .text-wrapper {
+    background: #3588cb;
+  }
+  .message-wrapper .circle-wrapper {
+    height: 42.6666666667px;
+    width: 42.6666666667px;
+    border-radius: 50%;
+  }
+  .message-wrapper .text-wrapper {
+    padding: 10.6666666667px;
+    min-height: 42.6666666667px;
+    width: 60%;
+    margin:0 10.6666666667px;
+    webkit-box-shadow: 0px 1px 0px 0px rgba(50, 50, 50, 0.3); /*riscado*/
+    box-shadow: 0px 1px 0px 0px rgba(50, 50, 50, 0.3);
+    border-radius: 10px;
+    font-weight: 300;
+    position: relative;
+    word-break: break-all; /*riscado*/
+    opacity: 0;
+  }
+  .fadeIn {
+    webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+  }
+  .bounceIn {
+    webkit-animation-name: bounceIn; /*riscado*/
+    animation-name: bounceIn;
+    webkit-animation-duration: .75s; /*riscado*/
+    animation-duration: .75%;
+  }
+  .animated {
+    webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  .message-wrapper.me .text-wrapper:before {
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent transparent #3588cb;
+    position: absolute;
+    bottom: 0.3em;
+    right: -8px;
+  }
+  .message-wrapper.them .text-wrapper:before {
+    border-width: 10px 10px 10px 0px;
+    border-color: transparent #fff transparent transparent;
+    position: absolute;
+    bottom: 0.3em;
+    left: -8px;
+  }
+  .message-wrapper .text-wrapper:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+  @keyframes fadeIn{
+    0%{opacity:0}
+    100%{opacity:1}
+  }
+  .fadeIn{
+    -webkit-animation-name:fadeIn;
+    animation-name:fadeIn
+  }
+  #message-area {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 50px;
+    border-top: 1px;
+    border-top-color: #000000;
+    background-color: #f1f1f1;
+  }
+</style>
+
+<script type="text/javascript">
+  $('#footer').fadeOut('slow');
+  $('html,body').animate({ scrollTop: $('html').height() }, 'slow');
+</script>
