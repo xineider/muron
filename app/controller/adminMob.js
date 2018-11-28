@@ -10,7 +10,7 @@ var app = express();
 app.use(require('express-is-ajax-request'));
 
 router.get('/', function(req, res, next) {
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'admin/index', data: data, usuario: req.session.usuario});
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'admin/indexMob', data: data, usuario: req.session.usuario});
 });
 
 router.get('/usuarios', function(req, res, next) {
@@ -18,7 +18,7 @@ router.get('/usuarios', function(req, res, next) {
 	model.GetUsuarios().then(data_usuarios => {
 		data.usuarios = data_usuarios;
 		console.log(data);
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'admin/usuarios', data: data, usuario: req.session.usuario});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'admin/usuariosMob', data: data, usuario: req.session.usuario});
 	});
 });
 
@@ -27,12 +27,8 @@ router.get('/permissao-faculdades', function(req, res, next) {
 	model.GetParceirosNaoValidados().then(data_usuarios => {
 		data.usuarios = data_usuarios;
 		console.log(data);
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'admin/permissao_faculdade', data: data, usuario: req.session.usuario});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'admin/permissao_faculdadeMob', data: data, usuario: req.session.usuario});
 	});
-});
-
-router.get('/loginfake', function(req, res, next) {
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorLimpo', {html: 'inicio/login_fake', data: data, usuario: req.session.usuario});
 });
 
 
@@ -41,7 +37,7 @@ router.get('/usuario-faculdade', function(req, res, next) {
 	model.GetUsuariosFaculdade().then(data_usuarios => {
 		data.usuarios = data_usuarios;
 		console.log(data);
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'admin/usuario_faculdade', data: data, usuario: req.session.usuario});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'admin/usuario_faculdadeMob', data: data, usuario: req.session.usuario});
 	});
 });
 
