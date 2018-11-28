@@ -1,0 +1,17 @@
+<div style="
+    width: 100%;
+    padding: 20px 0;
+        background-color: #fff;
+        box-shadow: 0px 2px 10px -3px black; text-align: center;">
+  <h5 class="container">
+    Lista de Transmissão
+  </h5>
+</div>
+<div>
+  <table class="striped">
+    <tbody id="grupos">
+      <%- include('usuarios_grupos_listaMob') %>
+    </tbody>
+  </table>
+</div>
+<button class="btn-floating btn btn-add blue modal-mount" data-href="#modalinfo" data-link="/usuarios/grupos/criar"><i class="fa fa-plus" aria-hidden="true"></i></button>

@@ -1,0 +1,87 @@
+<section class="tipos_categorias">
+	<%if (usuario.tipo == 2) {%>
+	<!-- se For uma faculdade ele não precisa da aba faculdades então não é colocado e é centralizado -->
+	<div class="row no-categoria-faculdade">
+		<% }else{ %>
+		<div class="row" id="tipos_categorias_row">
+			<% } %>
+			<%
+			if (typeof data.categorias != 'undefined' && data.categorias.length > 0) {
+				for (var i = data.categorias.length - 1; i >= 0; i--) {
+					%>
+
+					<div class="col s3">
+						<a href="<%= data.categorias[i].link%><%= data.categorias[i].id %>" class="ajax-load">
+							
+							<img src="<%= data.categorias[i].icone %>" style="width:72px;height: 72px;">
+
+
+							<p style="margin-top:5px;" class="center-align black-text">	
+								<%= data.categorias[i].nome %>
+							</p>
+						</a>
+						<%
+						if (data.categorias[i].atualizacoes > 0) {
+							%>
+							<div class="atualizacoes">
+								<%= data.categorias[i].atualizacoes %>
+							</div>
+							<%
+						}
+						%>
+					</div>
+					<%
+				}
+			}
+
+			%>
+		</div>
+	</section>
+	<section class="main-margin">
+
+		<%- include('../postagens/postagensMob'); %>
+
+	</section>
+
+
+<!-- <script type="text/javascript">
+changeHeader('par1');
+</script> -->
+
+<style type="text/css">
+</style>
+
+<script type="text/javascript">
+	$('#footer').fadeIn('slow');
+	$('#sair').fadeOut('slow');
+</script>
+
+
+
+<script>
+	adicionarPaddingMain();
+
+	$(window).resize(function(){
+		console.log('estou dando resize');
+		adicionarPaddingMain();
+	})
+
+	function adicionarPaddingMain(){
+
+		var headerHeight = $('header').height();
+
+		if(headerHeight != undefined && headerHeight>0) {
+			var paddingTop = headerHeight - 70 + 10;
+
+			if(paddingTop>0){
+				// var mainTypes = $('.tipos_categorias > row');
+				var mainTypes = $('#tipos_categorias_row');
+
+				if($('#tipos_categorias_row') != undefined ){
+					mainTypes.css('padding-top',paddingTop);
+				}
+
+			}
+		}
+	}
+</script>

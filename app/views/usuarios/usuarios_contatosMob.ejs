@@ -1,0 +1,18 @@
+<form method="POST" action="">
+  <div class="row">
+    <div class="input-field col s12">
+      <label>Nome/Murer/E-mail</label>
+      <input type="text" name="pesquisar" placeholder="Exemplo: joao@gmail.com">
+      <input type="hidden" name="id_usuario" value="">
+    </div>
+    <div class="center-align col s12">
+      <a id="pesquisar_contato" class="btn blue darken-1 white-text" data-href="/sistema/usuarios/contatos">Pesquisar Todos Usuários</a>
+    </div>
+  </div>
+</form>
+<div id="contatos">  
+  <%- include('usuariosMob'); %>
+</div>
+<script type="text/javascript">
+  $('#footer').fadeOut('slow');
+</script>

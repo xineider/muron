@@ -20,7 +20,7 @@ router.get('/cadastro', function(req, res, next) {
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_cadastroMob', data: data, usuario: req.session.usuario});
 });
 router.get('/login', function(req, res, next) {
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_login', data: data, usuario: req.session.usuario});
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_loginMob', data: data, usuario: req.session.usuario});
 });
 router.get('/editar/:id', function(req, res, next) {
 	id = req.params.id;
@@ -56,12 +56,12 @@ router.get('/contatos/', function(req, res, next) {
 		console.log('[[[[[[[[[[[[[[[[[[[[[[ DADOS DOS CONTATOS [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[');
 		console.log(data);
 		console.log('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[');
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_contatos', data: data, usuario: req.session.usuario});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_contatosMob', data: data, usuario: req.session.usuario});
 	});
 });
 router.get('/grupos/', function(req, res, next) {
 	model.GetUsuarioGrupos(req.session.usuario.id).then(data => {
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_grupos', data: data, usuario: req.session.usuario});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_gruposMob', data: data, usuario: req.session.usuario});
 	});
 });
 router.get('/grupos/ver/:id', function(req, res, next) {

@@ -37,7 +37,7 @@ router.get('/ver/:id', function(req, res, next) {
 			data_insert = {id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id,id_categoria:id, status:data_usuario[0].status};
 			model.GetPostagemByCat(data_insert).then(data_postagens => {
 				data.postagens = data_postagens;
-				res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'postagens/postagens_ver', data: data, usuario: req.session.usuario, title: title});
+				res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'postagens/postagens_verMob', data: data, usuario: req.session.usuario, title: title});
 			});
 		});
 
@@ -74,7 +74,7 @@ router.get('/pesquisar/:pesquisa', function(req, res, next) {
 	}
 	model.SearchPostagem(pesquisa, req.session.usuario.id).then(data_postagens => {
 		data.postagens = data_postagens;
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'postagens/postagens_ver', data: data, usuario: req.session.usuario, title: 'Pesquisa por: ' + pesquisa});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'postagens/postagens_verMob', data: data, usuario: req.session.usuario, title: 'Pesquisa por: ' + pesquisa});
 	});
 });
 

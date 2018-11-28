@@ -40,7 +40,7 @@ router.get('/', function(req, res, next) {
 								model.GetPostagensTodas(data_insert).then(data_postagens=> {
 									data.postagens = data_postagens;
 								// console.log(data);
-								res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+								res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'inicio/indexMob', data: data, usuario: req.session.usuario});
 							});
 							});
 						});
@@ -57,7 +57,7 @@ router.get('/', function(req, res, next) {
 							model.GetPostagensTodasFaculdade(data_insert).then(data_postagens=>{
 								data.postagens = data_postagens;
 								console.log(data);				
-								res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+								res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'inicio/indexMob', data: data, usuario: req.session.usuario});
 							});
 						});
 					});
@@ -66,7 +66,7 @@ router.get('/', function(req, res, next) {
 				model.GetCategorias().then(data=> {
 					model.GetPostagens(req.session.usuario.id).then(data_postagens => {
 						data.postagens = data_postagens;
-						res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'inicio/parceiro', data: data, usuario: req.session.usuario});
+						res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'inicio/parceiroMob', data: data, usuario: req.session.usuario});
 					});
 				});
 			}
