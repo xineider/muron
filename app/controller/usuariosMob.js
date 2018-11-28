@@ -13,11 +13,11 @@ app.use(require('express-is-ajax-request'));
 router.get('/', function(req, res, next) {
 	model.SelectUsuario().then(data=> {
 		console.log('ADASDASD / DO CONTATO');
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuariosMob', data: data, usuario: req.session.usuario});
 	});
 });
 router.get('/cadastro', function(req, res, next) {
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_cadastro', data: data, usuario: req.session.usuario});
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_cadastroMob', data: data, usuario: req.session.usuario});
 });
 router.get('/login', function(req, res, next) {
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_login', data: data, usuario: req.session.usuario});
@@ -43,7 +43,7 @@ router.get('/ver/:id', function(req, res, next) {
 			console.log('********************* DADOS DO PERFIL ****************************');
 			console.log(data);
 			console.log('******************************************************************');
-			res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_ver', data: data, usuario: req.session.usuario});
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_verMob', data: data, usuario: req.session.usuario});
 		});
 	});
 });
@@ -70,7 +70,7 @@ router.get('/grupos/ver/:id', function(req, res, next) {
 		data.grupo = data_grupo;
 		model.GetUsuariosGrupo(id).then(data_usuarios => {
 			data.usuarios = data_usuarios;
-			res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_grupos_ver', data: data, usuario: req.session.usuario});
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_grupos_verMob', data: data, usuario: req.session.usuario});
 		});
 	});
 });
@@ -81,7 +81,7 @@ router.get('/situacao/:id', function(req, res, next) {
 	console.log('-------------- DATA DA SITUACAO ------------------------');
 	console.log(data);
 	console.log('--------------------------------------------------------');
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_situacao', data: data, usuario: req.session.usuario});
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_situacaoMob', data: data, usuario: req.session.usuario});
 });
 
 
@@ -90,7 +90,7 @@ router.get('/genero/:id', function(req, res, next) {
 	console.log('-------------- DATA DO GENERO ------------------------');
 	console.log(data);
 	console.log('--------------------------------------------------------');
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_genero', data: data, usuario: req.session.usuario});
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_generoMob', data: data, usuario: req.session.usuario});
 });
 
 router.get('/faculdade/:id', function(req, res, next) {
@@ -98,7 +98,7 @@ router.get('/faculdade/:id', function(req, res, next) {
 	console.log('-------------- DATA DA FACULDADE ------------------------');
 	console.log(data);
 	console.log('--------------------------------------------------------');
-	res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'usuarios/usuarios_faculdade', data: data, usuario: req.session.usuario});
+	res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'usuarios/usuarios_faculdadeMob', data: data, usuario: req.session.usuario});
 });
 
 router.get('/ufcidade/:id', function(req, res, next) {
@@ -106,17 +106,17 @@ router.get('/ufcidade/:id', function(req, res, next) {
 	console.log('-------------- DATA DA FACULDADE ------------------------');
 	console.log(data);
 	console.log('--------------------------------------------------------');
-	res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'usuarios/usuarios_ufcidade', data: data, usuario: req.session.usuario});
+	res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'usuarios/usuarios_ufcidadeMob', data: data, usuario: req.session.usuario});
 });
 
 
 router.get('/alterar-senha/', function(req, res, next) {
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/alterar_senha', data: data, usuario: req.session.usuario});
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/alterar_senhaMob', data: data, usuario: req.session.usuario});
 });
 
 
 router.get('/grupos/criar', function(req, res, next) {
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_grupos_criar', data: data, usuario: req.session.usuario});
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_grupos_criarMob', data: data, usuario: req.session.usuario});
 });
 
 // Metodos POST
@@ -134,7 +134,7 @@ router.post('/contatos/', function(req, res, next) {
 
 	if(req.session.usuario.tipo == 2){
 		model.GetUsuariosFaculdade(POST,req.session.usuario.id_faculdade, req.session.usuario.id).then(data => {
-			res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
+			res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'usuarios/usuariosMob', data: data, usuario: req.session.usuario});
 		});
 	}else{
 		POST.id_usuario = req.session.usuario.id;
@@ -145,7 +145,7 @@ router.post('/contatos/', function(req, res, next) {
 			console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG');
 
 
-			res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
+			res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'usuarios/usuariosMob', data: data, usuario: req.session.usuario});
 		});
 
 	}

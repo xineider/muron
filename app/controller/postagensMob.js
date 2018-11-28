@@ -10,7 +10,7 @@ var app = express();
 app.use(require('express-is-ajax-request'));
 
 router.get('/', function(req, res, next) {
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'postagens/postagens', data: data, usuario: req.session.usuario});
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'postagens/postagensMob', data: data, usuario: req.session.usuario});
 });
 router.get('/ver/:id', function(req, res, next) {
 	id = req.params.id;
@@ -45,19 +45,19 @@ router.get('/ver/:id', function(req, res, next) {
 	});
 });
 router.get('/pesquisar', function(req, res, next) {
-	res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'postagens/postagens_pesquisar', data: data, usuario: req.session.usuario});
+	res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'postagens/postagens_pesquisarMob', data: data, usuario: req.session.usuario});
 });
 router.get('/comentarios/:id', function(req, res, next) {
 	id = req.params.id;
 	model.GetComentarios(id).then(data_comentarios => {
 		data.comentarios = data_comentarios;
 		data.postagem = id;
-		res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'postagens/postagens_comentarios', data: data, usuario: req.session.usuario});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'postagens/postagens_comentariosMob', data: data, usuario: req.session.usuario});
 	});
 });
 router.get('/criar', function(req, res, next) {
 	model.GetCategorias().then(data=> {
-		res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'postagens/postagens_criar', data: data, usuario: req.session.usuario});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'postagens/postagens_criarMob', data: data, usuario: req.session.usuario});
 	});
 });
 router.get('/pesquisar/:pesquisa', function(req, res, next) {
@@ -128,7 +128,7 @@ router.post('/cadastrar', function(req, res, next) {
 	console.log(POST);
 	console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
 	model.InsertPostagem(POST).then(data => {
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'postagens/postagens_criar', data: data, usuario: req.session.usuario});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'postagens/postagens_criarMob', data: data, usuario: req.session.usuario});
 	});
 });
 router.post('/desativar/', function(req, res, next) {

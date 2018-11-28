@@ -12,7 +12,7 @@ app.use(require('express-is-ajax-request'));
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {
 	model.SelectFaculdade().then(data=> {
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'faculdades/faculdades', data: data, usuario: req.session.usuario});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'faculdades/faculdadesMob', data: data, usuario: req.session.usuario});
 	});
 });
 
@@ -42,17 +42,17 @@ router.get('/ver/:id', function(req, res, next) {
 			// data.perfil = data_faculdade;
 			model.GetPostagemByFaculdade(data.perfil[0].id).then(data_postagens => {
 				data.postagens = data_postagens;
-				res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_ver', data: data, usuario: req.session.usuario});
+				res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_verMob', data: data, usuario: req.session.usuario});
 			});
 		} else if(data_faculdade == 2){
 				// res.redirect('/sistema/');
-				res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_ver', data: data, usuario: req.session.usuario,error:data_faculdade});
+				res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_verMob', data: data, usuario: req.session.usuario,error:data_faculdade});
 			}
 		});
 });
 router.get('/alunos/relacao', function(req, res, next) {
 	model.GetRelacao(req.session.usuario.id_faculdade,req.session.usuario.tipo).then(data => {
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'faculdades/faculdades_relacao', data: data, usuario: req.session.usuario});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'faculdades/faculdades_relacaoMob', data: data, usuario: req.session.usuario});
 	});
 });
 

@@ -12,7 +12,7 @@ app.use(require('express-is-ajax-request'));
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {
 	model.GetContatos(req.session.usuario.id).then(data => {
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'chats/chats', data: data, usuario: req.session.usuario});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'chats/chatsMob', data: data, usuario: req.session.usuario});
 	});
 });
 

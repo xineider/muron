@@ -1,0 +1,13 @@
+<form method="POST" action="">
+  <div class="row">
+  	<input type="hidden" name="id_lider" value="<%= usuario.id %>">
+    <div class="input-field col s12">
+      <label>Nome da Lista</label>
+      <input type="text" name="nome" required="true">
+    </div>
+
+    <div class="center-align col s12">
+      <a class="btn blue darken-1 white-text ajax-submit" data-href="/mobsmart/usuarios/grupos/adicionar/" data-action="/mobsmart/usuarios/grupos">Criar</a>
+    </div>
+  </div>
+</form>

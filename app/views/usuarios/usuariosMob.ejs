@@ -1,0 +1,78 @@
+<form method="POST" action="">
+  <ul class="collection">
+    <%
+    if (typeof data != 'undefined' && data.length > 0) {
+      for (var i = data.length - 1; i >= 0; i--) {
+        %>
+
+
+        <div style="position:relative">
+
+          <a href="/mobsmart/usuarios/ver/<%= data[i].id_usuario2 %>" class="ajax-load">
+            <li class="collection-item avatar">
+              <img src="/assets/uploads/<%= data[i].imagem %>" alt="" class="circle">
+              <span class="title"><%= data[i].nome_murer %></span>
+              <p style="line-height: 9px;"><small><%= data[i].nome %><br>
+                <%= data[i].email %></small>
+              </p>
+            </li>
+          </a>
+
+
+          <%if(data[i].aluno_faculdade == 1 ){%>
+          <div class="secondary-content" style="position: absolute;top: 16px;right: 16px;">
+            <p>
+              <label>
+              <input type="checkbox" class="checkbox_selecionar_aluno" id="selecionar-usuario-<%= data[i].id_usuario2%>" data-id="<%= data[i].id_usuario2%>" name="lista[id][]" data-aluno_deletado = "<%= data[i].aluno %>"value="<%= data[i].id_relacao%>" <%= data[i].aluno == 0 ? "checked " : "" %> >
+              <span></span>
+              <label for="selecionar-usuario-<%= data[i].id_usuario2%>"></label>
+              </label>
+            </p>
+          </div>
+
+
+          <% } %>
+
+
+
+          <%if((data[i].amigos == 0) && (data[i].tipo == 1) ){%>
+
+          <div class="secondary-content" style="position: absolute;top: 16px;right: 16px;">
+            <p>
+              <label>
+              <input type="checkbox" class="checkbox_selecionar_usuario" id="selecionar-usuario-<%= data[i].id_usuario2%>" data-id="<%= data[i].id_usuario2%>" name="lista[id_usuario2][]" value="<%= data[i].id_usuario2%>"/>
+              <span></span>
+              <label for="selecionar-usuario-<%= data[i].id_usuario2%>"></label>
+              </label>
+            </p>
+          </div>
+
+
+          <%
+        }
+      }
+    } else {
+      %>
+      <li class="center-align">
+        Nenhum contato foi encontrado com essa pesquisa
+      </li>
+      <%
+    }
+    %>
+  </ul>
+
+  <div class="footer_adicionar_contatos blue lighten-1">
+    <button class="btn white blue-text text-lighten-1 ajax-submit" data-href="/mobsmart/usuarios/contatos/adicionar-varios" data-action="/mobsmart/usuarios/contatos">Adicionar Contatos</button>    
+  </div>
+
+
+  <div class="footer_remover_aluno blue lighten-1">
+    <button class="btn white blue-text text-lighten-1 ajax-submit" data-href="/mobsmart/usuarios/contatos/remover-varios-alunos" data-action="/mobsmart/usuarios/contatos">Remover Aluno</button>    
+  </div>
+
+    <div class="footer_adicionar_aluno blue lighten-1">
+    <button class="btn white blue-text text-lighten-1 ajax-submit" data-href="/mobsmart/usuarios/contatos/adicionar-varios-alunos" data-action="/mobsmart/usuarios/contatos">Adicionar Aluno</button>    
+  </div>
+
+
+</form>

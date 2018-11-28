@@ -1,0 +1,31 @@
+
+  <div class="card-panel white">
+    <h4>Alterar Senha</h4>
+    <form method="POST" action="" enctype="multipart/form-data">
+
+      <div class="row">
+        <div class="input-field col s12 l3">
+          <input required="true" class="validate" type="password" name="senha_atual">
+          <label for="senha_atual">Senha Atual</label>
+        </div>
+      </div>
+
+      <div class="row">
+         <div class="input-field col s12 l3">
+          <input required="true" id="alterar_senha" class="validate" type="password" name="senha">
+          <label for="senha">Nova Senha</label>
+        </div>
+      </div>
+      <div class="row">
+         <div class="input-field col s12 l3">
+          <input required="true" id="confirmar_alterar_senha" class="validate" type="password">
+          <label for="confirmar_senha">Confirme a Nova Senha</label>
+        </div>
+      </div>
+
+      <button data-href="/mobsmart/usuarios/alterar-senha/" data-action="" class="btn waves-effect waves-light green darken-1 alterar-senha-botao">
+        Alterar
+      </button>
+    </form>
+  </div>
+</div>
