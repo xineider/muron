@@ -236,6 +236,16 @@ body > div.row .col {
     main>section:first-child{
       margin-top: 162px;
     }
+
+    .card .card-image img{
+      object-fit: contain;
+      height: 28vw;
+    }
+
+    .main-margin .card-image {
+      background: url(/assets/imgs/chat_background.png);
+    }
+
   }
 
   /*Alterações Materialize*/
