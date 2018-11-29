@@ -12,7 +12,7 @@ $(document).on('ready', function () {
 	FormatInputs();
 	GoTo(location.pathname, false);
 
-	adicionarPaddingMain();
+	// adicionarPaddingMain();
 
 	/*só para dar update no umbler*/
 
