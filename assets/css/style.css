@@ -242,9 +242,18 @@ body > div.row .col {
       height: 28vw;
     }
 
+  }
+
+  @media (min-width: 601px){
+    .card .card-image img{
+      object-fit: contain;
+      height: 50vw;
+    }
+
     .main-margin .card-image {
       background: url(/assets/imgs/chat_background.png);
     }
+
 
   }
 
