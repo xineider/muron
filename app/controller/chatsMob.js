@@ -23,7 +23,7 @@ router.get('/ver/:id', function(req, res, next) {
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'chats/chats_interno', data: data, usuario: req.session.usuario, usuario_chat: id});
 	});
 
-	res.json('oi');
+	// res.json('oi');
 
 
 
