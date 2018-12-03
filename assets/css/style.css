@@ -128,6 +128,12 @@ body > div.row .col {
     z-index: 1007;
   }
 
+  .center-no-float{
+    float: none!important;
+    margin: 0 auto;
+    text-align: center;
+  }
+
   .error {
     position: absolute;
     bottom: -20px;
