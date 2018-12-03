@@ -90,6 +90,7 @@
 		</form>
 	</div>
 </div>
+
 <!-- Cadastre-se Parceiro -->
 <div id="modalparceiro" class="modal">
 	<div class="modal-content">
@@ -207,13 +208,13 @@
 								</button>
 							</div>
 							<p class="acc">
-								<a class="white-text" href="#modalforgot">Esqueceu sua senha? <span class="blue-text text-darken-2">Clique aqui</span></a><br>
-								<a class="white-text" href="#modalnew">Ainda não tem conta? <span class="blue-text text-darken-2">Cadastre-se</span></a>
+								<a class="white-text modal-trigger" href="#modalforgot">Esqueceu sua senha? <span class="blue-text text-darken-2">Clique aqui</span></a><br>
+								<a class="white-text modal-trigger" href="#modalnew">Ainda não tem conta? <span class="blue-text text-darken-2">Cadastre-se</span></a>
 							</p>
 							<div class="or"><span>OU</span></div>
 							<div class="row">
 								<br>
-								<a class="white-text" href="#modalparceiro">Quer ser um parceiro? <span class="blue-text text-darken-2">Cadastre-se</span></a><br>
+								<a class="white-text modal-trigger" href="#modalparceiro">Quer ser um parceiro? <span class="blue-text text-darken-2">Cadastre-se</span></a><br>
 							</div>
 						</div>
 					</div>
@@ -223,7 +224,7 @@
 
 		<div class="container-small">
 			<div class="footer white-text">
-				Está com problemas para fazer login? Contete <a class="blue-text text-darken-2" href="mailto:suporte@muron.com.br">suporte@muron.com.br</a>
+				Está com problemas para fazer login? Contate <a class="blue-text text-darken-2" href="mailto:suporte@muron.com.br">suporte@muron.com.br</a>
 			</div>
 		</div>
 
@@ -301,7 +302,7 @@
   //   	});
 		// });
 
-
+		$('.modal').modal();
 
 		$('#cadastra-usuario').on('submit', function(e) {
 			e.preventDefault();
