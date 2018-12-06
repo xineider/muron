@@ -458,7 +458,9 @@ function autoComplete(element,url,select_el){
 				url:url+request.term,
 				beforeSend: function() {
 					console.log(request);	
-					console.log(request.term);	
+					console.log(request.term);
+					console.log('url');
+					console.log(url+request.term);
 				},
 				success: function(data) {
 					console.log(data);
