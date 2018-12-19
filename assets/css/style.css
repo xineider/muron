@@ -267,6 +267,12 @@ body > div.row .col {
 
   }
 
+  @media (max-width:400px){
+    header img{
+      margin-left: -25%;
+    }
+  }
+
   /*Alterações Materialize*/
 
   nav a.sidenav-trigger{
