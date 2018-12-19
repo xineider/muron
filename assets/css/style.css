@@ -718,6 +718,7 @@ table.striped>tbody>tr>td {
     max-width: 100%;
     display: block;
     margin: 0 auto;
+    margin-top: 5px;
   }
   .tipos_categorias p {
     font-size: 0.8em;
