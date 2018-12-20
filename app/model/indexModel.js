@@ -42,9 +42,9 @@ class IndexModel {
 				AND (id_contato = ? OR id_contato IN (SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario2 = ? AND deletado = ?))\
 				)\
 				AND (\
-				(id_tipo = ? AND id_faculdade = ? AND (filtro_status_faculdade = ? OR filtro_status_faculdade = ?)) OR (id_tipo != ?)\
+				(id_tipo = ? AND deletado = ? AND id_faculdade = ? AND (filtro_status_faculdade = ? OR filtro_status_faculdade = ?)) OR (id_tipo != ?)\
 				)";
-				values = [0, POST.id_usuario, 0, 0, 0, 0, POST.id_usuario, 0, POST.id_usuario, 0, 0, POST.id_usuario, 0, 2, POST.id_faculdade,0, POST.status, 2];
+				values = [0, POST.id_usuario, 0, 0, 0, 0, POST.id_usuario, 0, POST.id_usuario, 0, 0, POST.id_usuario, 0, 2, 0, POST.id_faculdade,0, POST.status, 2];
 			} else {
 				values = [0, POST.id_usuario, 0, 0, 0, 0];
 			}
