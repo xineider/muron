@@ -107,7 +107,7 @@ class PostagensModel {
 				(SELECT COUNT(e.id) FROM postagens_comentarios as e WHERE e.id_postagem = a.id AND e.deletado = ? GROUP BY e.id_postagem) as qtd_comentario,\
 				a.imagem, a.descricao, DATE_FORMAT(a.data_atualizado, "%d/%m/%Y") as data_atualizado\
 				FROM postagens as a INNER JOIN usuarios as b ON a.id_usuario = b.id WHERE a.deletado = ? AND\
-				(a.descricao like CONCAT("%", ?, "%"))' + where_add, 
+				(a.descricao like CONCAT(?, "%"))' + where_add, 
 				values).then(data => {
 					resolve(data);
 				});
