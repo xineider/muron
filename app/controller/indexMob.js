@@ -85,7 +85,7 @@ router.post('/', function(req, res, next) {
 		console.log(data);
 		if (data.length > 0) {
 			req.session.id_usuario = data[0].id;
-			res.redirect('/sistema');
+			res.redirect('/mobsmart');
 		} else {
 			res.render('login/index', { erro: 'Login ou senha incorreto(s).', tipo_erro: 'login' });
 		}
