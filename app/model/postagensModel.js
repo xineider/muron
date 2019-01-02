@@ -96,9 +96,9 @@ class PostagensModel {
 				where_add = "AND ((id_grupo = ? OR id_grupo IN ((SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?)))\
 				AND (id_contato = ? OR id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = a.id_usuario AND deletado = ?)))\
 				OR id_usuario = ?)";
-				values = [id_usuario, 0, 0, 0, 0, pesquisa,0, id_usuario, 0, 0, 0, id_usuario];
+				values = [id_usuario, 0, 0, 0, 0, pesquisa,pesquisa,0, id_usuario, 0, 0, 0, id_usuario];
 			} else {
-				values = [id_usuario, 0, 0, 0, 0, pesquisa];
+				values = [id_usuario, 0, 0, 0, 0, pesquisa,pesquisa];
 			}
 			helper.Query('SELECT a.id, a.id_usuario,\
 				b.nome_murer as usuario,\
@@ -107,7 +107,7 @@ class PostagensModel {
 				(SELECT COUNT(e.id) FROM postagens_comentarios as e WHERE e.id_postagem = a.id AND e.deletado = ? GROUP BY e.id_postagem) as qtd_comentario,\
 				a.imagem, a.descricao, DATE_FORMAT(a.data_atualizado, "%d/%m/%Y") as data_atualizado\
 				FROM postagens as a INNER JOIN usuarios as b ON a.id_usuario = b.id WHERE a.deletado = ? AND\
-				(a.descricao like CONCAT(?, "%"))' + where_add, 
+				(a.descricao LIKE CONCAT(?, "%") OR a.descricao LIKE CONCAT(" ",?,"%"))' + where_add, 
 				values).then(data => {
 					resolve(data);
 				});
