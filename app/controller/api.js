@@ -58,10 +58,40 @@ router.post('/', function(req, res, next) {
 
 router.post('/recuperar/senha', function(req, res, next) {
 	var post = req.body;
-	var html = "<p>Sua nova senha é: <b>"+nova_senha+"</b>";
-	var text = "Sua nova senha é: "+nova_senha;
-	control.SendMail(post.email, 'Recuperação de Senha - MurOn', html, text);
-	res.json(10);
+	console.log('00000000000000 É isso que recebo do recuperar senha 000000000000000');
+	console.log(post);
+	console.log('0000000000000000000000000000000000000000000000000000000000000000000');
+	model.PesquisarEmail(post.email).then(idEmail => {
+		console.log('----------------- ID Email ------------------------');
+		console.log(idEmail);
+		console.log('-----------------------------------------------------');
+		if(idEmail != ''){
+			var nova_senha = Math.random().toString(36).substring(7);
+			var html = "<p>Sua nova senha é: <b>"+nova_senha+"</b>";
+			var text = "Sua nova senha é: "+nova_senha;
+			console.log('+++++++++++++++++++++++++ ESTOU RECUPERANDO A SENHA +++++++++++++++++++++++++++++++++');
+			console.log(nova_senha);
+			console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+			control.SendMail(post.email, 'Recuperação de Senha - MurOn', html, text);
+			var data_insert = {id: idEmail, senha: nova_senha};
+			console.log('DDDDDDDDDDDDDDDDDDDDDDDD DATA_INSERT DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
+			console.log(data_insert);
+			console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
+			model.AlterarSenhaUsuarioPorId(data_insert).then(data_alterado_sucesso =>{
+				console.log('data_alterado_sucesso');
+				res.jsno(data_alterado_sucesso);
+			});
+
+		}else{
+			console.log(';;;;;;;;;;;;;;;;;;;;;;; não tem email no muron!! ;;;;;;;;;;;;;;;;;;;;;');
+			console.log(post.email);
+			console.log(';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;');
+			res.json(['email_nao_cadastrado']);
+		}
+	});
+
+	
+	// res.json(10);
 });
 
 router.post('/cadastrar/usuario', function(req, res, next) {
@@ -217,7 +247,7 @@ router.post('/entrar_sistema', function(req, res, next) {
 						}
 					});
 
-				/*Usuário não verificado ou seja é parceiro aguardando validação para acessar*/
+					/*Usuário não verificado ou seja é parceiro aguardando validação para acessar*/
 				}else if(dataVerificado[0].validacao == 1){
 					res.send({result: 'aguardarparceria', mensagem:'Agora é só aguardar o e-mail de confirmação de parceria com o Muron.',erro:'alert'});
 					// res.render('login/index', { alertaAcesso: 'Agora é só aguardar o e-mail de confirmação de parceria com o Muron.', tipo_alerta: 'login', iconeAlerta:'fa-handshake-o', usuario: req.session.usuario });

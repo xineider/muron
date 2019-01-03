@@ -206,6 +206,45 @@
 
 
 
+ 	PesquisarEmail(email) {
+ 		return new Promise(function(resolve, reject) {
+
+ 			console.log('22222222222222222 EMAIL 22222222222222222222222');
+ 			console.log(email);
+ 			console.log('22222222222222222222222222222222222222222222222');			
+
+ 			/*seleciono o id para ver se existe algum usuario com aquele email*/
+ 			helper.Query('SELECT id	FROM usuarios WHERE email = ? AND deletado = ? LIMIT 1',[email,0]).then(data => {
+ 					console.log('3333333333 ID do usuario do email 33333333333333333333333333333333333333');
+ 					console.log(data);
+ 					console.log('333333333333333333333333333333333333333333333333333333333333333333333333');
+ 					resolve(data);
+ 				});
+ 			});
+ 	}
+
+
+ 	AlterarSenhaUsuarioPorId(POST){
+		return new Promise(function(resolve, reject) {
+			
+			POST.senha = helper.Encrypt(senha);
+
+			console.log('------------ DADOS DO POST DE ALTERAR SENHA USUARIO -----------');
+			console.log(POST);
+			console.log('---------------------------------------------------------');
+			
+
+
+			helper.Update('usuarios', POST).then(data => {
+				resolve(senha);
+			});
+		});
+	}
+
+
+
+
+
 
 
  	VerificarSenha(data) {
