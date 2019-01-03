@@ -38,18 +38,18 @@ class Control {
 		nodemailer.createTestAccount((err, account) => {
 			// create reusable transporter object using the default SMTP transport
 			let transporter = nodemailer.createTransport({
-					host: 'smtp.ethereal.email',
+					host: 'smtp.umbler.com',
 					port: 587,
 					secure: false, // true for 465, false for other ports
 					auth: {
-							user: 'hd5yrqyezakkrmod@ethereal.email', // generated ethereal user
-							pass: 'GMcVw514cAB5eFye3y'  // generated ethereal password
+							user: 'noreply@muron.com.br', // generated ethereal user
+							pass: 'VOWrO77eu'  // generated ethereal password
 					}
 			});
 
 			// setup email data with unicode symbols
 			let mailOptions = {
-					from: 'jgrhm5kdxr5z3lkt@ethereal.email', // sender address
+					from: 'noreply@muron.com.br', // sender address
 					to: to, // list of receivers
 					subject: subject, // Subject line
 					html: html, // html body
