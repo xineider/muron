@@ -112,11 +112,11 @@ router.post('/cadastrar/usuario', function(req, res, next) {
 									if(id_usuario != ''){
 										data_insert = {id_faculdade: id_faculdade_criada,id_aluno:id_usuario};
 										model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
-											var html = "<p>Obrigado <b>"+post.nome+"</b> por se cadastrar no MurOn seu login é: "+post.nome_murer+"</p><p>Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para <a href='mailto:suporte@muron.com.br'>suporte@muron.com.br</a></p><p>Por-favor não responda este e-mail pois ele é enviado automaticamente. </p><p>Obrigado <b>Equipe MurOn</b></p>";
+											var html = "<p>Obrigado <b>"+post.nome+"</b> por se cadastrar no MurOn seu login é: "+post.nome_murer+"</p><p>Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para <a href='mailto:suporte@muron.com.br'>suporte@muron.com.br</a></p><p>Por-favor não responda este e-mail pois ele é enviado automaticamente. </p><p>Obrigado! <b>Equipe MurOn</b></p>";
 											var text = "Obrigado "+post.nome+" por se cadastrar no MurOn seu login é: "+post.nome_murer+"\
 											Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para suporte@muron.com.br\
 											Por-favor não responda este e-mail pois ele é enviado automaticamente.\
-											Obrigado Equipe MurOn";
+											Obrigado! Equipe MurOn";
 											control.SendMail(post.email, 'Cadastrado em MurOn com Sucesso!!', html, text);
 											res.json(data);
 										});
@@ -135,11 +135,11 @@ router.post('/cadastrar/usuario', function(req, res, next) {
 								if(id_usuario != ''){
 									data_insert = {id_faculdade: id_faculdade_criada,id_aluno:id_usuario};
 									model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
-										var html = "<p>Obrigado <b>"+post.nome+"</b> por se cadastrar no MurOn seu login é: "+post.nome_murer+"</p><p>Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para <a href='mailto:suporte@muron.com.br'>suporte@muron.com.br</a></p><p>Por-favor não responda este e-mail pois ele é enviado automaticamente. </p><p>Obrigado <b>Equipe MurOn</b></p>";
+										var html = "<p>Obrigado <b>"+post.nome+"</b> por se cadastrar no MurOn seu login é: "+post.nome_murer+"</p><p>Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para <a href='mailto:suporte@muron.com.br'>suporte@muron.com.br</a></p><p>Por-favor não responda este e-mail pois ele é enviado automaticamente. </p><p>Obrigado! <b>Equipe MurOn</b></p>";
 										var text = "Obrigado "+post.nome+" por se cadastrar no MurOn seu login é: "+post.nome_murer+"\
 										Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para suporte@muron.com.br\
 										Por-favor não responda este e-mail pois ele é enviado automaticamente.\
-										Obrigado Equipe MurOn";
+										Obrigado! Equipe MurOn";
 										control.SendMail(post.email, 'Cadastrado em MurOn com Sucesso!!', html, text);
 										res.json(data);
 									});
@@ -167,11 +167,11 @@ router.post('/cadastrar/usuario', function(req, res, next) {
 									if(id_usuario != ''){
 										data_insert = {id_faculdade: post_limpo.id_faculdade,id_aluno:id_usuario};
 										model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
-											var html = "<p>Obrigado <b>"+post.nome+"</b> por se cadastrar no MurOn seu login é: "+post.nome_murer+"</p><p>Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para <a href='mailto:suporte@muron.com.br'>suporte@muron.com.br</a></p><p>Por-favor não responda este e-mail pois ele é enviado automaticamente. </p><p>Obrigado <b>Equipe MurOn</b></p>";
+											var html = "<p>Obrigado <b>"+post.nome+"</b> por se cadastrar no MurOn seu login é: "+post.nome_murer+"</p><p>Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para <a href='mailto:suporte@muron.com.br'>suporte@muron.com.br</a></p><p>Por-favor não responda este e-mail pois ele é enviado automaticamente. </p><p>Obrigado! <b>Equipe MurOn</b></p>";
 											var text = "Obrigado "+post.nome+" por se cadastrar no MurOn seu login é: "+post.nome_murer+"\
 											Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para suporte@muron.com.br\
 											Por-favor não responda este e-mail pois ele é enviado automaticamente.\
-											Obrigado Equipe MurOn";
+											Obrigado! Equipe MurOn";
 											control.SendMail(post.email, 'Cadastrado em MurOn com Sucesso!!', html, text);
 											res.json(data);
 										});
@@ -189,11 +189,11 @@ router.post('/cadastrar/usuario', function(req, res, next) {
 								if(id_usuario != ''){
 									data_insert = {id_faculdade: post_limpo.id_faculdade, id_aluno: id_usuario};
 									model.CadastrarRelacaoAlunoFaculdade(data_insert).then(data =>{
-										var html = "<p>Obrigado <b>"+post.nome+"</b> por se cadastrar no MurOn seu login é: "+post.nome_murer+"</p><p>Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para <a href='mailto:suporte@muron.com.br'>suporte@muron.com.br</a></p><p>Por-favor não responda este e-mail pois ele é enviado automaticamente. </p><p>Obrigado <b>Equipe MurOn</b></p>";
+										var html = "<p>Obrigado <b>"+post.nome+"</b> por se cadastrar no MurOn seu login é: "+post.nome_murer+"</p><p>Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para <a href='mailto:suporte@muron.com.br'>suporte@muron.com.br</a></p><p>Por-favor não responda este e-mail pois ele é enviado automaticamente. </p><p>Obrigado! <b>Equipe MurOn</b></p>";
 										var text = "Obrigado "+post.nome+" por se cadastrar no MurOn seu login é: "+post.nome_murer+"\
 										Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para suporte@muron.com.br\
 										Por-favor não responda este e-mail pois ele é enviado automaticamente.\
-										Obrigado Equipe MurOn";
+										Obrigado! Equipe MurOn";
 										control.SendMail(post.email, 'Cadastrado em MurOn com Sucesso!!', html, text);
 										res.json(data);
 									});
@@ -309,6 +309,12 @@ router.post('/cadastrar/parceiro', function(req, res, next) {
 						model.CadastrarFaculdadeCasoNaoExistir(nome_facul).then(id_faculdade_criada =>{
 							post_limpo.id_faculdade = id_faculdade_criada;
 							model.CadastrarParceiro(post_limpo).then(id_parceiro => {
+								var html = "<p>Obrigado <b>"+post.nome+"</b> por se cadastrar no MurOn, seu perfil está sendo avaliado e em instantes será liberado pelo sistema para você poder usufruir do MurOn, o seu login é: "+post.nome_murer+"</p><p>Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para <a href='mailto:suporte@muron.com.br'>suporte@muron.com.br</a></p><p>Por-favor não responda este e-mail pois ele é enviado automaticamente. </p><p>Obrigado! <b>Equipe MurOn</b></p>";
+								var text = "Obrigado "+post.nome+" por se cadastrar no MurOn, seu perfil está sendo avaliado e em instantes será liberado pelo sistema para você poder usufruir do MurOn, o seu login é: "+post.nome_murer+"\
+								Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para suporte@muron.com.br\
+								Por-favor não responda este e-mail pois ele é enviado automaticamente.\
+								Obrigado! Equipe MurOn";
+								control.SendMail(post.email, 'Cadastrado em MurOn com Sucesso!!', html, text);
 								res.json(id_parceiro);
 							});						
 						});
@@ -317,6 +323,12 @@ router.post('/cadastrar/parceiro', function(req, res, next) {
 						model.VerSeExisteParceiroFaculdade(post_limpo.id_faculdade).then(temParceiro=>{
 							if(temParceiro == ''){
 								model.CadastrarParceiro(post_limpo).then(id_parceiro => {
+									var html = "<p>Obrigado <b>"+post.nome+"</b> por se cadastrar no MurOn, seu perfil está sendo avaliado e em instantes será liberado pelo sistema para você poder usufruir do MurOn, o seu login é: "+post.nome_murer+"</p><p>Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para <a href='mailto:suporte@muron.com.br'>suporte@muron.com.br</a></p><p>Por-favor não responda este e-mail pois ele é enviado automaticamente. </p><p>Obrigado! <b>Equipe MurOn</b></p>";
+									var text = "Obrigado "+post.nome+" por se cadastrar no MurOn, seu perfil está sendo avaliado e em instantes será liberado pelo sistema para você poder usufruir do MurOn, o seu login é: "+post.nome_murer+"\
+									Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para suporte@muron.com.br\
+									Por-favor não responda este e-mail pois ele é enviado automaticamente.\
+									Obrigado! Equipe MurOn";
+									control.SendMail(post.email, 'Cadastrado em MurOn com Sucesso!!', html, text);
 									res.json(id_parceiro);
 								});
 							}else{
@@ -327,6 +339,12 @@ router.post('/cadastrar/parceiro', function(req, res, next) {
 					}
 				}else{
 					model.CadastrarParceiro(post_limpo).then(id_parceiro => {
+						var html = "<p>Obrigado <b>"+post.nome+"</b> por se cadastrar no MurOn, seu perfil está sendo avaliado e em instantes será liberado pelo sistema para você poder usufruir do MurOn, o seu login é: "+post.nome_murer+"</p><p>Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para <a href='mailto:suporte@muron.com.br'>suporte@muron.com.br</a></p><p>Por-favor não responda este e-mail pois ele é enviado automaticamente. </p><p>Obrigado! <b>Equipe MurOn</b></p>";
+						var text = "Obrigado "+post.nome+" por se cadastrar no MurOn, seu perfil está sendo avaliado e em instantes será liberado pelo sistema para você poder usufruir do MurOn, o seu login é: "+post.nome_murer+"\
+						Se você está com dificuldades de acessar o MurOn por-favor enviar e-mail para suporte@muron.com.br\
+						Por-favor não responda este e-mail pois ele é enviado automaticamente.\
+						Obrigado! Equipe MurOn";
+						control.SendMail(post.email, 'Cadastrado em MurOn com Sucesso!!', html, text);
 						res.json(id_parceiro);
 					});
 				}
