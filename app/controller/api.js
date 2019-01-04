@@ -62,30 +62,17 @@ router.post('/recuperar/senha', function(req, res, next) {
 	console.log(post);
 	console.log('0000000000000000000000000000000000000000000000000000000000000000000');
 	model.PesquisarEmail(post.email).then(idEmail => {
-		console.log('----------------- ID Email ------------------------');
-		console.log(idEmail);
-		console.log('-----------------------------------------------------');
 		if(idEmail != ''){
 			var nova_senha = Math.random().toString(36).substring(7);
-			var html = "<p>Sua nova senha é: <b>"+nova_senha+"</b>";
-			var text = "Sua nova senha é: "+nova_senha;
-			console.log('+++++++++++++++++++++++++ ESTOU RECUPERANDO A SENHA +++++++++++++++++++++++++++++++++');
-			console.log(nova_senha);
-			console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+			var html = "<p>Sua nova senha no Muron é: <b>"+nova_senha+"</b>";
+			var text = "Sua nova senha no Muron é: "+nova_senha;
 			control.SendMail(post.email, 'Recuperação de Senha - MurOn', html, text);
 			var data_insert = {id: idEmail[0].id, senha: nova_senha};
-			console.log('DDDDDDDDDDDDDDDDDDDDDDDD DATA_INSERT DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
-			console.log(data_insert);
-			console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
 			model.AlterarSenhaUsuarioPorId(data_insert).then(data_alterado_sucesso =>{
-				console.log('data_alterado_sucesso');
 				res.json(data_alterado_sucesso);
 			});
 
 		}else{
-			console.log(';;;;;;;;;;;;;;;;;;;;;;; não tem email no muron!! ;;;;;;;;;;;;;;;;;;;;;');
-			console.log(post.email);
-			console.log(';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;');
 			res.json(['email_nao_cadastrado']);
 		}
 	});

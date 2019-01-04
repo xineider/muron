@@ -431,17 +431,13 @@
 				data: post,
 				url: '/sistema/api/recuperar/senha',
 				success: function(data) {
-
-
 					if(data == "email_nao_cadastrado"){
 						$('.error_container_resend').removeClass('hide');
 						$('.error_container_resend').find('.error_resend_mensagem').html('Não existe ninguém cadastrado com este e-mail!');
 					}else{
-						console.log('ESTÁ SENDO UM SUCESSO A TROCA DE SENHA!!!!!!!!!!!!!!!!!');
 						M.toast({html:'<div class="center-align" style="width:100%;">Senha enviada para seu email com sucesso!!!</div>', displayLength:7000, classes: 'rounded green'});
+						$('.modal').modal('close');
 					}
-
-
 				},
 			    error: function(xhr) { // if error occured
 			    	alert("Error, contate o administrador ou reinicie a pagina.");
