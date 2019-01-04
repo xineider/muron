@@ -52,7 +52,7 @@ class PostagensModel {
 				}else{
 					where_add = "AND (\
 					(id_grupo = ? OR id_grupo IN (SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?))\
-					AND (id_contato = ? OR id_contato IN (SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = ? AND deletado = ?))\
+					AND (id_contato = ? OR id_contato = ?)\
 					OR id_usuario = ?)";
 					values = [0, POST.id_usuario, 0, 0, 0, 0, POST.id_categoria, 0, POST.id_usuario, 0, 0, POST.id_usuario, 0, POST.id_usuario];
 				}
