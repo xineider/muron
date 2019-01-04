@@ -73,13 +73,13 @@ router.post('/recuperar/senha', function(req, res, next) {
 			console.log(nova_senha);
 			console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
 			control.SendMail(post.email, 'Recuperação de Senha - MurOn', html, text);
-			var data_insert = {id: idEmail, senha: nova_senha};
+			var data_insert = {id: idEmail[0].id, senha: nova_senha};
 			console.log('DDDDDDDDDDDDDDDDDDDDDDDD DATA_INSERT DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
 			console.log(data_insert);
 			console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
 			model.AlterarSenhaUsuarioPorId(data_insert).then(data_alterado_sucesso =>{
 				console.log('data_alterado_sucesso');
-				res.jsno(data_alterado_sucesso);
+				res.json(data_alterado_sucesso);
 			});
 
 		}else{

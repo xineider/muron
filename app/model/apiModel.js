@@ -226,17 +226,14 @@
 
  	AlterarSenhaUsuarioPorId(POST){
 		return new Promise(function(resolve, reject) {
-			
-			POST.senha = helper.Encrypt(senha);
-
 			console.log('------------ DADOS DO POST DE ALTERAR SENHA USUARIO -----------');
 			console.log(POST);
 			console.log('---------------------------------------------------------');
-			
 
+			POST.senha = helper.Encrypt(POST.senha);
 
 			helper.Update('usuarios', POST).then(data => {
-				resolve(senha);
+				resolve(data);
 			});
 		});
 	}

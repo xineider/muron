@@ -16,15 +16,23 @@
 	<!-- Esqueceu Senha -->
 	<div id="modalforgot" class="modal">
 		<div class="modal-content">
+			<p><b>Recuperação de Senha</b></p>
 			<form method="POST">
-				<p><b>Recuperação de Senha</b></p>
-				<div class="input-field">
-					<label>Digite seu email</label>
-					<input type="email" name="email">
+				<div class="row">
+					<div class="col s12 input-field">
+						<label>Digite seu email</label>
+						<input type="email" name="email">
+					</div>
+
+					<div class="col s12 error_container_resend hide">
+						<div class="error_resend_mensagem red white-text" style="margin-bottom: 10px;padding: 5px;text-align: center;"></div>
+					</div>
+					<div class="col s12">
+						<button class="btn blue white-text resend-pass">
+							Confirmar
+						</button>
+					</div>
 				</div>
-				<button class="btn blue white-text resend-pass">
-					Confirmar
-				</button>
 			</form>
 		</div>
 	</div>
@@ -347,7 +355,7 @@
 			    },
 			    complete: function() {
 			    }
-			  });
+			});
 			};
 		});
 
@@ -409,7 +417,7 @@
 				    },
 				    complete: function() {
 				    }
-				  });
+				});
 			}
 		});
 
@@ -423,12 +431,22 @@
 				data: post,
 				url: '/sistema/api/recuperar/senha',
 				success: function(data) {
-					Materialize.toast('<div class="center-align" style="width:100%;">Mensagem enviada com sucesso.</div>', 5000, 'rounded');
+
+
+					if(data == "email_nao_cadastrado"){
+						$('.error_container_resend').removeClass('hide');
+						$('.error_container_resend').find('.error_resend_mensagem').html('Não existe ninguém cadastrado com este e-mail!');
+					}else{
+						console.log('ESTÁ SENDO UM SUCESSO A TROCA DE SENHA!!!!!!!!!!!!!!!!!');
+						M.toast({html:'<div class="center-align" style="width:100%;">Senha enviada para seu email com sucesso!!!</div>', displayLength:7000, classes: 'rounded green'});
+					}
+
+
 				},
 			    error: function(xhr) { // if error occured
 			    	alert("Error, contate o administrador ou reinicie a pagina.");
 			    }
-			  });
+			});
 		});
 
 		$(document).on('change', 'select[id="tipo_parceiro_sel"]', function () {
