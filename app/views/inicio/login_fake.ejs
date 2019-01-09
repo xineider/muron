@@ -2,20 +2,28 @@
       <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
     </div>
     <!-- Esqueceu Senha -->
-    <div id="modalforgotagain" class="modal">
-      <div class="modal-content">
-        <form method="POST">
-          <p><b>Recuperação de Senha</b></p>
-          <div class="input-field">
+  <div id="modalforgotagain" class="modal">
+    <div class="modal-content">
+      <p><b>Recuperação de Senha</b></p>
+      <form method="POST">
+        <div class="row">
+          <div class="col s12 input-field">
             <label>Digite seu email</label>
             <input type="email" name="email">
           </div>
-          <button class="btn blue white-text resend-pass-again">
-            Confirmar
-          </button>
-        </form>
-      </div>
+
+          <div class="col s12 error_container_resend hide">
+            <div class="error_resend_mensagem red white-text" style="margin-bottom: 10px;padding: 5px;text-align: center;"></div>
+          </div>
+          <div class="col s12">
+            <button class="btn blue white-text resend-pass" style="width: 100%;">
+              Confirmar
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
+  </div>
     <!-- Cadastre-se -->
     <div id="modalnewagain" class="modal">
       <div class="modal-content">
