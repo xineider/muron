@@ -37,9 +37,9 @@ class PostagensModel {
 		return new Promise(function(resolve, reject) {
 			var where_add = '';
 			var values = [];
-			console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP POST DA CATEGORIA PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
+			console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAA POSTAGEM POR CATEGORIA AAAAAAAAAAAAAAAAAAAAAAA');
 			console.log(POST);
-			console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
+			console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
 			if (POST.id_usuario != 1) {
 				console.log('&&&&&&&&&&&&&&& Não sou administrador &&&&&&&&&&&&&&&&&&');
 
@@ -50,11 +50,34 @@ class PostagensModel {
 					console.log('((((((((( É FACULDADE ((((((((((((((((((((((((((((')
 
 				}else{
-					where_add = "AND (\
-					(id_grupo = ? OR id_grupo IN (SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?))\
-					AND (id_contato = ? OR id_contato = ?)\
-					OR id_usuario = ?)";
-					values = [0, POST.id_usuario, 0, 0, 0, 0, POST.id_categoria, 0, POST.id_usuario, 0, 0, POST.id_usuario, POST.id_usuario];
+
+					/*Se for uma Faculdade Vizualizando ela não vê postagens do Divulgador*/
+					if(POST.tipo == 2){
+						where_add = "AND (id_usuario IN \
+						(SELECT id_aluno FROM faculdades_relacoes_aluno WHERE id_faculdade = ? and deletado = ?) \
+						AND (\
+						(id_grupo = ? OR id_grupo IN \
+						(\
+						(SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?)\
+						)\
+						)\
+						AND (\
+						id_contato = ? OR id_contato IN \
+						(\
+						(SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = postagens.id_usuario AND deletado = ?)\
+						)\
+						)\
+						)\
+						OR id_usuario = ? OR id_usuario = ?)";
+						values = [0, POST.id_usuario, 0, 0, 0, 0, POST.id_categoria,POST.id_faculdade, 0, 0, POST.id_usuario, 0, 0, 0, POST.id_usuario,1];
+					
+					}else{
+						where_add = "AND (\
+						(id_grupo = ? OR id_grupo IN (SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?))\
+						AND (id_contato = ? OR id_contato = ?)\
+						OR id_usuario = ?)";
+						values = [0, POST.id_usuario, 0, 0, 0, 0, POST.id_categoria, 0, POST.id_usuario, 0, 0, POST.id_usuario, POST.id_usuario];
+					}
 				}
 			} else {
 				values = [0, POST.id_usuario, 0, 0, 0, 0, POST.id_categoria];

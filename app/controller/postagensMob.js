@@ -34,7 +34,7 @@ router.get('/ver/:id', function(req, res, next) {
 	console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
 	model.AddViewCat(id, req.session.usuario.id).then(ret => {
 		model.GetUsuario(req.session.usuario.id).then(data_usuario => {
-			data_insert = {id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id,id_categoria:id, status:data_usuario[0].status};
+			data_insert = {id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id,id_categoria:id, status:data_usuario[0].status, tipo:data_usuario[0].tipo};
 			model.GetPostagemByCat(data_insert).then(data_postagens => {
 				data.postagens = data_postagens;
 				res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'postagens/postagens_verMob', data: data, usuario: req.session.usuario, title: title});
