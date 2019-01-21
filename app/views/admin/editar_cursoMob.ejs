@@ -1,0 +1,26 @@
+<div class="row">
+	<form method="POST" action="">
+
+		<input type="hidden" name="id" value="<%= data.curso[0].id %>">
+
+		<div class="input-field col s12">
+			<label for="NO_CURSO">Nome do Curso </label>
+			<input  type="text" name="NO_CURSO" value="<%= data.curso[0].NO_CURSO %>">
+		</div>
+
+
+		<div class="col s12 m6">
+			<a style="width: 100%; text-align: center;" href="" class="modal-action modal-close waves-effect waves-gray btn-flat grey lighten-2">Cancelar</a>
+		</div>
+
+		<div class="col s12 m6">
+			<button style="width: 100%; text-align: center;" class="modal-action modal-close waves-effect waves-green btn-flat green lighten-2 white-text ajax-submit" data-href="/mobsmart/admin/editar-curso" data-action="/mobsmart/admin/cadastro-cursos">Salvar 
+			</button>
+		</div>
+
+
+
+	</form>
+
+
+</div>

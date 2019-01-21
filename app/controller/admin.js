@@ -45,6 +45,41 @@ router.get('/usuario-faculdade', function(req, res, next) {
 	});
 });
 
+router.get('/cadastro-faculdade', function(req, res, next) {
+	model.GetFaculdadesPorAtivacao().then(data_faculdades => {
+		data.faculdades = data_faculdades;
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'admin/cadastro_faculdade', data: data, usuario: req.session.usuario});
+	});
+});
+
+
+router.get('/cadastro-cursos', function(req, res, next) {
+	console.log('Clicando nos cadastros dos cursos');
+	model.GetCursosPorAtivacao().then(data_cursos => {
+		data.cursos = data_cursos;
+		console.log(data);
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'admin/cadastro_curso', data: data, usuario: req.session.usuario});
+	});
+});
+
+
+router.get('/editar-faculdade/:id', function(req, res, next) {
+	id = req.params.id;
+	model.GetFaculdadePorId(id).then(data_faculdade=>{
+		data.faculdade = data_faculdade;
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'admin/editar_faculdade', data: data, usuario: req.session.usuario});
+	});
+});
+
+
+router.get('/editar-curso/:id', function(req, res, next) {
+	id = req.params.id;
+	model.GetCursoPorId(id).then(data_curso=>{
+		data.curso = data_curso;
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'admin/editar_curso', data: data, usuario: req.session.usuario});
+	});
+});
+
 
 
 router.post('/aprovarUsuario/', function(req, res, next) {
@@ -213,7 +248,40 @@ router.post('/cadastrar/usuario', function(req, res, next) {
 
 
 
+router.post('/desativar-faculdade', function(req, res, next) {
+	// Recebendo o valor do post
+	POST = req.body;
+	model.DesativarFaculdade(POST).then(data=> {
+		res.json(data);
+	});
+});
 
+router.post('/desativar-curso', function(req, res, next) {
+	// Recebendo o valor do post
+	POST = req.body;
+	model.DesativarCurso(POST).then(data=> {
+		res.json(data);
+	});
+});
+
+
+router.post('/editar-faculdade', function(req, res, next) {
+	// Recebendo o valor do post
+	POST = req.body;
+	model.AtualizarFaculdade(POST).then(data=> {
+		res.json(data);
+	});
+});
+
+
+
+router.post('/editar-curso', function(req, res, next) {
+	// Recebendo o valor do post
+	POST = req.body;
+	model.AtualizarCurso(POST).then(data=> {
+		res.json(data);
+	});
+});
 
 
 

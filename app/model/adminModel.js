@@ -27,12 +27,25 @@ class PostagensModel {
 			helper.Query('SELECT a.*,\
 				(SELECT NO_IES FROM faculdades_inep as c WHERE id IN  (SELECT id_faculdade FROM faculdades_relacoes_aluno as d WHERE d.id_aluno = a.id and deletado = ?)) as faculdade \
 				FROM usuarios as a WHERE a.deletado = ? AND a.tipo = ? ORDER BY a.data_cadastro', [0, 0, 1]).then(data => {
-					console.log('DDDDDDDDDDDDDDDDDDDDDDD DADOS DOS USUARIOS DDDDDDDDDDDDDDDDDD');
-					console.log(data);
-					console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
 					resolve(data);
 				});
 			});	
+	}
+
+	GetFaculdadesPorAtivacao(){
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.* FROM faculdades_inep as a WHERE a.deletado = ? ORDER BY a.ativacao ASC', [0]).then(data => {
+				resolve(data);
+			});
+		});	
+	}
+
+	GetCursosPorAtivacao(){
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.* FROM cursos as a WHERE a.deletado = ? ORDER BY a.ativacao ASC', [0]).then(data => {
+				resolve(data);
+			});
+		});	
 	}
 
 
@@ -99,6 +112,22 @@ class PostagensModel {
 	GetUsuarioById(id){
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT * FROM usuarios WHERE id = ? and deletado = ?', [id,0]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+	GetFaculdadePorId(id){
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT * FROM faculdades_inep WHERE id = ? and deletado = ?', [id,0]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+	GetCursoPorId(id){
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT * FROM cursos WHERE id = ? and deletado = ?', [id,0]).then(data => {
 				resolve(data);
 			});
 		});
@@ -274,6 +303,39 @@ class PostagensModel {
 		});
 	}
 
+	DesativarFaculdade(post) {
+		return new Promise(function(resolve, reject) {
+			helper.Desativar('faculdades_inep', post).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+
+	DesativarCurso(post) {
+		return new Promise(function(resolve, reject) {
+			helper.Desativar('cursos', post).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+
+	AtualizarFaculdade(POST) {
+		return new Promise(function(resolve, reject) {
+			helper.Update('faculdades_inep', POST).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+	AtualizarCurso(POST) {
+		return new Promise(function(resolve, reject) {
+			helper.Update('cursos', POST).then(data => {
+				resolve(data);
+			});
+		});
+	}
 
 
 	

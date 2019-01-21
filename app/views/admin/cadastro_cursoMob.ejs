@@ -1,0 +1,55 @@
+<section>
+	<% if (usuario.id == 1) {%>
+	<!-- só um teste para ver se é o admin mesmo -->
+	<div class="row white">
+		
+		<div class="col s12">
+			
+			<table id='tabela-admin-usuario' class="centered" style="margin-bottom: 20px;">
+				<thead>
+					<tr>
+						<td>Nome do Curso</td>
+						<td>Alterar Dados</td>
+						<td>Excluir</td>
+					</tr>
+				</thead>
+				<tbody>
+
+					<% if (typeof data.cursos != 'undefined' && data.cursos.length > 0) {
+						for (var i = data.cursos.length - 1; i >= 0; i--) {
+							%>
+
+							<tr>
+								<td><%= data.cursos[i].NO_CURSO %></td>
+									<td>
+										<a data-href="#modalinfo" data-link="/admin/editar-curso/<%= data.cursos[i].id %>" class="modal-mount">
+											<i class="fas fa-edit"></i>
+										</a>
+									</td>
+									<td>
+										<a class="modal-remover-mount" data-href="#modaldeletar" data-texto="Tem certeza que deseja desativar este curso? Esta ação não pode ser desfeita." data-to="/mobsmart/admin/desativar-curso/" data-back="/mobsmart/admin/cadastro-cursos" data-id="<%= data.cursos[i].id %>" style="margin-bottom:10px;width: 100%;">
+										<i class="fas fa-times red-text text-darken-1"></i>
+										</a>
+									</td>
+
+								</tr>
+
+								<%}} else {%>
+								<tr>
+									<td>Nenhum curso foi encontrado.</td>
+								</tr>
+								<%} %>
+
+							</tbody>
+
+						</table>
+					</div>
+				</div>
+				<%}else{	%>
+				<div>
+					<p>Desculpe, somente o administrador pode ver esta página!</p>
+				</div>
+
+
+				<%}%>
+			</section>
