@@ -4,7 +4,7 @@
     if (typeof data != 'undefined' && data.length > 0) {
       for (var i = data.length - 1; i >= 0; i--) {
     %>
-    <a href="/mobstart/chats/ver/<%= data[i].id_usuario2 %>" class="black-text ajax-load" data-top="1">
+    <a href="/mobsmart/chats/ver/<%= data[i].id_usuario2 %>" class="black-text ajax-load" data-top="1">
       <li class="collection-item avatar">
         <img src="/assets/uploads/<%= data[i].imagem %>" alt="" class="circle">
         <span class="title"><%= data[i].nome_murer %></span>
@@ -19,7 +19,7 @@
   } else {
   %>
     <li class="center-align">
-      Nenhum contato foi adicionado, <a href="/mobstart/usuarios/contatos">clique aqui para adicionar contatos</a>
+      Nenhum contato foi adicionado, <a href="/mobsmart/usuarios/contatos">clique aqui para adicionar contatos</a>
     </li>
   <%
   }

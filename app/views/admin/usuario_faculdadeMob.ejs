@@ -46,18 +46,18 @@
 										<%break;}%>
 									</td>
 									<td>
-										<a href="/mobstart/usuarios/ver/<%= data.usuarios[i].id %>" class="ajax-load">
+										<a href="/mobsmart/usuarios/ver/<%= data.usuarios[i].id %>" class="ajax-load">
 											<i class="fas fa-user-edit"></i>
 										</a>
 									</td>
 									<td>
-										<a class="modal-remover-mount" data-href="#modaldeletar" data-texto="Tem certeza que deseja desativar esta conta? Esta ação não pode ser desfeita." data-to="/mobstart/usuarios/desativar/" data-back="/mobstart/admin/usuarios" data-id="<%= data.usuarios[i].id %>" style="margin-bottom:10px;width: 100%;">
+										<a class="modal-remover-mount" data-href="#modaldeletar" data-texto="Tem certeza que deseja desativar esta conta? Esta ação não pode ser desfeita." data-to="/mobsmart/usuarios/desativar/" data-back="/mobsmart/admin/usuarios" data-id="<%= data.usuarios[i].id %>" style="margin-bottom:10px;width: 100%;">
 										<i class="fas fa-user-times red-text text-darken-1"></i>
 										</a>
 									</td>
 
 									<td>
-										<a class="modal-one-item-mount" data-href="#modaloneitem" data-texto="Tem certeza que deseja alterar a senha desta conta?" data-texto-botao="Alterar Senha" data-cor-botao="green lighten-2" data-to="/mobstart/admin/alterarSenhaUsuario/" data-back="/mobstart/admin/usuarios" data-id="<%= data.usuarios[i].id %>" style="margin-bottom:10px;width: 100%;">
+										<a class="modal-one-item-mount" data-href="#modaloneitem" data-texto="Tem certeza que deseja alterar a senha desta conta?" data-texto-botao="Alterar Senha" data-cor-botao="green lighten-2" data-to="/mobsmart/admin/alterarSenhaUsuario/" data-back="/mobsmart/admin/usuarios" data-id="<%= data.usuarios[i].id %>" style="margin-bottom:10px;width: 100%;">
 										<i class="fas fa-key yellow-text text-darken-2"></i>
 										</a>
 									</td>
