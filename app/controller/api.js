@@ -64,8 +64,17 @@ router.post('/recuperar/senha', function(req, res, next) {
 	model.PesquisarEmail(post.email).then(idEmail => {
 		if(idEmail != ''){
 			var nova_senha = Math.random().toString(36).substring(7);
-			var html = "<p>Sua nova senha no Muron é: <b>"+nova_senha+"</b>";
-			var text = "Sua nova senha no Muron é: "+nova_senha;
+			var html = "Olá, você está recebendo este e-mail pois pediu para recuperar sua senha"+
+			"<br>Sua nova senha no Muron é: "+nova_senha+
+			"<br>Caso não pediu para recuperar a sua senha entre em contato com o Suporte pelo e-mail <a href='mailto:suporte@muron.com.br'>suporte@muron.com.br</a>"+
+			'<br><br>Não mostre seu login e senha para ninguém. A sua conta é responsabilidade sua.'+
+			'<br>Não responda esta mensagem, ela é enviada automaticamente.';
+			var text = "Olá, você está recebendo este e-mail pois pediu para recuperar sua senha"+
+			"<br>Sua nova senha no Muron é: "+nova_senha+
+			"<br>Caso não pediu para recuperar a sua senha entre em contato com o Suporte pelo e-mail <a href='mailto:suporte@muron.com.br'>suporte@muron.com.br</a>"+
+			'<br><br>Não mostre seu login e senha para ninguém. A sua conta é responsabilidade sua.'+
+			'<br>Não responda esta mensagem, ela é enviada automaticamente.';
+			
 			control.SendMail(post.email, 'Recuperação de Senha - MurOn', html, text);
 			var data_insert = {id: idEmail[0].id, senha: nova_senha};
 			model.AlterarSenhaUsuarioPorId(data_insert).then(data_alterado_sucesso =>{
