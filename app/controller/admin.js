@@ -122,13 +122,15 @@ router.post('/alterarSenhaUsuario/', function(req, res, next) {
 			console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
 
 			control.SendMail(data_usuario[0].email,'Senha Alterada em Muron',
-				'Olá, sua senha foi alterada pelo Administrado no Muron segue sua nova senha: ' + dataSenha + 
-				'Recomendamos assim que entrar alterar esta senha gerada.Não responda esta mensagem, ela é enviada automaticamente.',
-				'Olá, sua senha foi alterada pelo Administrado no Muron segue sua nova senha: '+ dataSenha +
-				'<br>Você pode acessar o Aplicativo do celular com seu Nome Murer e com esta senha, \
-				recomendamos fortemente que você troque a sua senha no seu perfil. '+
-				'<br>Não mostre seu login e senha para ninguém. A sua conta é responsabilidade sua.'+
+				'Olá, sua senha foi alterada pelo Administrador no Muron segue sua nova senha: ' + dataSenha + 
+				'<br>Recomendamos assim que entrar alterar esta senha gerada ao clicar no seu perfil e clicar no botão "Alterar Senha" no fim da página do perfil.' + 
+				'<br><br>Não mostre seu login e senha para ninguém. A sua conta é responsabilidade sua.'+
+				'<br>Não responda esta mensagem, ela é enviada automaticamente.',
+				'Olá, sua senha foi alterada pelo Administrador no Muron segue sua nova senha: '+ dataSenha +
+				'<br>Recomendamos assim que entrar alterar esta senha gerada ao clicar no seu perfil e clicar no botão "Alterar Senha" no fim da página do perfil.'+
+				'<br><br>Não mostre seu login e senha para ninguém. A sua conta é responsabilidade sua.'+
 				'<br>Não responda esta mensagem, ela é enviada automaticamente.');
+			res.json([]);
 
 
 		});
