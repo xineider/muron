@@ -72,9 +72,11 @@ router.get('/pesquisar/:pesquisa', function(req, res, next) {
 	if (pesquisa.indexOf('_') !== -1) {
 		pesquisa = pesquisa.split('_').join('/');
 	}
-	model.SearchPostagem(pesquisa, req.session.usuario.id).then(data_postagens => {
-		data.postagens = data_postagens;
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'postagens/postagens_verMob', data: data, usuario: req.session.usuario, title: 'Pesquisa por: ' + pesquisa});
+	model.GetUsuario(req.session.usuario.id).then(data_usuario=>{
+		model.SearchPostagem(pesquisa, req.session.usuario.id,req.session.usuario.id_faculdade,data_usuario[0].status).then(data_postagens => {
+			data.postagens = data_postagens;
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'postagens/postagens_verMob', data: data, usuario: req.session.usuario, title: 'Pesquisa por: ' + pesquisa});
+		});
 	});
 });
 

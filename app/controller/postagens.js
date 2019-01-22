@@ -78,10 +78,6 @@ router.get('/pesquisar/:pesquisa', function(req, res, next) {
 	}
 
 	model.GetUsuario(req.session.usuario.id).then(data_usuario=>{
-		console.log('============= DATA USUARIO FILTRO FACULDADE ==================');
-		console.log(data_usuario);
-		console.log('==============================================================');
-
 		model.SearchPostagem(pesquisa, req.session.usuario.id,req.session.usuario.id_faculdade,data_usuario[0].status).then(data_postagens => {
 			data.postagens = data_postagens;
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_ver', data: data, usuario: req.session.usuario, title: 'Pesquisa por: ' + pesquisa});
