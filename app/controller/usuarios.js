@@ -130,7 +130,7 @@ router.post('/uploadfoto/', function(req, res, next) {
 
 router.post('/contatos/', function(req, res, next) {
 	POST = req.body;
-	console.log(req.session.usuario);
+	console.log(POST);
 
 	if(req.session.usuario.tipo == 2){
 		model.GetUsuariosFaculdade(POST,req.session.usuario.id_faculdade, req.session.usuario.id).then(data => {

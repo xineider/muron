@@ -98,7 +98,7 @@ class PostagensModel {
 			});	
 	}
 
-	SearchPostagem(pesquisa, id_usuario) {
+	SearchPostagem(pesquisa, id_usuario,id_faculdade,status) {
 		return new Promise(function(resolve, reject) {
 			var where_add = '';
 			var values = [];
@@ -113,14 +113,16 @@ class PostagensModel {
 				console.log(pesquisa);
 				console.log(pesquisa);
 			}
-			console.log('$$$$$$$$$$$$$$$$$$$ PESQUISA MODEL $$$$$$$$$$$$$$$$$$$$$$$');
-			console.log(pesquisa);
-			console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
+
 			if (id_usuario != 1) {
-				where_add = "AND ((id_grupo = ? OR id_grupo IN ((SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?)))\
-				AND (id_contato = ? OR id_contato IN ((SELECT id_usuario2 FROM usuarios_contatos WHERE id_usuario = a.id_usuario AND deletado = ?)))\
-				OR id_usuario = ?)";
-				values = [id_usuario, 0, 0, 0, 0, pesquisa,pesquisa,0, id_usuario, 0, 0, 0, id_usuario];
+				where_add = "AND (id_usuario = ? \
+				OR ( \
+				(a.id_grupo = ? OR a.id_grupo IN (SELECT id_grupo FROM grupos_usuarios WHERE a.id_usuario = ? AND deletado = ?))\
+				AND (a.id_contato = ? OR a.id_contato = ?)\
+				) AND (\
+				(a.id_tipo = ? AND a.deletado = ? AND a.id_faculdade = ? AND (a.filtro_status_faculdade = ? OR a.filtro_status_faculdade = ?)) OR (a.id_tipo != ?)\
+				))";
+				values = [id_usuario, 0, 0, 0, 0, pesquisa,pesquisa,id_usuario,0,id_usuario, 0, id_usuario, 0, 2, 0,id_faculdade,0,status,2];
 			} else {
 				values = [id_usuario, 0, 0, 0, 0, pesquisa,pesquisa];
 			}
