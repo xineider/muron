@@ -70,9 +70,6 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 				<div class="container">
 					<div class="row">
 
-						<% console.log(data.perfil[i].tipo)%>
-						<% console.log(data.perfil[i].amigos)%>
-
 						<div class="card-panel panel-full">
 							<div class="card-content">
 								MurEr <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input right" data-nome="MurEr" data-id="'+data.perfil[i].id+'" data-collum="nome_murer"><i class="fa fa-edit"></i></span>' : '' %>
@@ -147,8 +144,11 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 
 						<!-- Sou Murer Comum e sou amigo do usuário -->
 
+						<% console.log(usuario);%>
+
+
 						<% if((data.perfil[i].tipo == 1 && data.perfil[i].amigos == 1 || 
-						data.perfil[i].tipo == 1 && data.perfil[i].id == usuario.id) || data.perfil[i].tipo == 1 && usuario.id == 1){%>
+						data.perfil[i].tipo == 1 && data.perfil[i].id == usuario.id) || (data.perfil[i].tipo == 1 && usuario.id == 1) || (data.perfil[i].tipo == 1 && usuario.id_faculdade == data.perfil[i].id_faculdade && usuario.tipo == 2)){%>
 
 						<!-- Se for Administrador ou seja é muron não tem esses dados -->
 
