@@ -90,19 +90,18 @@ class PostagensModel {
 	AlterarSenhaUsuario(POST){
 		return new Promise(function(resolve, reject) {
 			
-			var senha = Math.random().toString(36).substr(2, 8);
-			console.log(senha);
+			console.log('BBBBBBBBBBBBBB POST BEFORE BBBBBBBBBBBBB');
+			console.log(POST);
+			console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
 
-			POST.senha = helper.Encrypt(senha);
+			POST.senha = helper.Encrypt(POST.senha);
 
 			console.log('------------ DADOS DO POST DE ALTERAR SENHA USUARIO -----------');
 			console.log(POST);
 			console.log('---------------------------------------------------------');
 			
-
-
 			helper.Update('usuarios', POST).then(data => {
-				resolve(senha);
+				resolve(data);
 			});
 		});
 	}

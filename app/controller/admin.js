@@ -113,24 +113,25 @@ router.post('/alterarSenhaUsuario/', function(req, res, next) {
 
 	model.GetUsuarioById(POST.id).then(data_usuario=>{
 		console.log(data_usuario);
+		var senha = Math.random().toString(36).substr(2, 8);
+		POST.senha = senha;
 
 
-
-		model.AlterarSenhaUsuario(POST).then(dataSenha=>{
+		model.AlterarSenhaUsuario(POST).then(data_alterar_senha=>{
 			console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRR RETORNO DA SENHA RRRRRRRRRRRRRRRRRRRRRRRRRR');
-			console.log(dataSenha);
+			console.log(data_alterar_senha);
 			console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
 
 			control.SendMail(data_usuario[0].email,'Senha Alterada em Muron',
-				'Olá, sua senha foi alterada pelo Administrador no Muron segue sua nova senha: ' + dataSenha + 
+				'Olá, sua senha foi alterada pelo Administrador no Muron segue sua nova senha: ' + senha + 
 				'<br>Recomendamos assim que entrar alterar esta senha gerada ao clicar no seu perfil e clicar no botão "Alterar Senha" no fim da página do perfil.' + 
 				'<br><br>Não mostre seu login e senha para ninguém. A sua conta é responsabilidade sua.'+
 				'<br>Não responda esta mensagem, ela é enviada automaticamente.',
-				'Olá, sua senha foi alterada pelo Administrador no Muron segue sua nova senha: '+ dataSenha +
+				'Olá, sua senha foi alterada pelo Administrador no Muron segue sua nova senha: '+ senha +
 				'<br>Recomendamos assim que entrar alterar esta senha gerada ao clicar no seu perfil e clicar no botão "Alterar Senha" no fim da página do perfil.'+
 				'<br><br>Não mostre seu login e senha para ninguém. A sua conta é responsabilidade sua.'+
 				'<br>Não responda esta mensagem, ela é enviada automaticamente.');
-			res.json(data_usuario);
+			res.json(data_alterar_senha);
 		});
 	});
 });

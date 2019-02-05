@@ -762,7 +762,7 @@ function SubmitAjax(post, link, back, method) {
 			adicionarLoader();
 		},
 		success: function(data) {
-			if (typeof data != undefined && data > 0) {
+			if (typeof data != undefined) {
 				M.toast({html:'<div class="center-align" style="width:100%;">Cadastrado com sucesso</div>'}, 5000, 'rounded');
 			}
 			if (typeof back != 'undefined' && back != '') {
