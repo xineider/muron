@@ -26,12 +26,6 @@ router.get('/ver/:id', function(req, res, next) {
 	} else {		
 		title = 'Divulgação';
 	}
-	console.log('^^^^^^^^^^^^^^^^^^^ ID DA CATEGORIA CLICADA ^^^^^^^^^^^^^^^^^^^^^^^^');
-	console.log(id);
-	console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
-	console.log('~~~~~~~~~~~~~~~~ ID DO USUARIO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
-	console.log(req.session.usuario.id);
-	console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
 	model.AddViewCat(id, req.session.usuario.id).then(ret => {
 		model.GetUsuario(req.session.usuario.id).then(data_usuario => {
 			data_insert = {id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id,id_categoria:id, status:data_usuario[0].status, tipo:data_usuario[0].tipo};
@@ -62,12 +56,6 @@ router.get('/criar', function(req, res, next) {
 });
 router.get('/pesquisar/:pesquisa', function(req, res, next) {
 	pesquisa = req.params.pesquisa;
-	console.log('@@@@@@@@@ dentro da pesquisa @@@@@@@@@@@@@');
-	console.log(pesquisa);
-	console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-	console.log(pesquisa.indexOf('_'))
-
-
 
 	if (pesquisa.indexOf('_') !== -1) {
 		pesquisa = pesquisa.split('_').join('/');
@@ -107,9 +95,6 @@ router.post('/uploadarquivo', function(req, res, next) {
 });
 router.post('/tipo', function(req, res, next) {
 	POST = req.body;
-	console.log('ppppppppppppppppppp Selecionar Tipo ppppppppppppppppppp');
-	console.log(POST);
-	console.log('ppppppppppppppppppppppppppppppppppppppppppppppppppppppp');
 	model.SearchTipo(POST, req.session.usuario.id).then(data => {
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'postagens/postagens_tipos', data: data, usuario: req.session.usuario});
 	});
@@ -126,9 +111,6 @@ router.post('/cadastrar', function(req, res, next) {
 	POST.id_usuario = req.session.usuario.id;
 	POST.id_faculdade = req.session.usuario.id_faculdade;
 	POST.id_tipo = req.session.usuario.tipo;
-	console.log('EEEEEEEEEEEEEEEEEEEEEE ESTOU CADASTRANDO UMA POSTAGEM EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
-	console.log(POST);
-	console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
 	model.InsertPostagem(POST).then(data => {
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'postagens/postagens_criarMob', data: data, usuario: req.session.usuario});
 	});
@@ -141,7 +123,6 @@ router.post('/desativar/', function(req, res, next) {
 });
 router.post('/cadastrar/comentario', function(req, res, next) {
 	POST = req.body;
-	console.log(POST);
 	model.InsertComentario(POST).then(data => {
 		res.json(data);
 	});

@@ -12,7 +12,6 @@ app.use(require('express-is-ajax-request'));
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {
 	model.SelectUsuario().then(data=> {
-		console.log('ADASDASD / DO CONTATO');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
 	});
 });
@@ -30,32 +29,17 @@ router.get('/editar/:id', function(req, res, next) {
 });
 router.get('/ver/:id', function(req, res, next) {
 	id = req.params.id;
-	console.log('IIIIIIIIIIIII ID USUARIO IIIIIIIIIIIIIIIIIII');
-	console.log(id);
-	console.log('IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII');
-	console.log('DDDDDDDDDDDDDDDD ID DO USUARIO LOGADO DDDDDDDD');
-	console.log(req.session.usuario.id);
-	console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
 	model.GetUsuario(id, req.session.usuario.id).then(data_usuario => {
 		data.perfil = data_usuario;
 		model.GetPostagemByUser(id, req.session.usuario.id).then(data_postagens => {
 			data.postagens = data_postagens;
-			console.log('********************* DADOS DO PERFIL ****************************');
-			console.log(data);
-			console.log('******************************************************************');
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_ver', data: data, usuario: req.session.usuario});
 		});
 	});
 });
 router.get('/contatos/', function(req, res, next) {
-	console.log('cliquei aqui nos contatos');
-	console.log('id');
-	console.log(req.session.usuario.id);
 	model.GetUsuarioContatos(req.session.usuario.id).then(data => {
 		data.usuario = req.session.usuario;
-		console.log('[[[[[[[[[[[[[[[[[[[[[[ DADOS DOS CONTATOS [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[');
-		console.log(data);
-		console.log('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_contatos', data: data, usuario: req.session.usuario});
 	});
 });
@@ -78,34 +62,22 @@ router.get('/grupos/ver/:id', function(req, res, next) {
 
 router.get('/situacao/:id', function(req, res, next) {
 	id = req.params.id;
-	console.log('-------------- DATA DA SITUACAO ------------------------');
-	console.log(data);
-	console.log('--------------------------------------------------------');
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_situacao', data: data, usuario: req.session.usuario});
 });
 
 
 router.get('/genero/:id', function(req, res, next) {
 	id = req.params.id;
-	console.log('-------------- DATA DO GENERO ------------------------');
-	console.log(data);
-	console.log('--------------------------------------------------------');
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'usuarios/usuarios_genero', data: data, usuario: req.session.usuario});
 });
 
 router.get('/faculdade/:id', function(req, res, next) {
 	id = req.params.id;
-	console.log('-------------- DATA DA FACULDADE ------------------------');
-	console.log(data);
-	console.log('--------------------------------------------------------');
 	res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'usuarios/usuarios_faculdade', data: data, usuario: req.session.usuario});
 });
 
 router.get('/ufcidade/:id', function(req, res, next) {
 	id = req.params.id;
-	console.log('-------------- DATA DA FACULDADE ------------------------');
-	console.log(data);
-	console.log('--------------------------------------------------------');
 	res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'usuarios/usuarios_ufcidade', data: data, usuario: req.session.usuario});
 });
 
@@ -130,7 +102,6 @@ router.post('/uploadfoto/', function(req, res, next) {
 
 router.post('/contatos/', function(req, res, next) {
 	POST = req.body;
-	console.log(POST);
 
 	if(req.session.usuario.tipo == 2){
 		model.GetUsuariosFaculdade(POST,req.session.usuario.id_faculdade, req.session.usuario.id).then(data => {
@@ -139,12 +110,6 @@ router.post('/contatos/', function(req, res, next) {
 	}else{
 		POST.id_usuario = req.session.usuario.id;
 		model.GetUsuarios(POST).then(data => {
-
-			console.log('GGGGGGGGGGGGGGGGGGGGG DADOS DOS USUARIOS GGGGGGGGGGGGGGGGGGGG');
-			console.log(data);
-			console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG');
-
-
 			res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'usuarios/usuarios', data: data, usuario: req.session.usuario});
 		});
 
@@ -192,10 +157,7 @@ router.post('/contatos/adicionar', function(req, res, next) {
 router.post('/contatos/adicionar-varios', function(req, res, next) {
 	POST = req.body;
 	POST.id_usuario = req.session.usuario.id;
-	console.log('ppppppppppppppppppppppppppp POST DE VARIOS ppppppppppppppppppppppppppppppppp');
-	console.log(POST);
-	console.log('pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp');
-	
+
 	model.InsertVariosContatos(POST).then(data=>{
 		res.json(data);
 	});
@@ -206,11 +168,6 @@ router.post('/contatos/adicionar-varios-alunos', function(req, res, next) {
 	POST = req.body;
 	POST.id_usuario = req.session.usuario.id;
 	POST.id_faculdade = req.session.usuario.id_faculdade;
-	console.log('66666666666666666 POST DE VARIOS ALUNOS 6666666666666666');
-	console.log(POST);
-	console.log('66666666666666666666666666666666666666666666666666666666');
-
-
 	model.AdicionarVariosAlunosUpdate(POST).then(data=>{
 		res.json(data);
 	});
@@ -221,16 +178,9 @@ router.post('/contatos/remover-varios-alunos', function(req, res, next) {
 	POST = req.body;
 	POST.id_usuario = req.session.usuario.id;
 	POST.id_faculdade = req.session.usuario.id_faculdade;
-	console.log('7777777777777 POST DE VARIOS ALUNOS 777777777777');
-	console.log(POST);
-	console.log('777777777777777777777777777777777777777777777777');
-
-
 	model.RemoverVariosAlunosUpdate(POST).then(data=>{
 		res.json(data);
 	});
-
-
 });
 
 
@@ -249,7 +199,7 @@ router.post('/grupos/adicionar/usuario', function(req, res, next) {
 		if (usuario.length > 0) {
 			data_insert = {id_usuario: usuario[0].id, id_grupo: POST.id_grupo};			
 			model.GetUsuarioMurerGrupo(data_insert).then(usuarionogrupo =>{
-					//se retornar algum valor quer dizer que o usuario está no grupo então não precisa cadastrar denovo
+				//se retornar algum valor quer dizer que o usuario está no grupo então não precisa cadastrar denovo
 					if(usuarionogrupo == 0 || usuarionogrupo == ''){
 						model.EntrarGrupo(data_insert).then(data => {
 							res.json(data);
@@ -286,9 +236,6 @@ POST.id = req.session.usuario.id;
 POST.senha_atual = control.Encrypt(POST.senha_atual);
 
 model.GetUsuarioAlterarSenha(req.session.usuario.id,POST.senha_atual).then(data_usuario => {
-	console.log('************* DADOS USUARIO *************');
-	console.log(data_usuario);
-	console.log('*****************************************');
 	delete POST.senha_atual;
 	if (data_usuario.length > 0){
 		model.UpdateUsuario(POST).then(data => {
@@ -313,10 +260,6 @@ router.post('/cadastro', function(req, res, next) {
 	POST = req.body;
 	POST.senha = control.Encrypt(POST.senha);
 	model.CadastrarUsuario(POST).then(data => {
-		console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGGG data GGGGGGGGGGGGGGGGGGGGGGGGGGG');
-		console.log(data);
-		console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG');
-
 		var to = 'clebercavalheiro.000@gmail.com';
 		var subject = 'Bem Vindo ao MurOn';
 		var html = 'Bem vindo ao aplicativo preferido das faculdades e alunos. Segue abaixo as informações sobre sua conta. \
@@ -331,42 +274,28 @@ router.post('/cadastro', function(req, res, next) {
 router.post('/atualizar', function(req, res, next) {
 	// Recebendo o valor do post
 	POST = req.body;
-	console.log('----------------------------- POST ATUALIZAR -----------------------');
-	console.log(POST);
-	console.log('--------------------------------------------------------------------');
 
-	if(POST.nome_murer != undefined){
-		console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& É NOME MURER &&&&&&&&&&&&&&&&&&&&&&');
+	/*se foi atualizado o nome de murer ver se ninguém já o está utilizando*/
+	if(POST.nome_murer != undefined){	
 		model.PesquisarUsuario(POST.nome_murer).then(id_usuario=>{
-			console.log(id_usuario);
-			if(id_usuario == ''){
-				console.log('DDDDDDDDDDDDDDDDDDDD NÃO TEM ESSE NOME MURER AINDA DDDDDDDDDDDDDDDDDDDDDD');
+			if(id_usuario == ''){				
 				model.UpdateUsuario(POST).then(data=> {
 					res.json(data);
 				});
 			}else{
-				console.log('CCCCCCCCCCCCCCCCCCCCCCCCCCC CAI AQUI NO JÁ CADASTRADO CCCCCCCCCCCCCCCCCCCCCCCCCCC');
 				res.json('usuariojacadastrado');
 			}
 		})
 	}else{
-		console.log('***************************** NÃO É NOME DE MURER *********************');
 		model.UpdateUsuario(POST).then(data=> {
 			res.json(data);
 		});
 	}
-
-
 });
 
 
 router.post('/atualizar/faculdade', function(req, res, next) {
-	console.log(req.session);
 	POST = req.body;
-	console.log('==================== POST ATUALIZAR FACULDADE ======================');
-	console.log(POST);
-	console.log('====================================================================');
-
 	model.UpdateUsuario(POST).then(data=> {
 		model.UpdateUsuarioFaculdadeRelacao(POST).then(id_relacao=>{
 			res.json(data);			
@@ -374,12 +303,6 @@ router.post('/atualizar/faculdade', function(req, res, next) {
 	});
 
 });
-
-
-
-
-
-
 
 
 router.post('/desativar', function(req, res, next) {

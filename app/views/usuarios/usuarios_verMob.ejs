@@ -70,9 +70,6 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 				<div class="container">
 					<div class="row">
 
-						<% console.log(data.perfil[i].tipo)%>
-						<% console.log(data.perfil[i].amigos)%>
-
 						<div class="card-panel panel-full">
 							<div class="card-content">
 								MurEr <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input right" data-nome="MurEr" data-id="'+data.perfil[i].id+'" data-collum="nome_murer"><i class="fa fa-edit"></i></span>' : '' %>

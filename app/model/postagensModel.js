@@ -25,10 +25,6 @@ class PostagensModel {
 	AddViewCat(id_categoria, id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('UPDATE postagens_categorias_view SET qtd_acesso = (qtd_acesso + 1) WHERE id_usuario = ? AND id_categoria = ?', [id_usuario, id_categoria]).then(data => {
-				console.log('°°°°°°°°°°°°°° Atualizando postagens_categorias_view °°°°°°°°°°°°°°°°°°°°°°°°');
-				console.log(data);
-				console.log('°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°');
-
 				resolve(data);
 			});
 		});
@@ -37,17 +33,12 @@ class PostagensModel {
 		return new Promise(function(resolve, reject) {
 			var where_add = '';
 			var values = [];
-			console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAA POSTAGEM POR CATEGORIA AAAAAAAAAAAAAAAAAAAAAAA');
-			console.log(POST);
-			console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
 			if (POST.id_usuario != 1) {
-				console.log('&&&&&&&&&&&&&&& Não sou administrador &&&&&&&&&&&&&&&&&&');
 
 				if(POST.id_categoria == 3){
 					//quer dizer que é uma faculdade
 					where_add = "AND id_faculdade = ? AND (filtro_status_faculdade = ? OR filtro_status_faculdade = ?) "
 					values = [0, POST.id_usuario, 0, 0, 0, 0, POST.id_categoria,POST.id_faculdade,0,POST.status];
-					console.log('((((((((( É FACULDADE ((((((((((((((((((((((((((((')
 
 				}else{
 
@@ -70,7 +61,7 @@ class PostagensModel {
 						)\
 						OR id_usuario = ? OR id_usuario = ?)";
 						values = [0, POST.id_usuario, 0, 0, 0, 0, POST.id_categoria,POST.id_faculdade, 0, 0, POST.id_usuario, 0, 0, 0, POST.id_usuario,1];
-					
+
 					}else{
 						where_add = "AND (\
 						(id_grupo = ? OR id_grupo IN (SELECT id_grupo FROM grupos_usuarios WHERE id_usuario = ? AND deletado = ?))\
@@ -90,9 +81,6 @@ class PostagensModel {
 				(SELECT COUNT(e.id) FROM postagens_comentarios as e WHERE e.id_postagem = postagens.id AND e.deletado = ? GROUP BY e.id_postagem) as qtd_comentario,\
 				imagem, descricao, DATE_FORMAT(data_atualizado, "%d/%m/%Y") as data_atualizado\
 				FROM postagens WHERE deletado = ? AND id_categoria = ? ' + where_add, values).then(data => {
-					console.log('!!!!!!!!!!! POSTAGENS DA CATEGORIA !!!!!!!!!!!!!!!!!!!!!!!!!!');
-					console.log(data);
-					console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 					resolve(data);
 				});
 			});	
@@ -107,11 +95,6 @@ class PostagensModel {
 			}
 			if ((new Date(pesquisa) !== "Invalid Date") && !isNaN(new Date(pesquisa))) {
 				pesquisa = new Date(pesquisa);
-				console.log(pesquisa);
-				console.log(pesquisa);
-				console.log(pesquisa);
-				console.log(pesquisa);
-				console.log(pesquisa);
 			}
 
 			if (id_usuario != 1) {
@@ -154,35 +137,27 @@ class PostagensModel {
 				});
 			});
 	}
+
 	SearchTipo(tipo, id_usuario) {
-		console.log(tipo);
 		return new Promise(function(resolve, reject) {
 			if (tipo.tipo == 1) {
-
-
-					// helper.Query('SELECT a.id_grupo as tipo_val, \
-					// 	(SELECT b.nome FROM grupos as b WHERE a.id_grupo = b.id) as nome\
-					// 	FROM grupos_usuarios as a WHERE id_usuario = ? AND deletado = ?', [id_usuario, 0]).then(data => {
-						// helper.Query('SELECT a.id_grupo as tipo_val, b.nome \
-						// 							FROM grupos_usuarios as a LEFT JOIN grupos as b ON a.id_grupo = b.id \
-						// 							WHERE b.deletado = ? AND a.deletado = ? AND a.id_usuario = ? GROUP BY b.nome ORDER BY nome ASC',[0,0,id_usuario]).then(data=>{
-							helper.Query('SELECT b.id as tipo_val, b.nome \
-								FROM grupos_usuarios as a\
-								INNER JOIN grupos as b ON a.id_grupo = b.id\
-								WHERE a.deletado = ? AND b.deletado = ? AND b.id_lider = ? \
-								GROUP BY b.nome', [0, 0, id_usuario]).then(data => {
-									resolve(data);
-								});
-							} else {
-								helper.Query('SELECT id_usuario2 as tipo_val,\
-									b.nome_murer as nome\
-									FROM usuarios_contatos as a\
-									LEFT JOIN usuarios as b ON b.id = a.id_usuario2\
-									WHERE a.deletado = ? AND b.deletado = ? AND a.id_usuario = ?', [0, 0, id_usuario]).then(data => {
-										resolve(data);
-									});
-								}
-							});
+				helper.Query('SELECT b.id as tipo_val, b.nome \
+					FROM grupos_usuarios as a\
+					INNER JOIN grupos as b ON a.id_grupo = b.id\
+					WHERE a.deletado = ? AND b.deletado = ? AND b.id_lider = ? \
+					GROUP BY b.nome', [0, 0, id_usuario]).then(data => {
+						resolve(data);
+					});
+				} else {
+					helper.Query('SELECT id_usuario2 as tipo_val,\
+						b.nome_murer as nome\
+						FROM usuarios_contatos as a\
+						LEFT JOIN usuarios as b ON b.id = a.id_usuario2\
+						WHERE a.deletado = ? AND b.deletado = ? AND a.id_usuario = ?', [0, 0, id_usuario]).then(data => {
+							resolve(data);
+						});
+					}
+				});
 	}
 	SelectUsuarios() {
 		return new Promise(function(resolve, reject) {
@@ -246,18 +221,10 @@ class PostagensModel {
 	GetUsuario(id_usuario){
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT * FROM usuarios WHERE deletado = ? AND id = ?', [0, id_usuario]).then(data => {
-				console.log(data);
 				resolve(data);
 			});
 		});
 	}
-
-
-
-
-
-
-
 
 
 }

@@ -14,24 +14,21 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/usuarios', function(req, res, next) {
-	console.log('Clicando nos usuarios');
 	model.GetUsuarios().then(data_usuarios => {
 		data.usuarios = data_usuarios;
-		console.log(data);
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'admin/usuariosMob', data: data, usuario: req.session.usuario});
 	});
 });
 
 router.get('/permissao-faculdades', function(req, res, next) {
-	console.log('Clicando nos usuarios');
+	/*pego as faculdades que ainda não foram validadas*/
 	model.GetParceirosNaoValidados().then(data_usuarios => {
 		data.usuarios = data_usuarios;
-		console.log(data);
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'admin/permissao_faculdadeMob', data: data, usuario: req.session.usuario});
 	});
 });
 
-
+/*login do aplicativo quando sair e entra denovo*/
 router.get('/loginfake', function(req, res, next) {
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorLimpo', {html: 'inicio/login_fake', data: data, usuario: req.session.usuario});
 });
@@ -53,10 +50,8 @@ router.get('/cadastro-faculdade', function(req, res, next) {
 });
 
 router.get('/cadastro-cursos', function(req, res, next) {
-	console.log('Clicando nos cadastros dos cursos');
 	model.GetCursosPorAtivacao().then(data_cursos => {
 		data.cursos = data_cursos;
-		console.log(data);
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'admin/cadastro_cursoMob', data: data, usuario: req.session.usuario});
 	});
 });
@@ -79,14 +74,8 @@ router.get('/editar-curso/:id', function(req, res, next) {
 	});
 });
 
-
-
-
-
-
 router.post('/aprovarUsuario/', function(req, res, next) {
 	POST = req.body;
-	var emailParceiro;
 
 	model.AprovarUsuario(POST).then(data => {
 		model.GetUsuarioById(POST.id).then(data_usuario => {
@@ -107,23 +96,13 @@ router.post('/aprovarUsuario/', function(req, res, next) {
 
 router.post('/alterarSenhaUsuario/', function(req, res, next) {
 	POST = req.body;
-	console.log('JJJJJJJ ESTOU DENTRO DO alterarSenhaUsuario JJJJJJJJJJJJJJJJJJJJJJJJJJJJJ');
-	console.log(POST);
-	console.log('JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ');
-
-	var emailParceiro;
 
 	model.GetUsuarioById(POST.id).then(data_usuario=>{
-		console.log(data_usuario);
 		var senha = Math.random().toString(36).substr(2, 8);
 		POST.senha = senha;
 
 
 		model.AlterarSenhaUsuario(POST).then(data_alterar_senha=>{
-			console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRR RETORNO DA SENHA RRRRRRRRRRRRRRRRRRRRRRRRRR');
-			console.log(data_alterar_senha);
-			console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
-
 			control.SendMail(data_usuario[0].email,'Senha Alterada em Muron',
 				'Olá, sua senha foi alterada pelo Administrador no Muron segue sua nova senha: ' + senha + 
 				'<br>Recomendamos assim que entrar alterar esta senha gerada ao clicar no seu perfil e clicar no botão "Alterar Senha" no fim da página do perfil.' + 
@@ -141,9 +120,6 @@ router.post('/alterarSenhaUsuario/', function(req, res, next) {
 router.post('/cadastrar/usuario', function(req, res, next) {
 	var post = req.body;
 	var post_limpo = model.VerificarSenha(post);
-	console.log('88888888888888 POST LIMPO ALUNO 8888888888888888888888888888888');
-	console.log(post_limpo);
-	console.log('888888888888888888888888888888888888888888888888888888888888888');
 	var nome_facul = post_limpo.nome_faculdade;
 	var nome_curso = post_limpo.nome_curso;
 	var data_insert;

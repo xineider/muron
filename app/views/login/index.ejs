@@ -292,65 +292,6 @@
 			}
 		});
 
-
-		// $('#entra-sistema').on('submit', function(e) {
-		// 	e.preventDefault();
-		// 	var form = $(this);
-		// 	var post = form.serializeArray();
-		// 	console.log('ppppppppp post');
-		// 	console.log(post);
-		// 	console.log('pppppppppppppp');
-
-
-
-		// 	$.ajax({
-		// 		method: 'POST',
-		// 		async: true,
-		// 		data: post,
-		// 		url: '/sistema/login/',
-		// 		beforeSend: function(request) {
-		// 			// request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
-		// 			// request.setRequestHeader("Authority-Optima-nivel", $('input[name="nivel_usuario_sessao"]').val());
-		// 			// request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
-
-		// 			console.log('ANTES DE ENVIAR :D');
-		// 		},
-		// 		success: function(data) {
-		// 			console.log('RRRRRRRRRRRRR RECEBIMENTO DATA RRRRRRRRRRRRRRRR');
-		// 			console.log(data);
-		// 			console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
-		// 			if(data.result == 'redirect'){
-		// 				window.location.replace(data.url);
-		// 			}else{
-		// 				$('.error_box').removeClass('hide');
-		// 				$('.error_box').find('span').text(data.mensagem);
-
-		// 				var cardpanel = $('.error_box').find('.card-panel');
-
-		// 				if(data.erro == 'warn'){
-		// 					/* Limpar o alert caso ele já está ativo*/
-		// 					$('.error_box').find('span').find('.fa').remove();
-		// 					cardpanel.removeClass('yellow darken-2');              
-		// 					cardpanel.addClass('red darken-1');
-
-		// 				}else if(data.erro == 'alert'){
-		// 					/*Limpar o warn caso ele já está ativo*/
-		// 					cardpanel.removeClass('red darken-1');
-		// 					cardpanel.addClass('yellow darken-2');
-		// 					$('.error_box').find('span').append('<i class="fa fa-handshake"></i>')
-		// 				}
-		// 			}
-		// 		},
-  //   		error: function(xhr) { 	// if error occured
-  //   			console.log('error de não entrar');
-  //   			console.log(xhr.statusText);
-  //   		},
-  //   		complete: function(data) {
-  //   			console.log('deu completado');	
-  //   		}
-  //   	});
-		// });
-
 		$('.modal').modal();
 
 		$('#cadastra-usuario').on('submit', function(e) {
@@ -421,16 +362,11 @@
 					beforeSend: function(request) {
 					},
 					success: function(data) {
-						console.log('DDDDDDDDDDDDDDDDD DATAAAAAAAAAAAAAAA DDDDDDDDDDDDDDDDDDDDDD');
-						console.log(data);
-						console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
 						if(data == "possui_gerente"){
-							console.log('SOU UM ERRO');
 							$('.error_container_parceiro').removeClass('hide');
 							$('.error_container_parceiro').find('.error_parceiro_mensagem').html('Já existe um Gerente para esta Faculdade!');
 
 						}else if(data == "possui_muron"){
-
 							$('.error_container_parceiro').removeClass('hide');
 							$('.error_container_parceiro').find('.error_parceiro_mensagem').html('Não é possível cadastrar este usuário!');
 
@@ -512,18 +448,9 @@ function autoComplete(element,url,select_el){
 				dataType:'json',
 				url:url+request.term,
 				beforeSend: function() {
-					console.log(request);	
-					console.log(request.term);
-					console.log('url');
-					console.log(url+request.term);
 				},
 				success: function(data) {
-					console.log(data);
 					response(data);
-					console.log('---------------- O REQUEST -----------');
-					console.log(request);
-					console.log('--------------------------------------');
-
 					response($.map(data, function (item) {
 						return {
 							label: item.name,

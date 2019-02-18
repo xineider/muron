@@ -9,7 +9,6 @@
  	CadastrarUsuario(data) {
  		return new Promise(function(resolve, reject) {
  			helper.Query('SELECT id FROM usuarios WHERE nome_murer = ?', [data.nome_murer]).then(result => {
- 				console.log(result);
  				if (result.length <= 0) {
  					helper.Insert('usuarios', data).then(data => {
  						resolve(data);
@@ -20,40 +19,24 @@
  			});
  		});
  	}
+
  	CadastrarParceiro(data) {
  		return new Promise(function(resolve, reject) {
  			helper.Query('SELECT id FROM usuarios WHERE nome_murer = ?', [data.nome_murer]).then(result => {
- 				
- 				console.log('^^^^^^^^^^^^^^^DADOS CADASTRAR PARCEIRO ^^^^^^^^^^^^^^^^^^');
- 				console.log(data);
- 				console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
-
  				if (result.length <= 0) {
  					if(data.tipo == 2 ){
  						var dataFaculdade = {id:data.id_faculdade,nome_contato:data.nome_contato, descricao:data.descricao};
- 						console.log('*************** DATA INSERÇÃO FACULDADE ********************');
- 						console.log(dataFaculdade);
- 						console.log('************************************************************');
  						helper.Update('faculdades_inep', dataFaculdade).then(id_faculdade => {
- 							console.log('))))))))))))) DADOS PARA INSERIR NA TABELA FACULDADES )))))))))))))))))))))))))))');
- 							console.log(data);
- 							console.log(')))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))');
-
  							helper.Insert('usuarios', data).then(data => {
  								resolve(data);
  							});
  						});
  					}else{
  						data.id_faculdade = 0;
- 						console.log('_____________________ DADOS DIVULGADOR ______________________');
- 						console.log(data);
- 						console.log('_____________________________________________________________');
-
  						helper.Insert('usuarios', data).then(data => {
  							resolve(data);
  						});
  					}
-
  				} else {
  					resolve([]);
  				}
@@ -85,10 +68,6 @@
 
 
  			helper.Query('SELECT id FROM cursos WHERE NO_CURSO = ? LIMIT 1', [nome_curso]).then(dataCurso => {
- 				console.log('--------------- SELECIONANDO CURSO -----------------');
- 				console.log(dataCurso);
- 				console.log('----------------------------------------------------');
-
  				if(dataCurso == ''){
  					var post_insert = {NO_CURSO:nome_curso,ativacao:1};
 
@@ -151,9 +130,6 @@
  	SelecionarFaculdades(){
  		return new Promise(function(resolve, reject) {
  			helper.Query('SELECT nome,id FROM faculdades WHERE deletado = ? ORDER BY nome ', [0]).then(data => {
- 				console.log('*********************** Faculdades do MODEL ***********************');
- 				console.log(data);
- 				console.log('*******************************************************************');
  				resolve(data);
  			});
  		});
@@ -165,20 +141,12 @@
 
  	PesquisarFaculdade(nomeFaculdade) {
  		return new Promise(function(resolve, reject) {
-
- 			console.log('000000000000000 NOME FACULDADE 00000000000000000000');
- 			console.log(nomeFaculdade);
- 			console.log('00000000000000000000000000000000000000000');			
-
  			/*Seleciono a pesquisa de acordo com o que foi digitado e coloco entre parênteses() a sigla se tiver alguma*/
  			helper.Query('SELECT id,\
  				(CASE WHEN SGL_IES = "" THEN NO_IES ELSE\
  				(CASE WHEN SGL_IES != "" THEN CONCAT(NO_IES," (",SGL_IES,")")\
  				END)END) as name\
  				FROM faculdades_inep WHERE NO_IES LIKE CONCAT("%", ?, "%") OR SGL_IES LIKE CONCAT("%", ?, "%") ORDER BY NO_IES ASC LIMIT 5',[nomeFaculdade,nomeFaculdade]).then(data => {
- 					console.log('------------------- PESQUISA DE FACULDADES ---------------');
- 					console.log(data);
- 					console.log('----------------------------------------------------------');
  					resolve(data);
  				});
  			});
@@ -188,17 +156,9 @@
 
  	PesquisarCurso(nomeCurso) {
  		return new Promise(function(resolve, reject) {
-
- 			console.log('11111111111 NOME CURSO 11111111111111');
- 			console.log(nomeCurso);
- 			console.log('1111111111111111111111111111111111111');			
-
- 			/*Seleciono a pesquisa de acordo com o que foi digitado e coloco entre parênteses() a sigla se tiver alguma*/
+			/*Seleciono a pesquisa de acordo com o que foi digitado e coloco entre parênteses() a sigla se tiver alguma*/
  			helper.Query('SELECT id, NO_CURSO as name  \
  				FROM cursos WHERE NO_CURSO LIKE CONCAT("%", ?, "%") ORDER BY NO_CURSO ASC LIMIT 5',[nomeCurso]).then(data => {
- 					console.log('------------------- PESQUISA DE FACULDADES ---------------');
- 					console.log(data);
- 					console.log('----------------------------------------------------------');
  					resolve(data);
  				});
  			});
@@ -225,12 +185,6 @@
  		});
  	}
 
-
-
-
-
-
-
  	VerificarSenha(data) {
  		if (typeof data.senha != 'undefined') {
  			if (data.senha == data.senha_confirmar) {
@@ -248,16 +202,11 @@
 
  	InserFaculdade(POST){
  		return new Promise(function(resolve, reject) {
- 			console.log('77777777777777777 Inserindo na Faculdade 7777777777777777777');
- 			console.log(POST);
- 			console.log('777777777777777777777777777777777777777777777777777777777777');
-
  			delete POST.tipo;
  			delete POST.nome_murer
  			delete POST.email;
  			delete POST.celular;
  			delete POST.senha;
-
 
  			helper.Insert('faculdades', POST).then(data => {
  				resolve(data);
@@ -287,10 +236,6 @@
  	}
 
 
-
-
- 	/*LLLLLLLLLLLLLLLLLLLLLLLLL LOGIN MODEL LLLLLLLLLLLLLLLLLLLLLLLLLLLL*/
-
  	Login(POST) {
  		return new Promise(function(resolve, reject) {
 			// Adicione a query com scape(?) e os respectivos valores em um array simples
@@ -307,6 +252,7 @@
 			});
 		});
  	}
+
  	LoadConfig(id) {
  		return new Promise(function(resolve, reject) {
  			helper.Query('SELECT * FROM configuracoes WHERE id_usuario = ?', [id]).then(data => {
@@ -314,6 +260,7 @@
  			});
  		});
  	}
+
  	VerificarValidado(id){
  		return new Promise(function(resolve, reject) {
  			helper.Query('SELECT id,validacao FROM usuarios WHERE id = ?', [id]).then(data => {
@@ -321,6 +268,7 @@
  			});
  		});
  	}
+
  	VerificarDeletado(id){
  		return new Promise(function(resolve, reject) {
  			helper.Query('SELECT id FROM usuarios WHERE id = ? AND deletado = ?', [id,1]).then(data => {
@@ -328,7 +276,6 @@
  			});
  		});
  	}
-
 
  }
  module.exports = ApiModel;

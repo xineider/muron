@@ -12,14 +12,15 @@ class GruposModel {
 			});
 		});
 	}
+
 	SelectGrupo(id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT * FROM grupos WHERE id_lider = ?', [id_usuario]).then(data => {
-				console.log(data);
 				resolve(data);
 			});
 		});
 	}
+
 	GetGrupo(id) {
 		// Para retornar quando chamar a função
 		return new Promise(function(resolve, reject) {
@@ -28,6 +29,7 @@ class GruposModel {
 			});
 		});
 	}
+
 	InsertGrupo(post) {
 		return new Promise(function(resolve, reject) {
 			helper.Insert('grupos', post).then(data => {
@@ -35,6 +37,7 @@ class GruposModel {
 			});
 		});
 	}
+
 	UpdateGrupo(post) {
 		return new Promise(function(resolve, reject) {
 			helper.Update('grupos', post).then(data => {
@@ -42,6 +45,7 @@ class GruposModel {
 			});
 		});
 	}
+	
 	DesativarGrupo(post) {
 		return new Promise(function(resolve, reject) {
 			helper.Desativar('grupos', post).then(data => {

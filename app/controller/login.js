@@ -21,9 +21,6 @@ router.get('/', function(req, res, next) {
 router.post('/cadastrar/usuario', function(req, res, next) {
 	var post = req.body;
 	var post_limpo = model.VerificarSenha(post);
-	console.log('88888888888888 POST LIMPO ALUNO 8888888888888888888888888888888');
-	console.log(post_limpo);
-	console.log('888888888888888888888888888888888888888888888888888888888888888');
 	var nome_facul = post_limpo.nome_faculdade;
 	var nome_curso = post_limpo.nome_curso;
 	var data_insert;
@@ -138,18 +135,9 @@ router.post('/', function(req, res, next) {
 	model.Login(POST).then(data => {
 		if(data.length > 0){
 			model.VerificarValidado(data[0].id).then(dataVerificado =>{
-				console.log('VVVVVVVVVVVVVVVVVV DATA VERIFICADO VVVVVVVVVVVVVVVVVVVVVV');
-				console.log(dataVerificado);
-				console.log('VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV');
 				if(dataVerificado[0].validacao == 0){
 					model.VerificarDeletado(data[0].id).then(dataDeletado => {
-						console.log('DDDDDDDDDDDDDDDDD DATA DELETADO DDDDDDDDDDDDDDDDDD');
-						console.log(dataDeletado);
-						console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
 						if(dataDeletado == ''){
-							console.log('LLLLLLLLLLLLLLLLLLLLLLLL DATA LOGIN LLLLLLLLLLLLLLLLLLLLLLLLLLL');
-							console.log(data);
-							console.log('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL');
 							req.session.usuario = {};
 							req.session.usuario.id = data[0].id;
 							req.session.usuario.hash_login = data[0].hash_login;
@@ -193,18 +181,9 @@ router.post('/teste_entrar', function(req, res, next) {
 	model.Login(POST).then(data => {
 		if(data.length > 0){
 			model.VerificarValidado(data[0].id).then(dataVerificado =>{
-				console.log('VVVVVVVVVVVVVVVVVV DATA VERIFICADO VVVVVVVVVVVVVVVVVVVVVV');
-				console.log(dataVerificado);
-				console.log('VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV');
 				if(dataVerificado[0].validacao == 0){
 					model.VerificarDeletado(data[0].id).then(dataDeletado => {
-						console.log('DDDDDDDDDDDDDDDDD DATA DELETADO DDDDDDDDDDDDDDDDDD');
-						console.log(dataDeletado);
-						console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
 						if(dataDeletado == ''){
-							console.log('LLLLLLLLLLLLLLLLLLLLLLLL DATA LOGIN LLLLLLLLLLLLLLLLLLLLLLLLLLL');
-							console.log(data);
-							console.log('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL');
 							req.session.usuario = {};
 							req.session.usuario.id = data[0].id;
 							req.session.usuario.hash_login = data[0].hash_login;

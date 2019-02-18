@@ -28,15 +28,9 @@
         dataType:'json',
         url:url+request.term,
         beforeSend: function() {
-          console.log(request); 
-          console.log(request.term);  
         },
         success: function(data) {
-          console.log(data);
           response(data);
-          console.log('---------------- O REQUEST -----------');
-          console.log(request);
-          console.log('--------------------------------------');
 
           response($.map(data, function (item) {
             return {
@@ -56,8 +50,6 @@
     },
     select:function(event,ui){
       $(this).parent().find('input[name="id_faculdade"]').val(ui.item.id);
-      console.log('DENTRO DO SELECT ------------------');
-      console.log($(this).parent().find('input[name="id_faculdade"]'));
     }
   });
 }

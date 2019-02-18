@@ -48,7 +48,6 @@ class PostagensModel {
 		});	
 	}
 
-
 	GetCategorias() {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT id, nome FROM postagens_categorias WHERE deletado = ? AND id != ? ORDER BY nome DESC', [0, 3]).then(data => {
@@ -59,10 +58,6 @@ class PostagensModel {
 	AddViewCat(id_categoria, id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('UPDATE postagens_categorias_view SET qtd_acesso = (qtd_acesso + 1) WHERE id_usuario = ? AND id_categoria = ?', [id_usuario, id_categoria]).then(data => {
-				console.log('°°°°°°°°°°°°°° Atualizando postagens_categorias_view °°°°°°°°°°°°°°°°°°°°°°°°');
-				console.log(data);
-				console.log('°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°');
-
 				resolve(data);
 			});
 		});
@@ -78,9 +73,6 @@ class PostagensModel {
 
 	AprovarUsuario(POST) {
 		return new Promise(function(resolve, reject) {
-			console.log('------------ DADOS DO POST DE APROVAR USUARIO -----------');
-			console.log(POST);
-			console.log('---------------------------------------------------------');
 			helper.Update('usuarios', POST).then(data => {
 				resolve(data);
 			});
@@ -89,24 +81,12 @@ class PostagensModel {
 
 	AlterarSenhaUsuario(POST){
 		return new Promise(function(resolve, reject) {
-			
-			console.log('BBBBBBBBBBBBBB POST BEFORE BBBBBBBBBBBBB');
-			console.log(POST);
-			console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
-
 			POST.senha = helper.Encrypt(POST.senha);
-
-			console.log('------------ DADOS DO POST DE ALTERAR SENHA USUARIO -----------');
-			console.log(POST);
-			console.log('---------------------------------------------------------');
-			
 			helper.Update('usuarios', POST).then(data => {
 				resolve(data);
 			});
 		});
 	}
-
-
 
 	GetUsuarioById(id){
 		return new Promise(function(resolve, reject) {
@@ -132,8 +112,6 @@ class PostagensModel {
 		});
 	}
 
-
-
 	InsertPostagem(data) {
 		return new Promise(function(resolve, reject) {
 			helper.Insert('postagens', data).then(data => {
@@ -141,6 +119,7 @@ class PostagensModel {
 			});
 		});
 	}
+
 	InsertComentario(data) {
 		return new Promise(function(resolve, reject) {
 			helper.Insert('postagens_comentarios', data).then(data => {
@@ -148,6 +127,7 @@ class PostagensModel {
 			});
 		});
 	}
+
 	DesativeComentario(data) {
 		return new Promise(function(resolve, reject) {
 			helper.Desativar('postagens_comentarios', data).then(data => {
@@ -155,6 +135,7 @@ class PostagensModel {
 			});
 		});
 	}
+
 	DesativePostagem(data) {
 		return new Promise(function(resolve, reject) {
 			helper.Desativar('postagens', data).then(data => {
@@ -166,7 +147,6 @@ class PostagensModel {
 	CadastrarUsuario(data) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT id FROM usuarios WHERE nome_murer = ?', [data.nome_murer]).then(result => {
-				console.log(result);
 				if (result.length <= 0) {
 					helper.Insert('usuarios', data).then(data => {
 						resolve(data);
@@ -177,40 +157,24 @@ class PostagensModel {
 			});
 		});
 	}
+
 	CadastrarParceiro(data) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT id FROM usuarios WHERE nome_murer = ?', [data.nome_murer]).then(result => {
-				
-				console.log('^^^^^^^^^^^^^^^DADOS CADASTRAR PARCEIRO ^^^^^^^^^^^^^^^^^^');
-				console.log(data);
-				console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
-
 				if (result.length <= 0) {
 					if(data.tipo == 2 ){
 						var dataFaculdade = {id:data.id_faculdade,nome_contato:data.nome_contato, descricao:data.descricao};
-						console.log('*************** DATA INSERÇÃO FACULDADE ********************');
-						console.log(dataFaculdade);
-						console.log('************************************************************');
 						helper.Update('faculdades_inep', dataFaculdade).then(id_faculdade => {
-							console.log('))))))))))))) DADOS PARA INSERIR NA TABELA FACULDADES )))))))))))))))))))))))))))');
-							console.log(data);
-							console.log(')))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))');
-
 							helper.Insert('usuarios', data).then(data => {
 								resolve(data);
 							});
 						});
 					}else{
 						data.id_faculdade = 0;
-						console.log('_____________________ DADOS DIVULGADOR ______________________');
-						console.log(data);
-						console.log('_____________________________________________________________');
-
 						helper.Insert('usuarios', data).then(data => {
 							resolve(data);
 						});
 					}
-
 				} else {
 					resolve([]);
 				}
@@ -221,10 +185,8 @@ class PostagensModel {
 
 	CadastrarFaculdadeCasoNaoExistir(nome_faculdade){
 		return new Promise(function(resolve, reject) {
-
 			helper.Query('SELECT id FROM faculdades_inep WHERE NO_IES = ? LIMIT 1', [nome_faculdade]).then(dataFaculdade => {
-
-				if(dataFaculdade == ''){
+			if(dataFaculdade == ''){
 					var post_insert = {NO_IES:nome_faculdade,SGL_IES:'',ativacao:1,recorrencia:1};
 					helper.Insert('faculdades_inep', post_insert).then(data => {
 						resolve(data);
@@ -239,16 +201,9 @@ class PostagensModel {
 
 	CadastrarCursoCasoNaoExistir(nome_curso){
 		return new Promise(function(resolve, reject) {
-
-
 			helper.Query('SELECT id FROM cursos WHERE NO_CURSO = ? LIMIT 1', [nome_curso]).then(dataCurso => {
-				console.log('--------------- SELECIONANDO CURSO -----------------');
-				console.log(dataCurso);
-				console.log('----------------------------------------------------');
-
 				if(dataCurso == ''){
 					var post_insert = {NO_CURSO:nome_curso,ativacao:1};
-
 					helper.Insert('cursos', post_insert).then(data => {
 						resolve(data);
 					});
@@ -256,7 +211,6 @@ class PostagensModel {
 					resolve(dataCurso[0].id);
 				}
 			});
-
 		});
 	}
 

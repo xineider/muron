@@ -12,11 +12,7 @@ app.use(require('express-is-ajax-request'));
 /* GET pagina de login. */
 
 router.get('/get-faculdades',function(req,res,next){
-	console.log('cai aqui no get-faculdades');
 	model.SelecionarFaculdades().then(data=> {
-		console.log('============== FACULDADES DO CONTROLLER =================');
-		console.log(data);
-		console.log('=========================================================');
 		res.json(data);
 	});
 });
@@ -24,14 +20,7 @@ router.get('/get-faculdades',function(req,res,next){
 router.get('/pesquisar/faculdade/:nomeFaculdade', function(req, res, next) {
 
 	nomeFaculdade = req.params.nomeFaculdade;
-	console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFF NOME FACULDADE FFFFFFFFFFFFFFFFFFFFFFF');
-	console.log(nomeFaculdade);
-	console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF');
-
 	model.PesquisarFaculdade(nomeFaculdade).then(data => {
-		console.log('========================= procurar faculdade ===================');
-		console.log(data);
-		console.log('===============================================================');
 		res.json(data);
 	});
 });
@@ -39,14 +28,9 @@ router.get('/pesquisar/faculdade/:nomeFaculdade', function(req, res, next) {
 router.get('/pesquisar/curso/:nomeCurso', function(req, res, next) {
 
 	nomeCurso = req.params.nomeCurso;
-	console.log('CCCCCCCCCCCCCCCCCCCCCCC NOME CURSO CCCCCCCCCCCCCCCCCCCC');
-	console.log(nomeCurso);
-	console.log('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
+
 
 	model.PesquisarCurso(nomeCurso).then(data => {
-		console.log('!!!!!!!!!!!!!!!!!!! procurar curso !!!!!!!!!!!!!!!!!!!!!!');
-		console.log(data);
-		console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 		res.json(data);
 	});
 });
@@ -60,9 +44,6 @@ router.post('/recuperar/senha', function(req, res, next) {
 	var post = req.body;
 	var data_insert;
 	var nova_senha;
-	console.log('00000000000000 É isso que recebo do recuperar senha 000000000000000');
-	console.log(post);
-	console.log('0000000000000000000000000000000000000000000000000000000000000000000');
 	model.PesquisarEmail(post.email).then(idEmail => {
 		if(idEmail != ''){
 			nova_senha = Math.random().toString(36).substring(7);
@@ -91,9 +72,6 @@ router.post('/recuperar/senha', function(req, res, next) {
 router.post('/cadastrar/usuario', function(req, res, next) {
 	var post = req.body;
 	var post_limpo = model.VerificarSenha(post);
-	console.log('88888888888888 POST LIMPO ALUNO 8888888888888888888888888888888');
-	console.log(post_limpo);
-	console.log('888888888888888888888888888888888888888888888888888888888888888');
 	var nome_facul = post_limpo.nome_faculdade;
 	var nome_curso = post_limpo.nome_curso;
 	var data_insert;
@@ -228,25 +206,13 @@ router.post('/entrar_sistema', function(req, res, next) {
 	// Recebendo o valor do post
 	POST = req.body;
 	POST.senha = control.Encrypt(POST.senha);
-	console.log('QQQQQQQQQQQQQQQ ESTOU NO TESTE_ENTRAR SEM USAR O POST NORMAL DO LOGIN QQQQQQQQQQQQQQQQQQQQQQQ');
-	console.log(POST);
-	console.log('QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ');
-	
+
 	model.Login(POST).then(data => {
 		if(data.length > 0){
 			model.VerificarValidado(data[0].id).then(dataVerificado =>{
-				console.log('XXXXXXXXXXXXXXXXXXXX DATA VERIFICADO XXXXXXXXXXXXXXXXXXXX');
-				console.log(dataVerificado);
-				console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
 				if(dataVerificado[0].validacao == 0){
 					model.VerificarDeletado(data[0].id).then(dataDeletado => {
-						console.log('YYYYYYYYYYYYYYYYYYYYYYY DATA DELETADO YYYYYYYYYYYYYYYYYYYYYY');
-						console.log(dataDeletado);
-						console.log('YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY');
 						if(dataDeletado == ''){
-							console.log('2ZZZZZZZZZZZZZZZZZL DATA LOGIN ZZZZZZZZZZZZZZZZZZZZZZZZZZ');
-							console.log(data);
-							console.log('2ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ');
 							req.session.usuario = {};
 							req.session.usuario.id = data[0].id;
 							req.session.usuario.hash_login = data[0].hash_login;
@@ -301,10 +267,6 @@ router.post('/cadastrar/parceiro', function(req, res, next) {
 	var data_insert;
 	post_limpo.validacao = 1;
 	
-
-	console.log('00000000000000000 POST LIMPO 00000000000000000000000000000');
-	console.log(post_limpo);
-	console.log('0000000000000000000000000000000000000000000000000000000000');
 
 	if (Object.keys(post_limpo).length > 0) {
 		/*Para identificar se o nome do murer for muron, se tiver muron no nome não cadastrar*/

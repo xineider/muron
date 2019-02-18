@@ -62,7 +62,6 @@ $(document).on('ready', function () {
 		var texto = $(this).data('texto');
 		var textoBotao = $(this).data('texto-botao');
 		var corBotao = $(this).data('cor-botao');
-		console.log(corBotao);
 		var id = $(this).data('id');
 		var to = $(this).data('to');
 		var back = $(this).data('back');
@@ -135,12 +134,9 @@ $(document).on('ready', function () {
 
 	$(document).on('click', '.ajax-load-back', function(e) {
 		e.preventDefault();
-		
-
+	
 		var link = $(this).attr('href');
 		var top = $(this).data('top');
-
-		console.log('BACK CORDOVA');
 
 		if(link!=""){
 			var navAjaxbE = document.querySelector('.sidenav');
@@ -166,16 +162,9 @@ $(document).on('ready', function () {
 	$(document).on('click', '.ajax-submit', function(e) {
 		e.preventDefault();
 		var form = $(this).closest('form');
-		console.log('form');
-		console.log(form);
-		
 		var post = form.serializeArray();
 		var link = $(this).data('href');
 		var back = $(this).data('action');
-		console.log('post');
-		console.log(post);
-		console.log(link);
-		console.log(back);
 		var metodo = $(this).data('method');
 		var method = (metodo != undefined && metodo != '') ? metodo : 'POST';
 		if (VerificarForm(form) == true) {
@@ -225,15 +214,10 @@ $(document).on('ready', function () {
 	});
 
 	$(document).on('change', 'select[name="id_filtro"]', function () {
-		console.log('Estou alterando o select, o valor é:');
-		console.log($(this).val());
 		var father = $(this).parent().attr('class')
 
 		//1 - faculdade, 2 - UF, 3 - cidade
 		if($(this).val() == 1){
-			console.log($(this).parent().attr('class'));
-			console.log($(this).parent().find('.select_filtro_container'));
-			console.log(father);
 			LoadToClass('/sistema/postagens/adicionar/filtro/faculdades',father);
 		}
 
@@ -242,11 +226,8 @@ $(document).on('ready', function () {
 
 
 	$(document).on('click','.checkbox_selecionar_usuario',function(){
-
 		var itenscheckados = 0;
-
 		if($(this).prop('checked') == true){
-			console.log('estou checkado');
 			$('.footer_adicionar_contatos ').css('display','block');
 			$('.footer_adicionar_contatos ').css('opacity',1);
 			itenscheckados++;
@@ -270,19 +251,11 @@ $(document).on('ready', function () {
 	var alunoativo = 0;
 
 	$(document).on('click','.checkbox_selecionar_aluno',function(){
-		console.log('estou sendo clicado no checkbox_selecionar_aluno');
-		
-		console.log('****************************** ALUNO VALOR DO DELETADO **********************************');
-		console.log($(this).data('aluno_deletado'));
-		console.log('*****************************************************************************************');
-
-		
 		/*aluno ativo e está selecionando para remover*/
 
 		if(primeiravezcheckbox == 0){
 
 			if($(this).data('aluno_deletado') == 0 && $(this).prop('checked') == false ){
-				console.log('############### ALUNO ATIVO E FOI DESELECIONADO ###################');
 				$('.footer_remover_aluno ').css('display','block');
 				$('.footer_remover_aluno ').css('opacity',1);
 				primeiravezcheckbox = 1;
@@ -340,9 +313,6 @@ $(document).on('ready', function () {
 	$(".sidenav-trigger").sidenav();
 
 	window.onpopstate = function() {
-		console.log('EEEEEEEEEEEEEE ESTOU NO ONPOPSTATE EEEEEEEEEEE');
-		console.log(location.pathname);
-		console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
 		GoTo(location.pathname, false);
 	};
 
@@ -355,7 +325,6 @@ $(document).on('ready', function () {
 	});
 
 	$(document).on('change', 'input[type="file"]:not(#imagem_perfil)', function () {
-		console.log('aaaaaaaaaaa');
 		if($(this).val() != '') {
 			UploadFile($(this));
 		}
@@ -428,8 +397,6 @@ $(document).on('ready', function () {
 	});
 
 	$(document).on('change', 'select[name="tipo"]', function () {
-		console.log('estou selecionando o tipo');
-		console.log($(this).val());
 		if ($(this).val() > 0) {
 			MountToAdd($(this).val(), '#add-tipo');
 		} else {
@@ -632,7 +599,6 @@ function GoToBackToIndex(link, state, top) {
 			$('#sair').fadeIn('slow');
 		},
 		success: function(data) {
-			console.log('GOTOBAKCINDEX MURON NORMAL');
 			$('body').addClass('login');
 			$('body').removeClass('g-white');
 			$('body').html(data);
@@ -831,7 +797,6 @@ function SearchAjax(post, link, method, to) {
 			adicionarLoader();
 		},
 		success: function(data) {
-			console.log(to);
 			$(to).html(data);
 		},
 	    error: function(xhr) { // if error occured
@@ -1061,46 +1026,6 @@ function LoadToClass(link, to) {
 		}
 	});
 }
-
-
-
-
-
-
-// function adicionarPaddingMain(){
-// 	var headerHeight = $('header').height();
-
-// 	if(headerHeight != undefined && headerHeight>0) {
-// 		console.log('HHHHHHHHHH HEADERHEIGHT HHHHHHHHHHHHHHH');
-// 		console.log(headerHeight);
-// 		console.log('HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
-
-// 		var paddingTop = headerHeight - 70 + 10;
-// 		if(paddingTop>0){
-// 			console.log('pppppppppp paddingTop ppppppppppppppppp');
-// 			console.log(paddingTop);
-// 			console.log('pppppppppppppppppppppppppppppppppppppp');
-// 			// var mainTypes = $('.tipos_categorias > row');
-// 			var mainTypes = $('#teste_naosumir');
-
-// 			console.log('mmmmmmmmmmmmm mainTypes mmmmmmmmmmmmmmm');
-// 			console.log(mainTypes);
-// 			console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
-
-// 			$('main').css('background','yellow');
-// 			if($('#teste_naosumir') != undefined ){
-// 				mainTypes.css('padding-top',paddingTop);
-// 				$('#teste_naosumir').css('background','yellow');
-// 				console.log('não é undefined');
-// 			}
-// 			else{
-// 				console.log('É UNDEFINED');
-// 			}
-// 		}
-// 	}
-// }
-
-
 
 function AdicionarContato(post) {
 	$.ajax({

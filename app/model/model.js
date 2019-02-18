@@ -189,6 +189,7 @@ class Helper {
 			  });
 		});
 	}
+	
 	// UpdateMultiple(table, data) {
 	// 	for (var key in data) {
 	// 		var names = '';
@@ -201,9 +202,6 @@ class Helper {
 	// 		for (var key2 in data[key]) {
 	// 			if (key == 'id') {
 	// 				var where = ' WHERE id = ' + data[key][key2];
-	// 				console.log('LLLLLLLLLLLLLLLL WHERE DO UPDATE MULTIPLE LLLLLLLLLLLLLLLLLL');
-	// 				console.log(where);
-	// 				console.log('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL');
 	// 			} else {
 	// 				if (this.Isset(array[key2], false)) {
 	// 					array[key2] = [];
@@ -222,20 +220,6 @@ class Helper {
 	// 		values2 = values2.slice(1);
 	// 		names = names.slice(1);
 	// 		values_final = values2;
-			
-	// 		console.log('ttttttttttttttttttttt Table ttttttttttttttttttttttttt');
-	// 		console.log(table);
-	// 		console.log('ttttttttttttttttttttttttttttttttttttttttttttttttttttt');
-	// 		console.log('MMMMMMMMMMMMMMMMMMMMMMMMMM VALUE MMMMMMMMMMMMMMMMMMMMMM');
-	// 		console.log(values);
-	// 		console.log('MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM');
-	// 		console.log('OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO Array OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
-	// 		console.log(array);
-	// 		console.log('OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
-	// 		console.log('WWWWWWWWWW WHERE WWWWWWWWWWWWWWWWWWWWWWWWWWWW');
-	// 		console.log(where);
-	// 		console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW');
-
 	// 	  // Adicione a query com scape(?) e os respectivos valores em um array simples
 	// 	  connection.query('UPDATE '+ table +' SET ' + values + where, array, function (error, results, fields) {
 	// 	  	if (error && query != '') console.log('ERROR SQL ------------- '+error+' ------------- SQL ERROR');

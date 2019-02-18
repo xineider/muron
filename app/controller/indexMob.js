@@ -11,15 +11,9 @@ app.use(require('express-is-ajax-request'));
 
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {
+	/*Adicionar as views somente para usuarios novos*/
 	model.VeifyViews(req.session.usuario.id).then(ret => {
-		console.log('QQQQQQQQQQQQQQQQQQQQQ REQ USUARIO QQQQQQQQQQQQQQQQQQQQQ');
-		console.log(req.session.usuario);
-		console.log('QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ');
-
 		model.GetUsuario(req.session.usuario.id).then(data_usuario=>{
-			console.log('------------------------- DATA USUARIO --------------------------------');
-			console.log(data_usuario);
-			console.log('-----------------------------------------------------------------------');
 
 			data_insert = {id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id,status:data_usuario[0].status};
 
@@ -28,6 +22,7 @@ router.get('/', function(req, res, next) {
 			data_estagio = {id_categoria:1, id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id, icone: '/assets/imgs/header-estagios-icon.png',link:'/sistema/postagens/ver/',filtro_status_faculdade:data_usuario[0].status};
 			data_divulgacao = {id_categoria:4, id_faculdade:req.session.usuario.id_faculdade, id_usuario:req.session.usuario.id, icone:'/assets/imgs/header-divulgacao-icon.png',link:'/sistema/postagens/ver/',filtro_status_faculdade:data_usuario[0].status};
 
+			/*se for um tipo 1 ou seja aluno*/
 			if (req.session.usuario.tipo == 1) {
 				model.GetCategoriasAtualizacoes(data_faculdade).then(cat_fac=>{
 					data.categorias = cat_fac;
@@ -38,15 +33,14 @@ router.get('/', function(req, res, next) {
 							model.GetCategoriasAtualizacoes(data_divulgacao).then(cat_div=> {
 								data.categorias.push(cat_div[0]);
 								model.GetPostagensTodas(data_insert).then(data_postagens=> {
-									data.postagens = data_postagens;
-								// console.log(data);
-								res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'inicio/indexMob', data: data, usuario: req.session.usuario});
-							});
+									data.postagens = data_postagens;									
+									res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'inicio/indexMob', data: data, usuario: req.session.usuario});
+								});
 							});
 						});
 					});
 				});
-
+				/*se for um tipo 2 ou seja faculdade*/
 			} else if(req.session.usuario.tipo == 2){
 				model.GetCategoriasAtualizacoesFaculdade(data_projeto).then(cat_proj=> {
 					data.categorias = cat_proj;
@@ -55,8 +49,7 @@ router.get('/', function(req, res, next) {
 						model.GetCategoriasAtualizacoesFaculdade(data_divulgacao).then(cat_div=> {
 							data.categorias.push(cat_div[0]);
 							model.GetPostagensTodasFaculdade(data_insert).then(data_postagens=>{
-								data.postagens = data_postagens;
-								console.log(data);				
+								data.postagens = data_postagens;				
 								res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'inicio/indexMob', data: data, usuario: req.session.usuario});
 							});
 						});
@@ -78,11 +71,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
 	// Recebendo o valor do post
 	POST = req.body;
-	console.log('///////////////////////// ENVIANDO POST PARA / //////////////////////////////////////////////');
-	console.log(POST);
-	console.log('/////////////////////////////////////////////////////////////////////////////////////////////');
 	model.Login(POST).then(data => {
-		console.log(data);
 		if (data.length > 0) {
 			req.session.id_usuario = data[0].id;
 			res.redirect('/mobsmart');

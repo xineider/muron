@@ -144,9 +144,6 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 
 						<!-- Sou Murer Comum e sou amigo do usuário -->
 
-						<% console.log(usuario);%>
-
-
 						<% if((data.perfil[i].tipo == 1 && data.perfil[i].amigos == 1 || 
 						data.perfil[i].tipo == 1 && data.perfil[i].id == usuario.id) || (data.perfil[i].tipo == 1 && usuario.id == 1) || (data.perfil[i].tipo == 1 && usuario.id_faculdade == data.perfil[i].id_faculdade && usuario.tipo == 2)){%>
 

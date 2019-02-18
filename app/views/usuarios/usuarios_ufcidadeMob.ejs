@@ -22,6 +22,7 @@
 <script src="/assets/js/jquery-ui.min.js"></script>
 
 <script type="text/javascript">
+  
 function Estados_Cidades() {
   $.getJSON('/assets/json/estados_cidades.json', function (data) {
     var items = [];
@@ -52,51 +53,4 @@ function Estados_Cidades() {
 
 Estados_Cidades();
 
-
-
-
-
-
-
-
-// function Estados_Cidades() {
-//   $.getJSON('/assets/json/estados_cidades.json', function (data) {
-//     var items = [];
-//     var options = '<option value="0" disabled selected>Escolha seu estado</option>'; 
-//     $.each(data, function (key, val) {
-//       console.log('============ KEY ============');
-//       console.log(key);
-//       console.log('=============================');
-//       console.log('____________ VAL ____________');
-//       console.log(val);
-//       console.log('_____________________________');
-//       options += '<option value="' + val.nome + '">' + val.sigla + '</option>';
-//     });         
-//     $("#estados").html(options);
-//     $("#estados").change(function () {
-//       só para ter certeza que o disabled e o selected estão funcionando
-//       if($('#estados').val() != 0){
-//         $('.cidade_filtro').prop('disabled',false);
-//         $('.cidade_filtro').focus();
-//       }
-
-//     });
-
-//       var options_cidades = '';
-//     var str = "";
-//    $("#estados option:selected").each(function () {
-//     str += $(this).text();
-//       });
-//      $.each(data, function (key, val) {
-//      if(val.nome == str) {             
-//        $.each(val.cidades, function (key_city, val_city) {
-//         options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
-//        });             
-//     }
-//   });
-//    $("#cidades").html(options_cidades);
-//  }).change();
-//   });
-//   // body...
-// }
 </script>

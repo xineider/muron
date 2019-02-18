@@ -15,23 +15,23 @@ router.get('/', function(req, res, next) {
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'grupos/grupos', data: data});
 	});
 });
-	router.get('/criar', function(req, res, next) {
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'grupos/grupos_criar', data: data});
+router.get('/criar', function(req, res, next) {
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'grupos/grupos_criar', data: data});
+});
+router.get('/editar/:id', function(req, res, next) {
+	id = req.params.id;
+	model.GetGrupo(id).then(data => {
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'grupos/grupos_editar', data: data});
 	});
-	router.get('/editar/:id', function(req, res, next) {
-		id = req.params.id;
-		model.GetGrupo(id).then(data => {
-			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'grupos/grupos_editar', data: data});
-		});
-	});
+});
 
-	// Metodos POST
-	router.post('/desativar', function(req, res, next) {
+// Metodos POST
+router.post('/desativar', function(req, res, next) {
 		// Recebendo o valor do post
 		POST = req.body;
-  		model.DesativarGrupo('grupos', POST).then(data=> {
-  			res.json(data);
-  		});
+		model.DesativarGrupo('grupos', POST).then(data=> {
+			res.json(data);
+		});
 	});
 
 module.exports = router;

@@ -19,14 +19,8 @@ router.get('/', function(req, res, next) {
 router.get('/ver/:id', function(req, res, next) {
 	id = req.params.id;
 	model.GetMensagens(id, req.session.usuario.id).then(data => {
-		console.log(id);
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'chats/chats_interno', data: data, usuario: req.session.usuario, usuario_chat: id});
 	});
-
-	// res.json('oi');
-
-
-
 });
 
 router.get('/novidades/', function(req, res, next) {
@@ -34,11 +28,11 @@ router.get('/novidades/', function(req, res, next) {
 });
 
 // POSTS
-	router.post('/enviar/mensagem/', function(req, res, next) {
-		POST = req.body;
-		model.InsertMensagem(POST).then(data => {
-			res.json(data);
-		});
+router.post('/enviar/mensagem/', function(req, res, next) {
+	POST = req.body;
+	model.InsertMensagem(POST).then(data => {
+		res.json(data);
 	});
+});
 
 module.exports = router;

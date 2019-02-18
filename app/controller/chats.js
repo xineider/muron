@@ -19,7 +19,6 @@ router.get('/', function(req, res, next) {
 router.get('/ver/:id', function(req, res, next) {
 	id = req.params.id;
 	model.GetMensagens(id, req.session.usuario.id).then(data => {
-		console.log(id);
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'chats/chats_interno', data: data, usuario: req.session.usuario, usuario_chat: id});
 	});
 });
