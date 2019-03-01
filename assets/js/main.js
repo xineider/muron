@@ -735,7 +735,7 @@ function SubmitAjax(post, link, back, method) {
 				M.toast({html:'<div class="center-align" style="width:100%;">Cadastrado com sucesso</div>'}, 5000, 'rounded');
 			}
 			if(data == 'alterado_senha'){
-				M.toast({html:'<div class="center-align" style="width:100%;">Senha Alterada com sucesso</div>'}, 5000, 'rounded');
+				M.toast({html:'<div class="center-align" style="width:100%;">Senha Alterada com sucesso!</div>'}, 5000, 'rounded');
 			}
 			if (typeof back != 'undefined' && back != '') {
 				GoTo(back, true);

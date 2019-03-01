@@ -29,7 +29,7 @@ router.get('/permissao-faculdades', function(req, res, next) {
 });
 
 /*login do aplicativo quando sair e entra denovo*/
-router.get('/loginfake', function(req, res, next) {
+router.get('/loginagain', function(req, res, next) {
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorLimpo', {html: 'inicio/login_fake', data: data, usuario: req.session.usuario});
 });
 
