@@ -29,7 +29,7 @@ router.get('/permissao-faculdades', function(req, res, next) {
 });
 
 /*login do aplicativo quando sair e entra denovo*/
-router.get('/loginfake', function(req, res, next) {
+router.get('/loginagain', function(req, res, next) {
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorLimpo', {html: 'inicio/login_fake', data: data, usuario: req.session.usuario});
 });
 
@@ -101,7 +101,6 @@ router.post('/alterarSenhaUsuario/', function(req, res, next) {
 		var senha = Math.random().toString(36).substr(2, 8);
 		POST.senha = senha;
 
-
 		model.AlterarSenhaUsuario(POST).then(data_alterar_senha=>{
 			control.SendMail(data_usuario[0].email,'Senha Alterada em Muron',
 				'Olá, sua senha foi alterada pelo Administrador no Muron segue sua nova senha: ' + senha + 
@@ -112,7 +111,7 @@ router.post('/alterarSenhaUsuario/', function(req, res, next) {
 				'<br>Recomendamos assim que entrar alterar esta senha gerada ao clicar no seu perfil e clicar no botão "Alterar Senha" no fim da página do perfil.'+
 				'<br><br>Não mostre seu login e senha para ninguém. A sua conta é responsabilidade sua.'+
 				'<br>Não responda esta mensagem, ela é enviada automaticamente.');
-			res.json(data_alterar_senha);
+			res.json('alterado_senha');
 		});
 	});
 });

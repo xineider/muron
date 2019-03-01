@@ -116,7 +116,7 @@ router.post('/alterarSenhaUsuario/', function(req, res, next) {
 				'<br>Recomendamos assim que entrar alterar esta senha gerada ao clicar no seu perfil e clicar no botão "Alterar Senha" no fim da página do perfil.'+
 				'<br><br>Não mostre seu login e senha para ninguém. A sua conta é responsabilidade sua.'+
 				'<br>Não responda esta mensagem, ela é enviada automaticamente.');
-			res.json(data_alterar_senha);
+			res.json('alterado_senha');
 		});
 	});
 });

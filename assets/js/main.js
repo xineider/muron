@@ -728,8 +728,14 @@ function SubmitAjax(post, link, back, method) {
 			adicionarLoader();
 		},
 		success: function(data) {
-			if (typeof data != undefined) {
+			console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD AJAX DATA DDDDDDDDDDDDDDDDDDDDDD');
+			console.log(data);
+			console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
+			if (typeof data != undefined && data != 'alterado_senha') {
 				M.toast({html:'<div class="center-align" style="width:100%;">Cadastrado com sucesso</div>'}, 5000, 'rounded');
+			}
+			if(data == 'alterado_senha'){
+				M.toast({html:'<div class="center-align" style="width:100%;">Senha Alterada com sucesso</div>'}, 5000, 'rounded');
 			}
 			if (typeof back != 'undefined' && back != '') {
 				GoTo(back, true);
