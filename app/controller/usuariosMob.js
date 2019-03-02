@@ -62,13 +62,13 @@ router.get('/grupos/ver/:id', function(req, res, next) {
 
 router.get('/situacao/:id', function(req, res, next) {
 	id = req.params.id;
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_situacaoMob', data: data, usuario: req.session.usuario});
+	res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'usuarios/usuarios_situacaoMob', data: data, usuario: req.session.usuario});
 });
 
 
 router.get('/genero/:id', function(req, res, next) {
 	id = req.params.id;
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'usuarios/usuarios_generoMob', data: data, usuario: req.session.usuario});
+	res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'usuarios/usuarios_generoMob', data: data, usuario: req.session.usuario});
 });
 
 router.get('/faculdade/:id', function(req, res, next) {
