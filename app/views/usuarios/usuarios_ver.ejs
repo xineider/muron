@@ -124,7 +124,7 @@ if (typeof data.perfil != 'undefined' && data.perfil.length > 0) {
 								Site <%- data.perfil[i].id == usuario.id ? '<span class="blue-text modal-input right" data-nome="Site" data-id="'+data.perfil[i].id+'" data-collum="site"><i class="fa fa-edit"></i></span>' : '' %>
 							</div>
 							<div class="card-title">
-								<a href="<%= data.perfil[i].site %>" target="_blank"><%= data.perfil[i].site %></a>
+								<a href="http://<%= data.perfil[i].site %>" target="_blank"><%= data.perfil[i].site %></a>
 							</div>
 						</div>
 
