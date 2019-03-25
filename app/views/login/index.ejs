@@ -450,6 +450,8 @@ function autoComplete(element,url,select_el){
 				beforeSend: function() {
 				},
 				success: function(data) {
+					console.log('retorno do autoComplete');
+					console.log(data);
 					response(data);
 					response($.map(data, function (item) {
 						return {
