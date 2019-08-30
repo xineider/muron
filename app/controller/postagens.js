@@ -83,17 +83,26 @@ router.get('/adicionar/filtro/faculdades', function(req, res, next) {
 // POST
 router.post('/uploadarquivo', function(req, res, next) {
 	var sampleFile = req.files.arquivo;
-	var nome = control.DateTimeForFile()+'_'+sampleFile.name;
+	var nomeImagem = control.DateTimeForFile()+'_'+sampleFile.name;
 
   // Use the mv() method to place the file somewhere on your server
-  sampleFile.mv('./assets/uploads/'+nome, function(err) {
+  sampleFile.mv('./assets/uploads/'+nomeImagem, function(err) {
   	if (err) {
   		return res.status(500).send(err);
   	}
 
-  	res.json(nome);
+  	var nomeImagemPerfil = '/assets/uploads/' + nomeImagem;
+
+  	console.log('estou no upload do arquivo :D');
+  	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+  	data.imagem = nomeImagemPerfil;
+  	data.id = req.session.usuario.id;
+
+  	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/imagem_cropper', data: data, usuario: req.session.usuario});
+
   });
 });
+
 router.post('/tipo', function(req, res, next) {
 	POST = req.body;
 	model.SearchTipo(POST, req.session.usuario.id).then(data => {

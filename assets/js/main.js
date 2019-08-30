@@ -483,8 +483,14 @@ function UploadFile(isso) {
 			adicionarLoader();
 		},
 		success: function (data) {
+			console.log('DDDDDDDDDDDDDDDDDD DATA DDDDDDDDDDDDD');
+			console.log(data);
+			console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
 			$('input[name="imagem"]').val(data);
-			$('.imagem-upload-preview').append('<img class="mur-img" src="/assets/uploads/'+data+'">')
+			// $('.imagem-upload-preview').append(data);
+			// $("#modalinfo").find('.modal-content').html(data);
+			// $("#modalinfo").modal('open');
+			// $('.imagem-upload-preview').append('<img class="mur-img" src="/assets/uploads/'+data+'">')
 
 		},
 		error: function (xhr, e, t) {

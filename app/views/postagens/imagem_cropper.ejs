@@ -1,0 +1,18 @@
+<form method="POST" action="" enctype="multipart/form-data">
+		<div class="row">
+				<input type="hidden" name="id" value="<%= data.id %>">
+
+				<div class="configuracao-image-container center">
+					<img id="imagem-usuario-config" src="<%= data.imagem %>" style="max-height: 300px;">
+			</div>
+	</div>
+
+	<button class="btn waves-effect crop-image-servidor waves-light bordo modal-close" data-crop="#imagem-usuario-config" data-action="/sistema/configuracoes">
+		Usar Imagem
+</button>
+
+<button  class="btn waves-effect waves-light grey darken-2 modal-close">
+		Cancelar
+</button>   
+
+</form>
