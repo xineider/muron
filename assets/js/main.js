@@ -484,6 +484,8 @@ function UploadFile(isso) {
 		},
 		success: function (data) {
 			$('input[name="imagem"]').val(data);
+			$('.imagem-upload-preview').append('<img class="mur-img" src="/assets/uploads/'+data+'">')
+
 		},
 		error: function (xhr, e, t) {
 			removerLoader();
