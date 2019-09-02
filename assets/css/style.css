@@ -244,95 +244,95 @@ body > div.row .col {
   @media (min-width: 994px){
 /*    main>section:first-child{
       margin-top: 86px;
-    }*/
+      }*/
 
-    .card .card-image img{
-      object-fit: contain;
-      height: 28vw;
+      .card .card-image img{
+        object-fit: contain;
+        height: 28vw;
+      }
+
     }
 
-  }
+    @media (min-width: 601px){
+      .card .card-image img{
+        object-fit: contain;
+        height: 50vw;
+      }
 
-  @media (min-width: 601px){
-    .card .card-image img{
-      object-fit: contain;
-      height: 50vw;
+
+      .card-image-background-desktop{
+        background: url(/assets/imgs/chat_background.png);
+      }
+
+
     }
 
-
-    .card-image-background-desktop{
-      background: url(/assets/imgs/chat_background.png);
+    @media (max-width:400px){
+      header img{
+        margin-left: -25%;
+      }
     }
 
+    /*Alterações Materialize*/
 
-  }
-
-  @media (max-width:400px){
-    header img{
-      margin-left: -25%;
+    nav a.sidenav-trigger{
+      display: block;
     }
-  }
 
-  /*Alterações Materialize*/
+    .btn-small{
+      width: 30px;
+      height: 30px;
+      line-height: 36px;
+    }
 
-  nav a.sidenav-trigger{
-    display: block;
-  }
+    .btn-small i{
+      font-size: 1.2rem;
+      line-height: 30px;
+    }
 
-  .btn-small{
-    width: 30px;
-    height: 30px;
-    line-height: 36px;
-  }
-
-  .btn-small i{
-    font-size: 1.2rem;
-    line-height: 30px;
-  }
-
-  .line {
-    border-bottom: 2px solid rgba(196, 196, 196, 0.6);
-  }
-  .small-line {
-    border-bottom: 1px solid rgba(196, 196, 196, 0.6);
-  }
-  .small-line.post-line {
-    width: 96%;
-    margin: 0 auto;
-  }
-  .side-nav li>a>i {
-    width: auto;
-  }
-  .carousel-item {
-    max-width: 8rem;
-    max-height: 100%;
-  }
-  .carousel h5 {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-  .carousel img {
-    box-shadow: rgba(0, 0, 0, 0.8) 0px 0px 8px;
-    border-radius: 50%;
-  }
-  .carousel {
-    background: aliceblue;
-    /*  max-height: 150px;*/
-    max-height: 11em;
-  }
-  .g-blue {
-    background: linear-gradient(to right top, rgb(94, 182, 255), rgb(3, 117, 210));
-  }
-  .g-blue-light {
-    background: linear-gradient(to right top, rgb(124, 186, 247), rgb(99, 130, 247));
-  }
-  .g-white {
-    background: linear-gradient(to bottom, rgb(255, 255, 255), rgb(242, 242, 242));
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    top: 0;
-  }
-  .logo-container img {
+    .line {
+      border-bottom: 2px solid rgba(196, 196, 196, 0.6);
+    }
+    .small-line {
+      border-bottom: 1px solid rgba(196, 196, 196, 0.6);
+    }
+    .small-line.post-line {
+      width: 96%;
+      margin: 0 auto;
+    }
+    .side-nav li>a>i {
+      width: auto;
+    }
+    .carousel-item {
+      max-width: 8rem;
+      max-height: 100%;
+    }
+    .carousel h5 {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    .carousel img {
+      box-shadow: rgba(0, 0, 0, 0.8) 0px 0px 8px;
+      border-radius: 50%;
+    }
+    .carousel {
+      background: aliceblue;
+      /*  max-height: 150px;*/
+      max-height: 11em;
+    }
+    .g-blue {
+      background: linear-gradient(to right top, rgb(94, 182, 255), rgb(3, 117, 210));
+    }
+    .g-blue-light {
+      background: linear-gradient(to right top, rgb(124, 186, 247), rgb(99, 130, 247));
+    }
+    .g-white {
+      background: linear-gradient(to bottom, rgb(255, 255, 255), rgb(242, 242, 242));
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      top: 0;
+    }
+    .logo-container img {
 /*    max-width: 80%;
 padding-top: 17px;*/
 }
@@ -931,4 +931,35 @@ table.striped>tbody>tr>td {
     left:  0;
     top: 0;
     background:url('/assets/imgs/chat_background.png');
+  }
+
+
+  /*Cropper */
+
+
+  .btn-group{
+    display: inline-block;
+    border-radius: 10px;
+  }
+
+  .btn-group .btn-similar:first-child{
+    border-radius: 10px 0 0 10px;
+  }
+
+  .btn-group .btn-similar:last-child{
+    border-radius: 0 10px 10px 0;
+  }
+
+  .btn-similar{
+    height: 36px;
+    line-height: 36px;
+    padding: 0 16px;
+    vertical-align: middle;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .btn-similar:hover,.btn-similar:focus{
+    background: #2196F3 !important;
   }

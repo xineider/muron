@@ -134,7 +134,7 @@ $(document).on('ready', function () {
 
 	$(document).on('click', '.ajax-load-back', function(e) {
 		e.preventDefault();
-	
+
 		var link = $(this).attr('href');
 		var top = $(this).data('top');
 
@@ -436,6 +436,27 @@ $(document).on('ready', function () {
 	});
 
 
+	$(document).on('click', '.rotate-esquerda', function () {
+		console.log('estou virando para a esquerda');
+		$('#imagem-usuario-config').cropper("rotate",90)
+	});
+
+	$(document).on('click', '.rotate-direita', function () {
+		console.log('estou virando para a direita');
+		$('#imagem-usuario-config').cropper("rotate",-90)
+	});
+
+	$(document).on('click', '.zoom-plus', function () {
+		console.log('estou dando zoom');
+		$('#imagem-usuario-config').cropper("zoom",0.1)
+	});
+
+	$(document).on('click', '.zoom-minus', function () {
+		console.log('estou removendo o zoom');
+		$('#imagem-usuario-config').cropper("zoom",-0.1)
+	});
+	
+
 
 	$(document).on('click', '.define-tipo', function () {
 		$('.define-tipo').removeClass('active');
@@ -465,37 +486,31 @@ $(window).on('load', function (e) {
 
 function UploadFile(isso) {
 	var link = isso.data('href');
+	console.log('FILE UPLOAD');
+	console.log(isso[0].files[0]);
 	var formData = new FormData();
 	formData.append('arquivo', isso[0].files[0]);
 
 	$.ajax({
-		url: link,
-		type: 'POST',
+		method: 'POST',
+		async: true,
 		data: formData,
-		dataType: 'json',
+		url: link,
 		processData: false,
 		contentType: false,
 		beforeSend: function(request) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-nivel", $('input[name="nivel_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Optima-faculdade", $('input[name="id_faculdade_sessao"]').val());
 			adicionarLoader();
 		},
 		success: function (data) {
-			console.log('DDDDDDDDDDDDDDDDDD DATA DDDDDDDDDDDDD');
-			console.log(data);
-			console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
-			$('input[name="imagem"]').val(data);
-			// $('.imagem-upload-preview').append(data);
-			// $("#modalinfo").find('.modal-content').html(data);
-			// $("#modalinfo").modal('open');
-			// $('.imagem-upload-preview').append('<img class="mur-img" src="/assets/uploads/'+data+'">')
-
+			console.log('SUCESSO');
+			$('.imagem-upload-preview').append(data);
 		},
 		error: function (xhr, e, t) {
-			removerLoader();
 			console.debug((xhr.responseText));
+			removerLoader();
 		},
 		complete: function() {
 			removerLoader();
@@ -591,7 +606,7 @@ function GoTo(link, state, top) {
 	    	$(".sidenav").sidenav('close');
 	    	instance.close();
 	    }
-	  });
+	});
 	if (state == true) {
 		window.history.pushState('Muron', 'Muron', link);
 	}
@@ -654,7 +669,7 @@ function FormatInputs(focus) {
     labelYearSelect: 'Selecione um ano',
     format: 'dd/mm/yyyy',
     closeOnSelect: false // Close upon selecting a date,
-  });
+});
 	$(document).ready(function(){
 		$('.collapsible').collapsible();
 	});
@@ -685,7 +700,20 @@ function FormatInputs(focus) {
 	// $('#'+'footer').fadeOut('showFooter');
 	$('#'+'sobre-facul').click(function(){
 		$('.facul-screen').toggle();
-	})
+	});
+
+	var imagem_usuario_perfil = $('#imagem-usuario-config');
+
+	if(typeof imagem_usuario_perfil != undefined){
+
+		console.log('iiiiiiiiiiiiiiiiii imagem_usuario_perfil iiiiiiiiiiiiiiiii');
+		console.log(imagem_usuario_perfil);
+		console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+
+		$(imagem_usuario_perfil).cropper({
+			
+		});
+	}
 }
 function GetEndereco(cep, pai) {
 	var link = 'https://viacep.com.br/ws/'+cep+'/json/ ';
@@ -720,7 +748,7 @@ function GetEndereco(cep, pai) {
     complete: function() {
     	removerLoader();
     }
-  });
+});
 }
 function SubmitAjax(post, link, back, method) {
 	$.ajax({
@@ -764,7 +792,7 @@ function SubmitAjax(post, link, back, method) {
 	    	removerLoader();
 	    	$('.modal').modal('close');
 	    }
-	  });
+	});
 }
 function SendAjax(post, link, back, method) {
 	$.ajax({
@@ -795,7 +823,7 @@ function SendAjax(post, link, back, method) {
 
 	    	$('html,body').animate({ scrollTop: $('html').height() }, 'slow');
 	    }
-	  });
+	});
 }
 function SearchAjax(post, link, method, to) {
 	$.ajax({
@@ -824,7 +852,7 @@ function SearchAjax(post, link, method, to) {
 	    	$('.tooltipped').tooltip({delay: 50});
 	    	$('.modal').modal('close');
 	    }
-	  });
+	});
 }
 function Reestruturar(str) {
 	var i = 1;
@@ -880,7 +908,7 @@ function MountModalInteiro(modal, link) {
 	    	$('.tooltipped').tooltip({delay: 50});
 	    	FormatInputs();
 	    }
-	  });
+	});
 }
 
 
@@ -912,7 +940,7 @@ function MountModal(modal, link) {
 	    	$('.tooltipped').tooltip({delay: 50});
 	    	FormatInputs();
 	    }
-	  });
+	});
 }
 function VerificarForm(form) {
 	var error = false;
@@ -988,7 +1016,7 @@ function AddLike(id, id_usuario, gostei) {
 	    complete: function() {
 	    	removerLoader();
 	    }
-	  });
+	});
 }
 function SubmitRemove(id, link, pai) {
 	var post = {id: id, deletado: 1};
@@ -1014,7 +1042,7 @@ function SubmitRemove(id, link, pai) {
 	    complete: function() {
 	    	removerLoader();
 	    }
-	  });
+	});
 }
 
 function LoadToClass(link, to) {
@@ -1066,7 +1094,7 @@ function AdicionarContato(post) {
 	    complete: function() {
 	    	removerLoader();
 	    }
-	  });
+	});
 }
 function MountToAdd(val, where) {
 	$.ajax({
@@ -1091,5 +1119,5 @@ function MountToAdd(val, where) {
 	    complete: function() {
 	    	removerLoader();
 	    }
-	  });
+	});
 }
