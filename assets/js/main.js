@@ -438,22 +438,81 @@ $(document).on('ready', function () {
 
 	$(document).on('click', '.rotate-esquerda', function () {
 		console.log('estou virando para a esquerda');
-		$('#imagem-usuario-config').cropper("rotate",90)
+		var cropper = $(this).data('cropper');
+		$(cropper).cropper("rotate",90)
 	});
 
 	$(document).on('click', '.rotate-direita', function () {
 		console.log('estou virando para a direita');
-		$('#imagem-usuario-config').cropper("rotate",-90)
+		var cropper = $(this).data('cropper');
+		$(cropper).cropper("rotate",-90)
 	});
 
 	$(document).on('click', '.zoom-plus', function () {
 		console.log('estou dando zoom');
-		$('#imagem-usuario-config').cropper("zoom",0.1)
+		var cropper = $(this).data('cropper');
+		$(cropper).cropper("zoom",0.1);
 	});
 
 	$(document).on('click', '.zoom-minus', function () {
 		console.log('estou removendo o zoom');
-		$('#imagem-usuario-config').cropper("zoom",-0.1)
+		var cropper = $(this).data('cropper');
+		$(cropper).cropper("zoom",-0.1)
+	});
+
+
+	$(document).on('click', '.ajax-submit-crop', function(e) {
+		e.preventDefault();
+		var form = $(this).closest('form');
+		var post = form.serializeArray();
+		var link = $(this).data('href');
+		var back = $(this).data('action');
+		var metodo = $(this).data('method');
+		var method = (metodo != undefined && metodo != '') ? metodo : 'POST';
+
+		var cropper = $('#imagem-publicacao-post').data('cropper');
+		console.log('croppper');
+		console.log(cropper);
+
+		cropper.getCroppedCanvas().toBlob((blob) => {
+			var formData = new FormData();
+			formData.append('arquivo', blob);
+
+			$.ajax({
+				url: '/sistema/postagens/editar_imagem_postagem/',
+				type: 'POST',
+				data: formData,
+				dataType: 'json',
+				processData: false,
+				contentType: false,
+				beforeSend: function(request) {
+					request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
+					request.setRequestHeader("Authority-Optima-tipo", $('input[name="tipo_usuario_sessao"]').val());
+					request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+					request.setRequestHeader("Authority-Optima-faculdade", $('input[name="id_faculdade_sessao"]').val());
+					adicionarLoader();
+				},
+				success: function (nome_arquivo) {
+					/*coloco dentro do post o nome da imagem e o arquivo que foram movidos para lá*/
+					post.push({name:'imagem',value:nome_arquivo});
+					if (VerificarForm(form) == true) {
+						SubmitAjax(post, link, back, method);
+					}
+
+				},
+				error: function(xhr) { 
+					removerLoader();
+					console.log('deu erro');
+					alert("Error, contate o administrador ou reinicie a pagina.");
+				},
+				complete: function() {
+					removerLoader();
+					console.log('estou no complete')
+					$('.modal').modal('close');
+				}
+			});
+		});
+
 	});
 	
 
@@ -702,7 +761,7 @@ function FormatInputs(focus) {
 		$('.facul-screen').toggle();
 	});
 
-	var imagem_usuario_perfil = $('#imagem-usuario-config');
+	var imagem_usuario_perfil = $('#imagem-publicacao-post');
 
 	if(typeof imagem_usuario_perfil != undefined){
 

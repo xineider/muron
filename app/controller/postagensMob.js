@@ -106,6 +106,23 @@ router.post('/gostei', function(req, res, next) {
 	});
 });
 
+router.post('/editar_imagem_postagem/', function(req, res, next) {
+
+	var arquivo = req.files.arquivo;
+	var nome = control.DateTimeForFile()+'_'+arquivo.name+'_cropped.png';
+
+	console.log('UUUUUUUUUUUUUUUUUUUUUU sampleFile UUUUUUUUUUUUUUUUUUUUUUUU');
+	console.log(arquivo);
+	console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU');
+
+	arquivo.mv('./assets/uploads/'+nome, function(err) {
+		if (err) {
+			return res.status(500).send(err);
+		}
+	});
+	res.json(nome);
+});
+
 router.post('/cadastrar', function(req, res, next) {
 	POST = req.body;
 	POST.id_usuario = req.session.usuario.id;

@@ -97,9 +97,7 @@ router.post('/uploadarquivo', function(req, res, next) {
   });
   var nomeImagemPerfil = '/assets/uploads/' + nomeImagem;
 
-
   data.imagem = nomeImagemPerfil;
-  data.id = req.session.usuario.id;
 
   res.render(req.isAjaxRequest() == true ? 'api' : 'montadorSistema', {html: 'postagens/imagem_cropper', data: data, usuario: req.session.usuario});
 
@@ -118,6 +116,24 @@ router.post('/gostei', function(req, res, next) {
 		res.json(data);
 	});
 });
+
+router.post('/editar_imagem_postagem/', function(req, res, next) {
+
+	var arquivo = req.files.arquivo;
+	var nome = control.DateTimeForFile()+'_'+arquivo.name+'_cropped.png';
+
+	console.log('UUUUUUUUUUUUUUUUUUUUUU sampleFile UUUUUUUUUUUUUUUUUUUUUUUU');
+	console.log(arquivo);
+	console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU');
+
+	arquivo.mv('./assets/uploads/'+nome, function(err) {
+		if (err) {
+			return res.status(500).send(err);
+		}
+	});
+	res.json(nome);
+});
+
 
 router.post('/cadastrar', function(req, res, next) {
 	POST = req.body;
