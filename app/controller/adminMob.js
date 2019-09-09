@@ -43,9 +43,23 @@ router.get('/usuario-faculdade', function(req, res, next) {
 
 
 router.get('/cadastro-faculdade', function(req, res, next) {
-	model.GetFaculdadesPorAtivacao().then(data_faculdades => {
+	model.GetFaculdadesCadastradas().then(data_faculdades => {
 		data.faculdades = data_faculdades;
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'admin/cadastro_faculdadeMob', data: data, usuario: req.session.usuario});
+		data.link_sistema = '/mobsmart';
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'admin/cadastro_faculdade', data: data, usuario: req.session.usuario});
+	});
+});
+
+router.get('/adicionar-faculdade', function(req, res, next) {
+	data.link_sistema = '/mobsmart';
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'admin/adicionar_faculdade', data: data, usuario: req.session.usuario});
+});
+
+router.get('/cadastro-faculdade-inep', function(req, res, next) {
+	model.GetFaculdadesInep().then(data_faculdades_inep => {
+		data.faculdades_inep = data_faculdades_inep;
+		data.link_sistema = '/mobsmart';
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'admin/cadastro_faculdade_inep', data: data, usuario: req.session.usuario});
 	});
 });
 
@@ -222,6 +236,16 @@ router.post('/cadastrar/usuario', function(req, res, next) {
 	} else {
 		res.json(['dado_invalido']);
 	}
+});
+
+router.post('/cadastrar-faculdade', function(req, res, next) {
+	// Recebendo o valor do post
+	POST = req.body;
+	POST.ativacao = 2;
+	POST.recorrencia = 0;
+	model.CadastrarFaculdade(POST).then(data=> {
+		res.json(data);
+	});
 });
 
 

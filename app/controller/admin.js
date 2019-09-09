@@ -44,17 +44,20 @@ router.get('/usuario-faculdade', function(req, res, next) {
 router.get('/cadastro-faculdade', function(req, res, next) {
 	model.GetFaculdadesCadastradas().then(data_faculdades => {
 		data.faculdades = data_faculdades;
+		data.link_sistema = '/sistema';
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'admin/cadastro_faculdade', data: data, usuario: req.session.usuario});
 	});
 });
 
 router.get('/adicionar-faculdade', function(req, res, next) {
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'admin/adicionar_faculdade', data: data, usuario: req.session.usuario});
+	data.link_sistema = '/sistema';
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'admin/adicionar_faculdade', data: data, usuario: req.session.usuario});
 });
 
 router.get('/cadastro-faculdade-inep', function(req, res, next) {
 	model.GetFaculdadesInep().then(data_faculdades_inep => {
 		data.faculdades_inep = data_faculdades_inep;
+		data.link_sistema = '/sistema';
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'admin/cadastro_faculdade_inep', data: data, usuario: req.session.usuario});
 	});
 });
