@@ -23,6 +23,7 @@
 					<tr>
 						<td>Nome da Faculdade</td>
 						<td>Sigla da Faculdade</td>
+						<td>Usuário que criou</td>
 						<td>Alterar Dados</td>
 						<td>Excluir</td>
 					</tr>
@@ -39,8 +40,9 @@
 							<tr>
 								<td><%= data.faculdades[i].NO_IES %></td>
 								<td><%= data.faculdades[i].SGL_IES %></td>
+								<td><%= data.faculdades[i].usuario_criador %></td>
 								<td>
-									<a data-href="#modalinfo" data-link="/admin/editar-faculdade/<%= data.faculdades[i].id %>" class="modal-mount">
+									<a data-href="#modalinfo" data-link="/admin/editar-faculdade/1/<%= data.faculdades[i].id %>" class="modal-mount">
 										<i class="fas fa-edit"></i>
 									</a>
 								</td>

@@ -71,10 +71,15 @@ router.get('/cadastro-cursos', function(req, res, next) {
 });
 
 
-router.get('/editar-faculdade/:id', function(req, res, next) {
+router.get('/editar-faculdade/:inep/:id', function(req, res, next) {
 	id = req.params.id;
+	var inep = req.params.inep;
+	var back;
+	inep == '1' ? back = '/sistema/admin/cadastro-faculdade' : back = '/sistema/admin/cadastro-faculdade-inep';
+
 	model.GetFaculdadePorId(id).then(data_faculdade=>{
 		data.faculdade = data_faculdade;
+		data.back = back;
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'admin/editar_faculdade', data: data, usuario: req.session.usuario});
 	});
 });

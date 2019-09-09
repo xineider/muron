@@ -42,7 +42,12 @@ class PostagensModel {
 
 	GetFaculdadesCadastradas(){
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.* FROM faculdades_inep as a WHERE a.deletado = ? AND a.ativacao != ? ORDER BY a.ativacao ASC', [0,0]).then(data => {
+			helper.Query('SELECT a.*, \
+				CASE \
+				WHEN a.ativacao = 1 THEN "MurEr"\
+				WHEN a.ativacao = 2 THEN "MurOn"\
+				ELSE "erro" END as usuario_criador\
+				FROM faculdades_inep as a WHERE a.deletado = ? AND a.ativacao != ? ORDER BY a.ativacao ASC', [0,0]).then(data => {
 				resolve(data);
 			});
 		});	
