@@ -1,0 +1,61 @@
+<section>
+	<% if (usuario.id == 1) {%>
+	<!-- só um teste para ver se é o admin mesmo -->
+	<div class="row white">
+		
+
+		<div class="col s12">
+
+			<table id='tabela-admin-usuario' class="centered" style="margin-bottom: 20px;">
+				<thead>
+					<tr>
+						<td>Nome da Faculdade</td>
+						<td>Sigla da Faculdade</td>
+						<td>Alterar Dados</td>
+						<td>Excluir</td>
+					</tr>
+				</thead>
+				<tbody>
+
+
+
+
+					<% if (typeof data.faculdades_inep != 'undefined' && data.faculdades_inep.length > 0) {
+						for (var i = data.faculdades_inep.length - 1; i >= 0; i--) {
+							%>
+
+							<tr>
+								<td><%= data.faculdades_inep[i].NO_IES %></td>
+								<td><%= data.faculdades_inep[i].SGL_IES %></td>
+									<td>
+										<a data-href="#modalinfo" data-link="/admin/editar-faculdade/<%= data.faculdades_inep[i].id %>" class="modal-mount">
+											<i class="fas fa-edit"></i>
+										</a>
+									</td>
+									<td>
+										<a class="modal-remover-mount" data-href="#modaldeletar" data-texto="Tem certeza que deseja desativar esta faculdade? Esta ação não pode ser desfeita." data-to="/sistema/admin/desativar-faculdade/" data-back="/sistema/admin/cadastro-faculdade-inep" data-id="<%= data.faculdades_inep[i].id %>" style="margin-bottom:10px;width: 100%;">
+										<i class="fas fa-times red-text text-darken-1"></i>
+										</a>
+									</td>
+
+								</tr>
+
+								<%}} else {%>
+								<tr>
+									<td>Nenhuma faculdade foi encontrada.</td>
+								</tr>
+								<%} %>
+
+							</tbody>
+
+						</table>
+					</div>
+				</div>
+				<%}else{	%>
+				<div>
+					<p>Desculpe, somente o administrador pode ver esta página!</p>
+				</div>
+
+
+				<%}%>
+			</section>

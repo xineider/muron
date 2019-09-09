@@ -32,9 +32,25 @@ class PostagensModel {
 			});	
 	}
 
-	GetFaculdadesPorAtivacao(){
+	// GetFaculdadesPorAtivacao(){
+	// 	return new Promise(function(resolve, reject) {
+	// 		helper.Query('SELECT a.* FROM faculdades_inep as a WHERE a.deletado = ? ORDER BY a.ativacao ASC', [0]).then(data => {
+	// 			resolve(data);
+	// 		});
+	// 	});	
+	// }
+
+	GetFaculdadesCadastradas(){
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.* FROM faculdades_inep as a WHERE a.deletado = ? ORDER BY a.ativacao ASC', [0]).then(data => {
+			helper.Query('SELECT a.* FROM faculdades_inep as a WHERE a.deletado = ? AND a.ativacao != ? ORDER BY a.ativacao ASC', [0,0]).then(data => {
+				resolve(data);
+			});
+		});	
+	}
+
+	GetFaculdadesInep(){
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.* FROM faculdades_inep as a WHERE a.deletado = ? AND a.ativacao = ? ORDER BY a.ativacao ASC', [0,0]).then(data => {
 				resolve(data);
 			});
 		});	
@@ -251,6 +267,14 @@ class PostagensModel {
 	CadastrarRelacaoAlunoFaculdade(POST){
 		return new Promise(function(resolve, reject) {
 			helper.Insert('faculdades_relacoes_aluno', POST).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+	CadastrarFaculdade(POST){
+		return new Promise(function(resolve, reject) {
+			helper.Insert('faculdades_inep', POST).then(data => {
 				resolve(data);
 			});
 		});

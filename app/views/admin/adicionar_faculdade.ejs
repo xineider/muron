@@ -1,0 +1,41 @@
+<section>
+	<% if (usuario.id == 1) {%>
+
+	<div class="row white">
+		<form method="post" action="">
+
+
+
+			<div class="input-field col s12">
+				<input type="text" name="NO_IES">
+				<label for="NO_IES">Nome da Faculdade</label>
+			</div>
+
+			<div class="input-field col s12">
+				<input type="text" name="SGL_IES">
+				<label for="SGL_IES">Sigla da Faculdade</label>
+			</div>
+
+			<div class="input-field col s12">
+				<label for="descricao" class="">Descrição</label>
+				<input type="text" name="descricao">
+			</div>
+
+
+
+
+			<div class="col s12 center">
+				<button style="width: 100%; text-align: center;" class="btn waves-effect waves-blue blue lighten-2 white-text ajax-submit" data-href="/sistema/admin/cadastrar-faculdade" data-action="/sistema/admin/cadastro-faculdade">Salvar Faculdade
+				</button>
+			</div>
+
+		</form>
+	</div>
+	<%}else{	%>
+	<div>
+		<p>Desculpe, somente o administrador pode ver esta página!</p>
+	</div>
+
+
+	<%}%>
+</section>

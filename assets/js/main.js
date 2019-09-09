@@ -761,16 +761,16 @@ function FormatInputs(focus) {
 		$('.facul-screen').toggle();
 	});
 
-	var imagem_usuario_perfil = $('#imagem-publicacao-post');
+	var imagem_publicacao_post = $('#imagem-publicacao-post');
 
-	if(typeof imagem_usuario_perfil != undefined){
+	if(typeof imagem_publicacao_post != undefined){
 
-		console.log('iiiiiiiiiiiiiiiiii imagem_usuario_perfil iiiiiiiiiiiiiiiii');
-		console.log(imagem_usuario_perfil);
+		console.log('iiiiiiiiiiiiiiiiii imagem_publicacao_post iiiiiiiiiiiiiiiii');
+		console.log(imagem_publicacao_post);
 		console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
 
-		$(imagem_usuario_perfil).cropper({
-			
+		$(imagem_publicacao_post).cropper({
+			viewMode:2
 		});
 	}
 }
