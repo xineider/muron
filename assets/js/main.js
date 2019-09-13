@@ -565,6 +565,7 @@ function UploadFile(isso) {
 		},
 		success: function (data) {
 			console.log('SUCESSO');
+			$('.imagem-upload-preview').empty();
 			$('.imagem-upload-preview').append(data);
 		},
 		error: function (xhr, e, t) {
@@ -770,7 +771,11 @@ function FormatInputs(focus) {
 		console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
 
 		$(imagem_publicacao_post).cropper({
-			viewMode:2
+			viewMode:2,
+			autoCropArea:1,
+			zoomOnWheel:false,
+			cropBoxMovable:false,
+			background:false
 		});
 	}
 }
