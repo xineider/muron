@@ -772,10 +772,13 @@ function FormatInputs(focus) {
 
 		$(imagem_publicacao_post).cropper({
 			viewMode:2,
+			autoCrop:false,
 			autoCropArea:1,
 			zoomOnWheel:false,
+			zoomOnTouch:false,
 			cropBoxMovable:false,
-			background:false
+			background:false,
+			toggleDragModeOnDblclick:false
 		});
 	}
 }
