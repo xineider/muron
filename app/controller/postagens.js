@@ -38,6 +38,23 @@ router.get('/ver/:id', function(req, res, next) {
 
 	});
 });
+
+router.get('/ver_unica_postagem_zoom/:id', function(req, res, next) {
+	id = req.params.id;
+	
+	model.GetUsuario(req.session.usuario.id).then(data_usuario => {
+		model.SelecionarPostagemById(id).then(data_postagens => {
+			data.postagens = data_postagens;
+			console.log('>>>>>>>>>> Data Postagem Zoom >>>>>>>>>>>>>>>>>');
+			console.log(data);
+			console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_ver_unica_postagem', data: data, usuario: req.session.usuario});
+		});
+	});
+
+});
+
+
 router.get('/pesquisar', function(req, res, next) {
 	res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'postagens/postagens_pesquisar', data: data, usuario: req.session.usuario});
 });

@@ -22,6 +22,15 @@ class PostagensModel {
 			});
 		});	
 	}
+
+	SelecionarPostagemById(id_postagem) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT * FROM postagens WHERE deletado = ? AND id = ?', [0, id_postagem]).then(data => {
+				resolve(data);
+			});
+		});	
+	}
+
 	AddViewCat(id_categoria, id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('UPDATE postagens_categorias_view SET qtd_acesso = (qtd_acesso + 1) WHERE id_usuario = ? AND id_categoria = ?', [id_usuario, id_categoria]).then(data => {
