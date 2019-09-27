@@ -799,7 +799,9 @@ function FormatInputs(focus) {
 
 	var imagem_zoom = $('.imagem_zoom');
 	if(typeof imagem_zoom != undefined){
-		$(imagem_zoom).zoom();
+		$(imagem_zoom).zoom({
+			magnify:0.8
+		});
 	}
 
 
