@@ -963,3 +963,34 @@ table.striped>tbody>tr>td {
   .btn-similar:hover,.btn-similar:focus{
     background: #2196F3 !important;
   }
+
+
+
+
+  .pinch-zoom ~ .cropper-container .cropper-dashed{
+    border:0;
+  }
+
+  .pinch-zoom ~ .cropper-container .cropper-line{
+    background: transparent;
+  }
+
+  .pinch-zoom ~ .cropper-container .cropper-point{
+    background:transparent;
+  }
+
+  .pinch-zoom ~ .cropper-container .cropper-modal{
+    background:transparent;
+  }
+
+   .pinch-zoom ~ .cropper-container .cropper-view-box{
+    outline: none;
+   }
+
+   .pinch-zoom ~ .cropper-container .cropper-face{
+    background:transparent;
+   }
+
+   .pinch-zoom ~ .cropper-container .cropper-center{
+    display: none;
+   }

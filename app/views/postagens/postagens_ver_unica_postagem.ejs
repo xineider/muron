@@ -1,9 +1,9 @@
-<div class="row">
+<div>
 	<%
 	if (typeof data.postagens != 'undefined' && data.postagens.length > 0) {
 			%>
 				<div style="width:100%">
-					<img src="/assets/uploads/<%= data.postagens[0].imagem %>" style="width: 100%;">
+					<img class="pinch-zoom" src="/assets/uploads/<%= data.postagens[0].imagem %>" style="width: 100%;">
 				</div>
 
 

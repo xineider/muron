@@ -781,6 +781,22 @@ function FormatInputs(focus) {
 			toggleDragModeOnDblclick:false
 		});
 	}
+
+		var imagem_zoom = $('.pinch-zoom');
+
+	if(typeof imagem_zoom != undefined){
+
+		console.log('iiiiiiiiiiiiiiiiii imagem_publicacao_post iiiiiiiiiiiiiiiii');
+		console.log(imagem_publicacao_post);
+		console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+
+		$(imagem_zoom).cropper({
+			viewMode:2,
+			autoCrop:false,
+			autoCropArea:1
+		});
+	}
+
 }
 function GetEndereco(cep, pai) {
 	var link = 'https://viacep.com.br/ws/'+cep+'/json/ ';

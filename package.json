@@ -26,6 +26,7 @@
     "nodemailer": "^4.6.3",
     "npm": "^5.7.1",
     "parseurl": "^1.3.2",
+    "pinch-zoom-js": "^2.3.4",
     "serve-favicon": "~2.4.2"
   }
 }
