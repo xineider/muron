@@ -88,6 +88,23 @@ $(document).on('ready', function () {
 		var link = $(this).data('link');
 		MountModal(modal, link);
 	});
+
+
+	$(document).on('click', '.modal-mount-imagem', function (e) {
+		e.preventDefault();
+		var modal = $(this).data('href');
+		var link = $(this).data('link');
+		var imagem = $(this).children('img');
+		console.log('+++++++++++++ imagem ++++++++++++++++');
+		console.log(imagem);
+		console.log('+++++++++++++++++++++++++++++++++++++');
+		console.log('width: '+$(imagem)[0].naturalWidth);
+		console.log('height: ' + $(imagem)[0].naturalHeight);
+		MountModal(modal, link);
+	});
+
+
+
 	$(document).on('click', '.modal-mount-inteiro', function (e) {
 		e.preventDefault();
 		var modal = $(this).data('href');
