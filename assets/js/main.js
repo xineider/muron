@@ -112,6 +112,20 @@ $(document).on('ready', function () {
 		MountModalInteiro(modal, link);
 	});
 
+	$(document).on('click', '.modal-mount-mymodal', function (e) {
+		e.preventDefault();
+		var modal = $(this).data('href');
+		var link = $(this).data('link');
+		MountModalMyModal(modal, link);
+	});
+
+	// $(document).on('click',function(e){
+	// 	if($(e.target).hasClass('myModal')){
+	// 		modalClose($('.myModal'));
+	// 	}
+	// })
+
+
 
 	$(document).on('click', '.modal-input', function (e) {
 		e.preventDefault();
@@ -799,14 +813,17 @@ function FormatInputs(focus) {
 		});
 	}
 
-	// var imagem_zoom = $('.pinch-zoom');
+	var imagem_zoom = $('.imagem_zoom');
+	var el = document.querySelector('div.imagem_zoom');
 
-	// if(typeof imagem_zoom != undefined){
+	// if(typeof el != undefined){
+
 
 	// 	console.log('iiiiiiiiiiiiiiiiii imagem_publicacao_post iiiiiiiiiiiiiiiii');
-	// 	console.log(imagem_publicacao_post);
+	// 	console.log(el);
 	// 	console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
-
+	// 	new PinchZoom.default(el, {});
+	// }
 	// 	$(imagem_zoom).cropper({
 	// 		viewMode:2,
 	// 		autoCrop:false,
@@ -814,12 +831,13 @@ function FormatInputs(focus) {
 	// 	});
 	// }
 
-	var imagem_zoom = $('.imagem_zoom');
-	if(typeof imagem_zoom != undefined){
-		$(imagem_zoom).zoom({
-			magnify:0.2
-		});
-	}
+	//funcionando imagem_zoom
+	// var imagem_zoom = $('.imagem_zoom');
+	// if(typeof imagem_zoom != undefined){
+	// 	$(imagem_zoom).zoom({
+	// 		magnify:0.2
+	// 	});
+	// }
 
 
 }
@@ -1016,6 +1034,40 @@ function MountModalInteiro(modal, link) {
 	    	$('.tooltipped').tooltip({delay: 50});
 	    	FormatInputs();
 	    }
+	});
+}
+
+
+function MountModalMyModal(modal, link) {
+	$.ajax({
+		method: "GET",
+		async: true,
+		url: '/sistema'+link,
+		beforeSend: function(request) {
+			request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
+			adicionarLoader();
+		},
+		success: function(data) {
+			console.log(link);
+			console.log('dddddddddddddd data dddddddddddddddddddd');
+			console.log(data);
+			console.log('dddddddddddddddddddddddddddddddddddddddd');
+			console.log('modal mmmmmmmmmmmmmmmmmm');
+			console.log(modal);
+			console.log('mmmmmmmmmmmmmmmmmmmmmmmm');
+			$(modal).find('.modal-container').html(data);
+			$(modal).addClass('modal-visible');
+		},
+		error: function(xhr) { // if error occured
+		},
+		complete: function() {
+			removerLoader();
+			$('.material-tooltip').remove();
+			$('.tooltipped').tooltip({delay: 50});
+			FormatInputs();
+		}
 	});
 }
 
@@ -1228,4 +1280,8 @@ function MountToAdd(val, where) {
 	    	removerLoader();
 	    }
 	});
+}
+
+function modalClose(modal){
+	modal.closest('.myModal').removeClass('modal-visible');
 }
