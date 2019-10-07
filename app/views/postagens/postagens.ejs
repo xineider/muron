@@ -7,7 +7,7 @@
 				<div class="col s12 m6 l4  post parent center-no-float">
 					<div class="card medium"> <!-- style="position: relative;" -->
 						<div class="card-image mur-card-img card-image-background-desktop" data-href="#modalinfo2" data-link="/postagens/ver_unica_postagem_zoom/<%= data.postagens[i].id%>">
-							<a href="/assets/uploads/<%= data.postagens[i].imagem %>" data-lightbox="image-<%= data.postagens[i].id%>">
+							<a rel="gallery-<%= data.postagens[i].id%>" class="swipebox" href="/assets/uploads/<%= data.postagens[i].imagem %>" data-lightbox="image-<%= data.postagens[i].id%>">
 								<img src="/assets/uploads/<%= data.postagens[i].imagem %>">
 								
 							</a>
@@ -68,3 +68,12 @@
 	}
 	%>
 </div>
+
+
+<script type="text/javascript">
+;( function( $ ) {
+
+	$( '.swipebox' ).swipebox();
+
+} )( jQuery );
+</script>
