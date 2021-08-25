@@ -157,6 +157,11 @@ router.post('/cadastrar', function(req, res, next) {
 	POST.id_usuario = req.session.usuario.id;
 	POST.id_faculdade = req.session.usuario.id_faculdade;
 	POST.id_tipo = req.session.usuario.tipo;
+
+	console.log('--------- cadastrar postagem ---------------------');
+	console.log(POST);
+	console.log('--------------------------------------------------');
+
 	model.InsertPostagem(POST).then(data => {
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'postagens/postagens_criar', data: data, usuario: req.session.usuario});
 	});
